@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 
@@ -22,15 +21,6 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /.json$/, use: { loader: 'json-loader' } },
-      // {
-      //   test: /\.(png|ico|jpg|jpeg|gif|svg)$/i,
-      //   use: {
-      //     loader: 'url-loader',
-      //     query: {
-      //       limit: 1000,
-      //     },
-      //   },
-      // },
       {
         test: /\.(png|ico|jpg|jpeg|gif|svg)$/,
         use: [
