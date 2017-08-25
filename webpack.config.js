@@ -25,6 +25,7 @@ module.exports = {
     alias: {
       _app: resolve('src'),
       _pages: resolve('src/pages'),
+      _settings: resolve('src/settings'),
       _components: resolve('src/components'),
     },
   },

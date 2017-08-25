@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class Entrance extends Component {
+class Entrance extends Component {
   render() {
     return (
       <div>
@@ -9,3 +10,8 @@ export default class Entrance extends Component {
     );
   }
 }
+
+export default connect((state, props) => ({
+  ...state,
+  ...props,
+}))(Entrance);

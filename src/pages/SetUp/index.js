@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SetUp extends Component {
+class SetUp extends Component {
   render() {
     return (
       <div>Первоначальная настройка плеера</div>
     );
   }
 }
+
+export default connect((state, props) => ({
+  ...state,
+  ...props,
+}))(SetUp);

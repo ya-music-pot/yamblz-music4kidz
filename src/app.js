@@ -4,9 +4,9 @@ import { AppContainer } from 'react-hot-loader';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 
-import store from '_app/store';
-import routes from '_app/routes';
-import history from '_app/history';
+import store from '_settings/store';
+import routes from '_settings/routes';
+import history from '_settings/history';
 
 
 ReactDOM.render((

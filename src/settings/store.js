@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 
-import history from '_app/history';
+import history from '_settings/history';
 import reducer from '_app/reducers';
 
 const devTools =
