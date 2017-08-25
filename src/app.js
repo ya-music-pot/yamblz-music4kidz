@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import { HashRouter } from 'react-router-dom';
+import { Router } from 'react-router';
+import { Provider } from 'react-redux';
 
+import store from '_app/store';
 import routes from '_app/routes';
+import history from '_app/history';
+
 
 ReactDOM.render((
   <AppContainer>
-    <HashRouter>
-      { routes }
-    </HashRouter>
+    <Provider store={store}>
+      <Router history={history}>
+        { routes }
+      </Router>
+    </Provider>
   </AppContainer>
 ), document.getElementById('root'));

@@ -14,10 +14,10 @@ const routes = (
     <App>
       <Route exact path="/" component={Entrance} />
       <Route path="/setup" component={SetUp} />
-      <Route path="/setup" component={Mood} />
-      <Route path="/setup" component={Action} />
-      <Route path="/setup" component={Playlist} />
-      <Route path="/setup" component={Player} />
+      <Route path="/mood" component={Mood} />
+      <Route path="/action" component={Action} />
+      <Route path="/playlist" component={Playlist} />
+      <Route path="/player" component={Player} />
     </App>
   </Switch>
 );

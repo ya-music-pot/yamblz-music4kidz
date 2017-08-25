@@ -7,12 +7,16 @@
   "rules": {
     "import/no-extraneous-dependencies": [0],
     "import/no-unresolved": [0],
+    "no-underscore-dangle": [0],
+    "no-mixed-operators": [0],
     "import/extensions": [0],
     "jsx-a11y/href-no-hash": [0],
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off"
   },
   "globals": {
-    "document": true
+    "document": true,
+    "window": true,
+    "isProduction": true
   }
 }
