@@ -1,10 +1,14 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import { HashRouter } from 'react-router-dom';
 
-import App from './pages/App';
+import routes from '_app/routes';
 
-
-ReactDom.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM.render((
+  <AppContainer>
+    <HashRouter>
+      { routes }
+    </HashRouter>
+  </AppContainer>
+), document.getElementById('root'));
