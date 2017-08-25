@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class App extends Component {
+export default class Mood extends Component {
   render() {
     return (
       <div>
-        Вход
+        Настроение
       </div>
     );
   }

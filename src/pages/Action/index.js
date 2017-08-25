@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-export default class Image extends Component {
+export default class Action extends Component {
   render() {
     return (
       <div>
-        12312
+        Выберите занятие.
       </div>
     );
   }
