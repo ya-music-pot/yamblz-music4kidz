@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --progress",
     "dev": "webpack",
     "prod": "webpack --optimize-minimize",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,16 +19,24 @@
     "url": "https://github.com/thevery/yamblz-music4kidz/issues"
   },
   "homepage": "https://github.com/thevery/yamblz-music4kidz#readme",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.css$": "identity-obj-proxy"
+    }
+  },
   "devDependencies": {
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "7.3.0",
-    "file-loader": "^0.11.2",
+    "file-loader": "0.11.2",
     "webpack-dev-server": "2.7.1"
   },
   "babel": {
+    "plugins": [
+      "react-hot-loader/babel"
+    ],
     "presets": [
       "es2015",
       "react",
@@ -43,7 +51,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "css-loader": "0.28.5",
-    "extract-text-webpack-plugin": "^3.0.0",
+    "extract-text-webpack-plugin": "3.0.0",
     "json-loader": "0.5.7",
     "node-sass": "4.5.3",
     "postcss-loader": "2.0.6",
