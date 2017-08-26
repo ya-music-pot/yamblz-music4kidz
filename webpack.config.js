@@ -23,13 +23,15 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        plugins: [
-          'react-hot-loader/babel',
-        ],
-        presets: [
-          ['es2015', { modules: false }],
-          'react',
-        ],
+        options: {
+          plugins: [
+            'react-hot-loader/babel',
+          ],
+          presets: [
+            ['es2015', { modules: false }],
+            'react',
+          ],
+        },
       },
       { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /.json$/, use: { loader: 'json-loader' } },
