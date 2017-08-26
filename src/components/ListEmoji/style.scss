@@ -1,0 +1,21 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 33%;
+  text-align: center;
+  margin-bottom: 40px;
+  transform: scale(1) translateZ(0);
+  transform-origin: 50% 50%;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.itemActive {
+  transform: scale(1.2) translateZ(0);
+}

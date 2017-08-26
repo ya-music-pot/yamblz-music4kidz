@@ -8,6 +8,7 @@ import store from '_settings/store';
 import routes from '_settings/routes';
 import history from '_settings/history';
 
+import '_settings/main.css';
 
 ReactDOM.render((
   <AppContainer>

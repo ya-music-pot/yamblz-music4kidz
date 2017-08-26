@@ -7,7 +7,7 @@ import entranceCloud2x from './images/entrance-cloud@2x.png';
 import entranceCloud3x from './images/entrance-cloud@3x.png';
 
 class Entrance extends Component {
-  _handleClick = (e) => {
+  _handleClick = () => {
     this.props.history.push('/setup');
   }
 
@@ -15,7 +15,7 @@ class Entrance extends Component {
     return (
       <div className={style.container}>
         <div className={style.imageContainer}>
-          <img 
+          <img
             src={entranceCloud}
             srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
           />
@@ -25,7 +25,7 @@ class Entrance extends Component {
             Привет!
           </div>
           <div className={style.subTitle}>
-            Давай слушать музыку и веселиться? 
+            Давай слушать музыку и веселиться?
           </div>
         </div>
         <div onClick={this._handleClick}>Кнопка</div>
