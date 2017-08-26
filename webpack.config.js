@@ -94,4 +94,14 @@ module.exports = {
       allChunks: true,
     }),
   ],
+
+  devServer: {
+    proxy: [
+      {
+        context: '/artists/**',
+        secure: false,
+        target: 'https://api.music.yandex.net/',
+      },
+    ],
+  },
 };
