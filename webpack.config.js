@@ -1,5 +1,6 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 
@@ -39,7 +40,21 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: 'style-loader!css-loader?modules&sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader!postcss-loader',
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                sourceMap: true,
+                localIdentName: '[local]___[hash:base64:8]',
+              },
+            },
+            'sass-loader',
+            'postcss-loader',
+          ],
+        }),
       },
     ],
   },
@@ -58,6 +73,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
+    }),
+
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
     }),
   ],
 };
