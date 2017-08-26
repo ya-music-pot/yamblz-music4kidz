@@ -4,11 +4,15 @@ import { connect } from 'react-redux';
 import Example from '_components/Example';
 
 class Entrance extends Component {
+  _onClick = (e) => {
+    console.log(1111)
+  }
+
   render() {
     return (
       <div>
         Вход
-        <Example />
+        <Example onClick={this._onClick} />
       </div>
     );
   }

@@ -30,10 +30,10 @@ module.exports = {
           presets: [
             ['es2015', { modules: false }],
             'react',
+            'stage-2',
           ],
         },
       },
-      { test: /\.jsx$/, exclude: /node_modules/, loader: 'babel-loader' },
       { test: /.json$/, use: { loader: 'json-loader' } },
       {
         test: /\.(png|ico|jpg|jpeg|gif|svg)$/,

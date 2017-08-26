@@ -6,6 +6,7 @@ import twitterImage from './images/twitter.svg';
 
 export default class Example extends Component {
   render() {
+    const { onClick } = this.props;
     return (
       <div>
         <span className={style.container}>Пример использования css</span>
@@ -14,6 +15,7 @@ export default class Example extends Component {
           src={twitterImage}
           alt="Твиттер"
           className={style.image}
+          onClick={onClick}
         />
       </div>
     );
