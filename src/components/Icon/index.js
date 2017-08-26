@@ -10,11 +10,12 @@ export default class Icon extends Component {
   }
 
   render() {
-    const { typeIcon } = this.props;
+    const { typeIcon, className, onClick } = this.props;
+
     return (
       <span
-        onClick={this._onClick}
-        className={cl(style.icon, style[typeIcon])}
+        onClick={onClick && this._onClick}
+        className={cl(style.icon, style[typeIcon], className)}
       />
     );
   }
@@ -23,4 +24,5 @@ export default class Icon extends Component {
 Icon.propTypes = {
   typeIcon: PropTypes.string.isRequired,
   onClick: PropTypes.func,
+  className: PropTypes.string,
 };

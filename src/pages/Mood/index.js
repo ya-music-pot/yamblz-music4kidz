@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 import ListEmoji from '_components/ListEmoji';
+import ButtonNext from '_components/ButtonNext';
+
 import { saveEmoji } from '_actions/mood';
 
 import style from './style.scss';
@@ -24,6 +27,10 @@ class Mood extends Component {
     this.props.saveEmoji({ activeType });
   }
 
+  _onMoveNextPage = () => {
+    this.props.push({ pathname: '/action' });
+  }
+
   render() {
     const { activeType } = this.props;
 
@@ -31,8 +38,13 @@ class Mood extends Component {
       <div className={style.container}>
         <h1 className={style.title}>Выбери своё настроение!</h1>
         <ListEmoji
+          className={style.list}
           data={serializeData(emoji, activeType)}
           onChange={this._onChange}
+        />
+        <ButtonNext
+          onClick={this._onMoveNextPage}
+          className={style.btn}
         />
       </div>
     );
@@ -41,6 +53,7 @@ class Mood extends Component {
 
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
   activeType: PropTypes.string,
 };
 
@@ -48,7 +61,7 @@ Mood.propTypes = {
 export default connect((state, props) => ({
   activeType: state.mood.activeType,
   ...props,
-}), { saveEmoji })(Mood);
+}), { saveEmoji, push })(Mood);
 
 
 /**

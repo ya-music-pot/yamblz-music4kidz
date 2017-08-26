@@ -7,9 +7,9 @@ import style from './style.scss';
 
 export default class ListEmoji extends Component {
   render() {
-    const { data, onChange } = this.props;
+    const { data, onChange, className } = this.props;
     return (
-      <ul className={style.list}>
+      <ul className={cl(style.list, className)}>
         { data.map(({ typeIcon, isActive }) => (
           <li
             key={typeIcon}
