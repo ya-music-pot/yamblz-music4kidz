@@ -3,18 +3,19 @@ import PropTypes from 'prop-types';
 
 export default class Button extends Component {
   render() {
-    const { onClick } = this.props;
-    const { label } = this.props;
-    return(
-        <button
-          className={this.props.style}
-          onClick={onClick}
-        >
-          {label}
-        </button>)
+    const { onClick, label, style } = this.props;
+    return (
+      <button
+        className={style}
+        onClick={onClick}
+      >
+        {label}
+      </button>);
   }
 }
 
 Button.propTypes = {
-  style: React.PropTypes.string
+  style: React.PropTypes.string,
+  onClick: React.PropTypes.function,
+  label: React.PropTypes.string,
 };
