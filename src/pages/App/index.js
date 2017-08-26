@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import Image from '_components/Image';
+import PropTypes from 'prop-types';
 
 export default class App extends Component {
   render() {
     return (
       <div>
-        Hello world!
-        <Image />
+        { this.props.children }
       </div>
     );
   }
 }
+
+App.propTypes = {
+  children: PropTypes.node.isRequired,
+};

@@ -1,10 +1,20 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import { Router } from 'react-router';
+import { Provider } from 'react-redux';
 
-import App from './pages/App';
+import store from '_settings/store';
+import routes from '_settings/routes';
+import history from '_settings/history';
 
 
-ReactDom.render(
-  <App />,
-  document.getElementById('root')
-);
+ReactDOM.render((
+  <AppContainer>
+    <Provider store={store}>
+      <Router history={history}>
+        { routes }
+      </Router>
+    </Provider>
+  </AppContainer>
+), document.getElementById('root'));
