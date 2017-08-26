@@ -1,0 +1,36 @@
+.container {
+    padding-top: 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #fee05b;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.imageContainer {
+    padding-top: 44px;
+    max-width: 343px;
+    width: 100%;
+    min-height: 270px;
+    box-sizing: border-box;
+    background: url('./images/entrance-background.png') no-repeat;
+}
+
+.textContainer {
+    padding-left: 24px;
+}
+
+.title {
+    font-size: 56px;
+    letter-spacing: -1.2px;
+    font-weight: bold;
+    line-height: 1.5em;
+}
+
+.subTitle {
+    font-size: 24px;
+    line-height: 1.25;
+}
