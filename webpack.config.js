@@ -36,7 +36,7 @@ module.exports = {
       },
       { test: /.json$/, use: { loader: 'json-loader' } },
       {
-        test: /\.(png|ico|jpg|jpeg|gif|svg)$/,
+        test: /\.(ttf|png|ico|jpg|jpeg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -77,7 +77,9 @@ module.exports = {
     alias: {
       _app: resolve('src'),
       _pages: resolve('src/pages'),
+      _actions: resolve('src/actions'),
       _settings: resolve('src/settings'),
+      _reducers: resolve('src/reducers'),
       _components: resolve('src/components'),
     },
   },

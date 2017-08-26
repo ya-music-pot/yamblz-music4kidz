@@ -32,7 +32,7 @@ class Entrance extends Component {
       this.state.showEntranceScreen ?
       <EntranceScreen
         onNavigate={this._handleNavigate}
-      /> : 
+      /> :
       <PlaylistCalibration
         onAccept={this._handleCalibrationAccept}
         onDeny={this._handleCalibrationDeny}
