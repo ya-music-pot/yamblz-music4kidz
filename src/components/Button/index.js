@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import styles from './style.scss';
+
 export default class Button extends Component {
   render() {
     const { onClick, label, style } = this.props;
     return (
       <button
-        className={style}
+        className={`${styles.buttonCommon} ${style}`}
         onClick={onClick}
       >
         {label}
@@ -15,7 +17,7 @@ export default class Button extends Component {
 }
 
 Button.propTypes = {
-  style: React.PropTypes.string,
-  onClick: React.PropTypes.function,
-  label: React.PropTypes.string,
+  style: PropTypes.string,
+  onClick: PropTypes.func.isRequired,
+  label: PropTypes.string,
 };

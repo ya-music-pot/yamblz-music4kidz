@@ -1,38 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import style from './style.scss';
-import entranceCloud from './images/entrance-cloud.png';
-import entranceCloud2x from './images/entrance-cloud@2x.png';
-import entranceCloud3x from './images/entrance-cloud@3x.png';
+import EntranceScreen from './screens/EntranceScreen';
+import PlaylistCalibration from './screens/PlaylistCalibration';
 
 class Entrance extends Component {
-  _handleClick = (e) => {
+  constructor() {
+    super();
+
+    this.state = {
+      showEntranceScreen: true
+    }
+  }
+
+  _handleNavigate = (e) => {
+    this.setState({
+      showEntranceScreen: false
+    });
+  }
+
+  _handleCalibrationAccept = (e) => {
     this.props.history.push('/setup');
+  }
+
+  _handleCalibrationDeny = (e) => {
+    this.props.history.push('/playlist');
   }
 
   render() {
     return (
-      <div className={style.container}>
-        <div className={style.imageContainer}>
-          <img 
-            src={entranceCloud}
-            srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
-          />
-        </div>
-        <div className={style.textContainer}>
-          <div className={style.title}>
-            Привет!
-          </div>
-          <div className={style.subTitle}>
-            Давай слушать музыку и веселиться? 
-          </div>
-        </div>
-        <div onClick={this._handleClick}>Кнопка</div>
-        <div className={style.cardContainer}>
-          Карточка
-        </div>
-      </div>
+      this.state.showEntranceScreen ?
+      <EntranceScreen
+        onNavigate={this._handleNavigate}
+      /> : 
+      <PlaylistCalibration
+        onAccept={this._handleCalibrationAccept}
+        onDeny={this._handleCalibrationDeny}
+      />
     );
   }
 }
