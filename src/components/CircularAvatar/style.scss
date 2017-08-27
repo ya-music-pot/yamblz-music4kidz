@@ -1,0 +1,20 @@
+.wrapper {
+  height: 38vh;
+  width: 38vh;
+}
+
+.circularImage {
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 36vh;
+  width: 36vh;
+  padding: 1vh;
+}
+
+.progressBar {
+  position: absolute;
+  height: 36vh;
+  width: 36vh;
+  padding: 1vh;
+}

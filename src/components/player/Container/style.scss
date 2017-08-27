@@ -1,13 +1,68 @@
+@font-face {
+    font-family: 'YandexRegularText';
+    src: url('./assets/Yandex_Sans_Text-Regular.ttf') format('truetype');
+}
+
 .wrapper {
   position: fixed;
-  height: 110vh;
-  width: 110vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  height: 8vh;
+  padding-top: 4vh;
+  padding-bottom: 2vh;
+  //background-color: rgba(0, 255, 0, 0.5);
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  color: white;
+  font-family: 'YandexRegularText';
+  line-height: 1.8rem;
+}
+
+.songName {
+  font-size: 1.5rem;
+}
+
+.artistName {
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.controlsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  align-items: center;
+  height: 10vh;
+  width: 65vw;
+  // background-color: rgba(255, 0, 0, 0.5);
+}
+
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
 }
 
 .buttonLike {
   color: white;
   background-color: tomato;
-
 }
 
 .buttonDislike {
@@ -15,6 +70,66 @@
   background-color: tomato;
 }
 
-.buttonImg {
+.buttonArrowDown {
+  background: url(./assets/arrow_down.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 24px;
+  width: 24px;
   color: white;
 }
+
+.buttonArrowDown:focus { outline: none; }
+
+.buttonDownload {
+  background: url(./assets/download.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 24px;
+  width: 24px;
+  color: white;
+}
+
+.buttonDownload:focus { outline: none; }
+
+.moodIcons {
+  width: 78vw;
+}
+
+.buttonPrevious {
+  background: url(./assets/previous.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+  color: white;
+}
+
+.buttonPrevious:focus { outline: none; }
+
+.buttonPlay {
+  background: url(./assets/play.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 36px;
+  width: 36px;
+  color: white;
+}
+
+.buttonPlay:focus { outline: none; }
+
+.buttonNext {
+  background: url(./assets/next.svg) no-repeat top left;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+  color: white;
+}
+
+.buttonNext:focus { outline: none; }
