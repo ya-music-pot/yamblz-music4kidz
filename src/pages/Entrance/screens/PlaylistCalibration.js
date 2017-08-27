@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
+import cl from 'classname';
 
 import style from '../style.scss';
 
@@ -14,7 +15,7 @@ export default class PlaylistCalibration extends Component {
           </div>
         </div>
         <Button
-          style={`${style.button} ${style.buttonLower}`}
+          style={cl(style.button, style.buttonLower)}
           label="Создать"
           onClick={this.props.onAccept}
         />

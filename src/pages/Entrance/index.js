@@ -5,12 +5,8 @@ import EntranceScreen from './screens/EntranceScreen';
 import PlaylistCalibration from './screens/PlaylistCalibration';
 
 class Entrance extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      showEntranceScreen: true,
-    }
+  state = {
+    showEntranceScreen: true,
   }
 
   _handleNavigate = () => {
@@ -32,7 +28,7 @@ class Entrance extends Component {
       this.state.showEntranceScreen ?
         <EntranceScreen
           onNavigate={this._handleNavigate}
-        /> : 
+        /> :
         <PlaylistCalibration
           onAccept={this._handleCalibrationAccept}
           onDeny={this._handleCalibrationDeny}
