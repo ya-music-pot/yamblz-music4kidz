@@ -3,7 +3,6 @@ import { routerMiddleware } from 'react-router-redux';
 
 import history from '_settings/history';
 import reducer from '_app/reducers';
-import api from '_app/middlewares/api';
 
 const devTools =
   typeof window === 'object' &&
@@ -14,7 +13,6 @@ const devTools =
 const routeMiddleware = routerMiddleware(history);
 const enhancer = devTools(
   applyMiddleware(
-    api,
     routeMiddleware,
   ),
 );
