@@ -36,7 +36,7 @@ module.exports = {
       },
       { test: /.json$/, use: { loader: 'json-loader' } },
       {
-        test: /\.(png|ico|jpg|jpeg|gif|svg)$/,
+        test: /\.(ttf|png|ico|jpg|jpeg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -76,8 +76,11 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       _app: resolve('src'),
+      _data: resolve('src/data'),
       _pages: resolve('src/pages'),
+      _actions: resolve('src/actions'),
       _settings: resolve('src/settings'),
+      _reducers: resolve('src/reducers'),
       _components: resolve('src/components'),
     },
   },
@@ -92,4 +95,14 @@ module.exports = {
       allChunks: true,
     }),
   ],
+
+  devServer: {
+    proxy: [
+      {
+        context: '/artists/**',
+        secure: false,
+        target: 'https://api.music.yandex.net/',
+      },
+    ],
+  },
 };

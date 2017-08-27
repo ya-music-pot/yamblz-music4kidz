@@ -9,34 +9,34 @@ class Entrance extends Component {
     super();
 
     this.state = {
-      showEntranceScreen: true
+      showEntranceScreen: true,
     }
   }
 
-  _handleNavigate = (e) => {
+  _handleNavigate = () => {
     this.setState({
-      showEntranceScreen: false
+      showEntranceScreen: false,
     });
   }
 
-  _handleCalibrationAccept = (e) => {
+  _handleCalibrationAccept = () => {
     this.props.history.push('/setup');
   }
 
-  _handleCalibrationDeny = (e) => {
+  _handleCalibrationDeny = () => {
     this.props.history.push('/playlist');
   }
 
   render() {
     return (
       this.state.showEntranceScreen ?
-      <EntranceScreen
-        onNavigate={this._handleNavigate}
-      /> : 
-      <PlaylistCalibration
-        onAccept={this._handleCalibrationAccept}
-        onDeny={this._handleCalibrationDeny}
-      />
+        <EntranceScreen
+          onNavigate={this._handleNavigate}
+        /> : 
+        <PlaylistCalibration
+          onAccept={this._handleCalibrationAccept}
+          onDeny={this._handleCalibrationDeny}
+        />
     );
   }
 }
