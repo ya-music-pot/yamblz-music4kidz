@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 import ListEmoji from '_components/ListEmoji';
 import ButtonNext from '_components/ButtonNext';
+import ListLikes from '_components/ListLikes';
 
 import { saveEmoji } from '_actions/mood';
-import { getApi } from '_actions/exampleApi';
 
 import style from './style.scss';
 
@@ -29,8 +29,7 @@ class Mood extends Component {
   }
 
   _onMoveNextPage = () => {
-    // this.props.push({ pathname: '/action' });
-    this.props.getApi();
+    this.props.push({ pathname: '/action' });
   }
 
   render() {
@@ -38,6 +37,7 @@ class Mood extends Component {
 
     return (
       <div className={style.container}>
+        <ListLikes count={3} className={style.list} />
         <h1 className={style.title}>Выбери своё настроение!</h1>
         <ListEmoji
           className={style.list}
@@ -63,7 +63,7 @@ Mood.propTypes = {
 export default connect((state, props) => ({
   activeType: state.mood.activeType,
   ...props,
-}), { saveEmoji, push, getApi })(Mood);
+}), { saveEmoji, push })(Mood);
 
 
 /**

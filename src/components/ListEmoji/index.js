@@ -30,4 +30,5 @@ ListEmoji.propTypes = {
     }),
   ).isRequired,
   onChange: PropTypes.func,
+  className: PropTypes.string,
 };
