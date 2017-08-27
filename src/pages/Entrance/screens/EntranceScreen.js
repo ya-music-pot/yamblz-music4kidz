@@ -26,9 +26,6 @@ export default class EntranceScreen extends Component {
             onClick={this.props.onNavigate}
           />
         </div>
-        <div className={style.cardContainer}>
-          Карточка
-        </div>
       </div>
     );
   }
