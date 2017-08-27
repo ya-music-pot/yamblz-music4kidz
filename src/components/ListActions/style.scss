@@ -1,0 +1,18 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item {
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  background: #ffde5a;
+  display: flex;
+  margin: 0 auto 40px;
+}
+
+.icon {
+  margin: auto;
+}

@@ -17,7 +17,7 @@ class Mood extends Component {
   }
 
   _onMoveNextPage = () => {
-    this.props.push({ pathname: '/action' });
+    this.props.history.push('/action');
   }
 
   render() {
@@ -49,6 +49,7 @@ Mood.propTypes = {
       title: PropTypes.string,
     }),
   ).isRequired,
+  history: PropTypes.object,
   activeType: PropTypes.string,
 };
 

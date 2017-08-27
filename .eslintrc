@@ -14,7 +14,8 @@
     "jsx-a11y/href-no-hash": [0],
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/forbid-prop-types": "off"
   },
   "globals": {
     "document": true,

@@ -1,80 +1,126 @@
 .icon {
   display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .emoji-angry {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-angry.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-angry.svg');
 }
 
 .emoji-crying {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-crying.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-crying.svg');
+
 }
 
 .emoji-grin {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-grin.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-grin.svg');
 }
 
 .emoji-spooky {
   width: 66px;
   height: 69px;
-  background: url('./images/emoji-spooky.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-spooky.svg');
 }
 
 .emoji-sunglasses {
   width: 66px;
   height: 68px;
-  background: url('./images/emoji-sunglasses.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-sunglasses.svg');
 }
 
 .emoji-tongue-out {
   width: 66px;
   height: 70px;
-  background: url('./images/emoji-tongue-out.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-tongue-out.svg');
 }
 
 .emoji-sad {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-sad.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-sad.svg');
 }
 
 .emoji-zzz {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-zzz.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-zzz.svg');
 }
 
 .emoji-heart-eyes {
   width: 66px;
   height: 66px;
-  background: url('./images/emoji-heart-eyes.svg');
-  background-size: cover;
+  background-image: url('./images/emoji-heart-eyes.svg');
+}
+
+.action-music {
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/action-music.png');
+}
+
+.action-song {
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/action-song.png');
+}
+
+.action-sport {
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/action-sport.png');
+}
+
+.action-car {
+  width: 178px;
+  height: 140px;
+  background-image: url('./images/action-car.png');
+}
+
+.action-game {
+  width: 155px;
+  height: 137px;
+  background-image: url('./images/action-game.png');
+}
+
+.action-dance {
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/action-dance.png');
+}
+
+.action-dont-know {
+  width: 159px;
+  height: 140px;
+  background-image: url('./images/action-dont-know.png');
+}
+
+.action-food {
+  width: 146px;
+  height: 140px;
+  background-image: url('./images/action-food.png');
+}
+
+.action-fun {
+  width: 140px;
+  height: 140px;
+  background-image: url('./images/action-fun.png');
 }
 
 .arrow-right {
   width: 24px;
   height: 24px;
-  background: url('./images/arrow-right.svg');
-  background-size: cover;
+  background-image: url('./images/arrow-right.svg');
 }
 
 .heart {
   width: 20px;
   height: 18px;
-  background: url('./images/heart.svg');
-  background-size: cover;
+  background-image: url('./images/heart.svg');
 }
