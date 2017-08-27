@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import style from './style.scss';
 
-export default class CollectionCard extends Component {
+export default class Avatar extends Component {
   render() {
     return (
-      <div>Collection</div>
+      <div>Avatar</div>
     );
   }
 }
 
-CollectionCard.propTypes = {};
+Avatar.propTypes = {};

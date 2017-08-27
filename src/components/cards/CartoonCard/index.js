@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import style from './style.scss';
 
-export default class CollectionCard extends Component {
+export default class CartoonCard extends Component {
   render() {
     return (
       <div>Collection</div>
@@ -9,4 +9,4 @@ export default class CollectionCard extends Component {
   }
 }
 
-CollectionCard.propTypes = {};
+CartoonCard.propTypes = {};
