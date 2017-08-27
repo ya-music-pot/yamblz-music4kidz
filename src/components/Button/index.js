@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cl from 'classname';
 
 import styles from './style.scss';
 
@@ -8,7 +9,7 @@ export default class Button extends Component {
     const { onClick, label, style } = this.props;
     return (
       <button
-        className={`${styles.buttonCommon} ${style}`}
+        className={cl(styles.buttonCommon, style)}
         onClick={onClick}
       >
         {label}
