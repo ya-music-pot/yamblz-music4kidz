@@ -11,18 +11,6 @@ import { saveEmoji } from '_actions/mood';
 
 import style from './style.scss';
 
-const emoji = [
-  { typeIcon: 'emoji-heart-eyes' },
-  { typeIcon: 'emoji-angry' },
-  { typeIcon: 'emoji-tongue-out' },
-  { typeIcon: 'emoji-crying' },
-  { typeIcon: 'emoji-sunglasses' },
-  { typeIcon: 'emoji-spooky' },
-  { typeIcon: 'emoji-zzz' },
-  { typeIcon: 'emoji-sad' },
-  { typeIcon: 'emoji-grin' },
-];
-
 class Mood extends Component {
   _onChange = (activeType) => {
     this.props.saveEmoji({ activeType });
@@ -33,7 +21,7 @@ class Mood extends Component {
   }
 
   render() {
-    const { activeType } = this.props;
+    const { activeType, listEmoji } = this.props;
 
     return (
       <div className={style.container}>
@@ -41,7 +29,7 @@ class Mood extends Component {
         <h1 className={style.title}>Выбери своё настроение!</h1>
         <ListEmoji
           className={style.list}
-          data={serializeData(emoji, activeType)}
+          data={serializeData(listEmoji, activeType)}
           onChange={this._onChange}
         />
         <ButtonNext
@@ -56,12 +44,18 @@ class Mood extends Component {
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
   push: PropTypes.func.isRequired,
+  listEmoji: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+    }),
+  ).isRequired,
   activeType: PropTypes.string,
 };
 
 
 export default connect((state, props) => ({
   activeType: state.mood.activeType,
+  listEmoji: state.dictionaries.listEmoji,
   ...props,
 }), { saveEmoji, push })(Mood);
 
@@ -71,8 +65,8 @@ export default connect((state, props) => ({
  */
 
 function serializeData(data, activeType) {
-  return data.map(item => (item.typeIcon === activeType
-    ? { ...item, isActive: true }
-    : { ...item, isActive: false }
+  return data.map(({ title }) => (title === activeType
+    ? { typeIcon: title, isActive: true }
+    : { typeIcon: title, isActive: false }
   ));
 }

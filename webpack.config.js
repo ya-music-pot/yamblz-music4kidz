@@ -76,6 +76,7 @@ module.exports = {
     extensions: ['.js'],
     alias: {
       _app: resolve('src'),
+      _data: resolve('src/data'),
       _pages: resolve('src/pages'),
       _actions: resolve('src/actions'),
       _settings: resolve('src/settings'),
