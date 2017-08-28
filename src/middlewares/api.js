@@ -1,8 +1,6 @@
-import xhr from 'xhr';
-
-const START = 'START';
-const FAIL = 'FAIL';
-const SUCCESS = 'SUCCESS';
+const START = '_START';
+const FAIL = '_FAIL';
+const SUCCESS = '_SUCCESS';
 
 export default ({ dispatch }) => (next) => (action) => {
   const { callAPI, type, ...rest } = action;
@@ -13,50 +11,36 @@ export default ({ dispatch }) => (next) => (action) => {
 
   dispatch({ ...rest, type: type + START });
 
-  const data = {
-    data: callAPI.data,
-    method: callAPI.method,
-    url: callAPI.url,
+  const options = {
+    body: callAPI.data,
+    method: callAPI.method || 'GET',
   };
 
-  api(data)
-    .then((response) => {
-      if (response.status === 'failure') {
-        generateError(rest, response, type, dispatch);
-      } else {
-        dispatch({ ...rest, response, type: type + SUCCESS });
+  return window.fetch(callAPI.url, options)
+    .then((response) => (response.json())
+    .then((data) => {
+      if (data.error) {
+        return Promise.reject(data);
       }
+
+      return dispatch({ ...rest, data, type: type + SUCCESS });
     })
     .catch((error) => {
       generateError(rest, error, type, dispatch);
-    });
+    }));
 };
 
 /* Helpers */
 
+/**
+ * [generateError create new action with error for reducers and print error]
+ * @param  {Object} rest
+ * @param  {Object} error    [response]
+ * @param  {String} type
+ * @param  {Function} dispatch
+ * @return {Error}
+ */
 function generateError(rest, error, type, dispatch) {
   dispatch({ ...rest, error, type: type + FAIL });
   return new Error(error);
-}
-
-function api({ url, data, method }) {
-  const sendObj = {
-    body: JSON.stringify(data),
-    method: method || 'GET',
-    url,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  return new Promise((resolve, reject) => {
-    xhr(sendObj, (error, resp, body) => {
-      const answer = JSON.parse(body);
-      if (error || (resp.statusCode !== 200 && resp.statusCode !== 201)) {
-        return reject(answer || {});
-      }
-
-      return resolve(answer);
-    });
-  });
 }
