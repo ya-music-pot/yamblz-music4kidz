@@ -4,7 +4,7 @@ import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
 
 import style from './style.scss';
-import artist from './assets/egorka.png';
+import artist from './images/egorka.png';
 
 export default class Container extends Component {
   _handleClickArrowDown = (e) => {
@@ -36,8 +36,9 @@ export default class Container extends Component {
           <Button style={style.buttonDownload} onClick={this._handleClickDownload} />
         </div>
         <CircularAvatar
-            image={artist}
-            progress={0.68}
+            image = {artist}
+            progress = {0.68}
+            radius = {0.18}
         />
         <div className={style.titleRow}>
            <div className={style.songName}>

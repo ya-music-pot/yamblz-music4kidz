@@ -8,7 +8,7 @@ import style from './style.scss';
 class Player extends Component {
   render() {
     return (
-      <div >
+      <div className={style.wrapper}>
         <Container />
         <Background />
       </div>
