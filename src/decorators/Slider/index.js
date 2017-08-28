@@ -36,10 +36,7 @@ export default class Slider extends Component {
     const newCurrentId = currentId + 1;
     if (newCurrentId > slidesLength - 1) return;
 
-    this.setState({
-      currentId: newCurrentId,
-      slideTransform: getShiftSlides(widthSlide, newCurrentId),
-    });
+    this._updateCurrentId(newCurrentId);
   }
 
   _toPrev = () => {
@@ -47,9 +44,14 @@ export default class Slider extends Component {
     const newCurrentId = currentId - 1;
     if (newCurrentId < 0) return;
 
+    this._updateCurrentId(newCurrentId);
+  }
+
+  _updateCurrentId(currentId) {
+    this.props.onChange(currentId);
     this.setState({
-      currentId: newCurrentId,
-      slideTransform: getShiftSlides(widthSlide, newCurrentId),
+      currentId,
+      slideTransform: getShiftSlides(widthSlide, currentId),
     });
   }
 
@@ -89,6 +91,7 @@ export default class Slider extends Component {
 Slider.propTypes = {
   currentId: PropTypes.number,
   className: PropTypes.string,
+  onChange: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node),
 };
 

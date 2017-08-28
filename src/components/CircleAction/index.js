@@ -6,7 +6,7 @@ import style from './style.scss';
 
 export default class CircleAction extends Component {
   render() {
-    const { typeIcon, title } = this.props;
+    const { typeIcon, title, isSmall } = this.props;
     return (
       <div className={style.container}>
         <div className={style.circle}>

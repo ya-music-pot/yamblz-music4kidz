@@ -47,7 +47,7 @@ Mood.propTypes = {
 
 
 export default connect((state, props) => ({
-  activeType: state.settings.defaultData.activeEmoji,
+  activeType: state.settings.activeEmoji,
   listEmoji: state.dictionaries.listEmoji,
   ...props,
 }), { saveEmoji, push })(Mood);

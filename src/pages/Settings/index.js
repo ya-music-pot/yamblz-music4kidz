@@ -17,7 +17,7 @@ class Settings extends Component {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
 
-    if (steps[newStep]) {
+    if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
     }
   }
@@ -43,16 +43,16 @@ class Settings extends Component {
 
 export default connect((state, props) => {
   const { steps, activeStep } = state.settings;
-
   return {
     steps,
-    activeStep: steps[activeStep],
+    activeStep: steps[activeStep - 1],
     ...props,
   };
 }, { updateStep })(Settings);
 
 Settings.propTypes = {
-  steps: PropTypes.object,
+  steps: PropTypes.array,
+  updateStep: PropTypes.func,
   history: PropTypes.object,
   activeStep: PropTypes.object,
 };
