@@ -83,6 +83,7 @@ module.exports = {
       _reducers: resolve('src/reducers'),
       _decorators: resolve('src/decorators'),
       _components: resolve('src/components'),
+      _middlewares: resolve('src/middlewares'),
     },
   },
   plugins: [

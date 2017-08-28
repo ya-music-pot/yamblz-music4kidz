@@ -14,7 +14,7 @@ class Mood extends Component {
    * @param  {String} activeType
    */
   _handleChange = (activeType) => {
-    this.props.saveEmoji({ activeType });
+    this.props.saveEmoji(activeType);
   }
 
   /**
@@ -28,7 +28,7 @@ class Mood extends Component {
         <ListEmoji
           className={style.list}
           data={serializeData(listEmoji, activeType)}
-          onChange={this._onChange}
+          onChange={this._handleChange}
         />
       </div>
     );
