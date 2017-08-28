@@ -1,3 +1,9 @@
+.container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
 .slider {
   position: relative;
   display: flex;
@@ -24,8 +30,4 @@
 
 .next {
   right: 0;
-}
-
-.container {
-  position: relative;
 }

@@ -14,7 +14,7 @@ export default class ListLikes extends Component {
       <ul className={cl(style.list, className)}>
         { data.map(id => (
           <li key={`heart${id}`} className={style.item}>
-            <Icon typeIcon="heart" />
+            <Icon typeIcon="heart-red" />
           </li>
         ))}
       </ul>

@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 import initReactFastclick from 'react-fastclick';
@@ -14,11 +13,9 @@ import '_settings/main.css';
 initReactFastclick();
 
 ReactDOM.render((
-  <AppContainer>
-    <Provider store={store}>
-      <Router history={history}>
-        { routes }
-      </Router>
-    </Provider>
-  </AppContainer>
+  <Provider store={store}>
+    <Router history={history}>
+      { routes }
+    </Router>
+  </Provider>
 ), document.getElementById('root'));
