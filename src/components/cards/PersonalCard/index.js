@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import EmojiStatus from '_components/EmojiStatus';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
-import Button from '_components/Button';
+import CardButton from '_components/cards/CardButton';
 
 import style from './style.scss';
 
@@ -18,9 +18,9 @@ export default class PersonalCard extends Component {
     return (
       <div className={container}>
         <EmojiStatus />
-        <CardTitle text="fanny trip" />
-        <CardSubtitle text="my playlist" />
-        <Button onClick={this._openPlayer} label="play" />
+        <CardTitle text="Весёлая поездка" />
+        <CardSubtitle text="Мой плейлист" />
+        <CardButton onClick={this._openPlayer} label="play" />
       </div>
     );
   }

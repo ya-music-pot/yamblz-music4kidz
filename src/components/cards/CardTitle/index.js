@@ -8,7 +8,7 @@ export default class CardTitle extends Component {
   render() {
 
     return (
-      <h2>
+      <h2 className={style.title}>
         {this.props.text}
       </h2>
     );

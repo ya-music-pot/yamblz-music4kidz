@@ -7,6 +7,7 @@ const ENV = process.env.NODE_ENV;
 module.exports = {
   entry: {
     app: [
+      'babel-polyfill',
       resolve('src/app'),
     ],
   },
@@ -24,11 +25,8 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          plugins: [
-            'react-hot-loader/babel',
-          ],
           presets: [
-            ['es2015', { modules: false }],
+            ['es2015', { loose: true, modules: false }],
             'react',
             'stage-2',
           ],
@@ -97,6 +95,7 @@ module.exports = {
   ],
 
   devServer: {
+    stats: 'minimal',
     proxy: [
       {
         context: '/artists/**',

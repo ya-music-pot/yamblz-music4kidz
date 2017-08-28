@@ -7,9 +7,9 @@ export default class CardSubtitle extends Component {
 
   render() {
     return (
-      <h2>
+      <div className={style.subtitle}>
         {this.props.text}
-      </h2>
+      </div>
     );
   }
 }
