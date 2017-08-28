@@ -1,5 +1,5 @@
-import listEmoji from '_data/listEmoji.json';
-import listActions from '_data/listActions.json';
+import listEmoji from '_data/listEmoji';
+import listActions from '_data/listActions';
 
 const dictionaries = {
   listEmoji,
