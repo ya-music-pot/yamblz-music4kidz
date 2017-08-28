@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import style from './style.scss';
-
 export default class App extends Component {
   render() {
     return (
-      <div className={style.container}>
+      <div>
         { this.props.children }
       </div>
     );
