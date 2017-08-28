@@ -80,6 +80,7 @@ module.exports = {
       _pages: resolve('src/pages'),
       _actions: resolve('src/actions'),
       _settings: resolve('src/settings'),
+      _helpers: resolve('src/helpers'),
       _reducers: resolve('src/reducers'),
       _decorators: resolve('src/decorators'),
       _components: resolve('src/components'),
