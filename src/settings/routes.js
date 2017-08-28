@@ -19,7 +19,7 @@ const routes = (
       <Route path="/action" component={Action} />
       <Route path="/playlist" component={Playlist} />
       <Route path="/player" component={Player} />
-        <Route path="/miniplayer" component={MiniPlayer} />
+      <Route path="/miniplayer" component={MiniPlayer} />
     </App>
   </Switch>
 );

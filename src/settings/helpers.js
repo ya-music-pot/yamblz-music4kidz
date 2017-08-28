@@ -3,28 +3,30 @@
  * @param url {string} - URL скрипта для загрузки
  * @param callback {function} - Функция, вызываемая по окончании загрузки скрипта
  * */
-export function getScript(url, callback = () => {}) {
-    if (!url) {
-        callback({
-            message: 'EmptyURL',
-        });
-    }
 
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.async = true;
-    script.src = url;
+/* eslint-disable import/prefer-default-export */
+export function getScript(url, callback = () => { }) {
+  if (!url) {
+    callback({
+      message: 'EmptyURL',
+    });
+  }
 
-    script.onerror = () => {
-        callback({
-            message: 'HTTPError',
-        });
-    };
+  const script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.async = true;
+  script.src = url;
 
-    script.onload = () => {
-        callback(null);
-    };
+  script.onerror = () => {
+    callback({
+      message: 'HTTPError',
+    });
+  };
 
-    const head = document.head || document.getElementsByTagName("head")[0];
-    head.appendChild(script);
+  script.onload = () => {
+    callback(null);
+  };
+
+  const head = document.head || document.getElementsByTagName('head')[0];
+  head.appendChild(script);
 }
