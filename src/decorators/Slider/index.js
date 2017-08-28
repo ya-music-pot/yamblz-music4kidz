@@ -5,13 +5,13 @@ import Hammer from 'hammerjs';
 
 import style from './style.scss';
 
-const widthSlide = 0.70; // 70% from width;
+const WIDTH_SLIDE = 0.70; // 70% from width;
 
 export default class Slider extends Component {
   state = {
     slidesLength: null,
     currentId: 0,
-    slideTransform: document.body.clientWidth * (1 - widthSlide) / 2,
+    slideTransform: document.body.clientWidth * (1 - WIDTH_SLIDE) / 2,
   };
 
   componentDidMount() {
@@ -51,7 +51,7 @@ export default class Slider extends Component {
     this.props.onChange(currentId);
     this.setState({
       currentId,
-      slideTransform: getShiftSlides(widthSlide, currentId),
+      slideTransform: getShiftSlides(WIDTH_SLIDE, currentId),
     });
   }
 
