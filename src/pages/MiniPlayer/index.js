@@ -28,6 +28,12 @@ class MiniPlayer extends Component {
      * Вызывается при успешной инициаллизации библиотеки Ya на странице
      * */
     _initPlayer = () => {
+        const playerError = this.yaPlayer.getPlayerError();
+        if (playerError) {
+            alert(playerError);
+            return;
+        }
+
         this.yaPlayer.setPlaylist(playlist);
 
         this.yaPlayer.setTrackDataCallback(() => {
@@ -52,7 +58,7 @@ class MiniPlayer extends Component {
 
     render() {
         return (
-            this.yaPlayer &&
+            this.yaPlayer && !this.yaPlayer.getPlayerError() &&
             <div>
                 <button onClick={this._handleButtonPressed}>
                     {this.state.shouldPlayMusic ? "Музыка стой" : "Музыка пой"}

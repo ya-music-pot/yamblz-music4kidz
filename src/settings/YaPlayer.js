@@ -10,6 +10,11 @@ export default class YaPlayer {
     _player = null;
 
     /**
+     * @member {string / null} _error - Ошибка загрузки скрипта или ошибка плеера яндекс музыки
+     * */
+    _error = null;
+
+    /**
      * @member {object} _playlist - Плейлист для воспроизведения
      * @property {string} _playlist.title - Наименование плейлиста
      * @property {string[]} _playlist.tracks - Массив треков для воспроизведения
@@ -56,7 +61,12 @@ export default class YaPlayer {
      * @param callback {function} - Вызывыется при успешной загрузке скрипта
      * */
     loadPlayerScript = (callback = () => {}) => {
-        getScript(playerUrl, () => {
+        getScript(playerUrl, (err) => {
+            if (err != null) {
+                this._error = err.message;
+                callback();
+            }
+
             if (window.Ya) {
                 this._player = new Ya.Music.Player();
                 this._initialize();
@@ -100,6 +110,10 @@ export default class YaPlayer {
             this._player.on('ended', () => {
                 this._currentTrackPosition = 0;
                 this._player.playNext('auto');
+            });
+
+            this._player.on('failed', (player, reason) => {
+                this._error = reason;
             });
         });
     };
@@ -188,6 +202,14 @@ export default class YaPlayer {
     };
 
     // Методы для доступа к текущиму состоянию плеера
+
+    /**
+     * @function getPlayerError - Служит получения информации о текущей точке воспроизведения трека
+     * @returns {string}
+     * */
+    getPlayerError = () => {
+        return this._error;
+    };
 
     /**
      * @function getPlaylist - Служит получения текущего плейлиста

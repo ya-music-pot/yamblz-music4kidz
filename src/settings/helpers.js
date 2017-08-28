@@ -5,7 +5,9 @@
  * */
 export function getScript(url, callback = () => {}) {
     if (!url) {
-        return;
+        callback({
+            message: 'EmptyURL',
+        });
     }
 
     const script = document.createElement("script");
@@ -13,8 +15,14 @@ export function getScript(url, callback = () => {}) {
     script.async = true;
     script.src = url;
 
+    script.onerror = () => {
+        callback({
+            message: 'HTTPError',
+        });
+    };
+
     script.onload = () => {
-        callback();
+        callback(null);
     };
 
     const head = document.head || document.getElementsByTagName("head")[0];
