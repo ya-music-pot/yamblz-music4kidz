@@ -10,11 +10,19 @@ import { saveAction } from '_actions/settings';
 import style from './style.scss';
 
 class Action extends Component {
+  /**
+   * [_handleChangeAction save actionType]
+   * @param  {Number} newId
+   */
   _handleChangeAction = (newId) => {
     const activeAction = this.props.listActions[newId];
     this.props.saveAction({ activeType: activeAction.typeIcon });
   }
 
+  /**
+   * [render action list]
+   * @return {Node}
+   */
   render() {
     const { listActions } = this.props;
 

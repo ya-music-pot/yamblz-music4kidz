@@ -4,20 +4,22 @@ import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 import ListEmoji from '_components/ListEmoji';
-
 import { saveEmoji } from '_actions/settings';
 
 import style from './style.scss';
 
 class Mood extends Component {
-  _onChange = (activeType) => {
+  /**
+   * [_handleChange save new type of mood in global State]
+   * @param  {String} activeType
+   */
+  _handleChange = (activeType) => {
     this.props.saveEmoji({ activeType });
   }
 
-  _onMoveNextPage = () => {
-    this.props.history.push('/action');
-  }
-
+  /**
+   * [render print list emoji]
+   */
   render() {
     const { activeType, listEmoji } = this.props;
 
@@ -56,7 +58,12 @@ export default connect((state, props) => ({
 /**
  * Helpers
  */
-
+/**
+ * [serializeData add to all items isActive false or true.]
+ * @param  {Object} data
+ * @param  {String} activeType
+ * @return {Array}
+ */
 function serializeData(data, activeType) {
   return data.map((item) => (item.typeIcon === activeType
     ? { ...item, isActive: true }

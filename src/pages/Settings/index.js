@@ -13,6 +13,9 @@ import Action from './Action';
 import style from './style.scss';
 
 class Settings extends Component {
+  /**
+   * [_handleChangeStep update step of settings]
+   */
   _handleChangeStep = () => {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
@@ -22,6 +25,10 @@ class Settings extends Component {
     }
   }
 
+  /**
+   * [render steps of settings]
+   * @return {Node}
+   */
   render() {
     const { activeStep } = this.props;
     const { title, step } = activeStep;
