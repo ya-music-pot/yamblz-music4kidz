@@ -8,7 +8,6 @@ import ButtonNext from '_components/ButtonNext';
 import ListLikes from '_components/ListLikes';
 
 import { saveEmoji } from '_actions/mood';
-import { getApi } from '_actions/exampleApi';
 
 import style from './style.scss';
 
@@ -58,7 +57,7 @@ export default connect((state, props) => ({
   activeType: state.mood.activeType,
   listEmoji: state.dictionaries.listEmoji,
   ...props,
-}), { saveEmoji, push, getApi })(Mood);
+}), { saveEmoji, push })(Mood);
 
 
 /**

@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 const START = '_START';
 const FAIL = '_FAIL';
 const SUCCESS = '_SUCCESS';
