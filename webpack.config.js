@@ -82,6 +82,7 @@ module.exports = {
       _settings: resolve('src/settings'),
       _reducers: resolve('src/reducers'),
       _components: resolve('src/components'),
+      _middlewares: resolve('src/middlewares'),
     },
   },
   plugins: [
