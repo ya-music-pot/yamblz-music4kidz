@@ -8,6 +8,7 @@ import Mood from '_pages/Mood';
 import Action from '_pages/Action';
 import Playlist from '_pages/Playlist';
 import Player from '_pages/Player';
+import MiniPlayer from '_pages/MiniPlayer';
 
 const routes = (
   <Switch>
@@ -18,6 +19,7 @@ const routes = (
       <Route path="/action" component={Action} />
       <Route path="/playlist" component={Playlist} />
       <Route path="/player" component={Player} />
+        <Route path="/miniplayer" component={MiniPlayer} />
     </App>
   </Switch>
 );
