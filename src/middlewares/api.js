@@ -4,6 +4,11 @@ const START = '_START';
 const FAIL = '_FAIL';
 const SUCCESS = '_SUCCESS';
 
+/**
+ * [The function is middleware for work with api in actions.]
+ * @param  {Function} { dispatch })
+ * @return {Function}
+ */
 export default ({ dispatch }) => (next) => (action) => {
   const { callAPI, type, ...rest } = action;
 

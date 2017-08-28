@@ -1,3 +1,7 @@
+/**
+ * [getApi example for work with api]
+ * @return {Object}
+ */
 export function getApi() {
   return {
     type: 'GET_API',
