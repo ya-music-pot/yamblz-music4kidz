@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cl from 'classname';
 
 import style from './style.scss';
 
 export default class CardSubtitle extends Component {
-
   render() {
+    const { styles } = this.props;
     return (
-      <div className={style.subtitle}>
+      <div className={cl(style.subtitle, styles)}>
         {this.props.text}
       </div>
     );
@@ -15,5 +16,6 @@ export default class CardSubtitle extends Component {
 }
 
 CardSubtitle.propTypes = {
+  styles: PropTypes.string,
   text: PropTypes.string,
 };

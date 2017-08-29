@@ -11,7 +11,7 @@ export default class CardButton extends Component {
 
     return (
       <div>
-        <Button onClick={onClick} label={label} style={style.button} />
+        {/*<Button onClick={onClick} label={label} style={style.button} />*/}
       </div>
     );
   }

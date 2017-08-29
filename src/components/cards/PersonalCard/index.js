@@ -9,17 +9,24 @@ import style from './style.scss';
 
 export default class PersonalCard extends Component {
   _openPlayer = () => {
-    console.log('open player');
-  }
+    console.log('open miniplayer');
+  };
 
   render() {
-    const { container } = style;
+    const { container, subtitle } = style;
+
+    const data = {
+      status: {
+        mood: 'Angry',
+        activity: 'Катаюсь',
+      },
+    };
 
     return (
       <div className={container}>
-        <EmojiStatus />
+        <EmojiStatus status={data.status} />
         <CardTitle text="Весёлая поездка" />
-        <CardSubtitle text="Мой плейлист" />
+        <CardSubtitle text="Мой плейлист" styles={subtitle} />
         <CardButton onClick={this._openPlayer} label="play" />
       </div>
     );

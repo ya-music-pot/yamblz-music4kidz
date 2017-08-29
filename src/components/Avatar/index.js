@@ -4,7 +4,7 @@ import style from './style.scss';
 export default class Avatar extends Component {
   render() {
     return (
-      <div>Avatar</div>
+      <div className={style.avatar}>avatar</div>
     );
   }
 }
