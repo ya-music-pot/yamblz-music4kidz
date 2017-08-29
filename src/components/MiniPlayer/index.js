@@ -6,6 +6,11 @@ import Button from '_components/Button';
 import style from './style.scss';
 
 export default class MiniPlayer extends Component {
+  /**
+   * Функция вычисляет заполенение прогрессбара
+   * @param  {Number} trackPercentage
+   * @return {Object}
+   */
   _calculateProgressStyle = (trackPercentage) => {
     return {
       right: `${100 - trackPercentage}%`,
