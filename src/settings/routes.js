@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Route, IndexRoute } from 'react-router';
 
 import App from '_pages/App';
 import Settings from '_pages/Settings';
@@ -8,16 +8,14 @@ import SetUp from '_pages/SetUp';
 import Playlist from '_pages/Playlist';
 import Player from '_pages/Player';
 
-const routes = (
-  <Switch>
-    <App>
-      <Route exact path="/" component={Entrance} />
-      <Route path="/setup" component={SetUp} />
-      <Route path="/settings" component={Settings} />
-      <Route path="/playlist" component={Playlist} />
-      <Route path="/player" component={Player} />
-    </App>
-  </Switch>
+const routes = () => (
+  <Route path="/" component={App}>
+    <IndexRoute component={Entrance} />
+    <Route path="/setup" component={SetUp} />
+    <Route path="/settings" component={Settings} />
+    <Route path="/playlist" component={Playlist} />
+    <Route path="/player" component={Player} />
+  </Route>
 );
 
-export default routes;
+export default routes();

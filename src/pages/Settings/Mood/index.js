@@ -36,7 +36,6 @@ class Mood extends Component {
 
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
   listEmoji: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
