@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import style from './style.scss';
 
-export default class CollectionCard extends Component {
+export default class GameCard extends Component {
   render() {
     return (
-      <div>Collection</div>
+      <div>Game</div>
     );
   }
 }
 
-CollectionCard.propTypes = {};
+GameCard.propTypes = {};
