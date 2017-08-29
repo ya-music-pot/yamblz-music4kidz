@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import YaPlayer from '_helpers/YaPlayer';
-import style from './style.scss';
 
 export default class App extends Component {
   state = {
