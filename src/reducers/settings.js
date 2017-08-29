@@ -1,4 +1,4 @@
-import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings';
+import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_COUNT_LIKES } from '_actions/settings';
 
 const settingsDefault = {
   likesCount: 0,
@@ -19,6 +19,11 @@ export default function (list = { ...settingsDefault }, action) {
       return {
         ...list,
         activeAction: payload.activeType,
+      };
+    case UPDATE_COUNT_LIKES:
+      return {
+        ...list,
+        likesCount: payload.likesCount,
       };
     default:
       return list;

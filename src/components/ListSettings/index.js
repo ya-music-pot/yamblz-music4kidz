@@ -5,7 +5,7 @@ import cl from 'classname';
 import Icon from '_components/Icon';
 import style from './style.scss';
 
-export default class ListLikes extends Component {
+export default class ListSettings extends Component {
   render() {
     const { count, className } = this.props;
     const data = Array.from(Array(count).keys());
@@ -22,7 +22,7 @@ export default class ListLikes extends Component {
   }
 }
 
-ListLikes.propTypes = {
+ListSettings.propTypes = {
   count: PropTypes.number.isRequired,
   className: PropTypes.string,
 };

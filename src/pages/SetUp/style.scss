@@ -1,5 +1,5 @@
 .container {
-  padding-top: 30px;
+  padding-top: 48px;
 }
 
 .title {
@@ -8,6 +8,12 @@
   line-height: 26px;
   color: #000;
   margin-bottom: 58px;
+}
+
+.list {
+  position: absolute;
+  top: 30px;
+  width: 100%;
 }
 
 .btn {

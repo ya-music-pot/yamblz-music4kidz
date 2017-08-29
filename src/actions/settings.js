@@ -1,5 +1,6 @@
 export const UPDATE_EMOJI = 'UPDATE_EMOJI';
 export const UPDATE_ACTION = 'UPDATE_ACTION';
+export const UPDATE_COUNT_LIKES = 'UPDATE_COUNT_LIKES';
 
 export function saveEmoji(activeType) {
   return {
@@ -15,6 +16,16 @@ export function saveAction(activeType) {
     type: UPDATE_ACTION,
     payload: {
       activeType,
+    },
+  };
+}
+
+export function saveLikesCount(likesCount) {
+  console.log(111)
+  return {
+    type: UPDATE_COUNT_LIKES,
+    payload: {
+      likesCount,
     },
   };
 }

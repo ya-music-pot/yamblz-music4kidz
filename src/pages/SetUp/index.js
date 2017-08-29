@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import ButtonCircle from '_components/ButtonCircle';
-import ListLikes from '_components/ListLikes';
+import ListSettings from '_components/ListSettings';
 
 import { updateStep } from '_actions/setup';
 
@@ -16,11 +16,10 @@ import style from './style.scss';
 
 class Settings extends Component {
   componentWillUnmount() {
-    console.log(1111)
     // this.props.clearSettings();
   }
 
-  _handleChangeStep = () => {
+  _handleNextStep = () => {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
 
@@ -29,28 +28,30 @@ class Settings extends Component {
     }
   }
 
-  _handleSkipStep = () => {
-    console.log(1111)
-  }
-
   /**
    * @return {Node}
    */
   render() {
-    const { activeStep } = this.props;
+    const {
+      activeStep, likesCount, activeAction,
+      activeEmoji,
+    } = this.props;
     const { title, step } = activeStep;
 
     return (
       <div className={style.container}>
-        <ListLikes count={3} className={style.list} />
+        <ListSettings
+          count={likesCount}
+          className={style.list}
+        />
         <h1 className={style.title}>{title}</h1>
-        { step === 1 && <Player /> }
+        { step === 1 && <Player onNextStep={this._handleNextStep} /> }
         { step === 2 && <Mood /> }
         { step === 3 && <Action /> }
         {
           activeStep.type !== 'player' &&
           <ButtonCircle
-            onClick={this._handleChangeStep}
+            onClick={this._handleNextStep}
             className={style.btn}
             typeIcon="arrow-right"
           />
@@ -59,7 +60,7 @@ class Settings extends Component {
           activeStep.type === 'player' &&
           <div
             className={style.skipTitle}
-            onClick={this._handleSkipStep}
+            onClick={this._handleNextStep}
           >
             Пропустить этот шаг
           </div>
@@ -71,8 +72,13 @@ class Settings extends Component {
 
 export default connect((state, props) => {
   const { steps, activeStep } = state.setup;
+  const { likesCount, activeAction, activeEmoji } = state.settings;
+
   return {
     steps,
+    likesCount,
+    activeAction,
+    activeEmoji,
     activeStep: steps[activeStep - 1],
     ...props,
   };
@@ -81,5 +87,8 @@ export default connect((state, props) => {
 Settings.propTypes = {
   steps: PropTypes.array,
   updateStep: PropTypes.func,
+  likesCount: PropTypes.number,
+  activeAction: PropTypes.string,
+  activeEmoji: PropTypes.string,
   activeStep: PropTypes.object,
 };

@@ -16,7 +16,7 @@ class Entrance extends Component {
   }
 
   _handleCalibrationAccept = () => {
-    this.props.history.push('/settings');
+    this.props.history.push('/setup');
   }
 
   _handleCalibrationDeny = () => {
