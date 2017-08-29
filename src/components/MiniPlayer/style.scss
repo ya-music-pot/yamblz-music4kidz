@@ -1,12 +1,70 @@
-.list {
-  position: relative;
-  list-style: none;
-  margin: 0 0 0 10px;
-  padding: 0;
-  text-align: center;
-}
+@import '../../settings/colors';
 
-.item {
-  display: inline-block;
-  margin-left: -10px;
+.miniPlayer {
+  height: 56px;
+  background-color: $color-white;
+  border: solid 1px $color-gray;
+
+  &-wrapper {
+    width: 100%;
+    background-color: rgba(55, 55, 55, 0.3);
+    padding-top: 4px;
+    position: relative;
+  }
+
+  &-progress {
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    top: 3.5px;
+    right: 100%;
+    background-color: $color-yellow;
+  }
+
+  &-button {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-color: transparent;
+    position: absolute;
+    margin: 16px;
+    -webkit-tap-highlight-color: $color-black;
+
+    &--play {
+      background-image: url('./images/play.svg');
+      left: 0;
+    }
+
+    &--pause {
+      @extend .miniPlayer-button--pause;
+      background-image: url('./images/pause.svg');
+    }
+
+    &--download {
+      background-image: url('./images/download.svg');
+      right: 0;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-title {
+    display: inline-block;
+    line-height: 20px;
+    padding: 8px 0 8px 56px;
+  }
+
+  &-songTitle {
+    font-size: 16px;
+    color: $color-black;
+    margin-bottom: 1px;
+  }
+
+  &-singerName {
+    font-size: 12px;
+    color: $color-lightgray;
+  }
 }
