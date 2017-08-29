@@ -47,8 +47,8 @@ jsDoc для функции render в react-компонентах, если о�
  * @param  {Object} list
  * @param  {String} list.name
  * @param  {Object} action
- * @param  {String} action[].type
- * @param  {Object} action[].payload 
+ * @param  {String} action.type
+ * @param  {Object} action.payload 
  * @return {Object}
  */
 function testFunc(list, action) {...}
