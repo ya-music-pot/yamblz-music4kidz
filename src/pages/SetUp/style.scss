@@ -16,3 +16,17 @@
   left: 50%;
   margin-left: -27px;
 }
+
+.skipTitle {
+  position: absolute;
+  width: 100%;
+  bottom: 60px;
+  color: #9e9e9e;
+  font-size: 16px;
+  text-align: center;
+  padding: 15px;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: 'Roboto', Arial;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}

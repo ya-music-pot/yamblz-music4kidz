@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import ButtonNext from '_components/ButtonNext';
+import ButtonCircle from '_components/ButtonCircle';
 import ListLikes from '_components/ListLikes';
 
-import { updateStep } from '_actions/settings';
+import { updateStep } from '_actions/setup';
 
 import Mood from './Mood';
 import Action from './Action';
@@ -29,6 +29,10 @@ class Settings extends Component {
     }
   }
 
+  _handleSkipStep = () => {
+    console.log(1111)
+  }
+
   /**
    * @return {Node}
    */
@@ -43,17 +47,30 @@ class Settings extends Component {
         { step === 1 && <Player /> }
         { step === 2 && <Mood /> }
         { step === 3 && <Action /> }
-        <ButtonNext
-          onClick={this._handleChangeStep}
-          className={style.btn}
-        />
+        {
+          activeStep.type !== 'player' &&
+          <ButtonCircle
+            onClick={this._handleChangeStep}
+            className={style.btn}
+            typeIcon="arrow-right"
+          />
+        }
+        {
+          activeStep.type === 'player' &&
+          <div
+            className={style.skipTitle}
+            onClick={this._handleSkipStep}
+          >
+            Пропустить этот шаг
+          </div>
+        }
       </div>
     );
   }
 }
 
 export default connect((state, props) => {
-  const { steps, activeStep } = state.settings;
+  const { steps, activeStep } = state.setup;
   return {
     steps,
     activeStep: steps[activeStep - 1],

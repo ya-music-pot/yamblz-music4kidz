@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="22px" viewBox="0 0 24 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
+    <title>sound_off</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="music" transform="translate(-170.000000, -325.000000)">
+            <g id="sound_off" transform="translate(170.000000, 324.000000)">
+                <rect id="Rectangle-4" fill="#000000" opacity="0" x="0" y="0" width="24" height="24"></rect>
+                <polygon id="ic_sound" fill="#FFFFFF" points="0 16.1044529 0 7.89417869 5.33333333 7.89417869 12 1.05228348 12 22.9463481 5.33333333 16.1044529"></polygon>
+                <rect id="Rectangle-3" fill="#FFFFFF" transform="translate(19.586952, 11.888121) rotate(40.000000) translate(-19.586952, -11.888121) " x="18.5869515" y="6.88812093" width="2" height="10"></rect>
+                <rect id="Rectangle-3" fill="#FFFFFF" transform="translate(19.586952, 11.888121) scale(-1, 1) rotate(40.000000) translate(-19.586952, -11.888121) " x="18.5869515" y="6.88812093" width="2" height="10"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
