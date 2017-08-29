@@ -54,36 +54,33 @@
     font-weight: 500;
     text-align: center;
     color: $color-white;
-}
 
-.button:active {
-    background-color: darken( $color-blue, 10% );
-}
+    &:active {
+        background-color: darken( $color-blue, 10% );
+    }
 
-.button:hover {
-    background-color: darken( $color-blue, 5% );
+    &:hover {
+        background-color: darken( $color-blue, 5% );
+    }
 }
 
 .buttonSmall {
     font-size: 16px;
     background-color: transparent;
     color: $color-gray;
-}
+    margin-top: 20px;
 
-.buttonSmall:active {
-    color: darken( $color-gray, 10% );
-}
+    &:active {
+        color: darken( $color-gray, 10% );
+    }
 
-.buttonSmall:hover {
-    color: darken( $color-gray, 5% );
+    &:hover {
+        color: darken( $color-gray, 5% );
+    }
 }
 
 .buttonLower {
     margin-top: 80px;
-}
-
-.buttonSmall {
-    margin-top: 20px;
 }
 
 .titleContainer {
