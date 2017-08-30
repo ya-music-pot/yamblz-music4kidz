@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import EmojiStatus from '_components/EmojiStatus';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
-import CardButton from '_components/cards/CardButton';
+import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 import style from './style.scss';
 
 export default class PersonalCard extends Component {
-  _openPlayer = () => {
+  _openMiniplayer = () => {
     console.log('open miniplayer');
   };
 
   render() {
-    const { container, subtitle } = style;
-
-    const data = {
-      status: {
-        mood: 'Angry',
-        activity: 'Катаюсь',
-      },
-    };
+    const { container, title, subtitle, button } = style;
 
     return (
       <div className={container}>
-        <EmojiStatus status={data.status} />
-        <CardTitle text="Весёлая поездка" />
+        <EmojiStatus settings={this.props.settings} />
+        <CardTitle text="Весёлая поездка" styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
-        <CardButton onClick={this._openPlayer} label="play" />
+        <ButtonMiniplayer onClick={this._openMiniplayer} position={button} />
       </div>
     );
   }
 }
 
-PersonalCard.propTypes = {};
+PersonalCard.propTypes = {
+  settings: PropTypes.object,
+};

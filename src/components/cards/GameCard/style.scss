@@ -1,0 +1,36 @@
+.container {
+    position: relative;
+    padding: 16px 24px;
+    margin-bottom: 24px;
+    border-radius: 15px;
+    background-image: linear-gradient(to top, #fde869, #00b1c1);
+    background-color: #7f44ff;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.22);
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.button {
+    margin-left: auto;
+}
+
+.image {
+  font-size: 0;
+  content: '';
+  width: 160px;
+  height: 160px;
+  left: 24px;
+  bottom: -15px;
+  display: block;
+  position: absolute;
+  border-radius: 15px;
+  background-image: url('./images/bg.png');
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: contain;
+}

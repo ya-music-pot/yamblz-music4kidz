@@ -14,17 +14,53 @@ import style from './style.scss';
 
 class Playlist extends Component {
   render() {
-    const { playlist } = style;
+    const { playlist, container } = style;
+
+    const willBeFromState = {
+      settings: {
+        activeEmoji: 'emoji-sunglasses',
+        activeAction: 'action-car',
+      },
+    };
+
+    const willRecieved = {
+      personal: {
+        title: 'Тачки 3',
+        text: '16 песен из мультика',
+        imageUrl: '',
+      },
+      game: {
+        title: 'Слушай и играй',
+        imageUrl: '',
+      },
+      newTrack: {
+        author: 'Imagine Gragons',
+        song: 'Thunder',
+        imageUrl: '',
+      },
+      radio: {
+        title: 'MiyaGi',
+        imageUrl: '',
+      },
+      collection: {
+        title: 'Песни Ивангая',
+        imageUrl: '',
+      },
+    };
+
+    const { settings } = willBeFromState;
 
     return (
       <div className={playlist}>
-        <Topbar />
-        <PersonalCard />
-        <CartoonCard />
-        <GameCard />
-        <SingleCard />
-        <RadioCard />
-        <CollectionCard />
+        <div className={container}>
+          <Topbar />
+          <PersonalCard settings={settings} />
+          <CartoonCard data={willRecieved.personal} />
+          <GameCard data={willRecieved.game} />
+          <SingleCard data={willRecieved.newTrack} />
+          <RadioCard data={willRecieved.radio} />
+          <CollectionCard data={willRecieved.collection} />
+        </div>
       </div>
     );
   }
