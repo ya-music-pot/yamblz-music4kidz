@@ -115,6 +115,10 @@ export default class YaPlayer {
       this._player.on('failed', (player, reason) => {
         this._error = reason;
       });
+
+      this._player.on('error', (player, reason) => {
+        this._error = reason;
+      });
     });
   };
 
@@ -160,6 +164,13 @@ export default class YaPlayer {
     }
   };
 
+  /**
+   * @param  {Number} position
+   * */
+  setTrackPosition = (position) => {
+    this._player.setPosition(position);
+  };
+
   // Методы для управления воспроизведением
 
   /**
@@ -202,6 +213,13 @@ export default class YaPlayer {
   };
 
   // Методы для доступа к текущиму состоянию плеера
+
+  /**
+   * @returns {Boolean}
+   * */
+  isPlaying = () => {
+    return this._player.isPlaying();
+  };
 
   /**
    * @function getPlayerError - Служит получения информации о текущей точке воспроизведения трека

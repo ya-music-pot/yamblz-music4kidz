@@ -8,10 +8,6 @@ import Icon from '_components/Icon';
 import style from './style.scss';
 
 export default class SingleCard extends Component {
-  _openMiniplayer = () => {
-    console.log('open miniplayer');
-  };
-
   render() {
     const {
       container,
@@ -34,7 +30,7 @@ export default class SingleCard extends Component {
         <div className={content}>
           <CardTitle text="Новый трек" styles={title} />
           <div className={info}>
-            <Button onClick={this._openMiniplayer} style={button}>
+            <Button onClick={this.props.onButtonClick} style={button}>
               <Icon typeIcon="play-card" />
             </Button>
             <div>
@@ -50,4 +46,5 @@ export default class SingleCard extends Component {
 
 SingleCard.propTypes = {
   data: PropTypes.object,
+  onButtonClick: PropTypes.func,
 };

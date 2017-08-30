@@ -9,10 +9,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.scss';
 
 export default class RadioCard extends Component {
-  _openMiniplayer = () => {
-    console.log('open miniplayer');
-  };
-
   render() {
     const { container, title: titleStyles, subtitle, image, button } = style;
 
@@ -27,7 +23,7 @@ export default class RadioCard extends Component {
         <CardTitle text={title} styles={titleStyles} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={image} style={backgroundStyles}>photo</div>
-        <ButtonMiniplayer onClick={this._openMiniplayer} position={button} />
+        <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
       </div>
     );
   }
@@ -35,4 +31,5 @@ export default class RadioCard extends Component {
 
 RadioCard.propTypes = {
   data: PropTypes.object,
+  onButtonClick: PropTypes.func,
 };
