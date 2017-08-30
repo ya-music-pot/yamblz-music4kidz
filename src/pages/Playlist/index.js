@@ -107,12 +107,12 @@ class Playlist extends Component {
   render() {
     const { playlist, container } = style;
 
-    const willBeFromState = {
-      settings: {
-        activeEmoji: 'emoji-sunglasses',
-        activeAction: 'action-car',
-      },
-    };
+    // const willBeFromState = {
+    //   settings: {
+    //     activeEmoji: 'emoji-sunglasses',
+    //     activeAction: 'action-car',
+    //   },
+    // };
 
     const willRecieved = {
       personal: {
@@ -139,7 +139,7 @@ class Playlist extends Component {
       },
     };
 
-    const { settings } = willBeFromState;
+    const { settings } = this.props;
     const { activeCardId } = this.state;
     const { trackName, singerName, trackPercentage, isPlaying } = this.state.playerState;
 
@@ -196,12 +196,13 @@ class Playlist extends Component {
 }
 
 export default connect((state, props) => ({
-  ...state,
+  settings: state.settings,
   ...props,
 }))(Playlist);
 
 Playlist.contextTypes = {
   yaPlayer: PropTypes.object,
+  settings: PropTypes.object,
 };
 
 // TODO данные должны приходить из store
