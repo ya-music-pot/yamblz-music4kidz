@@ -1,11 +1,13 @@
 @font-face {
     font-family: 'YandexSans';
-    src: url('./fonts/Yandex-Sans-Text-Regular.ttf');
+    src: url('./fonts/YandexSansText-Regular.woff2'),
+    url('./fonts/YandexSansText-Regular.woff');
 }
 
 @font-face {
     font-family: 'YandexSans';
-    src: url('./fonts/Yandex-Sans-Text-Bold.ttf');
+    src: url('./fonts/YandexSansText-Bold.woff2'),
+    url('./fonts/YandexSansText-Bold.woff');
     font-weight: bold;
 }
 
