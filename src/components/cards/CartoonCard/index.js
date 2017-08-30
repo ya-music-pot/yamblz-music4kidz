@@ -8,10 +8,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.scss';
 
 export default class CartoonCard extends Component {
-  _openMiniplayer = () => {
-    console.log('open miniplayer');
-  };
-
   render() {
     const { container, content, title: titleStyles, subtitle, button } = style;
 
@@ -27,7 +23,7 @@ export default class CartoonCard extends Component {
         <div className={content}>
           <CardTitle text={title} styles={titleStyles} />
           <CardSubtitle text={text} styles={subtitle} />
-          <ButtonMiniplayer onClick={this._openMiniplayer} position={button} />
+          <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
         </div>
       </div>
     );
@@ -36,4 +32,5 @@ export default class CartoonCard extends Component {
 
 CartoonCard.propTypes = {
   data: PropTypes.object,
+  onButtonClick: PropTypes.func,
 };

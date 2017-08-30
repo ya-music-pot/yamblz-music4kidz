@@ -7,10 +7,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.scss';
 
 export default class CollectionCard extends Component {
-  _openMiniplayer = () => {
-    console.log('open miniplayer');
-  };
-
   render() {
     const { container, title: titleStyles, content, button } = style;
 
@@ -25,7 +21,7 @@ export default class CollectionCard extends Component {
       <div className={container} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={title} styles={titleStyles} />
-          <ButtonMiniplayer onClick={this._openMiniplayer} position={button} />
+          <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
         </div>
       </div>
     );
@@ -34,4 +30,5 @@ export default class CollectionCard extends Component {
 
 CollectionCard.propTypes = {
   data: PropTypes.object,
+  onButtonClick: PropTypes.func,
 };

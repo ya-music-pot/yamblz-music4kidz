@@ -203,6 +203,10 @@ export default class YaPlayer {
 
   // Методы для доступа к текущиму состоянию плеера
 
+  isPlaying = () => {
+    return this._player.isPlaying();
+  };
+
   /**
    * @function getPlayerError - Служит получения информации о текущей точке воспроизведения трека
    * @returns {string}

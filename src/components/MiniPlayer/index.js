@@ -21,8 +21,8 @@ export default class MiniPlayer extends Component {
     const { trackName, singerName, trackPercentage, isPlaying, onTogglePlay, onDownload, className } = this.props;
 
     return (
-      <div className={style['miniPlayer-wrapper']}>
-        <div className={cl(style.miniPlayer, className)}>
+      <div className={cl(style['miniPlayer-wrapper'], className)}>
+        <div className={style.miniPlayer}>
           <div
             className={style['miniPlayer-progress']}
             style={this._calculateProgressStyle(trackPercentage)}
