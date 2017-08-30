@@ -1,0 +1,32 @@
+.container {
+  padding: 24px 24px 16px;
+  margin-bottom: 24px;
+  border-radius: 15px;
+  background-color: #282d32;
+  box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.22);
+}
+
+.title {
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  margin-bottom: 15px;
+}
+
+.button {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image {
+  width: 185px;
+  height: 185px;
+  margin: 0 auto;
+  font-size: 0;
+  border-radius: 100%;
+  background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}

@@ -6,13 +6,13 @@ import styles from './style.scss';
 
 export default class Button extends Component {
   render() {
-    const { onClick, label, style } = this.props;
+    const { onClick, children, style } = this.props;
     return (
       <button
         className={cl(styles.buttonCommon, style)}
         onClick={onClick}
       >
-        {label}
+        {children}
       </button>);
   }
 }
@@ -20,5 +20,8 @@ export default class Button extends Component {
 Button.propTypes = {
   style: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  label: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]),
 };

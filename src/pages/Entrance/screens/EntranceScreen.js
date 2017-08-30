@@ -22,9 +22,10 @@ export default class EntranceScreen extends Component {
           <Title />
           <Button
             style={style.button}
-            label="Поехали"
             onClick={this.props.onNavigate}
-          />
+          >
+            Поехали
+          </Button>
         </div>
       </div>
     );

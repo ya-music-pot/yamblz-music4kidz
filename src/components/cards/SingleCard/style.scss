@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  padding: 24px 24px 16px;
+  margin-bottom: 24px;
+  border-radius: 15px;
+  background-color: #7f44ff;
+  background-image: url('./images/bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.22);
+
+  &::after {
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    position: absolute;
+    background-color: #7f44ff;
+    background-image: linear-gradient(to top, rgba(144, 208, 227, 0.92), #7492e8);
+    border-radius: 15px;
+    opacity: 0.7;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  margin-bottom: 35px;
+}
+
+.info {
+  display: flex;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.singer {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.button {
+  margin-right: 10px;
+  background: none;
+}
