@@ -1,12 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import style from './style.scss';
+import YaPlayer from '_helpers/YaPlayer';
 
 export default class App extends Component {
+  state = {
+    yaPlayer: null,
+  };
+
+  getChildContext() {
+    return { yaPlayer: this.state.yaPlayer };
+  }
+
+  componentDidMount() {
+    const yaPlayer = new YaPlayer();
+    yaPlayer.loadPlayerScript(
+      () => {
+        this.setState({ yaPlayer });
+      },
+    );
+  }
+
   render() {
     return (
-      <div className={style.container}>
+      <div>
         { this.props.children }
       </div>
     );
@@ -15,4 +32,8 @@ export default class App extends Component {
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
+};
+
+App.childContextTypes = {
+  yaPlayer: PropTypes.object,
 };
