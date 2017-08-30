@@ -52,18 +52,21 @@ class Playlist extends Component {
       const playerState = Object.assign({}, this.state.playerState, {
         trackName: this.yaPlayer.getCurrentTrackTitle(),
         singerName: this.yaPlayer.getCurrentTrackArtists()[0]["name"],
-        trackPercentage: this.yaPlayer.getCurrentTrackPosition(),
       });
 
       this.setState({ playerState });
     });
 
     this.yaPlayer.setTimeUpdateCallback(() => {
-      const playerState = Object.assign({}, this.state.playerState, {
-        trackPercentage: this.yaPlayer.getCurrentTrackPosition(),
-      });
+      const currentTrackPosition = this.yaPlayer.getCurrentTrackPosition();
+      const currentTrackDuration = this.yaPlayer.getCurrentTrackDuration();
 
-      this.setState({ playerState });
+      if (currentTrackDuration) {
+        const trackPercentage = currentTrackPosition / currentTrackDuration * 100;
+        const playerState = Object.assign({}, this.state.playerState, { trackPercentage });
+
+        this.setState({ playerState });
+      }
     });
   };
 
@@ -182,7 +185,7 @@ class Playlist extends Component {
             singerName={singerName}
             trackPercentage={trackPercentage}
             isPlaying={isPlaying}
-            onTogglePlay={this._handleTogglePlay}
+            onTogglePlay={this._handleTogglePlay.bind(this, this.state.activeCardId)}
             onDownload={this._handleDownload}
             className={style['playlist-miniPlayer']}
           />

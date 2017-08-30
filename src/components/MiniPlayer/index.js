@@ -31,7 +31,7 @@ export default class MiniPlayer extends Component {
             style={
               cl(
                 style['miniPlayer-button'],
-                isPlaying ? style['miniPlayer-button--play'] : style['miniPlayer-button--pause'],
+                isPlaying ? style['miniPlayer-button--pause'] : style['miniPlayer-button--play'],
               )
             }
             isPlaying={isPlaying}
