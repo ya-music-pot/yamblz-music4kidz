@@ -1,0 +1,51 @@
+.container {
+  position: relative;
+  width: 330px;
+  height: 330px;
+  display: flex;
+}
+
+.image {
+  position: relative;
+  width: 235px;
+  height: 235px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: auto;
+  z-index: 9;
+}
+
+.grad1,
+.grad2,
+.grad3 {
+  position: absolute;
+  top: 0;
+  display: block;
+  border-radius: 50%;
+  background: linear-gradient(0deg, #5fcef9, #ffde5a);
+}
+
+.grad1 {
+  z-index: 3;
+  top: 30px;
+  left: 30px;
+  width: 270px;
+  height: 270px;
+  opacity: 0.6;
+}
+
+.grad2 {
+  z-index: 2;
+  top: 15px;
+  left: 15px;
+  width: 300px;
+  height: 300px;
+  opacity: 0.4;
+}
+
+.grad3 {
+  z-index: 1;
+  width: 330px;
+  height: 330px;
+  opacity: 0.2;
+}
