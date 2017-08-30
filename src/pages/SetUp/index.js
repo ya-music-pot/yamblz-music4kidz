@@ -21,7 +21,7 @@ class SetUp extends Component {
     if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
     } else {
-      this.props.history.push('/playlist');
+      this.props.router.push('/playlist');
     }
   }
 
@@ -71,7 +71,7 @@ class SetUp extends Component {
 }
 
 SetUp.propTypes = {
-  history: PropTypes.object.isRequired,
+  router: PropTypes.object.isRequired,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       step: PropTypes.number,

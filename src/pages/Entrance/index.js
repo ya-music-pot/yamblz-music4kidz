@@ -16,11 +16,11 @@ class Entrance extends Component {
   }
 
   _handleCalibrationAccept = () => {
-    this.props.history.push('/setup');
+    this.props.router.push('/setup');
   }
 
   _handleCalibrationDeny = () => {
-    this.props.history.push('/playlist');
+    this.props.router.push('/playlist');
   }
 
   render() {
