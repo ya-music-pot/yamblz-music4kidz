@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import PropTypes from 'prop-types';
 
 import ListEmoji from '_components/ListEmoji';
@@ -37,7 +36,6 @@ class Mood extends Component {
 
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
   listEmoji: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
@@ -52,7 +50,7 @@ export default connect((state, props) => ({
   activeType: state.settings.activeEmoji,
   listEmoji: state.dictionaries.listEmoji,
   ...props,
-}), { saveEmoji, push })(Mood);
+}), { saveEmoji })(Mood);
 
 
 /**

@@ -16,14 +16,16 @@ export default class PlaylistCalibration extends Component {
         </div>
         <Button
           style={cl(style.button, style.buttonLower)}
-          label="Создать"
           onClick={this.props.onAccept}
-        />
+        >
+          Создать
+        </Button>
         <Button
           style={style.buttonSmall}
-          label="Не хочу сейчас"
           onClick={this.props.onDeny}
-        />
+        >
+          Не хочу сейчас
+        </Button>
       </div>
     );
   }

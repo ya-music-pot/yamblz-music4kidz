@@ -7,55 +7,64 @@
 .emoji-angry {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-angry.jpg');
+  background: url('./images/emoji-angry.png');
+  background-size: cover;
 }
 
 .emoji-crying {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-crying.jpg');
+  background: url('./images/emoji-crying.png');
+  background-size: cover;
 }
 
 .emoji-grin {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-grin.jpg');
+  background: url('./images/emoji-grin.png');
+  background-size: cover;
 }
 
 .emoji-spooky {
   width: 66px;
   height: 69px;
-  background-image: url('./images/emoji-spooky.jpg');
+  background: url('./images/emoji-spooky.png');
+  background-size: cover;
 }
 
 .emoji-sunglasses {
   width: 66px;
   height: 68px;
-  background-image: url('./images/emoji-sunglasses.jpg');
+  background: url('./images/emoji-sunglasses.png');
+  background-size: cover;
 }
 
 .emoji-tongue-out {
   width: 67px;
   height: 70px;
-  background-image: url('./images/emoji-tongue-out.jpg');
+  background: url('./images/emoji-tongue-out.png');
+  background-size: cover;
 }
 
 .emoji-sad {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-sad.jpg');
+  background: url('./images/emoji-sad.png');
+  background-size: cover;
 }
 
 .emoji-zzz {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-zzz.jpg');
+  background: url('./images/emoji-zzz.png');
+  background-size: cover;
 }
 
 .emoji-heart-eyes {
   width: 66px;
   height: 66px;
-  background-image: url('./images/emoji-heart-eyes.jpg');
+  background: url('./images/emoji-heart-eyes.png');
+  background-size: cover;
 }
 
 .action-music {
@@ -122,4 +131,11 @@
   width: 20px;
   height: 18px;
   background-image: url('./images/heart-red.svg');
+}
+
+.play-card {
+  width: 23px;
+  height: 24px;
+  opacity: 0.6;
+  background-image: url('./images/play.svg');
 }
