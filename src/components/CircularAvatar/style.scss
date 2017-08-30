@@ -1,0 +1,56 @@
+.wrapper {
+  height: 38vh;
+  width: 38vh;
+}
+
+.circularImage {
+  position: absolute;
+  border-radius: 50%;
+  object-fit: cover;
+  height: 36vh;
+  width: 36vh;
+  padding: 1vh;
+  z-index: 1;
+}
+
+.progressBar {
+  position: absolute;
+  height: 36vh;
+  width: 36vh;
+  padding: 1vh;
+}
+
+.controls {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 38vh;
+  width: 38vh;
+  z-index: 2;
+}
+
+.timeLeft {
+  color: white;
+  font-family: 'YandexSans';
+  font-size: 0.8rem;
+  align-self: center;
+}
+
+.spacer {
+  height: 24vh;
+}
+
+.buttonWrapper {
+  align-self: center;
+}
+
+.buttonShazam {
+  color: white;
+  background: url(./images/shazam.svg) no-repeat;
+  background-position: center center;
+  height: 40px;
+  width: 40px;
+}
+
+.buttonShazam:focus { outline: none; }
