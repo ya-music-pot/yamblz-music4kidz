@@ -5,6 +5,10 @@ import style from './style.scss';
 
 export default class CircularAvatar extends Component {
 
+  _handleClickShazam = (e) => {
+    console.log("Shazam");
+  }
+
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
     let angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
@@ -26,7 +30,7 @@ export default class CircularAvatar extends Component {
   }
 
   render() {
-    const { progress, image, radius } = this.props;
+    const { progress, image, radius, time } = this.props;
 
     return (
       <div className = {style.wrapper}>
@@ -37,18 +41,27 @@ export default class CircularAvatar extends Component {
                 <stop offset = "95%" stopColor = "#5fcef9"/>
             </linearGradient>
         </defs>
-          <path d = {this._describeArc(
-            document.documentElement.clientHeight * radius,
-            document.documentElement.clientHeight * radius,
-            document.documentElement.clientHeight * radius,
-            0,
-            progress * 360
-          )} stroke = "url(#linear-gradient)" strokeWidth = "11" />
+            <path d = {this._describeArc(
+                document.documentElement.clientHeight * radius,
+                document.documentElement.clientHeight * radius,
+                document.documentElement.clientHeight * radius,
+                0,
+                progress * 360
+            )} stroke = "url(#linear-gradient)" strokeWidth = "11" />
         </svg>
         <img
-          src = {image}
-          className = {style.circularImage}
+            src = {image}
+            className = {style.circularImage}
         />
+        <div className = {style.controls}>
+          <div className = {style.timeLeft}>
+              {time}
+          </div>
+          <div className = {style.spacer} />
+          <div className = {style.buttonWrapper}>
+              <Button style={style.buttonShazam} onClick={this._handleClickShazam} />
+          </div>
+        </div>
       </div>
     );
   }
