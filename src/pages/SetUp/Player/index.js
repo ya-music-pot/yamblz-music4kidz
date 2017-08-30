@@ -13,6 +13,7 @@ import style from './style.scss';
 class Player extends Component {
   state = {
     countChoose: 0,
+    isSound: true,
   }
 
   _handleLike = () => {
@@ -22,6 +23,10 @@ class Player extends Component {
 
   _handleSkip = () => {
     this._handleUpdateChoose();
+  }
+
+  _handleToggleSound = () => {
+    this.setState({ isSound: !this.state.isSound });
   }
 
   _handleUpdateChoose() {
@@ -34,6 +39,8 @@ class Player extends Component {
   }
 
   render() {
+    const isSound = this.state.isSound;
+
     return (
       <div className={style.container}>
         <div className={style.wrapperPlayer}>
@@ -51,21 +58,21 @@ class Player extends Component {
               className={style.skip}
             />
             <div className={style.sound}>
-              <ButtonCircle
-                onClick={this._handleChangeStep}
-                typeIcon="sound"
-                background="rgba(0,0,0,0)"
-                className={style.soundIn}
-              />
-              {
-                /*
-                  <ButtonCircle
-                  onClick={this._handleChangeStep}
+              { isSound &&
+                <ButtonCircle
+                  onClick={this._handleToggleSound}
+                  typeIcon="sound"
+                  background="rgba(0,0,0,0)"
+                  className={style.soundIn}
+                />
+              }
+              { !isSound &&
+                <ButtonCircle
+                  onClick={this._handleToggleSound}
                   typeIcon="sound-off"
                   background="rgba(0,0,0,0)"
                   className={style.soundOut}
-                  />
-                */
+                />
               }
             </div>
           </div>
