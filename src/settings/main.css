@@ -3,6 +3,12 @@
     src: url('./fonts/Yandex-Sans-Text-Regular.ttf');
 }
 
+@font-face {
+    font-family: 'YandexSans';
+    src: url('./fonts/Yandex-Sans-Text-Bold.ttf');
+    font-weight: bold;
+}
+
 body {
     font-family: 'YandexSans', Arial;
     margin: 0;
