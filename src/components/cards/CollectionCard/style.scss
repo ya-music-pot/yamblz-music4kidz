@@ -1,0 +1,39 @@
+.container {
+  position: relative;
+  padding: 24px 24px 16px;
+  margin-bottom: 24px;
+  border-radius: 15px;
+  background-color: #7f44ff;
+  background-image: linear-gradient(to bottom, #f6d365, #f8c96c 20%, #fabf73 40%, #fbb579 60%, #fcab7f 80%, #fda085);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: cover;
+  box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.22);
+
+  &::before {
+    content: '';
+    right: 0;
+    bottom: 0;
+    top: 24px;
+    left: 24px;
+    display: block;
+    position: absolute;
+    background-image: url('./images/bg.png');
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
+    border-radius: 15px;
+  }
+}
+
+.title {
+  margin-bottom: 30px;
+}
+
+.content {
+  position: relative;
+}
+
+.button {
+  margin-left: auto;
+}

@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Icon from '_components/Icon';
 import style from './style.scss';
 
 export default class EmojiStatus extends Component {
   render() {
-    const { container } = style;
-    const { status: { mood, activity } } = this.props;
+    const { container, icon } = style;
+    const { settings: { activeEmoji, activeAction } } = this.props;
 
     return (
       <div className={container}>
-        <span>{mood}</span>
-        <span>{activity}</span>
+        <Icon typeIcon={activeAction} className={icon} />
+        <Icon typeIcon={activeEmoji} className={icon} />
       </div>
     );
   }
 }
 
 EmojiStatus.propTypes = {
-  status: PropTypes.object,
+  settings: PropTypes.object,
 };
