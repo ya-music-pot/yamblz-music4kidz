@@ -7,16 +7,30 @@ import style from './style.scss';
 
 export default class ListSettings extends Component {
   render() {
-    const { count, className } = this.props;
+    const {
+      count, className, activeEmoji,
+      activeAction,
+    } = this.props;
+
     const data = Array.from(Array(count).keys());
 
-    return count > 0 && (
+    return (
       <ul className={cl(style.list, className)}>
         { data.map(id => (
           <li key={`heart${id}`} className={style.item}>
-            <Icon typeIcon="heart-red" />
+            <Icon typeIcon="heart-red" className={style.icon} />
           </li>
         ))}
+        { activeEmoji &&
+          <li key={`emoji${activeEmoji}`} className={style.item}>
+            <Icon typeIcon={activeEmoji} className={style.emoji} />
+          </li>
+        }
+        { activeAction &&
+          <li key={`action${activeAction}`} className={style.item}>
+            <Icon typeIcon={activeAction} className={style.action} />
+          </li>
+        }
       </ul>
     );
   }
@@ -24,5 +38,7 @@ export default class ListSettings extends Component {
 
 ListSettings.propTypes = {
   count: PropTypes.number.isRequired,
+  activeEmoji: PropTypes.string.isRequired,
+  activeAction: PropTypes.string.isRequired,
   className: PropTypes.string,
 };

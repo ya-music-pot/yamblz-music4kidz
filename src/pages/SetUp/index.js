@@ -1,4 +1,3 @@
-// TO DO — переименовать в SetUp
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -14,36 +13,37 @@ import Player from './Player';
 
 import style from './style.scss';
 
-class Settings extends Component {
-  componentWillUnmount() {
-    // this.props.clearSettings();
-  }
-
+class SetUp extends Component {
   _handleNextStep = () => {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
 
     if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
+    } else {
+      this.props.history.push('/playlist');
     }
   }
 
-  /**
-   * @return {Node}
-   */
   render() {
     const {
       activeStep, likesCount, activeAction,
-      activeEmoji,
+      activeEmoji, steps,
     } = this.props;
     const { title, step } = activeStep;
+
+    const stepEmoji = getStepByType(steps, 'emoji');
+    const stepActive = getStepByType(steps, 'action');
 
     return (
       <div className={style.container}>
         <ListSettings
           count={likesCount}
           className={style.list}
+          activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
+          activeAction={activeStep.step > stepActive ? activeAction : ''}
         />
+
         <h1 className={style.title}>{title}</h1>
         { step === 1 && <Player onNextStep={this._handleNextStep} /> }
         { step === 2 && <Mood /> }
@@ -70,6 +70,26 @@ class Settings extends Component {
   }
 }
 
+SetUp.propTypes = {
+  history: PropTypes.object.isRequired,
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      step: PropTypes.number,
+      type: PropTypes.string,
+      title: PropTypes.string,
+    }),
+  ),
+  updateStep: PropTypes.func,
+  likesCount: PropTypes.number,
+  activeAction: PropTypes.string,
+  activeEmoji: PropTypes.string,
+  activeStep: PropTypes.shape({
+    step: PropTypes.number,
+    type: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};
+
 export default connect((state, props) => {
   const { steps, activeStep } = state.setup;
   const { likesCount, activeAction, activeEmoji } = state.settings;
@@ -82,13 +102,21 @@ export default connect((state, props) => {
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep })(Settings);
+}, { updateStep })(SetUp);
 
-Settings.propTypes = {
-  steps: PropTypes.array,
-  updateStep: PropTypes.func,
-  likesCount: PropTypes.number,
-  activeAction: PropTypes.string,
-  activeEmoji: PropTypes.string,
-  activeStep: PropTypes.object,
-};
+/**
+ * Helpers
+ */
+
+/**
+ * getStepByType
+ * @param  {Object[]} steps
+ * @param  {Number} steps[].step
+ * @param  {String} steps[].type
+ * @param  {String} emoji
+ * @return {Number}
+ */
+function getStepByType(steps, emoji) {
+  const findStep = steps.find((item) => item.type === emoji);
+  return findStep && findStep.step;
+}

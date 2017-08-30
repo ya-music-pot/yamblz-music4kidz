@@ -77,7 +77,6 @@ class Player extends Component {
 }
 
 Player.propTypes = {
-  activeType: PropTypes.string,
   saveLikesCount: PropTypes.func,
   onNextStep: PropTypes.func,
   likesCount: PropTypes.number,
@@ -85,7 +84,6 @@ Player.propTypes = {
 
 export default connect((state, props) => ({
   likesCount: state.settings.likesCount,
-  activeType: state.settings.activeEmoji,
   listEmoji: state.dictionaries.listEmoji,
   ...props,
 }), { saveLikesCount })(Player);

@@ -10,16 +10,13 @@ import style from './style.scss';
 
 class Mood extends Component {
   /**
-   * [_handleChange save new type of mood in global State]
+   * _handleChange save new type of mood in global State
    * @param  {String} activeType
    */
   _handleChange = (activeType) => {
     this.props.saveEmoji(activeType);
   }
 
-  /**
-   * [render print list emoji]
-   */
   render() {
     const { activeType, listEmoji } = this.props;
 
@@ -37,13 +34,11 @@ class Mood extends Component {
 
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
-  push: PropTypes.func.isRequired,
   listEmoji: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
     }),
   ).isRequired,
-  history: PropTypes.object,
   activeType: PropTypes.string,
 };
 

@@ -21,7 +21,6 @@ export function saveAction(activeType) {
 }
 
 export function saveLikesCount(likesCount) {
-  console.log(111)
   return {
     type: UPDATE_COUNT_LIKES,
     payload: {
