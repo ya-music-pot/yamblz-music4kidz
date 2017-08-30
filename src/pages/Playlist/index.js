@@ -107,13 +107,6 @@ class Playlist extends Component {
   render() {
     const { playlist, container } = style;
 
-    // const willBeFromState = {
-    //   settings: {
-    //     activeEmoji: 'emoji-sunglasses',
-    //     activeAction: 'action-car',
-    //   },
-    // };
-
     const willRecieved = {
       personal: {
         title: 'Тачки 3',
