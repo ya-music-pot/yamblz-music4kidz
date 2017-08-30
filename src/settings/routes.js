@@ -7,6 +7,7 @@ import Entrance from '_pages/Entrance';
 import SetUp from '_pages/SetUp';
 import Playlist from '_pages/Playlist';
 import Player from '_pages/Player';
+import MiniPlayer from '_pages/MiniPlayer';
 
 const routes = () => (
   <Route path="/" component={App}>
@@ -15,6 +16,7 @@ const routes = () => (
     <Route path="/settings" component={Settings} />
     <Route path="/playlist" component={Playlist} />
     <Route path="/player" component={Player} />
+    <Route path="/miniplayer" component={MiniPlayer} />
   </Route>
 );
 
