@@ -68,14 +68,21 @@ class Playlist extends Component {
   };
 
   _handleTogglePlay = (cardId) => {
-    if (!this.yaPlayer.isPlaying()) {
+    let playState;
+
+    if (!this.yaPlayer.isPlaying() || cardId !== this.state.activeCardId) {
       // TODO плейлисты в карточки будут приходить из store
       const cardPlayList = playlists[cardId];
 
+      if (cardId !== this.state.activeCardId) {
+        this.yaPlayer.stop();
+      }
       this.yaPlayer.setPlaylist(cardPlayList);
       this.yaPlayer.play();
+      playState = true;
     } else {
       this.yaPlayer.pause();
+      playState = false;
     }
 
     setTimeout(() => {
@@ -84,7 +91,7 @@ class Playlist extends Component {
       this.setState({
         activeCardId: cardId,
         playerState: Object.assign({}, playerState, {
-          isPlaying: !playerState.isPlaying,
+          isPlaying: playState,
         }),
       });
     }, 0);
@@ -205,31 +212,31 @@ const playlists = {
   cartoon: {
     title: 'cartoon',
     tracks: [
-      '57730',
+      '3935391',
     ],
   },
   game: {
     title: 'game',
     tracks: [
-      '57730',
+      '7671',
     ],
   },
   newTrack: {
     title: 'newTrack',
     tracks: [
-      '57730',
+      '3935390',
     ],
   },
   radio: {
     title: 'radio',
     tracks: [
-      '57730',
+      '3935287',
     ],
   },
   collection: {
     title: 'collection',
     tracks: [
-      '57730',
+      '3935388',
     ],
   },
 };
