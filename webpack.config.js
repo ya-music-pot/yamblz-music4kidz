@@ -51,22 +51,39 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                sourceMap: true,
-                localIdentName: '[local]___[hash:base64:8]',
-              },
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              localIdentName: '[local]___[hash:base64:8]',
             },
-            'sass-loader',
-            'postcss-loader',
-          ],
-        }),
+          },
+          'sass-loader',
+          'postcss-loader',
+        ],
       },
+      // {
+      //   test: /\.scss$/,
+      //   exclude: /node_modules/,
+      //   loader: ExtractTextPlugin.extract({
+      //     fallback: 'style-loader',
+      //     use: [
+      //       {
+      //         loader: 'css-loader',
+      //         options: {
+      //           modules: true,
+      //           sourceMap: true,
+      //           localIdentName: '[local]___[hash:base64:8]',
+      //         },
+      //       },
+      //       'sass-loader',
+      //       'postcss-loader',
+      //     ],
+      //   }),
+      // },
     ],
   },
 
