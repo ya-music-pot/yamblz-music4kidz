@@ -9,7 +9,8 @@ import style from './style.scss';
 
 export default class CartoonCard extends Component {
   render() {
-    const { container, content, title: titleStyles,
+    const {
+      container, content, title: titleStyles,
       subtitle, button,
     } = style;
 

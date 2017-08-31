@@ -8,7 +8,10 @@ import style from './style.scss';
 
 export default class CollectionCard extends Component {
   render() {
-    const { container, title: titleStyles, content, button } = style;
+    const {
+      container, title: titleStyles,
+      content, button,
+    } = style;
 
     const {
       data: { title, imageUrl },

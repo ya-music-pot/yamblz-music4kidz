@@ -10,7 +10,10 @@ import style from './style.scss';
 
 export default class RadioCard extends Component {
   render() {
-    const { container, title: titleStyles, subtitle, image, button } = style;
+    const {
+      container, title: titleStyles,
+      subtitle, image, button,
+    } = style;
 
     const {
       data: { title, imageUrl },

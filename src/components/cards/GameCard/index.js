@@ -8,7 +8,10 @@ import style from './style.scss';
 
 export default class GameCard extends Component {
   render() {
-    const { container, title: titleStyles, image, button } = style;
+    const {
+      container, title: titleStyles,
+      image, button,
+    } = style;
 
     const {
       data: { title, imageUrl },

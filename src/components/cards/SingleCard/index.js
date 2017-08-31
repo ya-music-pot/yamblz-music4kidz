@@ -10,12 +10,8 @@ import style from './style.scss';
 export default class SingleCard extends Component {
   render() {
     const {
-      container,
-      content,
-      title,
-      info,
-      singer,
-      button,
+      container, content, title,
+      info, singer, button,
     } = style;
 
     const {
