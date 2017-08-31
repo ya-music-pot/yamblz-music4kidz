@@ -4,12 +4,13 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
+  margin: 0 5vw;
 }
 
 .item {
   width: 33%;
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 10vw;
   transform: scale(1) translateZ(0);
   transform-origin: 50% 50%;
   transition: transform 0.1s;
@@ -19,6 +20,13 @@
 
 .list {
   margin-bottom: 50px;
+}
+
+.icon {
+  width: 17vw;
+  height: 17vw;
+  max-width: 70px;
+  max-height: 70px;
 }
 
 .itemActive {

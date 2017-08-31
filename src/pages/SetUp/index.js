@@ -49,11 +49,11 @@ class SetUp extends Component {
         />
 
         <h1 className={style.title}>{title}</h1>
-        { step === 1 && <Player onNextStep={this._handleNextStep} /> }
-        { step === 2 && <Mood /> }
+        { step === 2 && <Player onNextStep={this._handleNextStep} /> }
+        { step === 1 && <Mood /> }
         { step === 3 && <Action /> }
         {
-          activeStep.type !== 'player' &&
+          activeStep.type !== 'player1' &&
           <ButtonCircle
             onClick={this._handleNextStep}
             className={style.btn}
@@ -61,7 +61,7 @@ class SetUp extends Component {
           />
         }
         {
-          activeStep.type === 'player' &&
+          activeStep.type === 'player1' &&
           <div
             className={style.skipTitle}
             onClick={this._handleNextStep}
