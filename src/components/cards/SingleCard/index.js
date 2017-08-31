@@ -10,15 +10,15 @@ import style from './style.scss';
 export default class SingleCard extends Component {
   render() {
     const {
-      container,
-      content,
-      title,
-      info,
-      singer,
-      button,
+      container, content, title,
+      info, singer, button,
     } = style;
 
-    const { author, song, imageUrl } = this.props.data;
+    const {
+      data: { author, song, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
+
     const backgroundStyles = {};
 
     if (imageUrl) {
@@ -26,11 +26,11 @@ export default class SingleCard extends Component {
     }
 
     return (
-      <div className={container} style={backgroundStyles}>
+      <div className={container} style={backgroundStyles} onClick={onCardClick}>
         <div className={content}>
           <CardTitle text="Новый трек" styles={title} />
           <div className={info}>
-            <Button onClick={this.props.onButtonClick} style={button}>
+            <Button onClick={onButtonClick} style={button}>
               <Icon typeIcon="play-card" />
             </Button>
             <div>
@@ -47,4 +47,5 @@ export default class SingleCard extends Component {
 SingleCard.propTypes = {
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
+  onCardClick: PropTypes.func,
 };
