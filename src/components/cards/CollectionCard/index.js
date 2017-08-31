@@ -10,9 +10,12 @@ export default class CollectionCard extends Component {
   render() {
     const { container, title: titleStyles, content, button } = style;
 
-    const { onCardClick, onButtonClick } = this.props;
+    const {
+      data: { title, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
 
-    const { title, imageUrl } = this.props.data;
+
     const backgroundStyles = {};
 
     if (imageUrl) {

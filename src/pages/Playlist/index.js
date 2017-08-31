@@ -213,6 +213,7 @@ Playlist.contextTypes = {
 
 Playlist.propTypes = {
   settings: PropTypes.object,
+  router: PropTypes.object,
 };
 
 // TODO данные должны приходить из store

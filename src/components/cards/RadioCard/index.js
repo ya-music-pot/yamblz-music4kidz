@@ -12,9 +12,11 @@ export default class RadioCard extends Component {
   render() {
     const { container, title: titleStyles, subtitle, image, button } = style;
 
-    const { onCardClick, onButtonClick } = this.props;
+    const {
+      data: { title, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
 
-    const { title, imageUrl } = this.props.data;
     const backgroundStyles = {};
 
     if (imageUrl) {

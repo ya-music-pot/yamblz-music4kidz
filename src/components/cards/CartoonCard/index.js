@@ -10,12 +10,14 @@ import style from './style.scss';
 export default class CartoonCard extends Component {
   render() {
     const { container, content, title: titleStyles,
-      subtitle, button
+      subtitle, button,
     } = style;
 
-    const { onCardClick, onButtonClick } = this.props;
+    const {
+      data: { title, text, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
 
-    const { title, text, imageUrl } = this.props.data;
     const backgroundStyles = {};
 
     if (imageUrl) {

@@ -18,9 +18,11 @@ export default class SingleCard extends Component {
       button,
     } = style;
 
-    const { onCardClick, onButtonClick } = this.props;
+    const {
+      data: { author, song, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
 
-    const { author, song, imageUrl } = this.props.data;
     const backgroundStyles = {};
 
     if (imageUrl) {

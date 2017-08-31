@@ -9,9 +9,11 @@ import style from './style.scss';
 export default class GameCard extends Component {
   render() {
     const { container, title: titleStyles, image, button } = style;
-    const { title, imageUrl } = this.props.data;
 
-    const { onCardClick, onButtonClick } = this.props;
+    const {
+      data: { title, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
 
     const backgroundStyles = {};
 
