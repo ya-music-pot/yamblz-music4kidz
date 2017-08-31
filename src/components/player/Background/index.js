@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.scss';
 
-import defaultImage from './images/egorka.png';
+import defaultImage from './images/egorka.jpg';
 
 export default class Background extends Component {
   render() {

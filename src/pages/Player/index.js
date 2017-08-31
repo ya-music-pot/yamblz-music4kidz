@@ -14,8 +14,8 @@ class Player extends Component {
       trackName: '',
       singerName: '',
       trackPercentage: 0,
-      minutesLeft: 0,
-      secondsLeft: 0,
+      minutesLeft: '',
+      secondsLeft: '',
       isPlaying: false,
       cover: '',
     },
@@ -60,12 +60,11 @@ class Player extends Component {
       const currentTrackDuration = this.yaPlayer.getCurrentTrackDuration();
 
       if (currentTrackDuration) {
-        const trackPercentage = currentTrackPosition / currentTrackDuration;
-        const minutesLeft = parseInt((currentTrackPosition - currentTrackDuration) / 60);
-        const sec = -(parseInt((currentTrackPosition - currentTrackDuration)) - minutesLeft * 60)
-        const secondsLeft = sec < 10 ? '0' + sec : sec;
-        const playerState = Object.assign({}, this.state.playerState, { trackPercentage, minutesLeft, secondsLeft});
-
+        const trackPercentage = currentTrackPosition / currentTrackDuration,
+              minutesLeft = (parseInt((currentTrackPosition - currentTrackDuration) / 60)).toString(),
+              sec = -(parseInt((currentTrackPosition - currentTrackDuration)) - minutesLeft * 60),
+              secondsLeft = (sec < 10 ? '0' + sec : sec).toString(),
+              playerState = Object.assign({}, this.state.playerState, { trackPercentage, minutesLeft, secondsLeft});
         this.setState({ playerState });
       }
     });

@@ -5,7 +5,7 @@ import CircularAvatar from '_components/CircularAvatar';
 import cl from 'classname';
 
 import style from './style.scss';
-import artist from './images/egorka.png';
+import artist from './images/egorka.jpg';
 
 export default class Container extends Component {
   _handleClickArrowDown = (e) => {
@@ -98,6 +98,12 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
+  trackName: React.PropTypes.string,
+  singerName: React.PropTypes.string,
+  trackPercentage: React.PropTypes.number,
+  minutesLeft: React.PropTypes.string,
+  secondsLeft: React.PropTypes.string,
+  cover: React.PropTypes.string,
   isPlaying: PropTypes.bool,
   onTogglePlay: PropTypes.func,
 };

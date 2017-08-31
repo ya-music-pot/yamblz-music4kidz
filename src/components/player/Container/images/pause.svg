@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="22px" height="32px" viewBox="0 0 22 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-    <title>-g-icon-pause copy</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="playlist" transform="translate(-173.000000, -478.000000)">
-            <g id="-g-icon-pause-copy" transform="translate(168.000000, 478.000000)">
-                <rect id="Rectangle-10" fill="#D8D8D8" opacity="0" x="0" y="0" width="32" height="32"></rect>
-                <path d="M11,30.9833333 L11,1.00833333 C11,0.45 10.6625,0 10.2375,0 L5.7625,0 C5.3375,0 5,0.45 5,1.00833333 L5,30.9833333 C5,31.5416667 5.3375,32 5.7625,32 L10.2375,32 C10.6625,32 11,31.55 11,30.9833333 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
-                <path d="M26.2375,0 L21.7625,0 C21.34375,0 21,0.45 21,1.00833333 L21,30.9833333 C21,31.5416667 21.3375,32 21.7625,32 L26.2375,32 C26.65625,32 27,31.55 27,30.9833333 L27,1.00833333 C27,0.45 26.6625,0 26.2375,0 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="22" height="32" viewBox="0 0 22 32" xmlns="http://www.w3.org/2000/svg"><title>-g-icon-pause copy</title><g fill="#FFF" fill-rule="nonzero"><path d="M6 30.983V1.008C6 .45 5.662 0 5.238 0H.762C.339 0 0 .45 0 1.008v29.975C0 31.542.338 32 .763 32h4.475c.424 0 .762-.45.762-1.017zM21.238 0h-4.476C16.345 0 16 .45 16 1.008v29.975c0 .559.337 1.017.762 1.017h4.476c.418 0 .762-.45.762-1.017V1.008C22 .45 21.663 0 21.238 0z"/></g></svg>
