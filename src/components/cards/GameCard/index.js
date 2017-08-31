@@ -11,6 +11,8 @@ export default class GameCard extends Component {
     const { container, title: titleStyles, image, button } = style;
     const { title, imageUrl } = this.props.data;
 
+    const { onCardClick, onButtonClick } = this.props;
+
     const backgroundStyles = {};
 
     if (imageUrl) {
@@ -18,9 +20,9 @@ export default class GameCard extends Component {
     }
 
     return (
-      <div className={container}>
+      <div className={container} onClick={onCardClick}>
         <CardTitle text={title} styles={titleStyles} />
-        <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={onButtonClick} position={button} />
         <div className={image} style={backgroundStyles}>image</div>
       </div>
     );
@@ -30,4 +32,5 @@ export default class GameCard extends Component {
 GameCard.propTypes = {
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
+  onCardClick: PropTypes.func,
 };
