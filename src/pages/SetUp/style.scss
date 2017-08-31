@@ -1,5 +1,5 @@
 .container {
-  padding-top: 48px;
+  padding-top: 40px;
 }
 
 .title {
@@ -7,26 +7,23 @@
   font: 24px/26px 'YandexSans', Arial;
   line-height: 26px;
   color: #000;
-  margin: 0 0 16vw;
+  margin: 0 0 45px;
 }
 
 .list {
   position: absolute;
-  top: 30px;
-  width: 100%;
+  top: 25px;
+  left: 0;
+  right: 0;
 }
 
 .btn {
-  position: absolute;
-  bottom: 52px;
-  left: 50%;
-  margin-left: -27px;
+  width: 15vw;
+  height: 15vw;
+  margin: 0 auto;
 }
 
 .skipTitle {
-  position: absolute;
-  width: 100%;
-  bottom: 5%;
   color: #9e9e9e;
   font-size: 16px;
   text-align: center;

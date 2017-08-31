@@ -4,7 +4,7 @@
   margin: 0;
   display: flex;
   flex-wrap: wrap;
-  margin: 0 5vw;
+  margin: 0 5vw 10px;
 }
 
 .item {
@@ -16,10 +16,6 @@
   transition: transform 0.1s;
   cursor: pointer;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-
-.list {
-  margin-bottom: 50px;
 }
 
 .icon {

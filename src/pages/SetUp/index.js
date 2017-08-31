@@ -41,34 +41,38 @@ class SetUp extends Component {
 
     return (
       <div className={style.container}>
-        <ListSettings
-          count={likesCount}
-          className={style.list}
-          activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
-          activeAction={activeStep.step > stepActive ? activeAction : ''}
-        />
-
-        <h1 className={style.title}>{title}</h1>
-        { step === 2 && <Player onNextStep={this._handleNextStep} /> }
-        { step === 1 && <Mood /> }
-        { step === 3 && <Action /> }
-        {
-          activeStep.type !== 'player1' &&
-          <ButtonCircle
-            onClick={this._handleNextStep}
-            className={style.btn}
-            typeIcon="arrow-right"
+        <div className={style.content}>
+          <ListSettings
+            count={likesCount}
+            className={style.list}
+            activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
+            activeAction={activeStep.step > stepActive ? activeAction : ''}
           />
-        }
-        {
-          activeStep.type === 'player1' &&
-          <div
-            className={style.skipTitle}
-            onClick={this._handleNextStep}
-          >
-            Пропустить этот шаг
-          </div>
-        }
+
+          <h1 className={style.title}>{title}</h1>
+          { step === 1 && <Player onNextStep={this._handleNextStep} /> }
+          { step === 2 && <Mood /> }
+          { step === 3 && <Action /> }
+        </div>
+        <div className={style.footer}>
+          {
+            activeStep.type !== 'player' &&
+            <ButtonCircle
+              onClick={this._handleNextStep}
+              className={style.btn}
+              typeIcon="arrow-right"
+            />
+          }
+          {
+            activeStep.type === 'player' &&
+            <div
+              className={style.skipTitle}
+              onClick={this._handleNextStep}
+            >
+              Пропустить этот шаг
+            </div>
+          }
+        </div>
       </div>
     );
   }
