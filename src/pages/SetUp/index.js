@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import ButtonCircle from '_components/ButtonCircle';
 import ListSettings from '_components/ListSettings';
 
-import { updateStep } from '_actions/setup';
+import { updateStep, clearSetUp } from '_actions/setup';
 
 import Mood from './Mood';
 import Action from './Action';
@@ -14,6 +14,10 @@ import Player from './Player';
 import style from './style.scss';
 
 class SetUp extends Component {
+  componentWillUnmount() {
+    this.props.clearSetUp();
+  }
+
   _handleNextStep = () => {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
@@ -80,6 +84,7 @@ SetUp.propTypes = {
     }),
   ),
   updateStep: PropTypes.func,
+  clearSetUp: PropTypes.func,
   likesCount: PropTypes.number,
   activeAction: PropTypes.string,
   activeEmoji: PropTypes.string,
@@ -102,7 +107,7 @@ export default connect((state, props) => {
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep })(SetUp);
+}, { updateStep, clearSetUp })(SetUp);
 
 /**
  * Helpers
