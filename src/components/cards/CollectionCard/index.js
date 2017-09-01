@@ -8,9 +8,17 @@ import style from './style.scss';
 
 export default class CollectionCard extends Component {
   render() {
-    const { container, title: titleStyles, content, button } = style;
+    const {
+      container, title: titleStyles,
+      content, button,
+    } = style;
 
-    const { title, imageUrl } = this.props.data;
+    const {
+      data: { title, imageUrl },
+      onCardClick, onButtonClick,
+    } = this.props;
+
+
     const backgroundStyles = {};
 
     if (imageUrl) {
@@ -18,10 +26,10 @@ export default class CollectionCard extends Component {
     }
 
     return (
-      <div className={container} style={backgroundStyles}>
+      <div className={container} style={backgroundStyles} onClick={onCardClick}>
         <div className={content}>
           <CardTitle text={title} styles={titleStyles} />
-          <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
       </div>
     );
@@ -31,4 +39,5 @@ export default class CollectionCard extends Component {
 CollectionCard.propTypes = {
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
+  onCardClick: PropTypes.func,
 };

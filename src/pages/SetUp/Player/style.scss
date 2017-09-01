@@ -1,48 +1,22 @@
 .singer {
-  margin: -40px auto 0;
+  margin: -25px auto 0;
 }
 
 .player {
   display: inline-block;
   position: relative;
+  margin-bottom: 25px;
 }
 
 .title {
   padding: 0 36px;
   font: 24px/26px 'YandexSans', Arial;
   line-height: 26px;
+  margin-top: 0;
   color: #000;
-  margin-bottom: 58px;
 }
 
 .wrapperPlayer {
   text-align: center;
   margin-top: -40px;
-}
-
-.like,
-.skip,
-.sound {
-  position: absolute;
-  z-index: 10;
-  cursor: pointer;
-}
-
-.like,
-.skip {
-  top: 140px;
-}
-
-.skip {
-  left: 50px;
-}
-
-.like {
-  right: 50px;
-}
-
-.sound {
-  bottom: 50px;
-  left: 140px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }

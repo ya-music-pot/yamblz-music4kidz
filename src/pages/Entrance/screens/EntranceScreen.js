@@ -125,15 +125,13 @@ EntranceScreen.propTypes = {
   onButtonClick: PropTypes.func,
 };
 
-const Title = () => {
-  return (
-    <div className={style.titleWrapper}>
-      <div className={style.title}>
-        Привет!
-      </div>
-      <div className={style.subTitle}>
-        Давай слушать музыку и веселиться?
-      </div>
+const Title = () => (
+  <div className={style.titleWrapper}>
+    <div className={style.title}>
+      Привет!
     </div>
-  );
-};
+    <div className={style.subTitle}>
+        Давай слушать музыку и веселиться?
+    </div>
+  </div>
+);

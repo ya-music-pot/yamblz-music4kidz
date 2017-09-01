@@ -2,22 +2,26 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.scss';
 
-import backgroundImage from './images/egorka.png';
+import defaultImage from './images/egorka.jpg';
 
 export default class Background extends Component {
   render() {
+    const { cover } = this.props;
+    const imageUri = (cover !== '') ? cover : defaultImage;
+
     return (
       <div>
-        <div
-          className={style.overlay}
-        />
+        <div className={style.overlay} />
         <img
-          src={backgroundImage}
+          src={imageUri}
           className={style.backgroundImage}
+          alt="Аватар"
         />
       </div>
     );
   }
 }
 
-Background.propTypes = {};
+Background.propTypes = {
+  cover: PropTypes.string,
+};

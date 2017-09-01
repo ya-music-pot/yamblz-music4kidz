@@ -30,7 +30,7 @@ class MiniPlayer extends Component {
   _initPlayer = () => {
     const playerError = this.yaPlayer.getPlayerError();
     if (playerError) {
-      alert(playerError);
+      console.log(playerError);
       return;
     }
 

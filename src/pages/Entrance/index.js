@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import EntranceScreen from './screens/EntranceScreen';
 import PlaylistCalibration from './screens/PlaylistCalibration';
@@ -44,9 +45,12 @@ class Entrance extends Component {
 }
 
 export default connect((state, props) => ({
-  ...state,
   ...props,
 }))(Entrance);
+
+Entrance.propTypes = {
+  router: PropTypes.object,
+};
 
 // TODO данные должны приходить из store
 const data = {
@@ -54,3 +58,4 @@ const data = {
   text: '16 песен из мультика',
   imageUrl: '',
 };
+
