@@ -19,6 +19,10 @@ export default class EntranceScreen extends Component {
     this.mc.destroy();
   }
 
+  /**
+   * _initializeCardActions — Функция инициаллизирует обработчик жестов
+   * @param  {Node} el
+   */
   _initializeCardActions = (el) => {
     this.card = el;
     this.isPanning = false;
@@ -41,6 +45,10 @@ export default class EntranceScreen extends Component {
     this.mc.on('pan', this._handlePan);
   };
 
+  /**
+   * _handlePan — Функция-обработчик для жестов показа и скрытия карточки
+   * @param  {Object} event
+   */
   _handlePan = (event) => {
     if (!this.isPanning) {
       this.isPanning = true;
