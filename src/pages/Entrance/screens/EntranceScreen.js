@@ -13,7 +13,7 @@ import entranceCloud3x from '../images/entrance-cloud@3x.png';
 export default class EntranceScreen extends Component {
   state = {
     isCardShown: false,
-  };
+  }
 
   componentWillUnmount() {
     this.mc.destroy();
@@ -39,7 +39,7 @@ export default class EntranceScreen extends Component {
     }));
 
     this.mc.on('pan', this._handlePan);
-  };
+  }
 
   _handlePan = (event) => {
     if (!this.isPanning) {
