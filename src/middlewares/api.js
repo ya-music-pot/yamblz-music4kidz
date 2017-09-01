@@ -24,7 +24,7 @@ export default ({ dispatch }) => (next) => (action) => {
   };
 
   return window.fetch(callAPI.url, options)
-    .then((response) => (response.json())
+    .then((response) => response.json())
     .then((data) => {
       if (data.error) {
         return Promise.reject(data);
@@ -34,7 +34,7 @@ export default ({ dispatch }) => (next) => (action) => {
     })
     .catch((error) => {
       generateError(rest, error, type, dispatch);
-    }));
+    });
 };
 
 /* Helpers */

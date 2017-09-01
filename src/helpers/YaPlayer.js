@@ -52,12 +52,14 @@ export default class YaPlayer {
   _currentTrackDuration = 0;
 
   /**
-   * @member {number} _pausedPosition - Время, на котором воспроизведение трека поставлено на паузу, сек
+   * @member {number} _pausedPosition - Время, на котором
+   * воспроизведение трека поставлено на паузу, сек
    * */
   _pausedPosition = 0;
 
   /**
-   * @function loadPlayerScript - Служит для добавления тега script на страницу с последующим созданием экземпляра плеера яндекс музыки
+   * @function loadPlayerScript - Служит для добавления тега
+   * script на страницу с последующим созданием экземпляра плеера яндекс музыки
    * @param callback {function} - Вызывыется при успешной загрузке скрипта
    * */
   loadPlayerScript = (callback = () => { }) => {
@@ -133,7 +135,8 @@ export default class YaPlayer {
   };
 
   /**
-   * @function setTrackDataCallback - Служит для установки обработчика события получения информации о треке
+   * @function setTrackDataCallback - Служит для установки
+   * обработчика события получения информации о треке
    * @example - В callback'е можно, например, запросить данные о текущем треке (getFullTrackData)
    * @param callback {function} - Функция, вызываемая при наступлении события trackdata
    * */
@@ -149,8 +152,10 @@ export default class YaPlayer {
   };
 
   /**
-   * @function setTrackDataCallback - Служит для установки обработчика события получения информации о процессе воспроизведения трека
-   * @example - В callback'е можно, например, запросить данные о текущей позиции воспроизведения (getCurrentTrackPosition)
+   * @function setTrackDataCallback - Служит для установки
+   * обработчика события получения информации о процессе воспроизведения трека
+   * @example - В callback'е можно, например, запросить
+   * данные о текущей позиции воспроизведения (getCurrentTrackPosition)
    * @param callback {function} - Функция, вызываемая при наступлении события trackdata
    * */
   setTimeUpdateCallback = (callback) => {
@@ -217,17 +222,13 @@ export default class YaPlayer {
   /**
    * @returns {Boolean}
    * */
-  isPlaying = () => {
-    return this._player.isPlaying();
-  };
+  isPlaying = () => this._player.isPlaying();
 
   /**
    * @function getPlayerError - Служит получения информации о текущей точке воспроизведения трека
    * @returns {string}
    * */
-  getPlayerError = () => {
-    return this._error;
-  };
+  getPlayerError = () => this._error;
 
   /**
    * @function getPlaylist - Служит получения текущего плейлиста
@@ -235,57 +236,44 @@ export default class YaPlayer {
    * @property {string} _playlist.title - Наименование плейлиста
    * @property {string[]} _playlist.tracks - Массив треков для воспроизведения
    * */
-  getPlaylist = () => {
-    return this._playlist;
-  };
+  getPlaylist = () => this._playlist;
 
   /**
-   * @function getCurrentTrackPosition - Служит получения информации о текущей точке воспроизведения трека
+   * @function getCurrentTrackPosition - Служит получения
+   * информации о текущей точке воспроизведения трека
    * @returns {number}
    * */
-  getCurrentTrackPosition = () => {
-    return this._currentTrackPosition || this._pausedPosition;
-  };
+  getCurrentTrackPosition = () => this._currentTrackPosition || this._pausedPosition;
 
   /**
    * @function getCurrentTrackTitle - Служит получения информации о названии трека
    * @returns {string}
    * */
-  getCurrentTrackTitle = () => {
-    return this._currentTrackTitle;
-  };
+  getCurrentTrackTitle = () => this._currentTrackTitle;
 
   /**
    * @function getCurrentTrackAlbums - Служит получения альбомов, в которые входит данный трек
    * @returns {object[]}
    * */
-  getCurrentTrackAlbums = () => {
-    return this._currentTrackAlbums;
-  };
+  getCurrentTrackAlbums = () => this._currentTrackAlbums;
 
   /**
    * @function getCurrentTrackArtists - Служит получения исполнителей данного трека
    * @returns {object[]}
    * */
-  getCurrentTrackArtists = () => {
-    return this._currentTrackArtists;
-  };
+  getCurrentTrackArtists = () => this._currentTrackArtists;
 
   /**
    * @function getCurrentTrackCoverUris - Служит получения ссылок на обложки альбомов данного трека
    * @returns {string[]}
    * */
-  getCurrentTrackCoverUris = () => {
-    return this._currentTrackCoverUris;
-  };
+  getCurrentTrackCoverUris = () => this._currentTrackCoverUris;
 
   /**
    * @function getCurrentTrackDuration - Служит получения длительности данного трека в секундах
    * @returns {number}
    * */
-  getCurrentTrackDuration = () => {
-    return this._currentTrackDuration;
-  };
+  getCurrentTrackDuration = () => this._currentTrackDuration;
 
   /**
    * @function getFullTrackData - Служит получения полной информации о треке
@@ -297,16 +285,14 @@ export default class YaPlayer {
    * @property {string[]} currentTrackCoverUris - Массив ссылок на обложки альбомов данного трека
    * @property {number} currentTrackDuration - Длительность трека в секундах
    * */
-  getFullTrackData = () => {
-    return {
-      currentTrackPosition: this.getCurrentTrackPosition(),
-      currentTrackTitle: this.getCurrentTrackTitle(),
-      currentTrackAlbums: this.getCurrentTrackAlbums(),
-      currentTrackArtists: this.getCurrentTrackArtists(),
-      currentTrackCoverUris: this.getCurrentTrackCoverUris(),
-      currentTrackDuration: this.getCurrentTrackDuration(),
-    }
-  };
+  getFullTrackData = () => ({
+    currentTrackPosition: this.getCurrentTrackPosition(),
+    currentTrackTitle: this.getCurrentTrackTitle(),
+    currentTrackAlbums: this.getCurrentTrackAlbums(),
+    currentTrackArtists: this.getCurrentTrackArtists(),
+    currentTrackCoverUris: this.getCurrentTrackCoverUris(),
+    currentTrackDuration: this.getCurrentTrackDuration(),
+  });
 }
 
 const playerUrl = 'http://music.yandex.ru/api/v1.5/index.js';

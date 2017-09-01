@@ -35,6 +35,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "7.3.0",
     "file-loader": "0.11.2",
+    "pre-commit": "^1.2.2",
     "webpack-dev-server": "2.7.1"
   },
   "babel": {

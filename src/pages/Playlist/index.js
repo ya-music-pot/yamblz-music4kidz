@@ -34,7 +34,7 @@ class Playlist extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if (this.context.yaPlayer !== nextContext.yaPlayer && nextContext.yaPlayer) {
+    if (this.context.yaPlayer!==nextContext.yaPlayer && nextContext.yaPlayer) {
       this.yaPlayer = nextContext.yaPlayer;
       this._initPlayer();
     }
