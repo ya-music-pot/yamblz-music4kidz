@@ -1,4 +1,5 @@
 .circle {
+  position: relative;
   background: #0065d9;
   width: 55px;
   height: 55px;
@@ -11,6 +12,8 @@
 
 .icon {
   position: absolute;
-  top: 16px;
-  left: 16px;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
 }

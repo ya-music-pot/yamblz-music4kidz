@@ -9,4 +9,4 @@ export function getApi() {
       url: '/artists/42581/tracks',
     },
   };
-};
+}

@@ -15,7 +15,11 @@ export default class ListEmoji extends Component {
             key={typeIcon}
             className={cl(style.item, isActive && style.itemActive)}
           >
-            <Icon typeIcon={typeIcon} onClick={onChange} />
+            <Icon
+              typeIcon={typeIcon}
+              onClick={onChange}
+              className={style.icon}
+            />
           </li>
         ))}
       </ul>

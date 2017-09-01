@@ -11,13 +11,14 @@ import style from './style.scss';
 export default class PersonalCard extends Component {
   render() {
     const { container, title, subtitle, button } = style;
+    const { settings, onCardClick, onButtonClick } = this.props;
 
     return (
-      <div className={container}>
-        <EmojiStatus settings={this.props.settings} />
+      <div className={container} onClick={onCardClick}>
+        <EmojiStatus settings={settings} />
         <CardTitle text="Весёлая поездка" styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
-        <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={onButtonClick} position={button} />
       </div>
     );
   }
@@ -26,4 +27,5 @@ export default class PersonalCard extends Component {
 PersonalCard.propTypes = {
   settings: PropTypes.object,
   onButtonClick: PropTypes.func,
+  onCardClick: PropTypes.func,
 };

@@ -44,14 +44,14 @@ class Playlist extends Component {
     const playerError = this.yaPlayer.getPlayerError();
     if (playerError) {
       // TODO вызвать модальное окно с ошибкой
-      alert(playerError);
+      console.log(playerError);
       return;
     }
 
     this.yaPlayer.setTrackDataCallback(() => {
       const playerState = Object.assign({}, this.state.playerState, {
         trackName: this.yaPlayer.getCurrentTrackTitle(),
-        singerName: this.yaPlayer.getCurrentTrackArtists()[0]["name"],
+        singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
       });
 
       this.setState({ playerState });
@@ -70,7 +70,9 @@ class Playlist extends Component {
     });
   };
 
-  _handleTogglePlay = (cardId) => {
+  _handleTogglePlay = (cardId, e) => {
+    e.stopPropagation();
+
     let playState;
 
     if (!this.yaPlayer.isPlaying() || cardId !== this.state.activeCardId) {
@@ -104,15 +106,12 @@ class Playlist extends Component {
     // TODO обработать нажатие кнопки скачать
   };
 
+  _onCardClick = () => {
+    this.props.router.push('/player');
+  };
+
   render() {
     const { playlist, container } = style;
-
-    const willBeFromState = {
-      settings: {
-        activeEmoji: 'emoji-sunglasses',
-        activeAction: 'action-car',
-      },
-    };
 
     const willRecieved = {
       personal: {
@@ -139,7 +138,7 @@ class Playlist extends Component {
       },
     };
 
-    const { settings } = willBeFromState;
+    const { settings } = this.props;
     const { activeCardId } = this.state;
     const { trackName, singerName, trackPercentage, isPlaying } = this.state.playerState;
 
@@ -151,31 +150,37 @@ class Playlist extends Component {
             id="personal"
             settings={settings}
             onButtonClick={this._handleTogglePlay.bind(this, 'personal')}
+            onCardClick={this._onCardClick}
           />
           <CartoonCard
             id="cartoon"
             data={willRecieved.personal}
             onButtonClick={this._handleTogglePlay.bind(this, 'cartoon')}
+            onCardClick={this._onCardClick}
           />
           <GameCard
             id="game"
             data={willRecieved.game}
             onButtonClick={this._handleTogglePlay.bind(this, 'game')}
+            onCardClick={this._onCardClick}
           />
           <SingleCard
             id="newTrack"
             data={willRecieved.newTrack}
             onButtonClick={this._handleTogglePlay.bind(this, 'newTrack')}
+            onCardClick={this._onCardClick}
           />
           <RadioCard
             id="radio"
             data={willRecieved.radio}
             onButtonClick={this._handleTogglePlay.bind(this, 'radio')}
+            onCardClick={this._onCardClick}
           />
           <CollectionCard
             id="collection"
             data={willRecieved.collection}
             onButtonClick={this._handleTogglePlay.bind(this, 'collection')}
+            onCardClick={this._onCardClick}
           />
         </div>
         {
@@ -196,12 +201,18 @@ class Playlist extends Component {
 }
 
 export default connect((state, props) => ({
-  ...state,
+  settings: state.settings,
   ...props,
 }))(Playlist);
 
 Playlist.contextTypes = {
   yaPlayer: PropTypes.object,
+  settings: PropTypes.object,
+};
+
+Playlist.propTypes = {
+  settings: PropTypes.object,
+  router: PropTypes.object,
 };
 
 // TODO данные должны приходить из store
