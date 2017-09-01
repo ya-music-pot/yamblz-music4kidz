@@ -33,12 +33,19 @@ app.use('/api', router);
 
 router.get('*', (req, res) => {
   got(`${API_URL}/${req.url}`)
-    .then(response => {
+    .then((response) => {
       res.json(response.body);
     })
     .catch(error => {
-      res.json(error);
+      res.json({ error });
     });
+});
+
+app.get('*', (req, res) => {
+  res.status(404);
+  res.json({
+    error: 'This page not found',
+  });
 });
 
 app.listen(8080, () => console.log('listening on 8080'));
