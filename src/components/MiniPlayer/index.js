@@ -18,7 +18,10 @@ export default class MiniPlayer extends Component {
   };
 
   render() {
-    const { trackName, singerName, trackPercentage, isPlaying, onTogglePlay, onDownload, className } = this.props;
+    const {
+      trackName, singerName, trackPercentage,
+      isPlaying, onTogglePlay, onDownload, className,
+    } = this.props;
 
     return (
       <div className={cl(style['miniPlayer-wrapper'], className)}>
