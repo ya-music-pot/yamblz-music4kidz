@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Hammer from 'hammerjs';
+import cl from 'classname';
 import Button from '_components/Button';
 import CartoonCard from '_components/cards/CartoonCard';
 
@@ -9,6 +11,70 @@ import entranceCloud2x from '../images/entrance-cloud@2x.png';
 import entranceCloud3x from '../images/entrance-cloud@3x.png';
 
 export default class EntranceScreen extends Component {
+  state = {
+    isCardShown: false,
+  };
+
+  componentWillUnmount() {
+    // TODO удалить слушатели событий
+  }
+
+  _initializeCardActions = (el) => {
+    this.card = el;
+    this.isPanning = false;
+
+    this.windowHeight = window.innerHeight;
+    this.cardHeight = this.card.offsetHeight;
+
+    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
+    this.bottomPosition = this.windowHeight - 66;
+    this.threshhold = this.windowHeight / 2;
+
+    this.posTimeout = null;
+
+    this.mc = new Hammer(this.card);
+    this.mc.add(new Hammer.Pan({
+      direction: Hammer.DIRECTION_VERTICAL,
+      threshold: 0,
+    }));
+
+    this.mc.on('pan', this._handlePan);
+  };
+
+  _handlePan = (event) => {
+    if (!this.isPanning) {
+      this.isPanning = true;
+      this.lastCardY = this.card.offsetTop;
+    }
+
+    const newCardY = event.deltaY + this.lastCardY;
+    this.card.style.top = `${newCardY}px`;
+
+    if (newCardY <= this.threshhold) {
+      if (this.posTimeout) {
+        clearTimeout(this.posTimeout);
+      }
+
+      this.posTimeout = setTimeout(() => {
+        this.card.style.top = `${this.upperPosition}px`;
+      }, 300);
+    }
+
+    if (newCardY > this.threshhold) {
+      if (this.posTimeout) {
+        clearTimeout(this.posTimeout);
+      }
+
+      this.posTimeout = setTimeout(() => {
+        this.card.style.top = `${this.bottomPosition}px`;
+      }, 300);
+    }
+
+    if (event.isFinal) {
+      this.isPanning = false;
+    }
+  };
+
   render() {
     const { data, onButtonClick } = this.props;
 
@@ -30,7 +96,10 @@ export default class EntranceScreen extends Component {
             Поехали
           </Button>
         </div>
-        <div className={style.cardContainer}>
+        <div
+          className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
+          ref={this._initializeCardActions}
+        >
           <CartoonCard
             data={data}
             onButtonClick={onButtonClick}

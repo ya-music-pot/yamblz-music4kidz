@@ -103,8 +103,14 @@
 }
 
 .cardContainer {
-    margin-top: 83px;
-    width: 100%;
-    padding: 0 16px;
-    box-sizing: border-box;
+    width: calc(100% - 32px);
+    position: absolute;
+    top: calc(100% - 66px);
+    left: 16px;
+    transition: all .35s ease-out;
+}
+
+.cardShown {
+    top: calc(50% - 180px);
+    transition: all .35s ease-out;
 }
