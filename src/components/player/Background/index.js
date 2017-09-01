@@ -11,16 +11,17 @@ export default class Background extends Component {
 
     return (
       <div>
-        <div
-          className={style.overlay}
-        />
+        <div className={style.overlay} />
         <img
           src={imageUri}
           className={style.backgroundImage}
+          alt="Аватар"
         />
       </div>
     );
   }
 }
 
-Background.propTypes = {};
+Background.propTypes = {
+  cover: PropTypes.string,
+};

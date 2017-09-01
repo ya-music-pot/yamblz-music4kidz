@@ -11,14 +11,16 @@ export default class MiniPlayer extends Component {
    * @param  {Number} trackPercentage
    * @return {Object}
    */
-  _calculateProgressStyle = (trackPercentage) => {
-    return {
-      right: `${100 - trackPercentage}%`,
-    };
-  };
+  _calculateProgressStyle = (trackPercentage) => ({
+    right: `${100 - trackPercentage}%`,
+  });
 
   render() {
-    const { trackName, singerName, trackPercentage, isPlaying, onTogglePlay, onDownload, className } = this.props;
+    const {
+      trackName, singerName, trackPercentage,
+      isPlaying, onTogglePlay, onDownload,
+      className,
+    } = this.props;
 
     return (
       <div className={cl(style['miniPlayer-wrapper'], className)}>

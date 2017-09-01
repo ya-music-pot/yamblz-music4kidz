@@ -36,15 +36,13 @@ EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
 };
 
-const Title = () => {
-  return (
-    <div>
-      <div className={style.title}>
+const Title = () => (
+  <div>
+    <div className={style.title}>
         Привет!
-      </div>
-      <div className={style.subTitle}>
-        Давай слушать музыку и веселиться?
-      </div>
     </div>
-  );
-};
+    <div className={style.subTitle}>
+        Давай слушать музыку и веселиться?
+    </div>
+  </div>
+);
