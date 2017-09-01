@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "dev": "webpack",
+    "lint": "eslint src/**/*.js *.js",
     "prod": "webpack --optimize-minimize",
     "test": "jest"
   },
@@ -13,6 +14,9 @@
     "type": "git",
     "url": "git+https://github.com/thevery/yamblz-music4kidz.git"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
