@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 
@@ -94,10 +93,5 @@ module.exports = {
     }),
 
     new webpack.HotModuleReplacementPlugin(),
-
-    new ExtractTextPlugin({
-      filename: 'style.css',
-      allChunks: true,
-    }),
   ],
 };
