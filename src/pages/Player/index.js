@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '_components/player/Background';
-import Container from '_components/player/Container'
+import Container from '_components/player/Container';
 import YaPlayer from '_helpers/YaPlayer';
 
 import style from './style.scss';
 
 class Player extends Component {
-
   state = {
     playerState: {
       trackName: '',
@@ -25,8 +24,8 @@ class Player extends Component {
     this.yaPlayer = new YaPlayer();
     this.yaPlayer.loadPlayerScript(
       () => {
-          console.log(this.yaPlayer);
-          this._initPlayer();
+        console.log(this.yaPlayer);
+        this._initPlayer();
       },
     );
   }
@@ -40,7 +39,7 @@ class Player extends Component {
   _initPlayer = () => {
     const playerError = this.yaPlayer.getPlayerError();
     if (playerError) {
-      alert(playerError);
+      console.log(playerError);
       return;
     }
 
@@ -48,7 +47,7 @@ class Player extends Component {
       const covers = this.yaPlayer.getCurrentTrackCoverUris();
       const playerState = Object.assign({}, this.state.playerState, {
         trackName: this.yaPlayer.getCurrentTrackTitle(),
-        singerName: this.yaPlayer.getCurrentTrackArtists()[0]["name"],
+        singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
         cover: covers[covers.length - 1],
       });
 
@@ -60,11 +59,18 @@ class Player extends Component {
       const currentTrackDuration = this.yaPlayer.getCurrentTrackDuration();
 
       if (currentTrackDuration) {
-        const trackPercentage = currentTrackPosition / currentTrackDuration,
-              minutesLeft = (parseInt((currentTrackPosition - currentTrackDuration) / 60)).toString(),
-              sec = -(parseInt((currentTrackPosition - currentTrackDuration)) - minutesLeft * 60),
-              secondsLeft = (sec < 10 ? '0' + sec : sec).toString(),
-              playerState = Object.assign({}, this.state.playerState, { trackPercentage, minutesLeft, secondsLeft});
+        const trackPercentage = currentTrackPosition / currentTrackDuration;
+        const minutesLeft = (parseInt(
+          (currentTrackPosition - currentTrackDuration) / 60, 10)).toString();
+        const sec = -(parseInt(
+          (currentTrackPosition - currentTrackDuration), 10) - minutesLeft * 60);
+        const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
+        const playerState = {
+          ...this.state.playerState,
+          trackPercentage,
+          minutesLeft,
+          secondsLeft,
+        };
         this.setState({ playerState });
       }
     });
@@ -111,17 +117,17 @@ class Player extends Component {
     return (
       <div className={style.wrapper}>
         <Container
-          trackName = {playerState.trackName}
-          singerName = {playerState.singerName}
-          trackPercentage = {playerState.trackPercentage}
-          minutesLeft = {playerState.minutesLeft}
-          secondsLeft = {playerState.secondsLeft}
-          cover = {playerState.cover}
-          isPlaying = {playerState.isPlaying}
-          onTogglePlay = {this._handleButtonPressed}
+          trackName={playerState.trackName}
+          singerName={playerState.singerName}
+          trackPercentage={playerState.trackPercentage}
+          minutesLeft={playerState.minutesLeft}
+          secondsLeft={playerState.secondsLeft}
+          cover={playerState.cover}
+          isPlaying={playerState.isPlaying}
+          onTogglePlay={this._handleButtonPressed}
         />
         <Background
-          cover = {playerState.cover}
+          cover={playerState.cover}
         />
       </div>
     );
@@ -129,7 +135,6 @@ class Player extends Component {
 }
 
 export default connect((state, props) => ({
-  ...state,
   ...props,
 }))(Player);
 

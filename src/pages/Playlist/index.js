@@ -34,7 +34,7 @@ class Playlist extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    if (this.context.yaPlayer!==nextContext.yaPlayer && nextContext.yaPlayer) {
+    if (this.context.yaPlayer !== nextContext.yaPlayer && nextContext.yaPlayer) {
       this.yaPlayer = nextContext.yaPlayer;
       this._initPlayer();
     }
@@ -44,14 +44,14 @@ class Playlist extends Component {
     const playerError = this.yaPlayer.getPlayerError();
     if (playerError) {
       // TODO вызвать модальное окно с ошибкой
-      alert(playerError);
+      console.log(playerError);
       return;
     }
 
     this.yaPlayer.setTrackDataCallback(() => {
       const playerState = Object.assign({}, this.state.playerState, {
         trackName: this.yaPlayer.getCurrentTrackTitle(),
-        singerName: this.yaPlayer.getCurrentTrackArtists()[0]["name"],
+        singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
       });
 
       this.setState({ playerState });
@@ -71,7 +71,6 @@ class Playlist extends Component {
   };
 
   _handleTogglePlay = (cardId, e) => {
-
     e.stopPropagation();
 
     let playState;

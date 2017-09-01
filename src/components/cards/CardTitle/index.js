@@ -5,7 +5,6 @@ import cl from 'classname';
 import style from './style.scss';
 
 export default class CardTitle extends Component {
-
   render() {
     const { styles } = this.props;
     return (
