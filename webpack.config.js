@@ -88,6 +88,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
+      API_URL: JSON.stringify(
+        ENV === 'production' ? 'https://musicforchildren.herokuapp.com/' : '/api',
+      ),
     }),
 
     new webpack.HotModuleReplacementPlugin(),

@@ -4,7 +4,7 @@ export function getUser(id) {
   return {
     type: GET_USER,
     callAPI: {
-      url: `user/${id}`,
+      url: `${API_URL}/user/${id}`,
     },
   };
 }

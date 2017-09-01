@@ -10,35 +10,35 @@ const app = express();
 const path = require('path');
 
 const compiler = webpack(webpackConfig);
+const API_URL = 'https://musicforchildren.herokuapp.com/';
+
 
 app.use('/dist', express.static(`${__dirname}/dist`));
-
 app.use(webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   noInfo: true,
-  stats: {
-    colors: true,
-  },
 }));
-
 app.use(webpackHotMiddleware(compiler));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(`${__dirname}/index.html`));
 });
 
-app.get('/playlist', (req, res) => {
-  got('https://musicforchildren.herokuapp.com/playlist')
+/*
+  Отслеживание всех маршрутов начинающихся с /api
+  и прокидывание подурла на необходимый API_URL.
+ */
+const router = express.Router();
+app.use('/api', router);
+
+router.get('*', (req, res) => {
+  got(`${API_URL}/${req.url}`)
     .then(response => {
-      console.log(response.body);
       res.json(response.body);
     })
     .catch(error => {
-      console.log(error.response.body);
-      //=> 'Internal server error ...'
+      res.json(error);
     });
-
-
 });
 
 app.listen(8080, () => console.log('listening on 8080'));
