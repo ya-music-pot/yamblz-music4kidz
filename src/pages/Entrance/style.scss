@@ -25,14 +25,14 @@
     align-self: left;
 }
 
-.textContainer {
-    padding-left: 24px;
+.title {
+    font-size: 56px;
+    letter-spacing: -1.2px;
+    font-weight: bold;
+    line-height: 1.5em;
 
-    .title {
-        font-size: 56px;
-        letter-spacing: -1.2px;
-        font-weight: bold;
-        line-height: 1.5em;
+    &Wrapper {
+        padding-left: 24px;
     }
 }
 
@@ -61,25 +61,31 @@
     &:hover {
         background-color: darken( $color-blue, 5% );
     }
-}
 
-.buttonSmall {
-    font-size: 16px;
-    background-color: transparent;
-    color: $color-gray;
-    margin-top: 20px;
+    &Small {
+        font-size: 16px;
+        background-color: transparent;
+        color: $color-gray;
+        margin-top: 20px;
 
-    &:active {
-        color: darken( $color-gray, 10% );
+        &:active {
+            color: darken( $color-gray, 10% );
+        }
+
+        &:hover {
+            color: darken( $color-gray, 5% );
+        }
     }
 
-    &:hover {
-        color: darken( $color-gray, 5% );
+    &Lower {
+        margin-top: 80px;
     }
-}
 
-.buttonLower {
-    margin-top: 80px;
+    &Wrapper {
+        width: 100%;
+        padding-left: 16px;
+        box-sizing: border-box;
+    }
 }
 
 .titleContainer {
@@ -92,5 +98,30 @@
 
     .title {
         font-size: 32px;
+    }
+}
+
+.cardContainer {
+    width: calc(100% - 32px);
+    position: absolute;
+    top: calc(100% - 66px);
+    left: 16px;
+    transition: all .35s ease-out;
+}
+
+.cardShown {
+    top: calc(50% - 180px);
+    transition: all .35s ease-out;
+}
+
+.background {
+    &--opacity100 {
+        opacity: 1;
+        transition: all .35s ease-in;
+    }
+
+    &--opacity20 {
+        opacity: 0.2;
+        transition: all .35s ease-in;
     }
 }

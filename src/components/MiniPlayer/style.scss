@@ -37,7 +37,6 @@
     }
 
     &--pause {
-      @extend .miniPlayer-button--pause;
       background-image: url('./images/pause.svg');
     }
 

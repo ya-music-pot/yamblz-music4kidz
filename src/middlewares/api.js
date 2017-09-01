@@ -25,16 +25,16 @@ export default ({ dispatch }) => (next) => (action) => {
 
   return window.fetch(callAPI.url, options)
     .then((response) => response.json())
-    .then((data) => {
-      const parsedData = parseJSON(data);
+    .then((dataJSON) => {
+      const data = JSON.parse(dataJSON);
 
-      if (parsedData.error) {
+      if (data.error) {
         return Promise.reject(data);
       }
 
       return dispatch({
         ...rest,
-        response: { data: parsedData },
+        response: { data },
         type: type + SUCCESS,
       });
     })
@@ -56,12 +56,4 @@ export default ({ dispatch }) => (next) => (action) => {
 function generateError(rest, error, type, dispatch) {
   dispatch({ ...rest, error, type: type + FAIL });
   return new Error(error);
-}
-
-function parseJSON(data) {
-  try {
-    return JSON.parse(data);
-  } catch (error) {
-    return { error };
-  }
 }
