@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
+      'webpack-hot-middleware/client',
       resolve('src/app'),
     ],
   },
@@ -89,20 +90,11 @@ module.exports = {
       isProduction: ENV === 'production',
     }),
 
+    new webpack.HotModuleReplacementPlugin(),
+
     new ExtractTextPlugin({
       filename: 'style.css',
       allChunks: true,
     }),
   ],
-
-  devServer: {
-    stats: 'minimal',
-    proxy: [
-      {
-        context: '/artists/**',
-        secure: false,
-        target: 'https://api.music.yandex.net/',
-      },
-    ],
-  },
 };

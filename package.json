@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "node server.js",
     "dev": "webpack",
     "lint": "eslint 'src/**/*.js'",
     "prod": "webpack --optimize-minimize",
@@ -29,14 +29,17 @@
     }
   },
   "devDependencies": {
+    "cors": "^2.8.4",
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "6.0.2",
     "eslint-plugin-react": "7.3.0",
     "file-loader": "0.11.2",
+    "got": "^7.1.0",
     "pre-commit": "1.2.2",
-    "webpack-dev-server": "2.7.1"
+    "webpack-dev-server": "2.7.1",
+    "webpack-hot-middleware": "^2.18.2"
   },
   "babel": {
     "plugins": [
@@ -78,6 +81,6 @@
     "url-loader": "0.5.9",
     "webpack": "3.5.5",
     "whatwg-fetch": "2.0.3",
-    "xhr": "2.4.0"
+    "xhr": "^2.4.0"
   }
 }

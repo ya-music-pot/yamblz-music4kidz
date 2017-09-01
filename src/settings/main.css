@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'YandexSans';
-    src: url('./fonts/Yandex-Sans-Text-Regular.ttf');
+  font-family: 'YandexSans';
+  src: url('./fonts/Yandex-Sans-Text-Regular.ttf');
 }
 
 body {
-    font-family: 'YandexSans', Arial;
-    margin: 0;
-    padding: 0;
+  font-family: 'YandexSans', Arial;
+  margin: 0;
+  padding: 0;
 }

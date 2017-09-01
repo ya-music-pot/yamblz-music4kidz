@@ -29,8 +29,12 @@ export default ({ dispatch }) => (next) => (action) => {
       if (data.error) {
         return Promise.reject(data);
       }
-
-      return dispatch({ ...rest, data, type: type + SUCCESS });
+      console.log(JSON.parse(data));
+      return dispatch({
+        ...rest,
+        data: JSON.stringify(data),
+        type: type + SUCCESS,
+      });
     })
     .catch((error) => {
       generateError(rest, error, type, dispatch);
