@@ -45,13 +45,15 @@ class Player extends Component {
 
     this.yaPlayer.setTrackDataCallback(() => {
       const covers = this.yaPlayer.getCurrentTrackCoverUris();
-      const playerState = Object.assign({}, this.state.playerState, {
-        trackName: this.yaPlayer.getCurrentTrackTitle(),
-        singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
-        cover: covers[covers.length - 1],
-      });
 
-      this.setState({ playerState });
+      this.setState({
+        playerState: {
+          ...this.state.playerState,
+          trackName: this.yaPlayer.getCurrentTrackTitle(),
+          singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
+          cover: covers[covers.length - 1],
+        },
+      });
     });
 
     this.yaPlayer.setTimeUpdateCallback(() => {
@@ -60,18 +62,19 @@ class Player extends Component {
 
       if (currentTrackDuration) {
         const trackPercentage = currentTrackPosition / currentTrackDuration;
-        const minutesLeft = (parseInt(
-          (currentTrackPosition - currentTrackDuration) / 60, 10)).toString();
-        const sec = -(parseInt(
-          (currentTrackPosition - currentTrackDuration), 10) - minutesLeft * 60);
+        const diffTrackPosition = currentTrackPosition - currentTrackDuration;
+        const minutesLeft = parseInt(diffTrackPosition / 60, 10);
+        const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
         const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
-        const playerState = {
-          ...this.state.playerState,
-          trackPercentage,
-          minutesLeft,
-          secondsLeft,
-        };
-        this.setState({ playerState });
+
+        this.setState({
+          playerState: {
+            ...this.state.playerState,
+            trackPercentage,
+            minutesLeft: minutesLeft.toString(),
+            secondsLeft,
+          },
+        });
       }
     });
   };
