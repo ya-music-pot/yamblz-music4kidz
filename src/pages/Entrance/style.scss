@@ -114,3 +114,15 @@
     top: calc(50% - 180px);
     transition: all .35s ease-out;
 }
+
+.background {
+    &--opacity100 {
+        opacity: 1;
+        transition: all .35s ease-in;
+    }
+
+    &--opacity20 {
+        opacity: 0.2;
+        transition: all .35s ease-in;
+    }
+}

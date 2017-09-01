@@ -16,7 +16,7 @@ export default class EntranceScreen extends Component {
   };
 
   componentWillUnmount() {
-    // TODO удалить слушатели событий
+    this.mc.destroy();
   }
 
   _initializeCardActions = (el) => {
@@ -57,6 +57,9 @@ export default class EntranceScreen extends Component {
 
       this.posTimeout = setTimeout(() => {
         this.card.style.top = `${this.upperPosition}px`;
+        this.setState({
+          isCardShown: true,
+        });
       }, 300);
     }
 
@@ -67,6 +70,9 @@ export default class EntranceScreen extends Component {
 
       this.posTimeout = setTimeout(() => {
         this.card.style.top = `${this.bottomPosition}px`;
+        this.setState({
+          isCardShown: false,
+        });
       }, 300);
     }
 
@@ -77,24 +83,27 @@ export default class EntranceScreen extends Component {
 
   render() {
     const { data, onButtonClick } = this.props;
+    const { isCardShown } = this.state;
 
     return (
       <div className={style.container}>
-        <div className={style.imageContainer}>
-          <img
-            alt="flying-cloud"
-            src={entranceCloud}
-            srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
-          />
-        </div>
-        <Title />
-        <div className={style.buttonWrapper}>
-          <Button
-            style={style.button}
-            onClick={this.props.onNavigate}
-          >
-            Поехали
-          </Button>
+        <div className={isCardShown ? style['background--opacity20'] : style['background--opacity100']}>
+          <div className={style.imageContainer}>
+            <img
+              alt="flying-cloud"
+              src={entranceCloud}
+              srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
+            />
+          </div>
+          <Title />
+          <div className={style.buttonWrapper}>
+            <Button
+              style={style.button}
+              onClick={this.props.onNavigate}
+            >
+              Поехали
+            </Button>
+          </div>
         </div>
         <div
           className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
