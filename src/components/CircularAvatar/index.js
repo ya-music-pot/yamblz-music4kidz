@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import style from './style.scss';
+import defaultImage from './images/avatar.jpg';
 
 export default class CircularAvatar extends Component {
 
@@ -31,8 +32,9 @@ export default class CircularAvatar extends Component {
 
   render() {
     const { progress, image, radius, time } = this.props;
-
+    const imageUri = (image !== '') ? image : defaultImage;
     return (
+
       <div className = {style.wrapper}>
         <svg className = {style.progressBar}>
         <defs>
@@ -50,7 +52,7 @@ export default class CircularAvatar extends Component {
             )} stroke = "url(#linear-gradient)" strokeWidth = "11" />
         </svg>
         <img
-            src = {image}
+            src = {imageUri}
             className = {style.circularImage}
         />
         <div className = {style.controls}>

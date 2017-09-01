@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
+import cl from 'classname';
 
 import style from './style.scss';
-import artist from './images/egorka.png';
+import artist from './images/egorka.jpg';
 
 export default class Container extends Component {
   _handleClickArrowDown = (e) => {
@@ -44,6 +45,7 @@ export default class Container extends Component {
   }
 
   render() {
+    const { trackName, singerName, isPlaying, onTogglePlay, trackPercentage, minutesLeft, secondsLeft, cover } = this.props;
     return (
       <div className = {style.wrapper}>
         <div className = {style.headerRow}>
@@ -58,23 +60,32 @@ export default class Container extends Component {
               <Button style = {style.buttonLike} onClick = {this._handleClickLike} />
           </div>
           <CircularAvatar
-              image = {artist}
-              progress = {0.68}
+              image = {cover}
+              progress = {trackPercentage}
               radius = {0.18}
-              time = {-2.58}
+              time = {minutesLeft + ':' + secondsLeft}
           />
         </div>
         <div className = {style.titleRow}>
            <div className = {style.songName}>
-              Будильник
+              {trackName}
            </div>
            <div className = {style.artistName}>
-              Егор Крид
+              {singerName}
            </div>
         </div>
         <div className = {style.controlsRow}>
           <Button style = {style.buttonPrevious} onClick = {this._handleClickPrevious} />
-          <Button style = {style.buttonPlay} onClick = {this._handleClickPlay} />
+          <Button
+            style = {
+              cl(
+                style['player-button'],
+                isPlaying ? style['player-button--pause'] : style['player-button--play'],
+              )
+            }
+            isPlaying = {isPlaying}
+            onClick = {onTogglePlay}
+          />
           <Button style = {style.buttonNext} onClick = {this._handleClickNext} />
         </div>
         <div className = {style.bottomRow}>
@@ -86,4 +97,13 @@ export default class Container extends Component {
   }
 }
 
-Container.propTypes = {};
+Container.propTypes = {
+  trackName: React.PropTypes.string,
+  singerName: React.PropTypes.string,
+  trackPercentage: React.PropTypes.number,
+  minutesLeft: React.PropTypes.string,
+  secondsLeft: React.PropTypes.string,
+  cover: React.PropTypes.string,
+  isPlaying: PropTypes.bool,
+  onTogglePlay: PropTypes.func,
+};

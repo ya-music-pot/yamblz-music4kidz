@@ -131,22 +131,27 @@
   border: none;
   height: 30px;
   width: 30px;
-  color: $color-white;
 }
 
 .buttonPrevious:focus { outline: none; }
 
-.buttonPlay {
-  background: url(./images/play.svg) no-repeat;
-  background-size: contain;
+.player-button {
   display: inline-block;
+  background-size: contain;
   border: none;
   height: 36px;
   width: 36px;
-  color: $color-white;
+
+  &--play {
+    background: url(./images/play.svg) no-repeat;
+  }
+
+  &--pause {
+    background: url(./images/pause.svg) no-repeat;
+  }
 }
 
-.buttonPlay:focus { outline: none; }
+.player-button:focus { outline: none; }
 
 .buttonNext {
   background: url(./images/next.svg) no-repeat;
@@ -155,7 +160,6 @@
   border: none;
   height: 30px;
   width: 30px;
-  color: $color-white;
 }
 
 .buttonNext:focus { outline: none; }
