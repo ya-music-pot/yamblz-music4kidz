@@ -11,7 +11,10 @@ import style from './style.scss';
 export default class PersonalCard extends Component {
   render() {
     const { container, title, subtitle, button } = style;
-    const { settings, onCardClick, onButtonClick } = this.props;
+    const {
+      settings,
+      callbacks: { onCardClick, onButtonClick },
+    } = this.props;
 
     return (
       <div className={container} onClick={onCardClick}>
@@ -26,6 +29,5 @@ export default class PersonalCard extends Component {
 
 PersonalCard.propTypes = {
   settings: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };
