@@ -6,12 +6,12 @@ import initReactFastclick from 'react-fastclick';
 
 import store from '_settings/store';
 import routes from '_settings/routes';
+
 import { getUser } from '_actions/user';
 import { getPlaylist } from '_actions/playlist';
 
 import AudioPlayer from '_helpers/AudioPlayer';
-
-import '_settings/main.css';
+import '_settings/main.styl';
 
 initReactFastclick();
 AudioPlayer.init();

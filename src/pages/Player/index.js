@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Background from '_components/player/Background';
 import Container from '_components/player/Container';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Player extends Component {
   state = {

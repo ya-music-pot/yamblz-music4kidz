@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 import Hammer from 'hammerjs';
 
-import style from './style.scss';
+import style from './style.styl';
 
 const WIDTH_SLIDE = 0.70; // 70% from width;
 

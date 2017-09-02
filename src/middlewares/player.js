@@ -1,8 +1,8 @@
 import AudioPlayer from '_helpers/AudioPlayer';
-import * as ActionTypes from '_actions/playerActionsTypes';
+import * as ActionTypes from '_actions/playerActionTypes.js';
 
-export default ({ dispatch, getState }) => (next) => (action) => {
-  const { player, type, ...rest } = action;
+export default ({ getState }) => (next) => (action) => {
+  const { player, type } = action;
 
   // TODO вынести этот URL
   const AUDIO_URL = 'https://dl.dropboxusercontent.com/s/';

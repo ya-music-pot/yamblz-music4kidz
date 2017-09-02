@@ -11,7 +11,7 @@ import CollectionCard from '_components/cards/CollectionCard';
 import CartoonCard from '_components/cards/CartoonCard/index';
 import GameCard from '_components/cards/GameCard/index';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Playlist extends Component {
   state = {

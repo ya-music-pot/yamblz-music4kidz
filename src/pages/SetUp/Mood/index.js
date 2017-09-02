@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import ListEmoji from '_components/ListEmoji';
 import { saveEmoji } from '_actions/settings';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Mood extends Component {
   /**
