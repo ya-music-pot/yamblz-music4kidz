@@ -16,7 +16,10 @@ const API_URL = 'https://musicforchildren.herokuapp.com/';
 app.use('/dist', express.static(`${__dirname}/dist`));
 app.use(webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  noInfo: true,
+  stats: {
+    colors: true,
+  },
+  // noInfo: true,
 }));
 app.use(webpackHotMiddleware(compiler));
 

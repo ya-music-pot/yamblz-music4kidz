@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dev-server",
     "dev": "webpack",
     "lint": "eslint 'src/**/*.js'",
     "prod": "webpack --optimize-minimize",
@@ -14,9 +14,7 @@
     "type": "git",
     "url": "git+https://github.com/thevery/yamblz-music4kidz.git"
   },
-  "pre-commit": [
-    "lint"
-  ],
+  "pre-commit": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -41,7 +39,10 @@
     "express": "4.15.4",
     "file-loader": "0.11.2",
     "got": "7.1.0",
+    "merge-descriptors": "^1.0.1",
     "pre-commit": "1.2.2",
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.7.1",
     "webpack-hot-middleware": "2.18.2"
   },
   "babel": {
@@ -55,6 +56,7 @@
     ]
   },
   "dependencies": {
+    "YandexAudio": "git://github.com/yandex/audio-js.git",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.1.2",

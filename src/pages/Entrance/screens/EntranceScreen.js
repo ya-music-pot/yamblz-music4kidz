@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { playerStart } from '_actions/player';
+
 import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
@@ -10,7 +13,7 @@ import entranceCloud from '../images/entrance-cloud.png';
 import entranceCloud2x from '../images/entrance-cloud@2x.png';
 import entranceCloud3x from '../images/entrance-cloud@3x.png';
 
-export default class EntranceScreen extends Component {
+class EntranceScreen extends Component {
   state = {
     isCardShown: false,
   }
@@ -24,6 +27,7 @@ export default class EntranceScreen extends Component {
    * @param  {Node} el
    */
   _initializeCardActions = (el) => {
+    if (!el) return;
     this.card = el;
     this.isPanning = false;
 
@@ -107,7 +111,7 @@ export default class EntranceScreen extends Component {
           <div className={style.buttonWrapper}>
             <Button
               style={style.button}
-              onClick={this.props.onNavigate}
+              onClick={this.props.playerStart}
             >
               Поехали
             </Button>
@@ -128,10 +132,16 @@ export default class EntranceScreen extends Component {
 }
 
 EntranceScreen.propTypes = {
-  onNavigate: PropTypes.func.isRequired,
+  playerStart: PropTypes.func.isRequired,
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
+
 };
+
+export default connect((state, props) => ({
+  settings: state.settings,
+  ...props,
+}), { playerStart })(EntranceScreen);
 
 const Title = () => (
   <div className={style.titleWrapper}>
