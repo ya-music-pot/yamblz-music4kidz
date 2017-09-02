@@ -1,8 +1,8 @@
 import AudioPlayer from '_helpers/AudioPlayer';
 import * as ActionTypes from '_actions/playerActionTypes.js';
 
-export default ({ getState }) => (next) => (action) => {
-  const { player, type } = action;
+export default ({ dispatch, getState }) => (next) => (action) => {
+  const { player, type, ...rest } = action;
 
   // TODO вынести этот URL
   const AUDIO_URL = 'https://dl.dropboxusercontent.com/s/';
@@ -11,25 +11,27 @@ export default ({ getState }) => (next) => (action) => {
     return next(action);
   }
 
+  dispatch({ ...rest, type });
+
   const store = getState();
   const track = store.tracks[player.trackId];
 
   switch (type) {
     case ActionTypes.PLAYER_START: {
       const trackUrl = `${AUDIO_URL}${track.mp3Url}`;
-      AudioPlayer.player.play(trackUrl);
-      break;
+      return AudioPlayer.player
+        .play(trackUrl)
+        .catch(() => dispatch({
+          type: ActionTypes.PLAYER_STOP,
+        }));
     }
     case ActionTypes.PLAYER_STOP:
-      AudioPlayer.player.stop();
-      break;
+      return AudioPlayer.player.stop();
     case ActionTypes.PLAYER_PAUSE:
-      AudioPlayer.player.pause();
-      break;
+      return AudioPlayer.player.pause();
     case ActionTypes.PLAYER_RESUME:
-      AudioPlayer.player.resume();
-      break;
+      return AudioPlayer.player.resume();
     default:
-      break;
+      return next(action);
   }
 };

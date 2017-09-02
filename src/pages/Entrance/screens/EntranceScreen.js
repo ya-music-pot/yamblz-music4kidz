@@ -135,7 +135,6 @@ EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
-
 };
 
 export default connect((state, props) => ({

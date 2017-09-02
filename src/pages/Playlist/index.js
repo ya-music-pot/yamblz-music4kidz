@@ -66,8 +66,6 @@ class Playlist extends Component {
     };
 
     const { settings } = this.props;
-    const { activeCardId } = this.state;
-    const { trackName, singerName, trackPercentage, isPlaying } = this.state.playerState;
 
     return (
       <div className={playlist}>
@@ -110,18 +108,6 @@ class Playlist extends Component {
             onCardClick={this._onCardClick}
           />
         </div>
-        {
-          activeCardId &&
-          <MiniPlayer
-            trackName={trackName}
-            singerName={singerName}
-            trackPercentage={trackPercentage}
-            isPlaying={isPlaying}
-            onTogglePlay={this._handleTogglePlay.bind(this, this.state.activeCardId)}
-            onDownload={this._handleDownload}
-            className={style['playlist-miniPlayer']}
-          />
-        }
       </div>
     );
   }
@@ -141,42 +127,3 @@ Playlist.propTypes = {
   router: PropTypes.object,
 };
 
-// TODO данные должны приходить из store
-const playlists = {
-  personal: {
-    title: 'personal',
-    tracks: [
-      '57730',
-    ],
-  },
-  cartoon: {
-    title: 'cartoon',
-    tracks: [
-      '3935391',
-    ],
-  },
-  game: {
-    title: 'game',
-    tracks: [
-      '7671',
-    ],
-  },
-  newTrack: {
-    title: 'newTrack',
-    tracks: [
-      '3935390',
-    ],
-  },
-  radio: {
-    title: 'radio',
-    tracks: [
-      '3935287',
-    ],
-  },
-  collection: {
-    title: 'collection',
-    tracks: [
-      '3935388',
-    ],
-  },
-};

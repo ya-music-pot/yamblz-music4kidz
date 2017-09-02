@@ -16,8 +16,8 @@ import '_settings/main.styl';
 initReactFastclick();
 AudioPlayer.init();
 
-// store.dispatch(getUser(1));
-// store.dispatch(getPlaylist());
+store.dispatch(getUser(1));
+store.dispatch(getPlaylist());
 
 ReactDOM.render((
   <Provider store={store}>
