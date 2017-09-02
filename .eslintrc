@@ -25,6 +25,7 @@
     "document": true,
     "window": true,
     "isProduction": true,
-    "Ya": true
+    "Ya": true,
+    "API_URL": true
   }
 }

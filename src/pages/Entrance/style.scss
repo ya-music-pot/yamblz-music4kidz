@@ -10,7 +10,6 @@
     position: fixed;
     top: 0;
     left: 0;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -68,11 +67,11 @@
         background-color: transparent;
         color: $color-gray;
         margin-top: 20px;
-    
+
         &:active {
             color: darken( $color-gray, 10% );
         }
-    
+
         &:hover {
             color: darken( $color-gray, 5% );
         }

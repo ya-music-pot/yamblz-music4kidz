@@ -25,12 +25,18 @@ export default ({ dispatch }) => (next) => (action) => {
 
   return window.fetch(callAPI.url, options)
     .then((response) => response.json())
-    .then((data) => {
+    .then((dataJSON) => {
+      const data = JSON.parse(dataJSON);
+
       if (data.error) {
         return Promise.reject(data);
       }
 
-      return dispatch({ ...rest, data, type: type + SUCCESS });
+      return dispatch({
+        ...rest,
+        response: { data },
+        type: type + SUCCESS,
+      });
     })
     .catch((error) => {
       generateError(rest, error, type, dispatch);

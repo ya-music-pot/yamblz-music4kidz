@@ -1,6 +1,5 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const ENV = process.env.NODE_ENV;
 
@@ -8,6 +7,7 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
+      'webpack-hot-middleware/client',
       resolve('src/app'),
     ],
   },
@@ -87,22 +87,11 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
+      API_URL: JSON.stringify(
+        ENV === 'production' ? 'https://musicforchildren.herokuapp.com/' : '/api',
+      ),
     }),
 
-    new ExtractTextPlugin({
-      filename: 'style.css',
-      allChunks: true,
-    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
-
-  devServer: {
-    stats: 'minimal',
-    proxy: [
-      {
-        context: '/artists/**',
-        secure: false,
-        target: 'https://api.music.yandex.net/',
-      },
-    ],
-  },
 };
