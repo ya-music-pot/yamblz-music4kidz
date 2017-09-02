@@ -201,13 +201,13 @@ class Playlist extends Component {
 }
 
 export default connect((state, props) => {
-  const user = state.user.data;
+  const { moodId, actionId } = state.user.data;
   const { listEmoji, listActions } = state.dictionaries;
 
   return {
     settings: {
-      moodIcon: user && listEmoji.data[user.moodId].typeIcon,
-      actionIcon: user && listActions.data[user.actionId].typeIcon,
+      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
+      actionIcon: actionId && listActions.data[actionId].typeIcon,
     },
     ...props,
   };

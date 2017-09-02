@@ -6,30 +6,45 @@ import ButtonCircle from '_components/ButtonCircle';
 import ListSettings from '_components/ListSettings';
 
 import { updateStep, clearSetUp } from '_actions/setup';
+import { updateUser } from '_actions/user';
 
 import Mood from './Mood';
 import Action from './Action';
 import Player from './Player';
+import Loader from './Loader';
 
 import style from './style.styl';
 
 class SetUp extends Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.user.moveToPlaylist) {
+      this.props.router.push('/playlist');
+    }
+  }
+
   componentWillUnmount() {
     this.props.clearSetUp();
   }
 
   _handleNextStep = () => {
-    const { steps, activeStep } = this.props;
+    const {
+      steps, activeStep, moodId,
+      actionId, user,
+    } = this.props;
     const newStep = activeStep.step + 1;
 
     if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
     } else {
-      this.props.router.push('/playlist');
+      this.props.updateUser({
+        id: user.data.id,
+        moodId,
+        actionId,
+      });
     }
   }
 
-  render() {
+  renderSteps() {
     const {
       activeStep, likesCount, actionId,
       moodId, steps, listActions,
@@ -77,10 +92,15 @@ class SetUp extends Component {
       </div>
     );
   }
+
+  render() {
+    return this.props.user.loading ? <Loader /> : this.renderSteps();
+  }
 }
 
 SetUp.propTypes = {
   router: PropTypes.object.isRequired,
+  loading: PropTypes.bool,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       step: PropTypes.number,
@@ -96,6 +116,8 @@ SetUp.propTypes = {
     order: PropTypes.array,
     data: PropTypes.object,
   }),
+  user: PropTypes.object,
+  updateUser: PropTypes.func,
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
   likesCount: PropTypes.number,
@@ -113,6 +135,7 @@ export default connect((state, props) => {
   const { likesCount, actionId, moodId } = state.settings;
   const { listEmoji, listActions } = state.dictionaries;
   return {
+    user: state.user,
     steps,
     likesCount,
     moodId,
@@ -122,7 +145,7 @@ export default connect((state, props) => {
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep, clearSetUp })(SetUp);
+}, { updateStep, clearSetUp, updateUser })(SetUp);
 
 /**
  * Helpers

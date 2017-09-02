@@ -13,8 +13,8 @@ import { getFeed } from '_actions/feed';
 import '_settings/main.styl';
 
 initReactFastclick();
-const userId = 1;
 
+const userId = 1;
 store.dispatch(getUser(userId));
 store.dispatch(getFeed(userId));
 
