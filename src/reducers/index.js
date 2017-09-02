@@ -2,8 +2,8 @@ import { combineReducers } from 'redux';
 
 import dictionaries from '_reducers/dictionaries';
 import settings from '_reducers/settings';
-import playlist from '_reducers/playlist';
 import player from '_reducers/player';
+import feed from '_reducers/feed';
 import setup from '_reducers/setup';
 import tracks from '_reducers/tracks';
 import user from '_reducers/user';
@@ -11,8 +11,8 @@ import user from '_reducers/user';
 export default combineReducers({
   dictionaries,
   settings,
-  playlist,
   player,
+  feed,
   setup,
   tracks,
   user,

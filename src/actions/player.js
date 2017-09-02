@@ -12,17 +12,20 @@ export function playerStart(trackId) {
 export function playerStop() {
   return {
     type: ActionType.PLAYER_STOP,
+    player: {},
   };
 }
 
 export function playerPause() {
   return {
     type: ActionType.PLAYER_PAUSE,
+    player: {},
   };
 }
 
 export function playerResume() {
   return {
     type: ActionType.PLAYER_RESUME,
+    player: {},
   };
 }

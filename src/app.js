@@ -8,16 +8,17 @@ import store from '_settings/store';
 import routes from '_settings/routes';
 
 import { getUser } from '_actions/user';
-import { getPlaylist } from '_actions/playlist';
+import { getFeed } from '_actions/feed';
 
 import AudioPlayer from '_helpers/AudioPlayer';
 import '_settings/main.styl';
 
 initReactFastclick();
 AudioPlayer.init();
+const userId = 1;
 
-store.dispatch(getUser(1));
-store.dispatch(getPlaylist());
+store.dispatch(getUser(userId));
+store.dispatch(getFeed(userId));
 
 ReactDOM.render((
   <Provider store={store}>
@@ -26,4 +27,3 @@ ReactDOM.render((
     </Router>
   </Provider>
 ), document.getElementById('root'));
-

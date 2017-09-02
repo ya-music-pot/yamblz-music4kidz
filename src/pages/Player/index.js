@@ -15,7 +15,13 @@ class Player extends Component {
    * */
   _handleButtonPressed = () => {
     const { playerActions, player } = this.props;
-    playerActions.playerStart(player.trackId);
+    if (player.isPlaying) {
+      playerActions.playerPause();
+    } else if (player.trackPersentage !== 0) {
+      playerActions.playerResume();
+    } else {
+      playerActions.playerStart(player.trackId);
+    }
   };
 
   render() {
