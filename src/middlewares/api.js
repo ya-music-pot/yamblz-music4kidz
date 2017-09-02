@@ -25,9 +25,7 @@ export default ({ dispatch }) => (next) => (action) => {
 
   return window.fetch(callAPI.url, options)
     .then((response) => response.json())
-    .then((dataJSON) => {
-      const data = JSON.parse(dataJSON);
-
+    .then((data) => {
       if (data.error) {
         return Promise.reject(data);
       }
