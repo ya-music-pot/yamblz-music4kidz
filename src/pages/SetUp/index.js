@@ -16,12 +16,6 @@ import Loader from './Loader';
 import style from './style.styl';
 
 class SetUp extends Component {
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.user.moveToPlaylist) {
-      this.props.router.push('/playlist');
-    }
-  }
-
   componentWillUnmount() {
     this.props.clearSetUp();
   }

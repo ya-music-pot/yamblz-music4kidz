@@ -13,7 +13,6 @@ export default function (state = { ...defaultState }, action) {
     case `${GET_USER}_SUCCESS`:
       return {
         ...state,
-        moveToPlaylist: false,
         loading: false,
         loaded: true,
         ...response,
@@ -21,21 +20,18 @@ export default function (state = { ...defaultState }, action) {
     case `${UPDATE_USER}_START`:
       return {
         ...state,
-        moveToPlaylist: false,
         loading: true,
         loaded: false,
       };
     case `${UPDATE_USER}_FAIL`:
       return {
         ...state,
-        moveToPlaylist: false,
         loading: false,
         loaded: true,
       };
     case `${UPDATE_USER}_SUCCESS`:
       return {
         ...state,
-        moveToPlaylist: true,
         loading: false,
         loaded: true,
         ...response,

@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import initReactFastclick from 'react-fastclick';
 
-import { hashHistory, Router } from 'react-router';
+import { Router } from 'react-router';
 import store from '_settings/store';
 import routes from '_settings/routes';
 
 import { getUser } from '_actions/user';
 import { getFeed } from '_actions/feed';
+
+import history from '_settings/history';
 
 import '_settings/main.styl';
 
@@ -20,7 +22,7 @@ store.dispatch(getFeed(userId));
 
 ReactDOM.render((
   <Provider store={store}>
-    <Router history={hashHistory}>
+    <Router history={history}>
       { routes }
     </Router>
   </Provider>
