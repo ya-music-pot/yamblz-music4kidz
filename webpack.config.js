@@ -1,5 +1,9 @@
+/* eslint-disable */
+
 const { resolve } = require('path');
 const webpack = require('webpack');
+const got = require('got');
+const API_URL = 'https://musicforchildren.herokuapp.com/';
 
 const ENV = process.env.NODE_ENV;
 
@@ -7,7 +11,6 @@ module.exports = {
   entry: {
     app: [
       'babel-polyfill',
-      'webpack-hot-middleware/client',
       resolve('src/app'),
     ],
   },
@@ -87,15 +90,22 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
-      API_URL: JSON.stringify(
-        ENV === 'production' ? 'https://musicforchildren.herokuapp.com/' : '/api',
-      ),
+      API_URL: JSON.stringify(ENV === 'production' ? 'https://musicforchildren.herokuapp.com/' : '/api'),
     }),
-
-    new webpack.HotModuleReplacementPlugin(),
   ],
 
   devServer: {
     stats: 'minimal',
+    setup(app) {
+      app.get('/api/*', function(req, res) {
+        got(`${API_URL}/${req.url.substr(5)}`)
+          .then((response) => {
+            res.json(response.body);
+          })
+          .catch(error => {
+            res.json({ error });
+          });
+      });
+    },
   },
 };

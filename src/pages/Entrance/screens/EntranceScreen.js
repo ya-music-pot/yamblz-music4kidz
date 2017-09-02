@@ -24,6 +24,7 @@ export default class EntranceScreen extends Component {
    * @param  {Node} el
    */
   _initializeCardActions = (el) => {
+    if (!el) return;
     this.card = el;
     this.isPanning = false;
 
