@@ -111,7 +111,7 @@ class EntranceScreen extends Component {
           <div className={style.buttonWrapper}>
             <Button
               style={style.button}
-              onClick={this.props.playerStart}
+              onClick={this.props.onNavigate}
             >
               Поехали
             </Button>
@@ -132,7 +132,7 @@ class EntranceScreen extends Component {
 }
 
 EntranceScreen.propTypes = {
-  playerStart: PropTypes.func.isRequired,
+  onNavigate: PropTypes.func.isRequired,
   data: PropTypes.object,
   onButtonClick: PropTypes.func,
 

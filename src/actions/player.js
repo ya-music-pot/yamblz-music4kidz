@@ -1,10 +1,28 @@
-export const PLAYER_START = 'PLAYER_START';
+import * as ActionType from './playerActionTypes.js';
 
-export function playerStart() {
+export function playerStart(trackId) {
   return {
-    type: PLAYER_START,
+    type: ActionType.PLAYER_START,
     player: {
-      trackId: 432072,
+      trackId,
     },
+  };
+}
+
+export function playerStop() {
+  return {
+    type: ActionType.PLAYER_STOP,
+  };
+}
+
+export function playerPause() {
+  return {
+    type: ActionType.PLAYER_PAUSE,
+  };
+}
+
+export function playerResume() {
+  return {
+    type: ActionType.PLAYER_RESUME,
   };
 }
