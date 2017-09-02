@@ -98,6 +98,7 @@ module.exports = {
   ],
 
   devServer: {
+    disableHostCheck: true,
     stats: 'minimal',
     proxy: [
       {

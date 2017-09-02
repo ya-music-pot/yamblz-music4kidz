@@ -44,9 +44,9 @@ export default class CircularAvatar extends Component {
             </linearGradient>
         </defs>
             <path d = {this._describeArc(
-                document.documentElement.clientHeight * radius,
-                document.documentElement.clientHeight * radius,
-                document.documentElement.clientHeight * radius,
+                document.documentElement.clientWidth * radius,
+                document.documentElement.clientWidth * radius,
+                document.documentElement.clientWidth * radius,
                 0,
                 progress * 360
             )} stroke = "url(#linear-gradient)" strokeWidth = "11" />

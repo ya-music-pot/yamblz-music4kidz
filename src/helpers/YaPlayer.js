@@ -309,4 +309,4 @@ export default class YaPlayer {
   };
 }
 
-const playerUrl = 'http://music.yandex.ru/api/v1.5/index.js';
+const playerUrl = 'https://music.yandex.ru/api/v1.5/index.js';

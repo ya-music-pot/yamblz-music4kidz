@@ -111,13 +111,7 @@ class Player extends Component {
     return (
       <div className={style.wrapper}>
         <Container
-          trackName = {playerState.trackName}
-          singerName = {playerState.singerName}
-          trackPercentage = {playerState.trackPercentage}
-          minutesLeft = {playerState.minutesLeft}
-          secondsLeft = {playerState.secondsLeft}
-          cover = {playerState.cover}
-          isPlaying = {playerState.isPlaying}
+          playerState = {playerState}
           onTogglePlay = {this._handleButtonPressed}
         />
         <Background

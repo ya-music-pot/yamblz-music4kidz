@@ -45,7 +45,15 @@ export default class Container extends Component {
   }
 
   render() {
-    const { trackName, singerName, isPlaying, onTogglePlay, trackPercentage, minutesLeft, secondsLeft, cover } = this.props;
+    const {
+      onTogglePlay,
+      playerState: {
+        trackName, singerName, isPlaying,
+        trackPercentage, minutesLeft,
+        secondsLeft, cover
+      }
+    } = this.props;
+
     return (
       <div className = {style.wrapper}>
         <div className = {style.headerRow}>
@@ -62,7 +70,7 @@ export default class Container extends Component {
           <CircularAvatar
               image = {cover}
               progress = {trackPercentage}
-              radius = {0.18}
+              radius = {0.32}
               time = {minutesLeft + ':' + secondsLeft}
           />
         </div>
@@ -98,12 +106,6 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
-  trackName: React.PropTypes.string,
-  singerName: React.PropTypes.string,
-  trackPercentage: React.PropTypes.number,
-  minutesLeft: React.PropTypes.string,
-  secondsLeft: React.PropTypes.string,
-  cover: React.PropTypes.string,
-  isPlaying: PropTypes.bool,
+  playerState: PropTypes.obj,
   onTogglePlay: PropTypes.func,
 };
