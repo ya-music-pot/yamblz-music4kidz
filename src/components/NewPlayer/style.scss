@@ -1,0 +1,23 @@
+@import '../../settings/colors';
+
+.wrapper {
+  display: flex;
+  position: fixed;
+  width: 200vw;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.leftWrapper,
+.rightWrapper {
+  width: 50%;
+}
+
+.leftWrapper {
+  background: red;
+}
+
+.rightWrapper {
+  background: green;
+}

@@ -91,6 +91,7 @@ export default class Slider extends Component {
 Slider.propTypes = {
   currentId: PropTypes.number,
   className: PropTypes.string,
+  // TODO: required
   onChange: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node),
 };

@@ -1,22 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
+import Slider from '_decorators/Slider';
 
 import style from './style.scss';
 
-export default class newPlayer extends Component {
+export default class NewPlayer extends Component {
+
+  _onChange = () => {
+    console.log('I am swipe!');
+  };
+
   render() {
+    const { wrapper, leftWrapper, rightWrapper } = style;
+
     return (
-      <div className={style.wrapper}>
-        Hello world!
+      <div className={wrapper}>
+        <Slider onChange={this._onChange}>
+          <div className={leftWrapper}>miniPlayer</div>
+          <div className={rightWrapper}>bigPlayer</div>
+        </Slider>
       </div>
     );
   }
 }
 
-newPlayer.propTypes = {
+NewPlayer.propTypes = {
 
-}
+};
 
 // Player.propTypes = {
 //   trackName: PropTypes.string,

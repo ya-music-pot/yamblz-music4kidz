@@ -11,7 +11,7 @@ import CollectionCard from '_components/cards/CollectionCard';
 import CartoonCard from '_components/cards/CartoonCard/index';
 import GameCard from '_components/cards/GameCard/index';
 import MiniPlayer from '_components/MiniPlayer';
-import newPlayer from '_components/newPlayer';
+import NewPlayer from '_components/NewPlayer';
 
 import style from './style.scss';
 
@@ -191,7 +191,7 @@ class Playlist extends Component {
             className={style['playlist-miniPlayer']}
           />
         }
-        <newPlayer/>
+        <NewPlayer />
       </div>
     );
   }

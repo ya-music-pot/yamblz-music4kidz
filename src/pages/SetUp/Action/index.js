@@ -17,7 +17,7 @@ class Action extends Component {
   _handleChangeAction = (newId) => {
     const activeAction = this.props.listActions[newId];
     this.props.saveAction(activeAction.typeIcon);
-  }
+  };
 
   render() {
     const { listActions } = this.props;
