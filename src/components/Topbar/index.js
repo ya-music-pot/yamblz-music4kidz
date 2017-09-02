@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import Avatar from '_components/Avatar';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class Topbar extends Component {
   render() {

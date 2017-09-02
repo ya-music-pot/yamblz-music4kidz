@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import cl from 'classname';
 
-import style from '../style.scss';
+import style from '../style.styl';
 
 export default class PlaylistCalibration extends Component {
   render() {

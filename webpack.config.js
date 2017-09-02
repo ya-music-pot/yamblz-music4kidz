@@ -49,7 +49,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.styl$/,
         exclude: /node_modules/,
         use: [
           'style-loader',
@@ -61,7 +61,7 @@ module.exports = {
               localIdentName: '[local]___[hash:base64:8]',
             },
           },
-          'sass-loader',
+          'stylus-loader',
           'postcss-loader',
         ],
       },
@@ -94,4 +94,8 @@ module.exports = {
 
     new webpack.HotModuleReplacementPlugin(),
   ],
+
+  devServer: {
+    stats: 'minimal',
+  },
 };
