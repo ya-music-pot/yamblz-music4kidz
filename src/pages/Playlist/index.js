@@ -200,10 +200,18 @@ class Playlist extends Component {
   }
 }
 
-export default connect((state, props) => ({
-  settings: state.settings,
-  ...props,
-}))(Playlist);
+export default connect((state, props) => {
+  const user = state.user.data;
+  const { listEmoji, listActions } = state.dictionaries;
+
+  return {
+    settings: {
+      moodIcon: user && listEmoji.data[user.moodId].typeIcon,
+      actionIcon: user && listActions.data[user.actionId].typeIcon,
+    },
+    ...props,
+  };
+})(Playlist);
 
 Playlist.contextTypes = {
   yaPlayer: PropTypes.object,

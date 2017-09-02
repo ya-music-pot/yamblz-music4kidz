@@ -10,14 +10,14 @@ export default class ListEmoji extends Component {
     const { data, onChange, className } = this.props;
     return (
       <ul className={cl(style.list, className)}>
-        { data.map(({ typeIcon, isActive }) => (
+        { data.map(({ id, typeIcon, isActive }) => (
           <li
             key={typeIcon}
             className={cl(style.item, isActive && style.itemActive)}
+            onClick={() => onChange(id)}
           >
             <Icon
               typeIcon={typeIcon}
-              onClick={onChange}
               className={style.icon}
             />
           </li>

@@ -31,8 +31,9 @@ class SetUp extends Component {
 
   render() {
     const {
-      activeStep, likesCount, activeAction,
-      activeEmoji, steps,
+      activeStep, likesCount, actionId,
+      moodId, steps, listActions,
+      listEmoji,
     } = this.props;
     const { title, step } = activeStep;
 
@@ -45,8 +46,8 @@ class SetUp extends Component {
           <ListSettings
             count={likesCount}
             className={style.list}
-            activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
-            activeAction={activeStep.step > stepActive ? activeAction : ''}
+            moodIcon={activeStep.step > stepEmoji && listEmoji.data[moodId].typeIcon}
+            actionIcon={activeStep.step > stepActive && listActions.data[actionId].typeIcon}
           />
 
           <h1 className={style.title}>{title}</h1>
@@ -87,11 +88,19 @@ SetUp.propTypes = {
       title: PropTypes.string,
     }),
   ),
+  listActions: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
+  listEmoji: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
   likesCount: PropTypes.number,
-  activeAction: PropTypes.string,
-  activeEmoji: PropTypes.string,
+  actionId: PropTypes.number,
+  moodId: PropTypes.number,
   activeStep: PropTypes.shape({
     step: PropTypes.number,
     type: PropTypes.string,
@@ -101,13 +110,15 @@ SetUp.propTypes = {
 
 export default connect((state, props) => {
   const { steps, activeStep } = state.setup;
-  const { likesCount, activeAction, activeEmoji } = state.settings;
-
+  const { likesCount, actionId, moodId } = state.settings;
+  const { listEmoji, listActions } = state.dictionaries;
   return {
     steps,
     likesCount,
-    activeAction,
-    activeEmoji,
+    moodId,
+    actionId,
+    listEmoji,
+    listActions,
     activeStep: steps[activeStep - 1],
     ...props,
   };
