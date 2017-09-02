@@ -11,7 +11,7 @@ import Mood from './Mood';
 import Action from './Action';
 import Player from './Player';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class SetUp extends Component {
   componentWillUnmount() {

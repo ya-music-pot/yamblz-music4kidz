@@ -4,7 +4,7 @@ import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
 import cl from 'classname';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class Container extends Component {
   _handleClickArrowDown = () => {

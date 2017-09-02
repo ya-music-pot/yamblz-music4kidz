@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "webpack-dev-server",
     "dev": "webpack",
     "lint": "eslint 'src/**/*.js'",
     "prod": "webpack --optimize-minimize",
@@ -42,6 +42,9 @@
     "file-loader": "0.11.2",
     "got": "7.1.0",
     "pre-commit": "1.2.2",
+    "stylus": "0.54.5",
+    "stylus-loader": "3.0.1",
+    "webpack-dev-server": "2.7.1",
     "webpack-hot-middleware": "2.18.2"
   },
   "babel": {

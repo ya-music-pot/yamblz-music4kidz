@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class CardTitle extends Component {
   render() {

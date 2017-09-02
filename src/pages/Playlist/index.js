@@ -12,7 +12,7 @@ import CartoonCard from '_components/cards/CartoonCard/index';
 import GameCard from '_components/cards/GameCard/index';
 import MiniPlayer from '_components/MiniPlayer';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Playlist extends Component {
   state = {

@@ -7,7 +7,7 @@ import GradientPlayer from '_components/GradientPlayer';
 import { saveLikesCount } from '_actions/settings';
 
 import person from './images/artist.jpg';
-import style from './style.scss';
+import style from './style.styl';
 
 class Player extends Component {
   state = {

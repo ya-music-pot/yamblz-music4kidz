@@ -6,7 +6,7 @@ import CardSubtitle from '_components/cards/CardSubtitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class RadioCard extends Component {
   render() {

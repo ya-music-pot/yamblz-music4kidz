@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 
 import Button from '_components/Button';
-import style from './style.scss';
+import style from './style.styl';
 
 export default class MiniPlayer extends Component {
   /**

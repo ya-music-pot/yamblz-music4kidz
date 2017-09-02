@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 import ButtonCircle from '_components/ButtonCircle';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class GradientPlayer extends Component {
   render() {

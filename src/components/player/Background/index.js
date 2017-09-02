@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import style from './style.scss';
+import style from './style.styl';
 
 import defaultImage from './images/egorka.jpg';
 

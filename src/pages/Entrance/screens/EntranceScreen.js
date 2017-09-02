@@ -5,7 +5,7 @@ import cl from 'classname';
 import Button from '_components/Button';
 import CartoonCard from '_components/cards/CartoonCard';
 
-import style from '../style.scss';
+import style from '../style.styl';
 import entranceCloud from '../images/entrance-cloud.png';
 import entranceCloud2x from '../images/entrance-cloud@2x.png';
 import entranceCloud3x from '../images/entrance-cloud@3x.png';
@@ -24,6 +24,7 @@ export default class EntranceScreen extends Component {
    * @param  {Node} el
    */
   _initializeCardActions = (el) => {
+    if (!el) return;
     this.card = el;
     this.isPanning = false;
 

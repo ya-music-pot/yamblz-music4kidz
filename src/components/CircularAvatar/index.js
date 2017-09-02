@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 
-import style from './style.scss';
+import style from './style.styl';
 import defaultImage from './images/avatar.jpg';
 
 export default class CircularAvatar extends Component {
