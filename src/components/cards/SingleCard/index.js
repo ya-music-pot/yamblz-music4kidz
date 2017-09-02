@@ -5,7 +5,7 @@ import CardTitle from '_components/cards/CardTitle';
 import Button from '_components/Button';
 import Icon from '_components/Icon';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class SingleCard extends Component {
   render() {

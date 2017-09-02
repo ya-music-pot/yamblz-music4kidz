@@ -1,6 +1,9 @@
+/* eslint-disable */
+
 const { resolve } = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const got = require('got');
+const API_URL = 'https://musicforchildren.herokuapp.com/';
 
 const ENV = process.env.NODE_ENV;
 
@@ -34,7 +37,7 @@ module.exports = {
       },
       { test: /.json$/, use: { loader: 'json-loader' } },
       {
-        test: /\.(ttf|png|ico|jpg|jpeg|gif|svg)$/,
+        test: /\.(ttf|woff|woff2|png|ico|jpg|jpeg|gif|svg)$/,
         use: [
           {
             loader: 'file-loader',
@@ -49,23 +52,21 @@ module.exports = {
         ],
       },
       {
-        test: /\.scss$/,
+        test: /\.styl$/,
         exclude: /node_modules/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                sourceMap: true,
-                localIdentName: '[local]___[hash:base64:8]',
-              },
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              localIdentName: '[local]___[hash:base64:8]',
             },
-            'sass-loader',
-            'postcss-loader',
-          ],
-        }),
+          },
+          'stylus-loader',
+          'postcss-loader',
+        ],
       },
     ],
   },
@@ -89,22 +90,22 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
-    }),
-
-    new ExtractTextPlugin({
-      filename: 'style.css',
-      allChunks: true,
+      API_URL: JSON.stringify(ENV === 'production' ? 'https://musicforchildren.herokuapp.com/' : '/api'),
     }),
   ],
 
   devServer: {
     stats: 'minimal',
-    proxy: [
-      {
-        context: '/artists/**',
-        secure: false,
-        target: 'https://api.music.yandex.net/',
-      },
-    ],
+    setup(app) {
+      app.get('/api/*', function(req, res) {
+        got(`${API_URL}/${req.url.substr(5)}`)
+          .then((response) => {
+            res.json(response.body);
+          })
+          .catch(error => {
+            res.json({ error });
+          });
+      });
+    },
   },
 };

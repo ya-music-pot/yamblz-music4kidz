@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import GradientPerson from '_components/GradientPerson';
-import ButtonCircle from '_components/ButtonCircle';
+import GradientPlayer from '_components/GradientPlayer';
 
 import { saveLikesCount } from '_actions/settings';
 
 import person from './images/artist.jpg';
-import style from './style.scss';
+import style from './style.styl';
 
 class Player extends Component {
   state = {
@@ -45,36 +44,13 @@ class Player extends Component {
       <div className={style.container}>
         <div className={style.wrapperPlayer}>
           <div className={style.player}>
-            <GradientPerson image={person} />
-            <ButtonCircle
-              background="#ff3333"
-              typeIcon="heart"
-              onClick={this._handleLike}
-              className={style.like}
+            <GradientPlayer
+              image={person}
+              onLike={this._handleLike}
+              onSkip={this._handleSkip}
+              onToggleSound={this._handleToggleSound}
+              isSound={isSound}
             />
-            <ButtonCircle
-              onClick={this._handleSkip}
-              typeIcon="skip"
-              className={style.skip}
-            />
-            <div className={style.sound}>
-              { isSound &&
-                <ButtonCircle
-                  onClick={this._handleToggleSound}
-                  typeIcon="sound"
-                  background="rgba(0,0,0,0)"
-                  className={style.soundIn}
-                />
-              }
-              { !isSound &&
-                <ButtonCircle
-                  onClick={this._handleToggleSound}
-                  typeIcon="sound-off"
-                  background="rgba(0,0,0,0)"
-                  className={style.soundOut}
-                />
-              }
-            </div>
           </div>
           <h3 className={style.title}>Егор Крид</h3>
         </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 
 import Icon from '_components/Icon';
-import style from './style.scss';
+import style from './style.styl';
 
 export default class ListEmoji extends Component {
   render() {
@@ -15,7 +15,11 @@ export default class ListEmoji extends Component {
             key={typeIcon}
             className={cl(style.item, isActive && style.itemActive)}
           >
-            <Icon typeIcon={typeIcon} onClick={onChange} />
+            <Icon
+              typeIcon={typeIcon}
+              onClick={onChange}
+              className={style.icon}
+            />
           </li>
         ))}
       </ul>

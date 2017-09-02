@@ -7,6 +7,7 @@
   "rules": {
     "import/no-extraneous-dependencies": [0],
     "import/no-unresolved": [0],
+    "import/prefer-default-export": [0],
     "no-underscore-dangle": [0],
     "no-mixed-operators": [0],
     "no-use-before-define": [0],
@@ -15,6 +16,7 @@
     "jsx-a11y/no-static-element-interactions": [0],
     "arrow-parens": [0],
     "react/jsx-filename-extension": "off",
+    "react/jsx-no-bind": "off",
     "react/prefer-stateless-function": "off",
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off"
@@ -22,6 +24,8 @@
   "globals": {
     "document": true,
     "window": true,
-    "isProduction": true
+    "isProduction": true,
+    "Ya": true,
+    "API_URL": true
   }
 }

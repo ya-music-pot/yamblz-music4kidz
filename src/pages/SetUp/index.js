@@ -5,15 +5,19 @@ import { connect } from 'react-redux';
 import ButtonCircle from '_components/ButtonCircle';
 import ListSettings from '_components/ListSettings';
 
-import { updateStep } from '_actions/setup';
+import { updateStep, clearSetUp } from '_actions/setup';
 
 import Mood from './Mood';
 import Action from './Action';
 import Player from './Player';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class SetUp extends Component {
+  componentWillUnmount() {
+    this.props.clearSetUp();
+  }
+
   _handleNextStep = () => {
     const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
@@ -37,34 +41,38 @@ class SetUp extends Component {
 
     return (
       <div className={style.container}>
-        <ListSettings
-          count={likesCount}
-          className={style.list}
-          activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
-          activeAction={activeStep.step > stepActive ? activeAction : ''}
-        />
-
-        <h1 className={style.title}>{title}</h1>
-        { step === 1 && <Player onNextStep={this._handleNextStep} /> }
-        { step === 2 && <Mood /> }
-        { step === 3 && <Action /> }
-        {
-          activeStep.type !== 'player' &&
-          <ButtonCircle
-            onClick={this._handleNextStep}
-            className={style.btn}
-            typeIcon="arrow-right"
+        <div className={style.content}>
+          <ListSettings
+            count={likesCount}
+            className={style.list}
+            activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
+            activeAction={activeStep.step > stepActive ? activeAction : ''}
           />
-        }
-        {
-          activeStep.type === 'player' &&
-          <div
-            className={style.skipTitle}
-            onClick={this._handleNextStep}
-          >
-            Пропустить этот шаг
-          </div>
-        }
+
+          <h1 className={style.title}>{title}</h1>
+          { step === 1 && <Player onNextStep={this._handleNextStep} /> }
+          { step === 2 && <Mood /> }
+          { step === 3 && <Action /> }
+        </div>
+        <div className={style.footer}>
+          {
+            activeStep.type !== 'player' &&
+            <ButtonCircle
+              onClick={this._handleNextStep}
+              className={style.btn}
+              typeIcon="arrow-right"
+            />
+          }
+          {
+            activeStep.type === 'player' &&
+            <div
+              className={style.skipTitle}
+              onClick={this._handleNextStep}
+            >
+              Пропустить этот шаг
+            </div>
+          }
+        </div>
       </div>
     );
   }
@@ -80,6 +88,7 @@ SetUp.propTypes = {
     }),
   ),
   updateStep: PropTypes.func,
+  clearSetUp: PropTypes.func,
   likesCount: PropTypes.number,
   activeAction: PropTypes.string,
   activeEmoji: PropTypes.string,
@@ -102,7 +111,7 @@ export default connect((state, props) => {
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep })(SetUp);
+}, { updateStep, clearSetUp })(SetUp);
 
 /**
  * Helpers

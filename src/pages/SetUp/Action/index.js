@@ -7,7 +7,7 @@ import Slider from '_decorators/Slider';
 
 import { saveAction } from '_actions/settings';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Action extends Component {
   /**

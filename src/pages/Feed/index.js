@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Topbar from '_components/Topbar';
 import PersonalCard from '_components/cards/PersonalCard';
 
-import style from './style.scss';
+import style from './style.styl';
 import CardList from './CardList';
 
 class Feed extends Component {

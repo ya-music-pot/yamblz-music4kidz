@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import CardTitle from '_components/cards/CardTitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class GameCard extends Component {
   render() {
