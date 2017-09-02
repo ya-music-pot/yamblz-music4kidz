@@ -16,7 +16,7 @@ export default class SingleCard extends Component {
 
     const {
       data: { author, song, imageUrl },
-      onCardClick, onButtonClick,
+      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -46,6 +46,5 @@ export default class SingleCard extends Component {
 
 SingleCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };

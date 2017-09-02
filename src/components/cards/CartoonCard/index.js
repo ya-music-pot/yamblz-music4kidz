@@ -16,7 +16,7 @@ export default class CartoonCard extends Component {
 
     const {
       data: { title, text, imageUrl },
-      onCardClick, onButtonClick,
+      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -39,6 +39,5 @@ export default class CartoonCard extends Component {
 
 CartoonCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };
