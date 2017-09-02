@@ -7,17 +7,19 @@
   top: 0;
   left: 0;
   bottom: 0;
+  background-color: blue;
 }
 
 .leftWrapper,
 .rightWrapper {
-  width: 50%;
+  width: 50vw;
+  height: 100%
 }
 
 .leftWrapper {
-  background: red;
+  background-color: red;
 }
 
 .rightWrapper {
-  background: green;
+  background-color: green;
 }

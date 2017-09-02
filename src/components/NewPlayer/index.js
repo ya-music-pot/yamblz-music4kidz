@@ -1,25 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
-import Slider from '_decorators/Slider';
+import PlayerToggle from '_decorators/PlayerToggle';
 
 import style from './style.scss';
 
 export default class NewPlayer extends Component {
 
-  _onChange = () => {
-    console.log('I am swipe!');
-  };
-
   render() {
     const { wrapper, leftWrapper, rightWrapper } = style;
+    console.log("render");
 
     return (
       <div className={wrapper}>
-        <Slider onChange={this._onChange}>
-          <div className={leftWrapper}>miniPlayer</div>
-          <div className={rightWrapper}>bigPlayer</div>
-        </Slider>
+        <PlayerToggle>
+          <div id="1">miniPlayer</div>
+          <div id="2">bigPlayer</div>
+        </PlayerToggle>
       </div>
     );
   }

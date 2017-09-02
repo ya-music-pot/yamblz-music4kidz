@@ -5,7 +5,7 @@ import Hammer from 'hammerjs';
 
 import style from './style.scss';
 
-const WIDTH_SLIDE = 0.70; // 70% from width;
+const WIDTH_SLIDE = 0.7; // 70% from width;
 
 export default class Slider extends Component {
   state = {
