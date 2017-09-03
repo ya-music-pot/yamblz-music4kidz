@@ -9,23 +9,25 @@ export default class PlaylistCalibration extends Component {
   render() {
     return (
       <div className={style.container}>
-        <div className={style.titleContainer}>
+        <div className={style.calibrationTitleContainer}>
           <div className={style.title}>
             А давай создадим лучший в мире плейлист для тебя?
           </div>
         </div>
-        <Button
-          style={cl(style.button, style.buttonLower)}
-          onClick={this.props.onAccept}
-        >
-          Создать
-        </Button>
-        <Button
-          style={style.buttonSmall}
-          onClick={this.props.onDeny}
-        >
-          Не хочу сейчас
-        </Button>
+        <div className={style.calibrationButtonWrapper}>
+          <Button
+            style={cl(style.button, style.buttonLower)}
+            onClick={this.props.onAccept}
+          >
+            Создать
+          </Button>
+          <Button
+            style={style.buttonSmall}
+            onClick={this.props.onDeny}
+          >
+            Не хочу сейчас
+          </Button>
+        </div>
       </div>
     );
   }
