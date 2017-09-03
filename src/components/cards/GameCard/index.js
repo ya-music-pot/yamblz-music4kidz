@@ -15,7 +15,7 @@ export default class GameCard extends Component {
 
     const {
       data: { title, imageUrl },
-      onCardClick, onButtonClick,
+      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -36,6 +36,5 @@ export default class GameCard extends Component {
 
 GameCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };

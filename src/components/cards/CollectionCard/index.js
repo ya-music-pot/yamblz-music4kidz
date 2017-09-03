@@ -15,7 +15,7 @@ export default class CollectionCard extends Component {
 
     const {
       data: { title, imageUrl },
-      onCardClick, onButtonClick,
+      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
 
@@ -38,6 +38,5 @@ export default class CollectionCard extends Component {
 
 CollectionCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };
