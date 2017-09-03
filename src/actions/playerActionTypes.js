@@ -8,3 +8,4 @@ export const PLAYER_PROGRESS = 'PLAYER_PROGRESS';
 export const PLAYER_ENDED = 'PLAYER_ENDED';
 
 export const SET_TRACKID = 'SET_TRACKID';
+export const SET_PLAYLISTID = 'SET_PLAYLISTID';

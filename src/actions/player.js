@@ -6,6 +6,9 @@ export function playerStart(trackId) {
     player: {
       trackId,
     },
+    payload: {
+      trackId,
+    },
   };
 }
 
@@ -35,6 +38,15 @@ export function setTrackId(trackId) {
     type: ActionType.SET_TRACKID,
     payload: {
       trackId,
+    },
+  };
+}
+
+export function setPlaylistId(playlistId) {
+  return {
+    type: ActionType.SET_PLAYLISTID,
+    payload: {
+      playlistId,
     },
   };
 }

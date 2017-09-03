@@ -4,9 +4,6 @@ import * as ActionTypes from '_actions/playerActionTypes.js';
 export default ({ dispatch, getState }) => (next) => (action) => {
   const { player, type, ...rest } = action;
 
-  // TODO вынести этот URL
-  const AUDIO_URL = 'https://dl.dropboxusercontent.com/s/';
-
   if (!player) {
     return next(action);
   }
@@ -14,16 +11,22 @@ export default ({ dispatch, getState }) => (next) => (action) => {
   dispatch({ ...rest, type });
 
   const store = getState();
-  const track = store.tracks[player.trackId];
+  const { playlistId } = store.player;
+  const { trackId } = player;
+
+  const playlist = store.feed.data.find(item => item.id === playlistId);
+  const track = playlist.tracks.find(item => item.id === trackId);
 
   switch (type) {
     case ActionTypes.PLAYER_START: {
-      const trackUrl = `${AUDIO_URL}${track.mp3Url}`;
+      const trackUrl = track.mp3_url;
       return AudioPlayer.player
         .play(trackUrl)
-        .catch(() => dispatch({
-          type: ActionTypes.PLAYER_STOP,
-        }));
+        .catch(() => {
+          dispatch({
+            type: ActionTypes.PLAYER_STOP,
+          });
+        });
     }
     case ActionTypes.PLAYER_STOP:
       return AudioPlayer.player.stop();

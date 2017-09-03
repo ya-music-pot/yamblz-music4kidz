@@ -6,6 +6,14 @@ export default function (state = playerState, action) {
 
   switch (type) {
     case PlayerActions.PLAYER_START:
+      return {
+        ...state,
+        isPlaying: true,
+        trackId: payload.trackId,
+        position: 0,
+        duration: 0,
+      };
+
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
@@ -35,6 +43,12 @@ export default function (state = playerState, action) {
       return {
         ...state,
         trackId: payload.trackId,
+      };
+
+    case PlayerActions.SET_PLAYLISTID:
+      return {
+        ...state,
+        playlistId: payload.playlistId,
       };
 
     default:

@@ -1,5 +1,6 @@
 export default {
   isPlaying: false,
+  isRadio: false,
   cover: '',
   singerName: '',
   trackName: '',
