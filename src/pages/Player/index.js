@@ -25,7 +25,21 @@ class Player extends Component {
   };
 
   _handleClickPrevious = () => {
+    const { playerActions, player, data } = this.props;
+    const { trackId, playlistId, position } = player;
 
+    const playlist = data.find(item => item.id === playlistId);
+    const track = playlist.tracks.find(item => item.id === trackId);
+    const trackIndex = playlist.tracks.indexOf(track);
+
+    if (trackIndex === 0) {
+      playerActions.playerStop();
+    } else {
+      const prevTrack = playlist.tracks[trackIndex - 1];
+      const prevTrackId = position ? prevTrack.id : trackId;
+
+      playerActions.playerStart(prevTrackId);
+    }
   };
 
   _handleClickNext = () => {
