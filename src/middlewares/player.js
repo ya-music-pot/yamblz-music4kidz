@@ -34,6 +34,8 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       return AudioPlayer.player.pause();
     case ActionTypes.PLAYER_RESUME:
       return AudioPlayer.player.resume();
+    case ActionTypes.RESTART:
+      return AudioPlayer.player.restart();
     default:
       return next(action);
   }

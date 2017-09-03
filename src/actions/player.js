@@ -50,3 +50,15 @@ export function setPlaylistId(playlistId) {
     },
   };
 }
+
+export function playNext(trackId) {
+  return {
+    type: ActionType.PLAYER_NEXT,
+    player: {
+      trackId,
+    },
+    payload: {
+      trackId,
+    },
+  };
+}

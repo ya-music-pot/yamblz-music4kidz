@@ -47,7 +47,8 @@ export default class Container extends Component {
     const {
       trackName, singerName, isPlaying,
       onTogglePlay, trackPercentage, minutesLeft,
-      secondsLeft, cover,
+      secondsLeft, cover, onClickPrevious,
+      onClickNext,
     } = this.props;
     return (
       <div className={style.wrapper}>
@@ -78,7 +79,7 @@ export default class Container extends Component {
           </div>
         </div>
         <div className={style.controlsRow}>
-          <Button style={style.buttonPrevious} onClick={this._handleClickPrevious} />
+          <Button style={style.buttonPrevious} onClick={onClickPrevious} />
           <Button
             style={
               cl(
@@ -89,7 +90,7 @@ export default class Container extends Component {
             isPlaying={isPlaying}
             onClick={onTogglePlay}
           />
-          <Button style={style.buttonNext} onClick={this._handleClickNext} />
+          <Button style={style.buttonNext} onClick={onClickNext} />
         </div>
         <div className={style.bottomRow}>
           <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
@@ -109,4 +110,6 @@ Container.propTypes = {
   cover: React.PropTypes.string,
   isPlaying: PropTypes.bool,
   onTogglePlay: PropTypes.func,
+  onClickPrevious: PropTypes.func,
+  onClickNext: PropTypes.func,
 };
