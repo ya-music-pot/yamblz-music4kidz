@@ -3,9 +3,8 @@ export default {
   cover: '',
   singerName: '',
   trackName: '',
-  trackPersentage: 0,
+  position: 0,
   trackId: 4451438,
-  minutesLeft: '0',
-  secondsLeft: '0',
+  duration: 0,
 };
 

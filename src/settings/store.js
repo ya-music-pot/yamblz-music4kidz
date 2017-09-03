@@ -3,6 +3,7 @@ import reducer from '_app/reducers';
 
 import api from '_middlewares/api';
 import player from '_middlewares/player';
+import addPlayerListeners from './playerListeners';
 
 const devTools =
   typeof window === 'object' &&
@@ -19,4 +20,7 @@ const enhancer = devTools(
 
 const state = {};
 
-export default createStore(reducer, state, enhancer);
+const store = createStore(reducer, state, enhancer);
+addPlayerListeners(store.dispatch, store.getState);
+
+export default store;

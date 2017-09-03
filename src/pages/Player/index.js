@@ -17,7 +17,7 @@ class Player extends Component {
     const { playerActions, player } = this.props;
     if (player.isPlaying) {
       playerActions.playerPause();
-    } else if (player.trackPersentage !== 0) {
+    } else if (player.position !== 0) {
       playerActions.playerResume();
     } else {
       playerActions.playerStart(player.trackId);
@@ -25,22 +25,31 @@ class Player extends Component {
   };
 
   render() {
-    const playerState = this.props.player;
+    const {
+      trackName, singerName, position,
+      cover, isPlaying, duration,
+    } = this.props.player;
+
+    const percentage = position / duration;
+    const diffTrackPosition = position - duration;
+    const minutesLeft = parseInt(diffTrackPosition / 60, 10).toString();
+    const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
+    const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
 
     return (
       <div className={style.wrapper}>
         <Container
-          trackName={playerState.trackName}
-          singerName={playerState.singerName}
-          trackPercentage={playerState.trackPercentage}
-          minutesLeft={playerState.minutesLeft}
-          secondsLeft={playerState.secondsLeft}
-          cover={playerState.cover}
-          isPlaying={playerState.isPlaying}
+          trackName={trackName}
+          singerName={singerName}
+          trackPercentage={percentage}
+          minutesLeft={minutesLeft}
+          secondsLeft={secondsLeft}
+          cover={cover}
+          isPlaying={isPlaying}
           onTogglePlay={this._handleButtonPressed}
         />
         <Background
-          cover={playerState.cover}
+          cover={cover}
         />
       </div>
     );
@@ -53,10 +62,9 @@ Player.propTypes = {
     cover: PropTypes.string,
     singerName: PropTypes.string,
     trackName: PropTypes.string,
-    trackPersentage: PropTypes.number,
+    position: PropTypes.number,
     trackId: PropTypes.number,
-    minutesLeft: PropTypes.string,
-    secondsLeft: PropTypes.string,
+    duration: PropTypes.number,
   }),
   playerActions: PropTypes.shape({
     playerStart: PropTypes.func,
