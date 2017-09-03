@@ -41,6 +41,7 @@
     "express": "4.15.4",
     "file-loader": "0.11.2",
     "got": "7.1.0",
+    "merge-descriptors": "1.0.1",
     "pre-commit": "1.2.2",
     "stylus": "0.54.5",
     "stylus-loader": "3.0.1",
@@ -58,6 +59,7 @@
     ]
   },
   "dependencies": {
+    "YandexAudio": "git://github.com/yandex/audio-js.git",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-loader": "7.1.2",

@@ -24,6 +24,7 @@ export default class RadioCard extends Component {
     if (imageUrl) {
       backgroundStyles.backgroundImage = `url(${imageUrl})`;
     }
+
     return (
       <div className={container} onClick={onCardClick}>
         <CardTitle text={title} styles={titleStyles} />

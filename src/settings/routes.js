@@ -6,7 +6,6 @@ import Entrance from '_pages/Entrance';
 import SetUp from '_pages/SetUp';
 import Feed from '_pages/Feed';
 import Player from '_pages/Player';
-import MiniPlayer from '_pages/MiniPlayer';
 
 const routes = () => (
   <Route path="/" component={App}>
@@ -14,7 +13,6 @@ const routes = () => (
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
     <Route path="/player" component={Player} />
-    <Route path="/miniplayer" component={MiniPlayer} />
   </Route>
 );
 
