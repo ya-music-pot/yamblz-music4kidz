@@ -18,26 +18,31 @@ class EntranceScreen extends Component {
     isCardShown: false,
   }
 
+  componentDidMount() {
+    this._initializeCardActions();
+  }
+
   componentWillUnmount() {
     this.mc.destroy();
   }
+
+  _updateThreshholds = () => {
+    this.windowHeight = window.innerHeight;
+    this.cardHeight = this.card.offsetHeight;
+    this.contentHeight = this.content.offsetHeight;
+
+    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
+    this.bottomPosition = this.content.offsetHeight + 16;
+    this.threshhold = this.windowHeight / 2;
+  };
 
   /**
    * _initializeCardActions — Функция инициаллизирует обработчик жестов
    * @param  {Node} el
    */
-  _initializeCardActions = (el) => {
-    if (!el) return;
-    this.card = el;
-    this.isPanning = false;
-
-    this.windowHeight = window.innerHeight;
-    this.cardHeight = this.card.offsetHeight;
-
-    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
-    this.bottomPosition = this.windowHeight - 66;
-    this.threshhold = this.windowHeight / 2;
-
+  _initializeCardActions = () => {
+    this.isPanning = null;
+    this._updateThreshholds();
     this.posTimeout = null;
 
     this.mc = new Hammer(this.card);
@@ -54,6 +59,14 @@ class EntranceScreen extends Component {
    * @param  {Object} event
    */
   _handlePan = (event) => {
+    if (this.isPanning == null) {
+      this._updateThreshholds();
+
+      this.card.style.left = '16px';
+      this.card.style.top = `${this.bottomPosition}px`;
+      this.card.style.position = 'absolute';
+    }
+
     if (!this.isPanning) {
       this.isPanning = true;
       this.lastCardY = this.card.offsetTop;
@@ -99,7 +112,10 @@ class EntranceScreen extends Component {
 
     return (
       <div className={style.container}>
-        <div className={isCardShown ? style['background--opacity20'] : style['background--opacity100']}>
+        <div
+          className={cl(style.background, isCardShown ? style['background--opacity20'] : style['background--opacity100'])}
+          ref={(el) => { this.content = el; }}
+        >
           <div className={style.imageContainer}>
             <img
               alt="flying-cloud"
@@ -119,7 +135,7 @@ class EntranceScreen extends Component {
         </div>
         <div
           className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
-          ref={this._initializeCardActions}
+          ref={(el) => { this.card = el; }}
         >
           <CartoonCard
             data={data}

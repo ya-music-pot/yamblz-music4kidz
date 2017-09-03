@@ -11,6 +11,7 @@ export default function (state = playerState, action) {
         ...state,
         isPlaying: true,
       };
+
     case PlayerActions.PLAYER_STOP:
     case PlayerActions.PLAYER_PAUSE:
       return {
