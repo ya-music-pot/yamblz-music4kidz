@@ -70,9 +70,8 @@ class Player extends Component {
 
   render() {
     const {
-      trackName, singerName, position,
-      cover, isPlaying, duration,
-      isRepeatMode,
+      trackName, singerName, position, duration,
+      cover, isPlaying, isRepeatMode,
     } = this.props.player;
 
     const percentage = position / duration;

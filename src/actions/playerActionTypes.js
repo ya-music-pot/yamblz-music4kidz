@@ -11,3 +11,5 @@ export const SET_TRACKID = 'SET_TRACKID';
 export const SET_PLAYLISTID = 'SET_PLAYLISTID';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
+export const UPDATE_SONG_INFO = 'UPDATE_SONG_INFO';
+

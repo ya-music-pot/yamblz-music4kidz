@@ -19,6 +19,15 @@ export default ({ dispatch, getState }) => (next) => (action) => {
 
   switch (type) {
     case ActionTypes.PLAYER_START: {
+      dispatch({
+        type: ActionTypes.UPDATE_SONG_INFO,
+        payload: {
+          cover: track.image_url,
+          singerName: track.artist,
+          trackName: track.name,
+        },
+      });
+
       const trackUrl = track.mp3_url;
       return AudioPlayer.player
         .play(trackUrl)

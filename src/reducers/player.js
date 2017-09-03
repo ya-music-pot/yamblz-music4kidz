@@ -57,6 +57,11 @@ export default function (state = playerState, action) {
         isRepeatMode: !state.isRepeatMode,
       };
 
+    case PlayerActions.UPDATE_SONG_INFO:
+      return {
+        ...state,
+        ...payload,
+      };
     default:
       return state;
   }
