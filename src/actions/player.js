@@ -51,3 +51,8 @@ export function setPlaylistId(playlistId) {
   };
 }
 
+export function toggleRepeatMode() {
+  return {
+    type: ActionType.TOGGLE_REPEAT,
+  };
+}

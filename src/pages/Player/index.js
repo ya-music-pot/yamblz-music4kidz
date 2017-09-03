@@ -62,10 +62,17 @@ class Player extends Component {
     }
   };
 
+  _handleClickRepeat = () => {
+    const { playerActions } = this.props;
+
+    playerActions.toggleRepeatMode();
+  };
+
   render() {
     const {
       trackName, singerName, position,
       cover, isPlaying, duration,
+      isRepeatMode,
     } = this.props.player;
 
     const percentage = position / duration;
@@ -84,9 +91,11 @@ class Player extends Component {
           secondsLeft={secondsLeft}
           cover={cover}
           isPlaying={isPlaying}
+          isRepeatMode={isRepeatMode}
           onTogglePlay={this._handleButtonPressed}
           onClickPrevious={this._handleClickPrevious}
           onClickNext={this._handleClickNext}
+          onClickRepeat={this._handleClickRepeat}
         />
         <Background
           cover={cover}
@@ -99,6 +108,7 @@ class Player extends Component {
 Player.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool,
+    isRepeatMode: PropTypes.bool,
     cover: PropTypes.string,
     singerName: PropTypes.string,
     trackName: PropTypes.string,

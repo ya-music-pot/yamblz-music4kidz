@@ -1,6 +1,8 @@
 export default {
   isPlaying: false,
   isRadio: false,
+  isRepeatMode: false,
+
   cover: '',
   singerName: '',
   trackName: '',
@@ -8,4 +10,3 @@ export default {
   trackId: 4451438,
   duration: 0,
 };
-

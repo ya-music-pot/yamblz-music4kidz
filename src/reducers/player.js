@@ -51,6 +51,12 @@ export default function (state = playerState, action) {
         playlistId: payload.playlistId,
       };
 
+    case PlayerActions.TOGGLE_REPEAT:
+      return {
+        ...state,
+        isRepeatMode: !state.isRepeatMode,
+      };
+
     default:
       return state;
   }

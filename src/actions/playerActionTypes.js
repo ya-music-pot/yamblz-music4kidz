@@ -9,3 +9,5 @@ export const PLAYER_ENDED = 'PLAYER_ENDED';
 
 export const SET_TRACKID = 'SET_TRACKID';
 export const SET_PLAYLISTID = 'SET_PLAYLISTID';
+
+export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';

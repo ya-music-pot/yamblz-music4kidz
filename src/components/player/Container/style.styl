@@ -70,50 +70,60 @@
   width: 18vh;
 }
 
-.buttonLike {
-  color: #ffffff;
-  background: url(./images/like.svg) no-repeat;
+.buttonCommon {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+}
+
+.buttonCommon24 {
+  @extends .buttonCommon;
+  height: 24px;
+  width: 24px;
+}
+
+.buttonCommon30 {
+  @extends .buttonCommon;
+  height: 30px;
+  width: 30px;
+}
+
+.buttonRoundCommon {
+  background-repeat: no-repeat;
   background-position: center center;
-  background-color: #ff3333;
   border-radius: 50%;
   height: 7vh;
   width: 7vh;
+}
+
+.buttonLike {
+  background-image: url(./images/like.svg);
+  background-color: #ff3333;
+  @extend .buttonRoundCommon;
 }
 
 .buttonLike:focus { outline: none; }
 
 .buttonDislike {
-  color: white;
-  background: url(./images/skip.svg) no-repeat;
-  background-position: center center;
+  background-image: url(./images/skip.svg);
   background-color: #0065d9;
-  border-radius: 50%;
-  height: 7vh;
-  width: 7vh;
+  @extend .buttonRoundCommon;
 }
 
 .buttonDislike:focus { outline: none; }
 
 .buttonArrowDown {
-  background: url(./images/arrow_down.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 24px;
-  width: 24px;
-  color: #ffffff;
+  background-image: url(./images/arrow_down.svg);
+  @extend .buttonCommon24;
 }
 
 .buttonArrowDown:focus { outline: none; }
 
 .buttonDownload {
-  background: url(./images/download.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 24px;
-  width: 24px;
-  color: #ffffff;
+  background-image: url(./images/download.svg);
+  @extend .buttonCommon24;
 }
 
 .buttonDownload:focus { outline: none; }
@@ -123,12 +133,8 @@
 }
 
 .buttonPrevious {
-  background: url(./images/previous.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 30px;
-  width: 30px;
+  background-image: url(./images/previous.svg);
+  @extend .buttonCommon30;
 }
 
 .buttonPrevious:focus { outline: none; }
@@ -152,36 +158,36 @@
 .player-button:focus { outline: none; }
 
 .buttonNext {
-  background: url(./images/next.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 30px;
-  width: 30px;
+  background-image: url(./images/next.svg);
+  @extend .buttonCommon30;
 }
 
 .buttonNext:focus { outline: none; }
 
 .buttonPlus {
-  background: url(./images/plus.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 30px;
-  width: 30px;
-  color: #ffffff;
+  background-image: url(./images/plus.svg);
+  @extend .buttonCommon30;
 }
 
 .buttonPlus:focus { outline: none; }
 
 .buttonRepeat {
-  background: url(./images/repeat.svg) no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-  height: 30px;
-  width: 30px;
-  color: #ffffff;
+  &Active {
+    background-image: url(./images/repeat.svg);
+    @extend .buttonCommon30;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &Inactive {
+    background-image: url(./images/repeat-inactive.svg);
+    @extend .buttonCommon30;
+
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
-.buttonRepeat:focus { outline: none; }
