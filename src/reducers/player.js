@@ -1,7 +1,16 @@
 import * as PlayerActions from '_actions/playerActionTypes.js';
-import playerState from '_data/player';
 
-export default function (state = playerState, action) {
+const defaultState = {
+  isPlaying: false,
+  cover: '',
+  singerName: '',
+  trackName: '',
+  position: 0,
+  trackId: 4451438,
+  duration: 0,
+};
+
+export default function (state = defaultState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -17,6 +26,13 @@ export default function (state = playerState, action) {
       return {
         ...state,
         isPlaying: false,
+      };
+
+    case PlayerActions.PLAYER_SAVE_TRACK:
+      return {
+        ...state,
+        cover: payload.imageUrl,
+        singerName: payload.artist,
       };
 
     case PlayerActions.PLAYER_PROGRESS:

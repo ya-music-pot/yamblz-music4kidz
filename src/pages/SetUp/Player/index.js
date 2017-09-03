@@ -5,14 +5,18 @@ import PropTypes from 'prop-types';
 import GradientPlayer from '_components/GradientPlayer';
 
 import { saveLikesCount } from '_actions/settings';
+import { playerStart } from '_actions/player';
 
-import person from './images/artist.jpg';
 import style from './style.styl';
 
 class Player extends Component {
   state = {
     countChoose: 0,
     isSound: true,
+  }
+
+  componentWillMount() {
+    this.props.playerStart(this.props.tracksIds[0]);
   }
 
   _handleLike = () => {
@@ -39,20 +43,22 @@ class Player extends Component {
 
   render() {
     const isSound = this.state.isSound;
+    const { cover, singerName, isPlaying } = this.props.player;
 
     return (
       <div className={style.container}>
         <div className={style.wrapperPlayer}>
           <div className={style.player}>
             <GradientPlayer
-              image={person}
+              isPlaying={isPlaying}
+              image={cover}
               onLike={this._handleLike}
               onSkip={this._handleSkip}
               onToggleSound={this._handleToggleSound}
               isSound={isSound}
             />
           </div>
-          <h3 className={style.title}>Егор Крид</h3>
+          <h3 className={style.title}>{ singerName }</h3>
         </div>
       </div>
     );
@@ -60,13 +66,22 @@ class Player extends Component {
 }
 
 Player.propTypes = {
+  playerStart: PropTypes.func,
   saveLikesCount: PropTypes.func,
   onNextStep: PropTypes.func,
   likesCount: PropTypes.number,
+  tracksIds: PropTypes.array,
+  player: PropTypes.shape({
+    cover: PropTypes.string,
+    singerName: PropTypes.string,
+    isPlaying: PropTypes.bool,
+  }),
 };
 
 export default connect((state, props) => ({
   likesCount: state.settings.likesCount,
   listEmoji: state.dictionaries.listEmoji,
+  tracksIds: state.settings.tracksIds,
+  player: state.player,
   ...props,
-}), { saveLikesCount })(Player);
+}), { saveLikesCount, playerStart })(Player);

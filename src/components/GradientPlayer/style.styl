@@ -7,7 +7,8 @@
   display: flex;
 }
 
-.image {
+.image,
+.defaultImage {
   position: relative;
   width: 72%;
   height: 72%;
@@ -15,6 +16,17 @@
   object-fit: cover;
   margin: auto;
   z-index: 9;
+  display: flex;
+}
+
+.defaultImage {
+  background: #b880f0;
+}
+
+.icon {
+  width: 50%;
+  height: 50%;
+  margin: auto;
 }
 
 .grad1,
@@ -76,11 +88,11 @@
 }
 
 .skip {
-  left: 16%;
+  left: 15%;
 }
 
 .like {
-  right: 16%;
+  right: 15%;
 }
 
 .sound {

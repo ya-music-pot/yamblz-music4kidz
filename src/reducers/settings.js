@@ -1,7 +1,9 @@
 import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_COUNT_LIKES } from '_actions/settings';
+import tracksIds from '_data/onboardTracks';
 
 const settingsDefault = {
   likesCount: 0,
+  tracksIds,
   actionId: 1,
   moodId: 1,
 };

@@ -4,9 +4,6 @@ import * as ActionTypes from '_actions/playerActionTypes.js';
 export default ({ dispatch, getState }) => (next) => (action) => {
   const { player, type, ...rest } = action;
 
-  // TODO вынести этот URL
-  const AUDIO_URL = 'https://dl.dropboxusercontent.com/s/';
-
   if (!player) {
     return next(action);
   }
@@ -18,20 +15,32 @@ export default ({ dispatch, getState }) => (next) => (action) => {
 
   switch (type) {
     case ActionTypes.PLAYER_START: {
-      const trackUrl = `${AUDIO_URL}${track.mp3Url}`;
-      return AudioPlayer.player
+      const trackUrl = track.mp3Url;
+
+      dispatch({
+        type: ActionTypes.PLAYER_SAVE_TRACK,
+        payload: track,
+      });
+
+      AudioPlayer.player
         .play(trackUrl)
         .catch(() => dispatch({
           type: ActionTypes.PLAYER_STOP,
         }));
+      break;
     }
     case ActionTypes.PLAYER_STOP:
-      return AudioPlayer.player.stop();
+      AudioPlayer.player.stop();
+      break;
     case ActionTypes.PLAYER_PAUSE:
-      return AudioPlayer.player.pause();
+      AudioPlayer.player.pause();
+      break;
     case ActionTypes.PLAYER_RESUME:
-      return AudioPlayer.player.resume();
+      AudioPlayer.player.resume();
+      break;
     default:
-      return next(action);
+      break;
   }
+
+  return next(action);
 };
