@@ -21,7 +21,7 @@ class Entrance extends Component {
   };
 
   _handleCalibrationDeny = () => {
-    this.props.router.push('/playlist');
+    this.props.router.push('/feed');
   };
 
   _handleOpenPlayer = () => {
@@ -34,7 +34,12 @@ class Entrance extends Component {
         <EntranceScreen
           onNavigate={this._handleNavigate}
           data={data}
+          callbacks={{
+            onCardClick: this._handleOpenPlayer,
+            onButtonClick: this._handleOpenPlayer,
+          }}
           onButtonClick={this._handleOpenPlayer}
+          onCardClick={this._handleOpenPlayer}
         /> :
         <PlaylistCalibration
           onAccept={this._handleCalibrationAccept}

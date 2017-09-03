@@ -28,6 +28,7 @@
     "window": true,
     "isProduction": true,
     "Ya": true,
+    "ya": true,
     "API_URL": true
   }
 }

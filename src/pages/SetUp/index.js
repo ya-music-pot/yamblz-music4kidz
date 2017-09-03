@@ -34,7 +34,7 @@ class SetUp extends Component {
         id: user.data.id,
         moodId,
         actionId,
-        moveNext: '/playlist',
+        moveNext: '/feed',
       });
     }
   }

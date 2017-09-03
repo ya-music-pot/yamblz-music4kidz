@@ -1,146 +1,85 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Background from '_components/player/Background';
 import Container from '_components/player/Container';
-import YaPlayer from '_helpers/YaPlayer';
+import * as PlayerActions from '_actions/player';
 
 import style from './style.styl';
 
 class Player extends Component {
-  state = {
-    playerState: {
-      trackName: '',
-      singerName: '',
-      trackPercentage: 0,
-      minutesLeft: '',
-      secondsLeft: '',
-      isPlaying: false,
-      cover: '',
-    },
-  };
-
-  componentWillMount() {
-    this.yaPlayer = new YaPlayer();
-    this.yaPlayer.loadPlayerScript(
-      () => {
-        console.log(this.yaPlayer);
-        this._initPlayer();
-      },
-    );
-  }
-
-  /**
-   * @function _initPlayer - Служит для инциаллизации плеера
-   * @example - Добавить плейлист, если нужно запустить плеер, добавить слушателей событий
-   *
-   * Вызывается при успешной инициаллизации библиотеки Ya на странице
-   * */
-  _initPlayer = () => {
-    const playerError = this.yaPlayer.getPlayerError();
-    if (playerError) {
-      console.log(playerError);
-      return;
-    }
-
-    this.yaPlayer.setTrackDataCallback(() => {
-      const covers = this.yaPlayer.getCurrentTrackCoverUris();
-
-      this.setState({
-        playerState: {
-          ...this.state.playerState,
-          trackName: this.yaPlayer.getCurrentTrackTitle(),
-          singerName: this.yaPlayer.getCurrentTrackArtists()[0].name,
-          cover: covers[covers.length - 1],
-        },
-      });
-    });
-
-    this.yaPlayer.setTimeUpdateCallback(() => {
-      const currentTrackPosition = this.yaPlayer.getCurrentTrackPosition();
-      const currentTrackDuration = this.yaPlayer.getCurrentTrackDuration();
-
-      if (currentTrackDuration) {
-        const trackPercentage = currentTrackPosition / currentTrackDuration;
-        const diffTrackPosition = currentTrackPosition - currentTrackDuration;
-        const minutesLeft = parseInt(diffTrackPosition / 60, 10);
-        const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
-        const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
-
-        this.setState({
-          playerState: {
-            ...this.state.playerState,
-            trackPercentage,
-            minutesLeft: minutesLeft.toString(),
-            secondsLeft,
-          },
-        });
-      }
-    });
-  };
-
   /**
    * @function _handleButtonPressed - Служит для обработки кликов по кнопке стой \ пой
    * Запускает и приостанавливает воспроизведение музыки
    * */
   _handleButtonPressed = () => {
-    let playState;
-
-    if (!this.yaPlayer.isPlaying()) {
-      // TODO плейлисты в карточки будут приходить из store
-      const playList = {
-        title: 'music',
-        tracks: [
-          '36481295',
-        ],
-      };
-
-      this.yaPlayer.setPlaylist(playList);
-      this.yaPlayer.play();
-      playState = true;
+    const { playerActions, player } = this.props;
+    if (player.isPlaying) {
+      playerActions.playerPause();
+    } else if (player.position !== 0) {
+      playerActions.playerResume();
     } else {
-      this.yaPlayer.pause();
-      playState = false;
+      playerActions.playerStart(player.trackId);
     }
-
-    setTimeout(() => {
-      const playerState = this.state.playerState;
-
-      this.setState({
-        playerState: Object.assign({}, playerState, {
-          isPlaying: playState,
-        }),
-      });
-    }, 0);
   };
 
   render() {
-    const playerState = this.state.playerState;
+    const {
+      trackName, singerName, position,
+      cover, isPlaying, duration,
+    } = this.props.player;
+
+    const percentage = position / duration;
+    const diffTrackPosition = position - duration;
+    const minutesLeft = parseInt(diffTrackPosition / 60, 10).toString();
+    const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
+    const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
 
     return (
       <div className={style.wrapper}>
         <Container
-          trackName={playerState.trackName}
-          singerName={playerState.singerName}
-          trackPercentage={playerState.trackPercentage}
-          minutesLeft={playerState.minutesLeft}
-          secondsLeft={playerState.secondsLeft}
-          cover={playerState.cover}
-          isPlaying={playerState.isPlaying}
+          trackName={trackName}
+          singerName={singerName}
+          trackPercentage={percentage}
+          minutesLeft={minutesLeft}
+          secondsLeft={secondsLeft}
+          cover={cover}
+          isPlaying={isPlaying}
           onTogglePlay={this._handleButtonPressed}
         />
         <Background
-          cover={playerState.cover}
+          cover={cover}
         />
       </div>
     );
   }
 }
 
-export default connect((state, props) => ({
-  ...props,
-}))(Player);
-
-Player.contextTypes = {
-  yaPlayer: PropTypes.object,
+Player.propTypes = {
+  player: PropTypes.shape({
+    isPlaying: PropTypes.bool,
+    cover: PropTypes.string,
+    singerName: PropTypes.string,
+    trackName: PropTypes.string,
+    position: PropTypes.number,
+    trackId: PropTypes.number,
+    duration: PropTypes.number,
+  }),
+  playerActions: PropTypes.shape({
+    playerStart: PropTypes.func,
+    playerStop: PropTypes.func,
+    playerPause: PropTypes.func,
+    playerResume: PropTypes.func,
+  }),
 };
+
+export default connect((state) => {
+  const { player } = state;
+
+  return {
+    player,
+  };
+}, (dispatch) => ({
+  playerActions: bindActionCreators(PlayerActions, dispatch),
+}))(Player);

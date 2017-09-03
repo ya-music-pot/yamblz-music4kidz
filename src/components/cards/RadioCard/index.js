@@ -5,7 +5,6 @@ import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
-
 import style from './style.styl';
 
 export default class RadioCard extends Component {
@@ -17,7 +16,7 @@ export default class RadioCard extends Component {
 
     const {
       data: { title, imageUrl },
-      onCardClick, onButtonClick,
+      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -25,6 +24,7 @@ export default class RadioCard extends Component {
     if (imageUrl) {
       backgroundStyles.backgroundImage = `url(${imageUrl})`;
     }
+
     return (
       <div className={container} onClick={onCardClick}>
         <CardTitle text={title} styles={titleStyles} />
@@ -38,6 +38,5 @@ export default class RadioCard extends Component {
 
 RadioCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
-  onCardClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };
