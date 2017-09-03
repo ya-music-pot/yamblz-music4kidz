@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import cl from 'classname';
 
 import CARDS from '_data/cardsType';
 
@@ -11,10 +10,7 @@ import CollectionCard from '_components/cards/CollectionCard';
 import CartoonCard from '_components/cards/CartoonCard/index';
 import GameCard from '_components/cards/GameCard/index';
 
-import style from './style.styl';
-
 class CardList extends Component {
-
   renderCard = (data) => {
     const cards = {
       [CARDS.radio]: RadioCard,

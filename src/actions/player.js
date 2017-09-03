@@ -29,3 +29,12 @@ export function playerResume() {
     player: {},
   };
 }
+
+export function setTrackId(trackId) {
+  return {
+    type: ActionType.SET_TRACKID,
+    payload: {
+      trackId,
+    },
+  };
+}

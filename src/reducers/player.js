@@ -30,6 +30,13 @@ export default function (state = playerState, action) {
         ...state,
         isPlaying: false,
       };
+
+    case PlayerActions.SET_TRACKID:
+      return {
+        ...state,
+        trackId: payload.trackId,
+      };
+
     default:
       return state;
   }

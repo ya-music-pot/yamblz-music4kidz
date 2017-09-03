@@ -6,3 +6,5 @@ export const PLAYER_RESUME = 'PLAYER_RESUME';
 
 export const PLAYER_PROGRESS = 'PLAYER_PROGRESS';
 export const PLAYER_ENDED = 'PLAYER_ENDED';
+
+export const SET_TRACKID = 'SET_TRACKID';

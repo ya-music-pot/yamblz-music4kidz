@@ -1,4 +1,4 @@
-import YandexAudio from 'YandexAudio/src';
+import YandexAudio from 'YandexAudio/src'; // eslint-disable-line
 
 const _audioPlayer = new ya.music.Audio('html5');
 

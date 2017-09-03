@@ -11,10 +11,14 @@ import { getUser } from '_actions/user';
 import { getFeed } from '_actions/feed';
 
 import AudioPlayer from '_helpers/AudioPlayer';
+import addPlayerListeners from '_settings/playerListeners';
+
 import '_settings/main.styl';
 
 initReactFastclick();
 AudioPlayer.init();
+addPlayerListeners(store.dispatch, store.getState);
+
 const userId = 1;
 
 store.dispatch(getUser(userId));
