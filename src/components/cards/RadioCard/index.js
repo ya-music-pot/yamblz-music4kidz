@@ -8,7 +8,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class RadioCard extends Component {
-
   render() {
     const {
       container, title: titleStyles,

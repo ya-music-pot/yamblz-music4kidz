@@ -12,7 +12,7 @@ const routes = () => (
   <Route path="/" component={App}>
     <IndexRoute component={Entrance} />
     <Route path="/setup" component={SetUp} />
-    <Route path="/playlist" component={Feed} />
+    <Route path="/feed" component={Feed} />
     <Route path="/player" component={Player} />
     <Route path="/miniplayer" component={MiniPlayer} />
   </Route>

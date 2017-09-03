@@ -94,6 +94,11 @@ export default class EntranceScreen extends Component {
     const { data, onButtonClick } = this.props;
     const { isCardShown } = this.state;
 
+    const callbacks = {
+      onButtonClick,
+      onCardClick: onButtonClick,
+    };
+
     return (
       <div className={style.container}>
         <div className={isCardShown ? style['background--opacity20'] : style['background--opacity100']}>
@@ -120,7 +125,7 @@ export default class EntranceScreen extends Component {
         >
           <CartoonCard
             data={data}
-            onButtonClick={onButtonClick}
+            callbacks={callbacks}
           />
         </div>
       </div>

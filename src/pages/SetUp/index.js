@@ -25,7 +25,7 @@ class SetUp extends Component {
     if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
     } else {
-      this.props.router.push('/playlist');
+      this.props.router.push('/feed');
     }
   }
 
