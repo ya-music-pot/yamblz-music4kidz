@@ -110,11 +110,6 @@ class EntranceScreen extends Component {
     const { data, callbacks } = this.props;
     const { isCardShown } = this.state;
 
-    const callbacks = {
-      onButtonClick,
-      onCardClick: onButtonClick,
-    };
-
     return (
       <div className={style.container}>
         <div

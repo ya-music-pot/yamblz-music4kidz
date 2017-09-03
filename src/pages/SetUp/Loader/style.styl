@@ -1,0 +1,42 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.bounce1, .bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #f5ef49;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: sk-bounce 2.0s infinite ease-in-out;
+}
+
+.bounce2 {
+  background-color: #e40f0f;
+  animation-delay: -1.0s;
+}
+
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+  } 50% {
+    transform: scale(1.0);
+  }
+}

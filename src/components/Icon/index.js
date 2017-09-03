@@ -5,10 +5,6 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class Icon extends Component {
-  _onClick = () => {
-    this.props.onClick(this.props.typeIcon);
-  };
-
   render() {
     const { typeIcon, className, onClick } = this.props;
 

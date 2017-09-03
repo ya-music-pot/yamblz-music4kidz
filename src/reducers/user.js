@@ -1,22 +1,35 @@
-import { GET_USER } from '_actions/user';
+import { GET_USER, UPDATE_USER } from '_actions/user';
 
-export default function (state = {}, action) {
+const defaultState = {
+  loading: false,
+  loaded: false,
+  data: {},
+};
+
+export default function (state = { ...defaultState }, action) {
   const { type, response } = action;
 
   switch (type) {
-    case `${GET_USER}_START`:
+    case `${GET_USER}_SUCCESS`:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        ...response,
+      };
+    case `${UPDATE_USER}_START`:
       return {
         ...state,
         loading: true,
         loaded: false,
       };
-    case `${GET_USER}_FAIL`:
+    case `${UPDATE_USER}_FAIL`:
       return {
         ...state,
         loading: false,
         loaded: true,
       };
-    case `${GET_USER}_SUCCESS`:
+    case `${UPDATE_USER}_SUCCESS`:
       return {
         ...state,
         loading: false,

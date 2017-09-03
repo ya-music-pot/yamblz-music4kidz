@@ -42,10 +42,18 @@ class Feed extends Component {
   }
 }
 
-export default connect((state, props) => ({
-  settings: state.settings,
-  ...props,
-}))(Feed);
+export default connect((state, props) => {
+  const { moodId, actionId } = state.user.data;
+  const { listEmoji, listActions } = state.dictionaries;
+
+  return {
+    ...props,
+    settings: {
+      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
+      actionIcon: actionId && listActions.data[actionId].typeIcon,
+    },
+  };
+})(Feed);
 
 Feed.propTypes = {
   settings: PropTypes.object,
