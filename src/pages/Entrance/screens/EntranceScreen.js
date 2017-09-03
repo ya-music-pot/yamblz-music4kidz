@@ -107,7 +107,7 @@ class EntranceScreen extends Component {
   };
 
   render() {
-    const { data, onButtonClick } = this.props;
+    const { data, callbacks } = this.props;
     const { isCardShown } = this.state;
 
     return (
@@ -139,7 +139,7 @@ class EntranceScreen extends Component {
         >
           <CartoonCard
             data={data}
-            onButtonClick={onButtonClick}
+            callbacks={callbacks}
           />
         </div>
       </div>
@@ -150,7 +150,7 @@ class EntranceScreen extends Component {
 EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };
 
 export default connect((state, props) => ({

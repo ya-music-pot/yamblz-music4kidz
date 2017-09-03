@@ -21,8 +21,8 @@
     "url": "https://github.com/thevery/yamblz-music4kidz/issues"
   },
   "engines": {
-    "npm": "8.2.1",
-    "node": "5.3.0"
+    "npm": "5.3.0",
+    "node": "8.2.1"
   },
   "homepage": "https://github.com/thevery/yamblz-music4kidz#readme",
   "jest": {
