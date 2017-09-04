@@ -51,11 +51,11 @@ export function playerPrev(currentTrackId) {
   };
 }
 
-export function setPlaylistId(playlistId) {
+export function setPlaylist(playlist) {
   return {
-    type: ActionType.SET_PLAYLISTID,
+    type: ActionType.SET_PLAYLIST,
     payload: {
-      playlistId,
+      playlist,
     },
   };
 }

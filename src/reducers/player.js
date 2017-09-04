@@ -45,10 +45,10 @@ export default function (state = playerState, action) {
         ...payload,
       };
 
-    case PlayerActions.SET_PLAYLISTID:
+    case PlayerActions.SET_PLAYLIST:
       return {
         ...state,
-        playlistId: payload.playlistId,
+        playlist: payload.playlist,
       };
 
     case PlayerActions.TOGGLE_REPEAT:

@@ -10,7 +10,7 @@ import style from './style.styl';
 export default class CartoonCard extends Component {
   _handleCardClick = () => {
     const {
-      data: { tracks, id },
+      data: { tracks },
       callbacks: { onCardClick },
     } = this.props;
 
@@ -18,7 +18,7 @@ export default class CartoonCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, id);
+      onCardClick(tracks[0].id, tracks);
     }
   };
 

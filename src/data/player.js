@@ -8,5 +8,6 @@ export default {
   trackName: '',
   position: 0,
   trackId: 4451438,
+  playlist: [],
   duration: 0,
 };

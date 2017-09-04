@@ -11,11 +11,9 @@ export default ({ dispatch, getState }) => (next) => (action) => {
   dispatch({ ...rest, type });
 
   const store = getState();
-  const { playlistId } = store.player;
+  const { playlist } = store.player;
   const { trackId } = player;
-
-  const playlist = store.feed.data.find(item => item.id === playlistId);
-  const track = playlist.tracks.find(item => item.id === trackId);
+  const track = playlist.find(item => item.id === trackId);
 
   switch (type) {
     case ActionTypes.PLAYER_START: {
@@ -49,10 +47,10 @@ export default ({ dispatch, getState }) => (next) => (action) => {
     }
 
     case ActionTypes.PLAYER_NEXT: {
-      const trackIndex = playlist.tracks.indexOf(track);
+      const trackIndex = playlist.indexOf(track);
 
-      if (trackIndex === playlist.tracks.length - 1) {
-        const firstTrack = playlist.tracks[0];
+      if (trackIndex === playlist.length - 1) {
+        const firstTrack = playlist[0];
 
         dispatch({
           type: ActionTypes.SET_TRACK_INFO,
@@ -67,7 +65,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
 
         return AudioPlayer.player.stop();
       }
-      const nextTrack = playlist.tracks[trackIndex + 1];
+      const nextTrack = playlist[trackIndex + 1];
       const trackUrl = nextTrack.mp3_url;
 
       dispatch({
@@ -84,7 +82,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
     }
 
     case ActionTypes.PLAYER_PREV: {
-      const trackIndex = playlist.tracks.indexOf(track);
+      const trackIndex = playlist.indexOf(track);
 
       if (trackIndex === 0) {
         dispatch({
@@ -98,7 +96,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       }
 
       const { position } = store.player;
-      const prevTrack = position ? playlist.tracks[trackIndex - 1] : track;
+      const prevTrack = position ? playlist[trackIndex - 1] : track;
       const trackUrl = prevTrack.mp3_url;
 
       dispatch({

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Topbar from '_components/Topbar';
 import PersonalCard from '_components/cards/PersonalCard';
 
-import { playerPlay, setPlaylistId } from '_actions/player';
+import { playerPlay, setPlaylist } from '_actions/player';
 
 import style from './style.styl';
 import CardList from './CardList';
@@ -15,8 +15,8 @@ class Feed extends Component {
     console.log('I click on button!');
   };
 
-  _onCardClick = (trackId, playlistId) => {
-    this.props.setPlaylistId(playlistId);
+  _onCardClick = (trackId, playlist) => {
+    this.props.setPlaylist(playlist);
     this.props.playerPlay(trackId);
 
     this.props.router.push('/player');
@@ -58,11 +58,11 @@ export default connect((state, props) => {
       actionIcon: actionId && listActions.data[actionId].typeIcon,
     },
   };
-}, { playerPlay, setPlaylistId })(Feed);
+}, { playerPlay, setPlaylist })(Feed);
 
 Feed.propTypes = {
   settings: PropTypes.object,
   router: PropTypes.object,
   playerPlay: PropTypes.func,
-  setPlaylistId: PropTypes.func,
+  setPlaylist: PropTypes.func,
 };

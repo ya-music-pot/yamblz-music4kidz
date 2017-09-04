@@ -14,11 +14,8 @@ export default (dispatch, getState) => {
   AudioPlayer.player.on(Audio.EVENT_ENDED, () => {
     const store = getState();
 
-    const { playlistId, trackId, isRepeatMode } = store.player;
-    const { feed } = store;
-
-    const playlist = feed.data.find(item => item.id === playlistId);
-    const trackIndex = playlist.tracks.findIndex(item => item.id === trackId);
+    const { playlist, trackId, isRepeatMode } = store.player;
+    const trackIndex = playlist.findIndex(item => item.id === trackId);
 
     let action;
 
@@ -28,8 +25,8 @@ export default (dispatch, getState) => {
         player: { trackId },
         payload: { trackId },
       };
-    } else if (trackIndex < playlist.tracks.length - 1) {
-      const nextTrackId = playlist.tracks[trackIndex + 1].id;
+    } else if (trackIndex < playlist.length - 1) {
+      const nextTrackId = playlist[trackIndex + 1].id;
       action = {
         type: PLAYER_START,
         player: {

@@ -11,7 +11,7 @@ export const PLAYER_PROGRESS = 'PLAYER_PROGRESS';
 export const PLAYER_ENDED = 'PLAYER_ENDED';
 
 export const SET_TRACK_INFO = 'SET_TRACK_INFO';
-export const SET_PLAYLISTID = 'SET_PLAYLISTID';
+export const SET_PLAYLIST = 'SET_PLAYLIST';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
 
