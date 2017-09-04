@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Topbar from '_components/Topbar';
-import PersonalCard from '_components/cards/PersonalCard';
-import DefaultCard from '_components/cards/DefaultCard';
 
 import style from './style.styl';
 import CardList from './CardList';
+import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
   _onButtonClick = () => {
@@ -18,26 +17,8 @@ class Feed extends Component {
     this.props.router.push('/player');
   };
 
-  // TODO: переделать на флаг наверное, что-то вроде onBoarding
-  renderPersonalCard = (settings, callbacks) => {
-    if (settings.actionIcon === '' || settings.moodIcon === '') {
-      return (
-        <DefaultCard />
-      );
-    }
-
-    return (
-      <PersonalCard
-        settings={settings}
-        callbacks={callbacks}
-      />
-    );
-  };
-
   render() {
     const { playlist, container } = style;
-
-    const { settings } = this.props;
 
     const callbacks = {
       onButtonClick: this._onButtonClick,
@@ -48,7 +29,7 @@ class Feed extends Component {
       <div className={playlist}>
         <div className={container}>
           <Topbar />
-          { this.renderPersonalCard(settings, callbacks) }
+          <PersonalRadio callbacks={callbacks} />
           <CardList callbacks={callbacks} />
         </div>
       </div>
@@ -56,20 +37,10 @@ class Feed extends Component {
   }
 }
 
-export default connect((state, props) => {
-  const { moodId, actionId } = state.user.data;
-  const { listEmoji, listActions } = state.dictionaries;
-
-  return {
-    ...props,
-    settings: {
-      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
-      actionIcon: actionId && listActions.data[actionId].typeIcon,
-    },
-  };
-})(Feed);
+export default connect((state, props) => ({
+  ...props,
+}))(Feed);
 
 Feed.propTypes = {
-  settings: PropTypes.object,
   router: PropTypes.object,
 };
