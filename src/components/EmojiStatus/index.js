@@ -7,12 +7,12 @@ import style from './style.styl';
 export default class EmojiStatus extends Component {
   render() {
     const { container, icon } = style;
-    const { settings: { activeEmoji, activeAction } } = this.props;
+    const { settings: { moodIcon, actionIcon } } = this.props;
 
     return (
       <div className={container}>
-        <Icon typeIcon={activeAction} className={icon} />
-        <Icon typeIcon={activeEmoji} className={icon} />
+        { actionIcon && <Icon typeIcon={actionIcon} className={icon} /> }
+        { moodIcon && <Icon typeIcon={moodIcon} className={icon} /> }
       </div>
     );
   }

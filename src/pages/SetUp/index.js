@@ -6,10 +6,12 @@ import ButtonCircle from '_components/ButtonCircle';
 import ListSettings from '_components/ListSettings';
 
 import { updateStep, clearSetUp } from '_actions/setup';
+import { updateUser } from '_actions/user';
 
 import Mood from './Mood';
 import Action from './Action';
 import Player from './Player';
+import Loader from './Loader';
 
 import style from './style.styl';
 
@@ -19,20 +21,29 @@ class SetUp extends Component {
   }
 
   _handleNextStep = () => {
-    const { steps, activeStep } = this.props;
+    const {
+      steps, activeStep, moodId,
+      actionId, user,
+    } = this.props;
     const newStep = activeStep.step + 1;
 
     if (steps[newStep - 1]) {
       this.props.updateStep(newStep);
     } else {
-      this.props.router.push('/playlist');
+      this.props.updateUser({
+        id: user.data.id,
+        moodId,
+        actionId,
+        moveNext: '/feed',
+      });
     }
   }
 
-  render() {
+  renderSteps() {
     const {
-      activeStep, likesCount, activeAction,
-      activeEmoji, steps,
+      activeStep, likesCount, actionId,
+      moodId, steps, listActions,
+      listEmoji,
     } = this.props;
     const { title, step } = activeStep;
 
@@ -45,8 +56,8 @@ class SetUp extends Component {
           <ListSettings
             count={likesCount}
             className={style.list}
-            activeEmoji={activeStep.step > stepEmoji ? activeEmoji : ''}
-            activeAction={activeStep.step > stepActive ? activeAction : ''}
+            moodIcon={activeStep.step > stepEmoji && listEmoji.data[moodId].typeIcon}
+            actionIcon={activeStep.step > stepActive && listActions.data[actionId].typeIcon}
           />
 
           <h1 className={style.title}>{title}</h1>
@@ -76,10 +87,14 @@ class SetUp extends Component {
       </div>
     );
   }
+
+  render() {
+    return this.props.user.loading ? <Loader /> : this.renderSteps();
+  }
 }
 
 SetUp.propTypes = {
-  router: PropTypes.object.isRequired,
+  loading: PropTypes.bool,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       step: PropTypes.number,
@@ -87,11 +102,21 @@ SetUp.propTypes = {
       title: PropTypes.string,
     }),
   ),
+  listActions: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
+  listEmoji: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
+  user: PropTypes.object,
+  updateUser: PropTypes.func,
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
   likesCount: PropTypes.number,
-  activeAction: PropTypes.string,
-  activeEmoji: PropTypes.string,
+  actionId: PropTypes.number,
+  moodId: PropTypes.number,
   activeStep: PropTypes.shape({
     step: PropTypes.number,
     type: PropTypes.string,
@@ -101,17 +126,20 @@ SetUp.propTypes = {
 
 export default connect((state, props) => {
   const { steps, activeStep } = state.setup;
-  const { likesCount, activeAction, activeEmoji } = state.settings;
-
+  const { likesCount, actionId, moodId } = state.settings;
+  const { listEmoji, listActions } = state.dictionaries;
   return {
+    user: state.user,
     steps,
     likesCount,
-    activeAction,
-    activeEmoji,
+    moodId,
+    actionId,
+    listEmoji,
+    listActions,
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep, clearSetUp })(SetUp);
+}, { updateStep, clearSetUp, updateUser })(SetUp);
 
 /**
  * Helpers

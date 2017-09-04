@@ -20,46 +20,22 @@ class Player extends Component {
     } else if (player.position !== 0) {
       playerActions.playerResume();
     } else {
-      playerActions.playerStart(player.trackId);
+      playerActions.playerPlay(player.trackId);
     }
   };
 
   _handleClickPrevious = () => {
-    const { playerActions, player, data } = this.props;
-    const { trackId, playlistId, position } = player;
+    const { playerActions, player } = this.props;
+    const { trackId } = player;
 
-    const playlist = data.find(item => item.id === playlistId);
-    const track = playlist.tracks.find(item => item.id === trackId);
-    const trackIndex = playlist.tracks.indexOf(track);
-
-    if (trackIndex === 0) {
-      playerActions.playerStop();
-    } else {
-      const prevTrack = playlist.tracks[trackIndex - 1];
-      const prevTrackId = position ? prevTrack.id : trackId;
-
-      playerActions.playerStart(prevTrackId);
-    }
+    playerActions.playerPrev(trackId);
   };
 
   _handleClickNext = () => {
-    const { playerActions, player, data } = this.props;
-    const { trackId, playlistId } = player;
+    const { playerActions, player } = this.props;
+    const { trackId } = player;
 
-    const playlist = data.find(item => item.id === playlistId);
-    const track = playlist.tracks.find(item => item.id === trackId);
-    const trackIndex = playlist.tracks.indexOf(track);
-
-    if (trackIndex < playlist.tracks.length - 1) {
-      const nextTrack = playlist.tracks[trackIndex + 1];
-
-      playerActions.playerStart(nextTrack.id);
-    } else {
-      const firstTrack = playlist.tracks[0];
-
-      playerActions.playerStop();
-      playerActions.setTrackId(firstTrack.id);
-    }
+    playerActions.playerNext(trackId);
   };
 
   _handleClickRepeat = () => {
@@ -115,9 +91,8 @@ Player.propTypes = {
     trackId: PropTypes.number,
     duration: PropTypes.number,
   }),
-  data: PropTypes.arrayOf(PropTypes.object),
   playerActions: PropTypes.shape({
-    playerStart: PropTypes.func,
+    playerPlay: PropTypes.func,
     playerStop: PropTypes.func,
     playerPause: PropTypes.func,
     playerResume: PropTypes.func,

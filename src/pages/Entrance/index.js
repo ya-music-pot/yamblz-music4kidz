@@ -21,7 +21,7 @@ class Entrance extends Component {
   };
 
   _handleCalibrationDeny = () => {
-    this.props.router.push('/playlist');
+    this.props.router.push('/feed');
   };
 
   _handleOpenPlayer = () => {
