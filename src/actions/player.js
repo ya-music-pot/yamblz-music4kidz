@@ -1,6 +1,6 @@
 import * as ActionType from './playerActionTypes.js';
 
-export function playerStart(trackId) {
+export function playerPlay(trackId) {
   return {
     type: ActionType.PLAYER_START,
     player: {
@@ -33,11 +33,20 @@ export function playerResume() {
   };
 }
 
-export function setTrackId(trackId) {
+export function playerNext(currentTrackId) {
   return {
-    type: ActionType.SET_TRACKID,
-    payload: {
-      trackId,
+    type: ActionType.PLAYER_NEXT,
+    player: {
+      trackId: currentTrackId,
+    },
+  };
+}
+
+export function playerPrev(currentTrackId) {
+  return {
+    type: ActionType.PLAYER_PREV,
+    player: {
+      trackId: currentTrackId,
     },
   };
 }

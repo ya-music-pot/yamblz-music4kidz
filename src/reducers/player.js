@@ -39,10 +39,10 @@ export default function (state = playerState, action) {
         isPlaying: false,
       };
 
-    case PlayerActions.SET_TRACKID:
+    case PlayerActions.SET_TRACK_INFO:
       return {
         ...state,
-        trackId: payload.trackId,
+        ...payload,
       };
 
     case PlayerActions.SET_PLAYLISTID:
@@ -57,11 +57,6 @@ export default function (state = playerState, action) {
         isRepeatMode: !state.isRepeatMode,
       };
 
-    case PlayerActions.UPDATE_SONG_INFO:
-      return {
-        ...state,
-        ...payload,
-      };
     default:
       return state;
   }
