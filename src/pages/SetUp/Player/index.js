@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import GradientPlayer from '_components/GradientPlayer';
+import ButtonCircle from '_components/ButtonCircle';
 
 import { saveLikesCount } from '_actions/settings';
 import { playerStart } from '_actions/player';
@@ -16,7 +17,7 @@ class Player extends Component {
   }
 
   componentWillMount() {
-    this.props.playerStart(this.props.tracksIds[0]);
+    // this.props.playerStart(this.props.tracksIds[0]);
   }
 
   _handleLike = () => {
@@ -41,10 +42,46 @@ class Player extends Component {
     this.setState({ countChoose });
   }
 
+  renderButtons() {
+    const { isSound } = this.state;
+    return (
+      <div className={style.wrapperButtons}>
+        <ButtonCircle
+          background="#ff3333"
+          typeIcon="heart"
+          onClick={this._handleLike}
+          className={style.like}
+        />
+        <ButtonCircle
+          onClick={this._handleSkip}
+          typeIcon="skip"
+          className={style.skip}
+        />
+        <div className={style.sound}>
+          { isSound &&
+            <ButtonCircle
+              onClick={this._handleToggleSound}
+              typeIcon="sound"
+              background="rgba(0,0,0,0)"
+              className={style.soundIn}
+            />
+          }
+          { !isSound &&
+            <ButtonCircle
+              onClick={this._handleToggleSound}
+              typeIcon="sound-off"
+              background="rgba(0,0,0,0)"
+              className={style.soundOut}
+            />
+          }
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const isSound = this.state.isSound;
     const { cover, singerName, isPlaying } = this.props.player;
-
     return (
       <div className={style.container}>
         <div className={style.wrapperPlayer}>
@@ -57,6 +94,7 @@ class Player extends Component {
               onToggleSound={this._handleToggleSound}
               isSound={isSound}
             />
+            { this.renderButtons() }
           </div>
           <h3 className={style.title}>{ singerName }</h3>
         </div>
@@ -66,11 +104,9 @@ class Player extends Component {
 }
 
 Player.propTypes = {
-  playerStart: PropTypes.func,
   saveLikesCount: PropTypes.func,
   onNextStep: PropTypes.func,
   likesCount: PropTypes.number,
-  tracksIds: PropTypes.array,
   player: PropTypes.shape({
     cover: PropTypes.string,
     singerName: PropTypes.string,
