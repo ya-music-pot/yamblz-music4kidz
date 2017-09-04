@@ -4,101 +4,97 @@ import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
 import cl from 'classname';
 
-import style from './style.scss';
-import artist from './images/egorka.jpg';
+import style from './style.styl';
 
 export default class Container extends Component {
-  _handleClickArrowDown = (e) => {
-    console.log("ArrowDown");
+  _handleClickArrowDown = () => {
+    console.log('ArrowDown');
   }
 
-  _handleClickDownload = (e) => {
-    console.log("Download");
+  _handleClickDownload = () => {
+    console.log('Download');
   }
 
-  _handleClickPrevious = (e) => {
-    console.log("Previous");
+  _handleClickPrevious = () => {
+    console.log('Previous');
   }
 
-  _handleClickPlay= (e) => {
-    console.log("Play");
+  _handleClickPlay= () => {
+    console.log('Play');
   }
 
-  _handleClickNext = (e) => {
-    console.log("Next");
+  _handleClickNext = () => {
+    console.log('Next');
   }
 
-  _handleClickDislike= (e) => {
-    console.log("Dislike");
+  _handleClickDislike= () => {
+    console.log('Dislike');
   }
 
-  _handleClickLike = (e) => {
-    console.log("Like");
+  _handleClickLike = () => {
+    console.log('Like');
   }
 
-  _handleClickPlus= (e) => {
-    console.log("Plus");
+  _handleClickPlus= () => {
+    console.log('Plus');
   }
 
-  _handleClickRepeat = (e) => {
-    console.log("Repeat");
+  _handleClickRepeat = () => {
+    console.log('Repeat');
   }
 
   render() {
     const {
-      onTogglePlay,
-      playerState: {
-        trackName, singerName, isPlaying,
-        trackPercentage, minutesLeft,
-        secondsLeft, cover
-      }
+      trackName, singerName, isPlaying,
+      onTogglePlay, trackPercentage, minutesLeft,
+      secondsLeft, cover,
     } = this.props;
 
     return (
-      <div className = {style.wrapper}>
-        <div className = {style.headerRow}>
-          <Button style = {style.buttonArrowDown} onClick = {this._handleClickArrowDown} />
-          <div className = {style.moodIcons} />
-          <Button style = {style.buttonDownload} onClick = {this._handleClickDownload} />
+      <div className={style.wrapper}>
+        <div className={style.headerRow}>
+          <Button style={style.buttonArrowDown} onClick={this._handleClickArrowDown} />
+          <div className={style.moodIcons} />
+          <Button style={style.buttonDownload} onClick={this._handleClickDownload} />
         </div>
         <div>
-          <div className = {style.vote}>
-              <Button style = {style.buttonDislike} onClick = {this._handleClickDislike} />
-              <div className = {style.spacer} />
-              <Button style = {style.buttonLike} onClick = {this._handleClickLike} />
+          <div className={style.vote}>
+            <Button style={style.buttonDislike} onClick={this._handleClickDislike} />
+            <div className={style.spacer} />
+            <Button style={style.buttonLike} onClick={this._handleClickLike} />
           </div>
           <CircularAvatar
-              image = {cover}
-              progress = {trackPercentage}
-              radius = {0.32}
-              time = {minutesLeft + ':' + secondsLeft}
+            image={cover}
+            progress={trackPercentage}
+            radius={0.32}
+            time={`${minutesLeft}:${secondsLeft}`}
           />
         </div>
-        <div className = {style.titleRow}>
-           <div className = {style.songName}>
-              {trackName}
-           </div>
-           <div className = {style.artistName}>
-              {singerName}
-           </div>
+        <div className={style.titleRow}>
+          <div className={style.songName}>
+            {trackName}
+          </div>
+          <div className={style.artistName}>
+            {singerName}
+          </div>
         </div>
-        <div className = {style.controlsRow}>
-          <Button style = {style.buttonPrevious} onClick = {this._handleClickPrevious} />
+        <div className={style.controlsRow}>
+          <Button style={style.buttonPrevious} onClick={this._handleClickPrevious} />
           <Button
-            style = {
+            style={
               cl(
                 style['player-button'],
                 isPlaying ? style['player-button--pause'] : style['player-button--play'],
               )
             }
-            isPlaying = {isPlaying}
-            onClick = {onTogglePlay}
+            isPlaying={isPlaying}
+            onClick={onTogglePlay}
           />
-          <Button style = {style.buttonNext} onClick = {this._handleClickNext} />
+          <Button style={style.buttonNext} onClick={this._handleClickNext} />
         </div>
-        <div className = {style.bottomRow}>
-          <Button style = {style.buttonPlus} onClick = {this._handleClickPlus} />
-          <Button style = {style.buttonRepeat} onClick = {this._handleClickRepeat} />
+        <div className={style.bottomRow}>
+          <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
+          <Button style={style.buttonRepeat} onClick={this._handleClickRepeat} />
         </div>
       </div>
     );

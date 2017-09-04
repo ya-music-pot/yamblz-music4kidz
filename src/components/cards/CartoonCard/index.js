@@ -5,13 +5,20 @@ import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class CartoonCard extends Component {
   render() {
-    const { container, content, title: titleStyles, subtitle, button } = style;
+    const {
+      container, content, title: titleStyles,
+      subtitle, button,
+    } = style;
 
-    const { title, text, imageUrl } = this.props.data;
+    const {
+      data: { title, text, imageUrl },
+      callbacks: { onCardClick, onButtonClick },
+    } = this.props;
+
     const backgroundStyles = {};
 
     if (imageUrl) {
@@ -19,11 +26,11 @@ export default class CartoonCard extends Component {
     }
 
     return (
-      <div className={container} style={backgroundStyles}>
+      <div className={container} onClick={onCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={title} styles={titleStyles} />
           <CardSubtitle text={text} styles={subtitle} />
-          <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
       </div>
     );
@@ -32,5 +39,5 @@ export default class CartoonCard extends Component {
 
 CartoonCard.propTypes = {
   data: PropTypes.object,
-  onButtonClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };

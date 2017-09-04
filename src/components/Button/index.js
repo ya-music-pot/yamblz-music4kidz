@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import styles from './style.scss';
+import styles from './style.styl';
 
 export default class Button extends Component {
   render() {

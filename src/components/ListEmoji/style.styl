@@ -1,0 +1,30 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 5vw 10px;
+}
+
+.item {
+  width: 33%;
+  text-align: center;
+  margin-bottom: 10vw;
+  transform: scale(1) translateZ(0);
+  transform-origin: 50% 50%;
+  transition: transform 0.1s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.icon {
+  width: 17vw;
+  height: 17vw;
+  max-width: 70px;
+  max-height: 70px;
+}
+
+.itemActive {
+  transform: scale(1.5) translateZ(0);
+}

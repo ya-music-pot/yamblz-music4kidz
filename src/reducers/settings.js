@@ -2,8 +2,8 @@ import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_COUNT_LIKES } from '_actions/settin
 
 const settingsDefault = {
   likesCount: 0,
-  activeEmoji: 'emoji-heart-eyes',
-  activeAction: 'action-car',
+  actionId: 1,
+  moodId: 1,
 };
 
 export default function (list = { ...settingsDefault }, action) {
@@ -13,12 +13,12 @@ export default function (list = { ...settingsDefault }, action) {
     case UPDATE_EMOJI:
       return {
         ...list,
-        activeEmoji: payload.activeType,
+        moodId: payload.moodId,
       };
     case UPDATE_ACTION:
       return {
         ...list,
-        activeAction: payload.activeType,
+        actionId: payload.actionId,
       };
     case UPDATE_COUNT_LIKES:
       return {

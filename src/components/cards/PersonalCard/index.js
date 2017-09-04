@@ -6,18 +6,22 @@ import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class PersonalCard extends Component {
   render() {
     const { container, title, subtitle, button } = style;
+    const {
+      settings,
+      callbacks: { onCardClick, onButtonClick },
+    } = this.props;
 
     return (
-      <div className={container}>
-        <EmojiStatus settings={this.props.settings} />
+      <div className={container} onClick={onCardClick}>
+        <EmojiStatus settings={settings} />
         <CardTitle text="Весёлая поездка" styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
-        <ButtonMiniplayer onClick={this.props.onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={onButtonClick} position={button} />
       </div>
     );
   }
@@ -25,5 +29,5 @@ export default class PersonalCard extends Component {
 
 PersonalCard.propTypes = {
   settings: PropTypes.object,
-  onButtonClick: PropTypes.func,
+  callbacks: PropTypes.object,
 };

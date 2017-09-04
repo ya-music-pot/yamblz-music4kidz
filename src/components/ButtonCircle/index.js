@@ -4,7 +4,7 @@ import cl from 'classname';
 
 import Icon from '_components/Icon';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class ButtonCircle extends Component {
   render() {

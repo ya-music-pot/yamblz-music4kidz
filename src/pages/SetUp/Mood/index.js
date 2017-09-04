@@ -5,25 +5,25 @@ import PropTypes from 'prop-types';
 import ListEmoji from '_components/ListEmoji';
 import { saveEmoji } from '_actions/settings';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Mood extends Component {
   /**
    * _handleChange save new type of mood in global State
    * @param  {String} activeType
    */
-  _handleChange = (activeType) => {
-    this.props.saveEmoji(activeType);
+  _handleChange = (moodId) => {
+    this.props.saveEmoji(moodId);
   }
 
   render() {
-    const { activeType, listEmoji } = this.props;
+    const { moodId, listEmoji } = this.props;
 
     return (
       <div className={style.container}>
         <ListEmoji
           className={style.list}
-          data={serializeData(listEmoji, activeType)}
+          data={serializeData(listEmoji, moodId)}
           onChange={this._handleChange}
         />
       </div>
@@ -33,17 +33,16 @@ class Mood extends Component {
 
 Mood.propTypes = {
   saveEmoji: PropTypes.func.isRequired,
-  listEmoji: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string,
-    }),
-  ).isRequired,
-  activeType: PropTypes.string,
+  listEmoji: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
+  moodId: PropTypes.number,
 };
 
 
 export default connect((state, props) => ({
-  activeType: state.settings.activeEmoji,
+  moodId: state.settings.moodId,
   listEmoji: state.dictionaries.listEmoji,
   ...props,
 }), { saveEmoji })(Mood);
@@ -58,9 +57,9 @@ export default connect((state, props) => ({
  * @param  {String} activeType
  * @return {Array}
  */
-function serializeData(data, activeType) {
-  return data.map((item) => (item.typeIcon === activeType
-    ? { ...item, isActive: true }
-    : { ...item, isActive: false }
+function serializeData({ order, data }, moodId) {
+  return order.map((key) => (data[key].id === moodId
+    ? { ...data[key], isActive: true }
+    : { ...data[key], isActive: false }
   ));
 }

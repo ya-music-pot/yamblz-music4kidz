@@ -1,0 +1,187 @@
+.wrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  height: 8vh;
+  padding-top: 4vh;
+  padding-bottom: 2vh;
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20vh;
+  color: #ffffff;
+  font-family: 'YandexSans';
+  line-height: 1.8rem;
+}
+
+.songName {
+  font-size: 1.5rem;
+}
+
+.artistName {
+  font-size: 1rem;
+  opacity: 0.5;
+}
+
+.controlsRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: center;
+  align-items: center;
+  height: 12vh;
+  width: 65vw;
+}
+
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 18vh;
+  width: 90vw;
+}
+
+.vote {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 16vh;
+  width: 38vh;
+  z-index: 3;
+}
+
+.spacer {
+  width: 18vh;
+}
+
+.buttonLike {
+  color: #ffffff;
+  background: url(./images/like.svg) no-repeat;
+  background-position: center center;
+  background-color: #ff3333;
+  border-radius: 50%;
+  height: 7vh;
+  width: 7vh;
+}
+
+.buttonLike:focus { outline: none; }
+
+.buttonDislike {
+  color: white;
+  background: url(./images/skip.svg) no-repeat;
+  background-position: center center;
+  background-color: #0065d9;
+  border-radius: 50%;
+  height: 7vh;
+  width: 7vh;
+}
+
+.buttonDislike:focus { outline: none; }
+
+.buttonArrowDown {
+  background: url(./images/arrow_down.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 24px;
+  width: 24px;
+  color: #ffffff;
+}
+
+.buttonArrowDown:focus { outline: none; }
+
+.buttonDownload {
+  background: url(./images/download.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 24px;
+  width: 24px;
+  color: #ffffff;
+}
+
+.buttonDownload:focus { outline: none; }
+
+.moodIcons {
+  width: 78vw;
+}
+
+.buttonPrevious {
+  background: url(./images/previous.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+}
+
+.buttonPrevious:focus { outline: none; }
+
+.player-button {
+  display: inline-block;
+  background-size: contain;
+  border: none;
+  height: 36px;
+  width: 36px;
+
+  &--play {
+    background: url(./images/play.svg) no-repeat;
+  }
+
+  &--pause {
+    background: url(./images/pause.svg) no-repeat;
+  }
+}
+
+.player-button:focus { outline: none; }
+
+.buttonNext {
+  background: url(./images/next.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+}
+
+.buttonNext:focus { outline: none; }
+
+.buttonPlus {
+  background: url(./images/plus.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+  color: #ffffff;
+}
+
+.buttonPlus:focus { outline: none; }
+
+.buttonRepeat {
+  background: url(./images/repeat.svg) no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  height: 30px;
+  width: 30px;
+  color: #ffffff;
+}
+
+.buttonRepeat:focus { outline: none; }

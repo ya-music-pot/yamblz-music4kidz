@@ -18,23 +18,35 @@ export default ({ dispatch }) => (next) => (action) => {
 
   dispatch({ ...rest, type: type + START });
 
+  const { body, method } = callAPI;
+  const requestBody = typeof body === 'object' ? JSON.stringify(body) : body;
+
   const options = {
-    body: callAPI.data,
-    method: callAPI.method || 'GET',
+    body: requestBody,
+    credentials: 'same-origin',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    method: method || 'GET',
   };
 
   return window.fetch(callAPI.url, options)
-    .then((response) => (response.json())
+    .then((response) => response.json())
     .then((data) => {
       if (data.error) {
         return Promise.reject(data);
       }
 
-      return dispatch({ ...rest, data, type: type + SUCCESS });
+      return dispatch({
+        ...rest,
+        response: { data },
+        type: type + SUCCESS,
+      });
     })
     .catch((error) => {
       generateError(rest, error, type, dispatch);
-    }));
+    });
 };
 
 /* Helpers */
@@ -42,7 +54,7 @@ export default ({ dispatch }) => (next) => (action) => {
 /**
  * [generateError create new action with error for reducers and print error]
  * @param  {Object} rest
- * @param  {Object} error    [response]
+ * @param  {Object} error
  * @param  {String} type
  * @param  {Function} dispatch
  * @return {Error}

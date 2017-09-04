@@ -7,7 +7,7 @@ import Slider from '_decorators/Slider';
 
 import { saveAction } from '_actions/settings';
 
-import style from './style.scss';
+import style from './style.styl';
 
 class Action extends Component {
   /**
@@ -15,12 +15,30 @@ class Action extends Component {
    * @param  {Number} newId
    */
   _handleChangeAction = (newId) => {
+<<<<<<< HEAD
     const activeAction = this.props.listActions[newId];
     this.props.saveAction(activeAction.typeIcon);
   };
+=======
+    const actionId = this.props.listActions.order[newId];
+    this.props.saveAction(actionId);
+  }
+
+  renderSlideItem(item) {
+    const { title, typeIcon } = item;
+    return (
+      <CircleAction
+        key={`action${typeIcon}`}
+        id={`action${typeIcon}`}
+        typeIcon={typeIcon}
+        title={title}
+      />
+    );
+  }
+>>>>>>> bdf1d97220931de80333caf956256228d5a23eff
 
   render() {
-    const { listActions } = this.props;
+    const { order, data } = this.props.listActions;
 
     return (
       <div className={style.container}>
@@ -28,16 +46,7 @@ class Action extends Component {
           className={style.slider}
           onChange={this._handleChangeAction}
         >
-          {
-            listActions.map(({ typeIcon, title }) => (
-              <CircleAction
-                key={`action${typeIcon}`}
-                id={`action${typeIcon}`}
-                typeIcon={typeIcon}
-                title={title}
-              />
-            ))
-          }
+          { order.map((key) => this.renderSlideItem(data[key]))}
         </Slider>
       </div>
     );
@@ -45,14 +54,16 @@ class Action extends Component {
 }
 
 Action.propTypes = {
-  listActions: PropTypes.array,
+  listActions: PropTypes.shape({
+    order: PropTypes.array,
+    data: PropTypes.object,
+  }),
   saveAction: PropTypes.func,
 };
 
 
 export default connect((state, props) => ({
   listActions: state.dictionaries.listActions,
-  activeAction: state.settings.activeAction,
   ...props,
 }), { saveAction })(Action);
 
