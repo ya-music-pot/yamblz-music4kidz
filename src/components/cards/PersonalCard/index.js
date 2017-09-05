@@ -19,7 +19,7 @@ export default class PersonalCard extends Component {
     return (
       <div className={container} onClick={onCardClick}>
         <EmojiStatus settings={settings} />
-        <CardTitle text="Весёлая поездка" styles={title} />
+        <CardTitle text={settings.title} styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
         <ButtonMiniplayer onClick={onButtonClick} position={button} />
       </div>
