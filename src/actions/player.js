@@ -1,9 +1,12 @@
 import * as ActionType from './playerActionTypes.js';
 
-export function playerStart(trackId) {
+export function playerPlay(trackId) {
   return {
     type: ActionType.PLAYER_START,
     player: {
+      trackId,
+    },
+    payload: {
       trackId,
     },
   };
@@ -30,11 +33,35 @@ export function playerResume() {
   };
 }
 
-export function setTrackId(trackId) {
+export function playerNext(currentTrackId) {
   return {
-    type: ActionType.SET_TRACKID,
-    payload: {
-      trackId,
+    type: ActionType.PLAYER_NEXT,
+    player: {
+      trackId: currentTrackId,
     },
+  };
+}
+
+export function playerPrev(currentTrackId) {
+  return {
+    type: ActionType.PLAYER_PREV,
+    player: {
+      trackId: currentTrackId,
+    },
+  };
+}
+
+export function setPlaylist(playlist) {
+  return {
+    type: ActionType.SET_PLAYLIST,
+    payload: {
+      playlist,
+    },
+  };
+}
+
+export function toggleRepeatMode() {
+  return {
+    type: ActionType.TOGGLE_REPEAT,
   };
 }

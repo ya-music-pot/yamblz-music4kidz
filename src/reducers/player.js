@@ -15,6 +15,14 @@ export default function (state = defaultState, action) {
 
   switch (type) {
     case PlayerActions.PLAYER_START:
+      return {
+        ...state,
+        isPlaying: true,
+        trackId: payload.trackId,
+        position: 0,
+        duration: 0,
+      };
+
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
@@ -47,10 +55,22 @@ export default function (state = defaultState, action) {
         isPlaying: false,
       };
 
-    case PlayerActions.SET_TRACKID:
+    case PlayerActions.SET_TRACK_INFO:
       return {
         ...state,
-        trackId: payload.trackId,
+        ...payload,
+      };
+
+    case PlayerActions.SET_PLAYLIST:
+      return {
+        ...state,
+        playlist: payload.playlist,
+      };
+
+    case PlayerActions.TOGGLE_REPEAT:
+      return {
+        ...state,
+        isRepeatMode: !state.isRepeatMode,
       };
 
     default:

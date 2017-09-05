@@ -15,18 +15,6 @@ export default class Container extends Component {
     console.log('Download');
   }
 
-  _handleClickPrevious = () => {
-    console.log('Previous');
-  }
-
-  _handleClickPlay= () => {
-    console.log('Play');
-  }
-
-  _handleClickNext = () => {
-    console.log('Next');
-  }
-
   _handleClickDislike= () => {
     console.log('Dislike');
   }
@@ -39,15 +27,13 @@ export default class Container extends Component {
     console.log('Plus');
   }
 
-  _handleClickRepeat = () => {
-    console.log('Repeat');
-  }
-
   render() {
     const {
-      trackName, singerName, isPlaying,
-      onTogglePlay, trackPercentage, minutesLeft,
-      secondsLeft, cover,
+      trackName, singerName, trackPercentage,
+      minutesLeft, secondsLeft, cover,
+      isPlaying, isRepeatMode,
+      onTogglePlay, onClickPrevious,
+      onClickNext, onClickRepeat,
     } = this.props;
     return (
       <div className={style.wrapper}>
@@ -78,7 +64,7 @@ export default class Container extends Component {
           </div>
         </div>
         <div className={style.controlsRow}>
-          <Button style={style.buttonPrevious} onClick={this._handleClickPrevious} />
+          <Button style={style.buttonPrevious} onClick={onClickPrevious} />
           <Button
             style={
               cl(
@@ -89,11 +75,14 @@ export default class Container extends Component {
             isPlaying={isPlaying}
             onClick={onTogglePlay}
           />
-          <Button style={style.buttonNext} onClick={this._handleClickNext} />
+          <Button style={style.buttonNext} onClick={onClickNext} />
         </div>
         <div className={style.bottomRow}>
           <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
-          <Button style={style.buttonRepeat} onClick={this._handleClickRepeat} />
+          <Button
+            style={isRepeatMode ? style.buttonRepeatActive : style.buttonRepeatInactive}
+            onClick={onClickRepeat}
+          />
         </div>
       </div>
     );
@@ -108,5 +97,9 @@ Container.propTypes = {
   secondsLeft: React.PropTypes.string,
   cover: React.PropTypes.string,
   isPlaying: PropTypes.bool,
+  isRepeatMode: PropTypes.bool,
   onTogglePlay: PropTypes.func,
+  onClickPrevious: PropTypes.func,
+  onClickNext: PropTypes.func,
+  onClickRepeat: PropTypes.func,
 };
