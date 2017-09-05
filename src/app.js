@@ -9,18 +9,25 @@ import routes from '_settings/routes';
 
 import { getUser } from '_actions/user';
 import { getFeed } from '_actions/feed';
+import { playerInit } from '_actions/playerInfo';
 
 import history from '_settings/history';
 
 import AudioPlayer from '_helpers/AudioPlayer';
-import addPlayerListeners from '_settings/playerListeners';
+import playerListeners from '_helpers/playerListeners';
 
 import '_settings/main.styl';
 
 initReactFastclick();
 
-AudioPlayer.init();
-addPlayerListeners(store.dispatch, store.getState);
+AudioPlayer.init().then(() => {
+  console.log('Аудио-плеер готов к работе');
+  playerListeners();
+  store.dispatch(playerInit());
+}, () => {
+  console.error('Не удалось инициализировать аудио-плеер');
+});
+
 
 const userId = 1;
 store.dispatch(getUser(userId));

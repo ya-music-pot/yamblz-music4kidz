@@ -136,6 +136,8 @@ export default ({ dispatch, getState }) => (next) => (action) => {
     }
 
     default:
-      return next(action);
+      break;
   }
+
+  return next(action);
 };

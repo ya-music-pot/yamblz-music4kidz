@@ -33,6 +33,12 @@ export function playerResume() {
   };
 }
 
+export function playerClear() {
+  return {
+    type: ActionType.PLAYER_CLEAR,
+  };
+}
+
 export function playerNext(currentTrackId) {
   return {
     type: ActionType.PLAYER_NEXT,

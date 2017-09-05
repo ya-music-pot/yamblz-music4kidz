@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import ButtonCircle from '_components/ButtonCircle';
 import ListSettings from '_components/ListSettings';
+import Loader from '_components/Loader';
 
 import { updateStep, clearSetUp } from '_actions/setup';
 import { updateUser } from '_actions/user';
@@ -11,7 +12,6 @@ import { updateUser } from '_actions/user';
 import Mood from './Mood';
 import Action from './Action';
 import Player from './Player';
-import Loader from './Loader';
 
 import style from './style.styl';
 
