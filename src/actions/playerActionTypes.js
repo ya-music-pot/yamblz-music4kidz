@@ -12,6 +12,7 @@ export const PLAYER_ENDED = 'PLAYER_ENDED';
 
 export const SET_TRACK_INFO = 'SET_TRACK_INFO';
 export const SET_PLAYLIST = 'SET_PLAYLIST';
+export const PLAYER_GET_RADIO = 'PLAYER_GET_RADIO';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
 

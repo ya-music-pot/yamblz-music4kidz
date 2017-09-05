@@ -1,8 +1,9 @@
 import * as PlayerActions from '_actions/playerActionTypes.js';
+import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 import playerState from '_data/player';
 
 export default function (state = playerState, action) {
-  const { type, payload } = action;
+  const { type, payload, response } = action;
 
   switch (type) {
     case PlayerActions.PLAYER_START:
@@ -48,13 +49,28 @@ export default function (state = playerState, action) {
     case PlayerActions.SET_PLAYLIST:
       return {
         ...state,
-        playlist: payload.playlist,
+        ...payload,
       };
 
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
         isRepeatMode: !state.isRepeatMode,
+      };
+
+    case `${PlayerActions.PLAYER_GET_RADIO}_SUCCESS`:
+      return {
+        ...state,
+        playlist: [...state.playlist, response.data],
+      };
+
+    case UPDATE_EMOJI:
+    case UPDATE_ACTION:
+      return {
+        ...state,
+        playlist: [
+          state.playlist.find((item) => item.id === state.trackId)
+        ],
       };
 
     default:

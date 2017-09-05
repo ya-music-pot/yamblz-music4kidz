@@ -51,11 +51,15 @@ export function playerPrev(currentTrackId) {
   };
 }
 
-export function setPlaylist(playlist) {
+export function setPlaylist(playlist, isRadio) {
   return {
     type: ActionType.SET_PLAYLIST,
+    player: {
+      isRadio,
+    },
     payload: {
       playlist,
+      isRadio,
     },
   };
 }

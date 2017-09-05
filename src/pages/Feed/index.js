@@ -19,8 +19,8 @@ class Feed extends Component {
     console.log('I click on button!');
   };
 
-  _onCardClick = (trackId, playlist) => {
-    this.props.setPlaylist(playlist);
+  _onCardClick = (trackId, playlist, isRadio = false) => {
+    this.props.setPlaylist(playlist, isRadio);
     this.props.playerPlay(trackId);
 
     this.props.router.push('/player');

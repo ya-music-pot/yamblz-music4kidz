@@ -1,5 +1,6 @@
 import AudioPlayer from '_helpers/AudioPlayer';
 import * as ActionTypes from '_actions/playerActionTypes.js';
+import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 
 export default ({ dispatch, getState }) => (next) => (action) => {
   const { player, type, ...rest } = action;
@@ -110,6 +111,28 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       });
 
       return AudioPlayer.player.play(trackUrl);
+    }
+
+    case UPDATE_EMOJI:
+    case UPDATE_ACTION:
+    case ActionTypes.SET_PLAYLIST: {
+      let { isRadio } = player;
+      const { id } = store.user.data;
+
+      if (typeof isRadio === 'undefined') {
+        isRadio = store.player.isRadio;
+      }
+
+      if (isRadio && id) {
+        return dispatch({
+          type: ActionTypes.PLAYER_GET_RADIO,
+          callAPI: {
+            url: `${API_URL}user/${id}/radio`,
+          },
+        });
+      }
+
+      return next(action);
     }
 
     default:
