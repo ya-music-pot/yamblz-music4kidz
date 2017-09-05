@@ -6,7 +6,10 @@ import GradientPlayer from '_components/GradientPlayer';
 import ButtonCircle from '_components/ButtonCircle';
 
 import { saveLikesCount } from '_actions/settings';
-import { playerStart } from '_actions/player';
+import {
+  setPlaylist, playerPlay, playerClear,
+  playerNext,
+} from '_actions/player';
 
 import style from './style.styl';
 
@@ -17,15 +20,25 @@ class Player extends Component {
   }
 
   componentWillMount() {
-    // this.props.playerStart(this.props.tracksIds[0]);
+    const playlist = this.props.playlist;
+    this.props.setPlaylist(playlist);
+    this.props.playerPlay(playlist[0].id);
+  }
+
+  componentWillUnmount() {
+    this.props.playerClear();
   }
 
   _handleLike = () => {
-    this.props.saveLikesCount(this.props.likesCount + 1);
+    const { player, likesCount } = this.props;
+
+    this.props.playerNext(player.trackId);
+    this.props.saveLikesCount(likesCount + 1);
     this._handleUpdateChoose();
   }
 
   _handleSkip = () => {
+    this.props.playerNext(this.props.player.trackId);
     this._handleUpdateChoose();
   }
 
@@ -106,11 +119,17 @@ class Player extends Component {
 Player.propTypes = {
   saveLikesCount: PropTypes.func,
   onNextStep: PropTypes.func,
+  setPlaylist: PropTypes.func,
+  playerPlay: PropTypes.func,
+  playerNext: PropTypes.func,
+  playerClear: PropTypes.func,
   likesCount: PropTypes.number,
+  playlist: PropTypes.array,
   player: PropTypes.shape({
     cover: PropTypes.string,
     singerName: PropTypes.string,
     isPlaying: PropTypes.bool,
+    trackId: PropTypes.number,
   }),
 };
 
@@ -119,5 +138,12 @@ export default connect((state, props) => ({
   listEmoji: state.dictionaries.listEmoji,
   tracksIds: state.settings.tracksIds,
   player: state.player,
+  playlist: state.setup.playlist,
   ...props,
-}), { saveLikesCount, playerStart })(Player);
+}), {
+  saveLikesCount,
+  setPlaylist,
+  playerPlay,
+  playerClear,
+  playerNext,
+})(Player);

@@ -17,23 +17,34 @@ export default function (state = defaultState, action) {
     case PlayerActions.PLAYER_START:
       return {
         ...state,
-        isPlaying: true,
         trackId: payload.trackId,
         position: 0,
         duration: 0,
+        isPlaying: false,
       };
 
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
+      };
+
+    case PlayerActions.PLAYER_PLAYED:
+      return {
         isPlaying: true,
       };
 
     case PlayerActions.PLAYER_STOP:
     case PlayerActions.PLAYER_PAUSE:
+    case PlayerActions.PLAYER_NEXT:
+    case PlayerActions.PLAYER_PREV:
       return {
         ...state,
         isPlaying: false,
+      };
+
+    case PlayerActions.PLAYER_CLEAR:
+      return {
+        ...defaultState,
       };
 
     case PlayerActions.PLAYER_SAVE_TRACK:

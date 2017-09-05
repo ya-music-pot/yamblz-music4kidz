@@ -24,7 +24,6 @@ class Feed extends Component {
 
   render() {
     const { playlist, container } = style;
-
     const { settings } = this.props;
 
     const callbacks = {
