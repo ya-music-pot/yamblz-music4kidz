@@ -8,7 +8,6 @@ import store from '_settings/store';
 import routes from '_settings/routes';
 
 import { getUser } from '_actions/user';
-import { getFeed } from '_actions/feed';
 
 import history from '_settings/history';
 
@@ -24,7 +23,6 @@ addPlayerListeners(store.dispatch, store.getState);
 
 const userId = 1;
 store.dispatch(getUser(userId));
-store.dispatch(getFeed(userId));
 
 ReactDOM.render((
   <Provider store={store}>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import CARDS from '_data/cardsType';
 import store from '_settings/store';
-import getFeed from '_actions/feed';
+import { getFeed } from '_actions/feed';
 
 import SingleCard from '_components/cards/SingleCard';
 import RadioCard from '_components/cards/RadioCard';
@@ -14,7 +14,9 @@ import GameCard from '_components/cards/GameCard/index';
 
 class CardList extends Component {
   componentWillMount() {
-    const { userId } = this.props;
+    let { userId } = this.props;
+    userId = userId === undefined ? 1 : userId;
+
     if (userId !== undefined) {
       store.dispatch(getFeed(userId));
     }

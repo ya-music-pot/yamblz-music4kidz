@@ -10,7 +10,7 @@ export default class CollectionCard extends Component {
   render() {
     const {
       container, title,
-      content, button,
+      content, button, image
     } = style;
 
     const {
@@ -26,11 +26,12 @@ export default class CollectionCard extends Component {
     }
 
     return (
-      <div className={container} style={backgroundStyles} onClick={onCardClick}>
+      <div className={container} onClick={onCardClick}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
+        <div className={image} style={backgroundStyles}>image</div>
       </div>
     );
   }
