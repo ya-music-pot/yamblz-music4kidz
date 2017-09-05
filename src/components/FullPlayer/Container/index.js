@@ -30,7 +30,6 @@ export default class Container extends Component {
 
   render() {
     const {
-<<<<<<< HEAD:src/components/FullPlayer/Container/index.js
       playerState: {
         trackName, singerName, isPlaying,
         trackPercentage, minutesLeft, secondsLeft,
@@ -38,16 +37,11 @@ export default class Container extends Component {
       },
     } = this.props.playerState;
 
-    const onTogglePlay = this.props.onTogglePlay;
+    const {
+      onTogglePlay, onClickNext, onClickPrevious,
+      onClickRepeat, isRepeatMode,
+    } = this.props.onTogglePlay;
 
-=======
-      trackName, singerName, trackPercentage,
-      minutesLeft, secondsLeft, cover,
-      isPlaying, isRepeatMode,
-      onTogglePlay, onClickPrevious,
-      onClickNext, onClickRepeat,
-    } = this.props;
->>>>>>> bb2b32bbc27cf0c217d5e20eea8f69789fcec1de:src/components/player/Container/index.js
     return (
       <div className={style.wrapper}>
         <div className={style.headerRow}>
@@ -106,21 +100,10 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
-<<<<<<< HEAD:src/components/FullPlayer/Container/index.js
-  onTogglePlay: PropTypes.func,
-  playerState: PropTypes.object,
-=======
-  trackName: React.PropTypes.string,
-  singerName: React.PropTypes.string,
-  trackPercentage: React.PropTypes.number,
-  minutesLeft: React.PropTypes.string,
-  secondsLeft: React.PropTypes.string,
-  cover: React.PropTypes.string,
-  isPlaying: PropTypes.bool,
-  isRepeatMode: PropTypes.bool,
   onTogglePlay: PropTypes.func,
   onClickPrevious: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
->>>>>>> bb2b32bbc27cf0c217d5e20eea8f69789fcec1de:src/components/player/Container/index.js
+  isRepeatMode: PropTypes.bool,
+  playerState: PropTypes.object,
 };

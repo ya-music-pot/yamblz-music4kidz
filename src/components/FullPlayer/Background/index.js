@@ -15,7 +15,7 @@ export default class Background extends Component {
         <img
           src={imageUri}
           className={style.backgroundImage}
-          alt={'backgroundImage'}
+          alt='Аватар'
         />
       </div>
     );
