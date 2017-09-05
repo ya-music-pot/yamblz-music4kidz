@@ -8,6 +8,20 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class RadioCard extends Component {
+  _handleCardClick = () => {
+    const {
+      data: { tracks },
+      callbacks: { onCardClick },
+    } = this.props;
+
+    if (
+      typeof onCardClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onCardClick(tracks[0].id, tracks, true);
+    }
+  };
+
   render() {
     const {
       container, title,
@@ -16,7 +30,7 @@ export default class RadioCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onCardClick, onButtonClick },
+      callbacks: { onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -26,7 +40,7 @@ export default class RadioCard extends Component {
     }
 
     return (
-      <div className={container} onClick={onCardClick}>
+      <div className={container} onClick={this._handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={image} style={backgroundStyles}>photo</div>

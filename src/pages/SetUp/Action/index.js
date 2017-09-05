@@ -61,4 +61,3 @@ export default connect((state, props) => ({
   listActions: state.dictionaries.listActions,
   ...props,
 }), { saveAction })(Action);
-

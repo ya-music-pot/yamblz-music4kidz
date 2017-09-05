@@ -1,30 +1,63 @@
 import * as PlayerActions from '_actions/playerActionTypes.js';
-import playerState from '_data/player';
+import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 
-export default function (state = playerState, action) {
-  const { type, payload } = action;
+const defaultState = {
+  isPlaying: false,
+  isRadio: false,
+  isRepeatMode: false,
+
+  cover: '',
+  singerName: '',
+  trackName: '',
+  position: 0,
+  trackId: 4451438,
+  playlist: [],
+  duration: 0,
+};
+
+export default function (state = defaultState, action) {
+  const { type, payload, response } = action;
+
 
   switch (type) {
     case PlayerActions.PLAYER_START:
       return {
         ...state,
-        isPlaying: true,
         trackId: payload.trackId,
         position: 0,
         duration: 0,
+        isPlaying: false,
       };
 
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
+      };
+
+    case PlayerActions.PLAYER_PLAYED:
+      return {
         isPlaying: true,
       };
 
     case PlayerActions.PLAYER_STOP:
     case PlayerActions.PLAYER_PAUSE:
+    case PlayerActions.PLAYER_NEXT:
+    case PlayerActions.PLAYER_PREV:
       return {
         ...state,
         isPlaying: false,
+      };
+
+    case PlayerActions.PLAYER_CLEAR:
+      return {
+        ...defaultState,
+      };
+
+    case PlayerActions.PLAYER_SAVE_TRACK:
+      return {
+        ...state,
+        cover: payload.imageUrl,
+        singerName: payload.artist,
       };
 
     case PlayerActions.PLAYER_PROGRESS:
@@ -48,13 +81,28 @@ export default function (state = playerState, action) {
     case PlayerActions.SET_PLAYLIST:
       return {
         ...state,
-        playlist: payload.playlist,
+        ...payload,
       };
 
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
         isRepeatMode: !state.isRepeatMode,
+      };
+
+    case `${PlayerActions.PLAYER_GET_RADIO}_SUCCESS`:
+      return {
+        ...state,
+        playlist: [...state.playlist, response.data],
+      };
+
+    case UPDATE_EMOJI:
+    case UPDATE_ACTION:
+      return {
+        ...state,
+        playlist: [
+          state.playlist.find((item) => item.id === state.trackId),
+        ],
       };
 
     default:

@@ -28,7 +28,6 @@ class EntranceScreen extends Component {
   _updateThreshholds = () => {
     this.windowHeight = window.innerHeight;
     this.cardHeight = this.card.offsetHeight;
-    this.contentHeight = this.content.offsetHeight;
 
     this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
     this.bottomPosition = this.content.offsetHeight + 16;

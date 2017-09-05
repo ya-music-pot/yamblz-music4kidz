@@ -10,7 +10,7 @@ export default class CollectionCard extends Component {
   render() {
     const {
       container, title,
-      content, button, image
+      content, button, image,
     } = style;
 
     const {
