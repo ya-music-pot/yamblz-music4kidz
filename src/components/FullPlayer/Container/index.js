@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
+import Background from '_components/FullPlayer/Background';
 import cl from 'classname';
 
 import style from './style.styl';
@@ -45,10 +46,14 @@ export default class Container extends Component {
 
   render() {
     const {
-      trackName, singerName, isPlaying,
-      onTogglePlay, trackPercentage, minutesLeft,
-      secondsLeft, cover,
-    } = this.props;
+      playerState: {
+        trackName, singerName, isPlaying,
+        trackPercentage, minutesLeft, secondsLeft,
+        cover,
+      },
+    } = this.props.playerState;
+
+    const onTogglePlay = this.props.onTogglePlay;
 
     return (
       <div className={style.wrapper}>
@@ -96,12 +101,15 @@ export default class Container extends Component {
           <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
           <Button style={style.buttonRepeat} onClick={this._handleClickRepeat} />
         </div>
+        <Background
+          cover={cover}
+        />
       </div>
     );
   }
 }
 
 Container.propTypes = {
-  playerState: PropTypes.object,
   onTogglePlay: PropTypes.func,
+  playerState: PropTypes.object,
 };

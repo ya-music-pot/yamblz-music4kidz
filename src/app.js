@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 import initReactFastclick from 'react-fastclick';
+import Player from '_components/Player';
 
 import store from '_settings/store';
 import routes from '_settings/routes';
@@ -27,9 +28,12 @@ store.dispatch(getUser(userId));
 store.dispatch(getFeed(userId));
 
 ReactDOM.render((
-  <Provider store={store}>
-    <Router history={history}>
-      { routes }
-    </Router>
-  </Provider>
+  <div>
+    <Provider store={store}>
+      <Router history={history}>
+        { routes }
+      </Router>
+    </Provider>
+    <Player />
+  </div>
 ), document.getElementById('root'));

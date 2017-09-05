@@ -75,6 +75,7 @@
     "postcss-loader": "2.0.6",
     "prop-types": "15.5.10",
     "react": "15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
     "react-dom": "15.6.1",
     "react-fastclick": "3.0.2",
     "react-hammerjs": "0.5.0",

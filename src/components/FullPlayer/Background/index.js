@@ -10,12 +10,12 @@ export default class Background extends Component {
     const imageUri = (cover !== '') ? cover : defaultImage;
 
     return (
-      <div>
+      <div className={style.wrapper}>
         <div className={style.overlay} />
         <img
           src={imageUri}
           className={style.backgroundImage}
-          alt="Аватар"
+          alt={'backgroundImage'}
         />
       </div>
     );

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
-import cl from 'classname';
 import Hammer from 'hammerjs';
 
 import style from './style.styl';
@@ -10,6 +9,7 @@ export default class PlayerToggle extends Component {
   state = {
     currentPlayer: 'mini',
     slideTransform: 0,
+    topPadding: '',
   };
 
   componentDidMount() {
@@ -17,7 +17,6 @@ export default class PlayerToggle extends Component {
   }
 
   _initToggle() {
-    const { children } = this.props;
     this.hammerMiniPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-0']));
     this.hammerFullPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-1']));
 
@@ -25,47 +24,46 @@ export default class PlayerToggle extends Component {
     this.hammerFullPlayer.on('swiperight', this._toMiniPlayer);
   }
 
-  _toFullPlayer = (ev) => {
+  _toFullPlayer = () => {
     this.setState({
       currentPlayer: 'full',
       slideTransform: -document.body.clientWidth,
+      topPadding: 0,
     });
   }
 
-  _toMiniPlayer = (ev) => {
+  _toMiniPlayer = () => {
     this.setState({
       currentPlayer: 'mini',
       slideTransform: 0,
     });
+    setTimeout(() => {
+      this.setState({
+        topPadding: '',
+      });
+    }, 500);
   }
 
-  _slide = () => {
-    console.log(this.state.currentPlayer, this.toggleNode);
+  _slide() {
     return {
       transform: `translateX(${this.state.slideTransform}px)`,
+      top: `${this.state.topPadding}`,
     };
   }
 
-  _saveToggle = (target) => {
-    console.log("target", target);
-    this.toggleNode = target;
-  }
-
   render() {
-    const { className } = this.props;
-
     return (
       <div
         className={style.container}
-        ref={this._saveToggle}
         style={this._slide()}
       >
         {
-          this.props.children.map((child, iter) => {
-              return React.cloneElement(child, {
-                  ref: `item-${iter}`
-              });
-          })
+          this.props.children.map((child, iter) =>
+            React.cloneElement(child, {
+              ref: `item-${iter}`,
+              key: child.props.key,
+            },
+            ))
         }
       </div>
     );

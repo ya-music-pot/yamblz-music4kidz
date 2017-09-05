@@ -21,7 +21,9 @@
     "react/jsx-no-bind": "off",
     "react/prefer-stateless-function": "off",
     "react/require-default-props": "off",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "react/no-find-dom-node": "off",
+    "react/no-string-refs": "off",
   },
   "globals": {
     "document": true,

@@ -7,7 +7,7 @@ import defaultImage from './images/avatar.jpg';
 
 export default class CircularAvatar extends Component {
   _handleClickShazam = () => {
-    console.log('Shazam');
+
   }
 
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
@@ -24,8 +24,6 @@ export default class CircularAvatar extends Component {
     const end = this._polarToCartesian(x, y, radius, startAngle);
     const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
-    console.log(start, end);
-
     return [
       'M', start.x, start.y,
       'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y,
@@ -38,6 +36,7 @@ export default class CircularAvatar extends Component {
       time,
     } = this.props;
     const imageUri = (image !== '') ? image : defaultImage;
+
     return (
 
       <div className={style.wrapper}>
