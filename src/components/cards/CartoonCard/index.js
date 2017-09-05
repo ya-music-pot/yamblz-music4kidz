@@ -15,7 +15,7 @@ export default class CartoonCard extends Component {
     } = style;
 
     const {
-      data: { title, text, imageUrl },
+      data: { name, description, image_url: imageUrl },
       callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
@@ -28,8 +28,8 @@ export default class CartoonCard extends Component {
     return (
       <div className={container} onClick={onCardClick} style={backgroundStyles}>
         <div className={content}>
-          <CardTitle text={title} styles={titleStyles} />
-          <CardSubtitle text={text} styles={subtitle} />
+          <CardTitle text={name} styles={titleStyles} />
+          <CardSubtitle text={description} styles={subtitle} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
       </div>

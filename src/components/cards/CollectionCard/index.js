@@ -14,7 +14,7 @@ export default class CollectionCard extends Component {
     } = style;
 
     const {
-      data: { title, imageUrl },
+      data: { name, image_url: imageUrl },
       callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
@@ -28,7 +28,7 @@ export default class CollectionCard extends Component {
     return (
       <div className={container} style={backgroundStyles} onClick={onCardClick}>
         <div className={content}>
-          <CardTitle text={title} styles={titleStyles} />
+          <CardTitle text={name} styles={titleStyles} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
       </div>
