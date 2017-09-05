@@ -9,7 +9,7 @@ import style from './style.styl';
 export default class CollectionCard extends Component {
   render() {
     const {
-      container, title: titleStyles,
+      container, title,
       content, button,
     } = style;
 
@@ -28,7 +28,7 @@ export default class CollectionCard extends Component {
     return (
       <div className={container} style={backgroundStyles} onClick={onCardClick}>
         <div className={content}>
-          <CardTitle text={name} styles={titleStyles} />
+          <CardTitle text={name} styles={title} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
       </div>

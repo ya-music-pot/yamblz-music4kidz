@@ -14,10 +14,10 @@ export default class SingleCard extends Component {
       info, singer, button,
     } = style;
 
+    const { onCardClick, onButtonClick } = this.props.callbacks;
     const {
-      data: { author, song, imageUrl },
-      callbacks: { onCardClick, onButtonClick },
-    } = this.props;
+      artist, name, image_url: imageUrl,
+    } = this.props.data.tracks[0];
 
     const backgroundStyles = {};
 
@@ -34,8 +34,8 @@ export default class SingleCard extends Component {
               <Icon typeIcon="play-card" />
             </Button>
             <div>
-              <div className={singer}>{author}</div>
-              <div>{song}</div>
+              <div className={singer}>{artist}</div>
+              <div>{name}</div>
             </div>
           </div>
         </div>
