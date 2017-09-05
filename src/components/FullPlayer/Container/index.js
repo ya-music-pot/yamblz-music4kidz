@@ -40,7 +40,7 @@ export default class Container extends Component {
     const {
       onTogglePlay, onClickNext, onClickPrevious,
       onClickRepeat, isRepeatMode,
-    } = this.props.onTogglePlay;
+    } = this.props;
 
     return (
       <div className={style.wrapper}>

@@ -6,6 +6,9 @@ import Button from '_components/Button';
 import style from './style.styl';
 
 export default class MiniPlayer extends Component {
+  _handlePlayButton = () => {
+    console.log('play');
+  };
   /**
    * Функция вычисляет заполенение прогрессбара
    * @param  {Number} trackPercentage
@@ -17,13 +20,13 @@ export default class MiniPlayer extends Component {
 
   render() {
     const {
-      onDownload, className,
+      className,
     } = this.props;
 
     const {
       playerState: {
         trackName, singerName, isPlaying,
-        onTogglePlay, trackPercentage,
+        trackPercentage,
       },
     } = this.props.playerState;
 
@@ -42,15 +45,11 @@ export default class MiniPlayer extends Component {
               )
             }
             isPlaying={isPlaying}
-            onClick={onTogglePlay}
+            onClick={this._handlePlayButton}
           />
           <Title
             trackName={trackName}
             singerName={singerName}
-          />
-          <Button
-            style={cl(style['miniPlayer-button'], style['miniPlayer-button--download'])}
-            onClick={onDownload}
           />
         </div>
       </div>
@@ -60,7 +59,6 @@ export default class MiniPlayer extends Component {
 
 MiniPlayer.propTypes = {
   playerState: PropTypes.object,
-  onDownload: PropTypes.function,
   className: PropTypes.string,
 };
 

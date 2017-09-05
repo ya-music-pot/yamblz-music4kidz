@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router } from 'react-router';
 import { Provider } from 'react-redux';
 import initReactFastclick from 'react-fastclick';
-import Player from '_components/Player';
 
 import store from '_settings/store';
 import routes from '_settings/routes';
@@ -34,6 +33,5 @@ ReactDOM.render((
         { routes }
       </Router>
     </Provider>
-    <Player />
   </div>
 ), document.getElementById('root'));
