@@ -19,7 +19,7 @@ class Player extends Component {
     isSound: true,
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const playlist = this.props.playlist;
     this.props.setPlaylist(playlist);
     this.props.playerPlay(playlist[0].id);

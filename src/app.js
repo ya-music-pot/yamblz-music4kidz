@@ -13,14 +13,19 @@ import { getFeed } from '_actions/feed';
 import history from '_settings/history';
 
 import AudioPlayer from '_helpers/AudioPlayer';
-import addPlayerListeners from '_settings/playerListeners';
+import playerListeners from '_helpers/playerListeners';
 
 import '_settings/main.styl';
 
 initReactFastclick();
 
-AudioPlayer.init();
-addPlayerListeners(store.dispatch, store.getState);
+AudioPlayer.init().then(() => {
+  console.log('Аудио-плеер готов к работе');
+  playerListeners();
+}, () => {
+  console.error('Не удалось инициализировать аудио-плеер');
+});
+
 
 const userId = 1;
 store.dispatch(getUser(userId));
