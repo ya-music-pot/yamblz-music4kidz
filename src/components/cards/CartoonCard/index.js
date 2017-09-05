@@ -22,6 +22,10 @@ export default class CartoonCard extends Component {
     }
   };
 
+  _handleButtonClick = () => {
+
+  };
+
   render() {
     const {
       container, content, title: titleStyles,
@@ -29,7 +33,7 @@ export default class CartoonCard extends Component {
     } = style;
 
     const {
-      data: { title, text, imageUrl },
+      data: { name, description, image_url: imageUrl },
     } = this.props;
 
     const backgroundStyles = {};
@@ -41,8 +45,8 @@ export default class CartoonCard extends Component {
     return (
       <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
         <div className={content}>
-          <CardTitle text={title} styles={titleStyles} />
-          <CardSubtitle text={text} styles={subtitle} />
+          <CardTitle text={name} styles={titleStyles} />
+          <CardSubtitle text={description} styles={subtitle} />
           <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
         </div>
       </div>

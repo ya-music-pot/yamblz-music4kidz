@@ -21,12 +21,13 @@ class Action extends Component {
 
   renderSlideItem(item) {
     const { title, typeIcon } = item;
+    const titleCap = title[0].toUpperCase() + title.slice(1);
     return (
       <CircleAction
         key={`action${typeIcon}`}
         id={`action${typeIcon}`}
         typeIcon={typeIcon}
-        title={title}
+        title={titleCap}
       />
     );
   }

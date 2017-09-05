@@ -1,10 +1,10 @@
 import { UPDATE_STEP, CLEAR_SET_UP } from '_actions/setup';
 
-import steps from '_data/stepsSetUp';
+import setUpData from '_data/setUp';
 
 const stateDefault = {
   activeStep: 1,
-  steps,
+  ...setUpData,
 };
 
 export default function (state = { ...stateDefault }, action) {

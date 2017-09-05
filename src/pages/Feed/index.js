@@ -3,20 +3,24 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Topbar from '_components/Topbar';
-import PersonalCard from '_components/cards/PersonalCard';
 
 import { playerPlay, setPlaylist } from '_actions/player';
 
 import style from './style.styl';
 import CardList from './CardList';
+import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
+  componentWillMount() {
+
+  }
+
   _onButtonClick = () => {
     console.log('I click on button!');
   };
 
-  _onCardClick = (trackId, playlist) => {
-    this.props.setPlaylist(playlist);
+  _onCardClick = (trackId, playlist, isRadio = false) => {
+    this.props.setPlaylist(playlist, isRadio);
     this.props.playerPlay(trackId);
 
     this.props.router.push('/player');
@@ -24,8 +28,6 @@ class Feed extends Component {
 
   render() {
     const { playlist, container } = style;
-
-    const { settings } = this.props;
 
     const callbacks = {
       onButtonClick: this._onButtonClick,
@@ -36,10 +38,7 @@ class Feed extends Component {
       <div className={playlist}>
         <div className={container}>
           <Topbar />
-          <PersonalCard
-            settings={settings}
-            callbacks={callbacks}
-          />
+          <PersonalRadio callbacks={callbacks} />
           <CardList callbacks={callbacks} />
         </div>
       </div>
@@ -47,21 +46,11 @@ class Feed extends Component {
   }
 }
 
-export default connect((state, props) => {
-  const { moodId, actionId } = state.user.data;
-  const { listEmoji, listActions } = state.dictionaries;
-
-  return {
-    ...props,
-    settings: {
-      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
-      actionIcon: actionId && listActions.data[actionId].typeIcon,
-    },
-  };
-}, { playerPlay, setPlaylist })(Feed);
+export default connect((state, props) => ({
+  ...props,
+}), { playerPlay, setPlaylist })(Feed);
 
 Feed.propTypes = {
-  settings: PropTypes.object,
   router: PropTypes.object,
   playerPlay: PropTypes.func,
   setPlaylist: PropTypes.func,
