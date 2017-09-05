@@ -1,4 +1,5 @@
 import * as PlayerActions from '_actions/playerActionTypes.js';
+import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 import playerState from '_data/player';
 
 export default function (state = playerState, action) {
@@ -61,6 +62,15 @@ export default function (state = playerState, action) {
       return {
         ...state,
         playlist: [...state.playlist, response.data],
+      };
+
+    case UPDATE_EMOJI:
+    case UPDATE_ACTION:
+      return {
+        ...state,
+        playlist: [
+          state.playlist.find((item) => item.id === state.trackId)
+        ],
       };
 
     default:
