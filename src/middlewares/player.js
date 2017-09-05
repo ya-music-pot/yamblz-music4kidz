@@ -112,6 +112,22 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       return AudioPlayer.player.play(trackUrl);
     }
 
+    case ActionTypes.SET_PLAYLIST: {
+      const { isRadio } = player;
+      const { id } = store.user.data;
+
+      if (isRadio && id) {
+        return dispatch({
+          type: ActionTypes.PLAYER_GET_RADIO,
+          callAPI: {
+            url: `${API_URL}user/${id}/radio`,
+          },
+        });
+      }
+
+      return next(action);
+    }
+
     default:
       return next(action);
   }
