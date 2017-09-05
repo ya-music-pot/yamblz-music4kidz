@@ -1,5 +1,8 @@
 import AudioPlayer from '_helpers/AudioPlayer';
-import { PLAYER_PROGRESS, PLAYER_ENDED, PLAYER_START } from '_actions/playerActionTypes.js';
+import {
+  PLAYER_PROGRESS, PLAYER_ENDED, PLAYER_START,
+  PLAYER_GET_RADIO,
+} from '_actions/playerActionTypes.js';
 import store from '_settings/store';
 
 const Audio = ya.music.Audio;
@@ -18,10 +21,20 @@ function setProgress(times) {
 }
 
 function setStopTrack() {
-  const { playlist, trackId, isRepeatMode } = store.getState().player;
+  const { playlist, trackId, isRepeatMode, isRadio } = store.getState().player;
   const trackIndex = playlist.findIndex(item => item.id === trackId);
 
   let action;
+
+  if (isRadio) {
+    const { id } = store.user.data;
+    store.dispatch({
+      type: PLAYER_GET_RADIO,
+      callAPI: {
+        url: `${API_URL}user/${id}/radio`,
+      },
+    });
+  }
 
   if (isRepeatMode) {
     action = {

@@ -1,17 +1,23 @@
 import * as PlayerActions from '_actions/playerActionTypes.js';
+import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 
 const defaultState = {
   isPlaying: false,
+  isRadio: false,
+  isRepeatMode: false,
+
   cover: '',
   singerName: '',
   trackName: '',
   position: 0,
   trackId: 4451438,
+  playlist: [],
   duration: 0,
 };
 
 export default function (state = defaultState, action) {
-  const { type, payload } = action;
+  const { type, payload, response } = action;
+
 
   switch (type) {
     case PlayerActions.PLAYER_START:
@@ -75,13 +81,28 @@ export default function (state = defaultState, action) {
     case PlayerActions.SET_PLAYLIST:
       return {
         ...state,
-        playlist: payload.playlist,
+        ...payload,
       };
 
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
         isRepeatMode: !state.isRepeatMode,
+      };
+
+    case `${PlayerActions.PLAYER_GET_RADIO}_SUCCESS`:
+      return {
+        ...state,
+        playlist: [...state.playlist, response.data],
+      };
+
+    case UPDATE_EMOJI:
+    case UPDATE_ACTION:
+      return {
+        ...state,
+        playlist: [
+          state.playlist.find((item) => item.id === state.trackId),
+        ],
       };
 
     default:
