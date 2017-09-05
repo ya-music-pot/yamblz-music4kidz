@@ -8,6 +8,24 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class CartoonCard extends Component {
+  _handleCardClick = () => {
+    const {
+      data: { tracks },
+      callbacks: { onCardClick },
+    } = this.props;
+
+    if (
+      typeof onCardClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onCardClick(tracks[0].id, tracks);
+    }
+  };
+
+  _handleButtonClick = () => {
+
+  };
+
   render() {
     const {
       container, content, title: titleStyles,
@@ -16,7 +34,6 @@ export default class CartoonCard extends Component {
 
     const {
       data: { name, description, image_url: imageUrl },
-      callbacks: { onCardClick, onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -26,11 +43,11 @@ export default class CartoonCard extends Component {
     }
 
     return (
-      <div className={container} onClick={onCardClick} style={backgroundStyles}>
+      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={name} styles={titleStyles} />
           <CardSubtitle text={description} styles={subtitle} />
-          <ButtonMiniplayer onClick={onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
         </div>
       </div>
     );

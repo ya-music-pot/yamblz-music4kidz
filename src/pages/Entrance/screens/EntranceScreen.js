@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { playerStart } from '_actions/player';
 
 import Hammer from 'hammerjs';
 import cl from 'classname';
@@ -156,7 +155,7 @@ EntranceScreen.propTypes = {
 export default connect((state, props) => ({
   settings: state.settings,
   ...props,
-}), { playerStart })(EntranceScreen);
+}))(EntranceScreen);
 
 const Title = () => (
   <div className={style.titleWrapper}>

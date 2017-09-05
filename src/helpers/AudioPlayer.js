@@ -7,6 +7,7 @@ function _init() {
     return _audioPlayer.initPromise().then(() => {
       console.log('Аудио-плеер готов к работе');
     }, () => {
+      // TODO вывести сообщение об ошибке
       console.error('Не удалось инициализировать аудио-плеер');
     });
   }
