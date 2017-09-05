@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
+import Background from '_components/FullPlayer/Background';
 import cl from 'classname';
 
 import style from './style.styl';
@@ -29,12 +30,18 @@ export default class Container extends Component {
 
   render() {
     const {
-      trackName, singerName, trackPercentage,
-      minutesLeft, secondsLeft, cover,
-      isPlaying, isRepeatMode,
-      onTogglePlay, onClickPrevious,
-      onClickNext, onClickRepeat,
-    } = this.props;
+      playerState: {
+        trackName, singerName, isPlaying,
+        trackPercentage, minutesLeft, secondsLeft,
+        cover,
+      },
+    } = this.props.playerState;
+
+    const {
+      onTogglePlay, onClickNext, onClickPrevious,
+      onClickRepeat, isRepeatMode,
+    } = this.props.onTogglePlay;
+
     return (
       <div className={style.wrapper}>
         <div className={style.headerRow}>
@@ -84,22 +91,19 @@ export default class Container extends Component {
             onClick={onClickRepeat}
           />
         </div>
+        <Background
+          cover={cover}
+        />
       </div>
     );
   }
 }
 
 Container.propTypes = {
-  trackName: React.PropTypes.string,
-  singerName: React.PropTypes.string,
-  trackPercentage: React.PropTypes.number,
-  minutesLeft: React.PropTypes.string,
-  secondsLeft: React.PropTypes.string,
-  cover: React.PropTypes.string,
-  isPlaying: PropTypes.bool,
-  isRepeatMode: PropTypes.bool,
   onTogglePlay: PropTypes.func,
   onClickPrevious: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
+  isRepeatMode: PropTypes.bool,
+  playerState: PropTypes.object,
 };

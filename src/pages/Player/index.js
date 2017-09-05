@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Background from '_components/player/Background';
-import Container from '_components/player/Container';
+import Background from '_components/FullPlayer/Background';
+import Container from '_components/FullPlayer/Container';
 import * as PlayerActions from '_actions/player';
 
 import style from './style.styl';

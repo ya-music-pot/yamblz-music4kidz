@@ -5,7 +5,7 @@ import Hammer from 'hammerjs';
 
 import style from './style.styl';
 
-const WIDTH_SLIDE = 0.70; // 70% from width;
+const WIDTH_SLIDE = 0.7; // 70% from width;
 
 export default class Slider extends Component {
   state = {
@@ -91,6 +91,7 @@ export default class Slider extends Component {
 Slider.propTypes = {
   currentId: PropTypes.number,
   className: PropTypes.string,
+  // TODO: required
   onChange: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node),
 };

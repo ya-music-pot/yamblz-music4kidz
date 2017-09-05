@@ -95,6 +95,7 @@ module.exports = {
   ],
 
   devServer: {
+    disableHostCheck: true,
     stats: 'minimal',
     setup(app) {
       app.get('/api/*', function(req, res) {
