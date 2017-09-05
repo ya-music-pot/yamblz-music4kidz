@@ -23,7 +23,7 @@
     "react/require-default-props": "off",
     "react/forbid-prop-types": "off",
     "react/no-find-dom-node": "off",
-    "react/no-string-refs": "off",
+    "react/no-string-refs": "off"
   },
   "globals": {
     "document": true,
