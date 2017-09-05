@@ -20,14 +20,34 @@ class Player extends Component {
     } else if (player.position !== 0) {
       playerActions.playerResume();
     } else {
-      playerActions.playerStart(player.trackId);
+      playerActions.playerPlay(player.trackId);
     }
+  };
+
+  _handleClickPrevious = () => {
+    const { playerActions, player } = this.props;
+    const { trackId } = player;
+
+    playerActions.playerPrev(trackId);
+  };
+
+  _handleClickNext = () => {
+    const { playerActions, player } = this.props;
+    const { trackId } = player;
+
+    playerActions.playerNext(trackId);
+  };
+
+  _handleClickRepeat = () => {
+    const { playerActions } = this.props;
+
+    playerActions.toggleRepeatMode();
   };
 
   render() {
     const {
-      trackName, singerName, position,
-      cover, isPlaying, duration,
+      trackName, singerName, position, duration,
+      cover, isPlaying, isRepeatMode,
     } = this.props.player;
 
     const percentage = position / duration;
@@ -46,7 +66,11 @@ class Player extends Component {
           secondsLeft={secondsLeft}
           cover={cover}
           isPlaying={isPlaying}
+          isRepeatMode={isRepeatMode}
           onTogglePlay={this._handleButtonPressed}
+          onClickPrevious={this._handleClickPrevious}
+          onClickNext={this._handleClickNext}
+          onClickRepeat={this._handleClickRepeat}
         />
         <Background
           cover={cover}
@@ -59,6 +83,7 @@ class Player extends Component {
 Player.propTypes = {
   player: PropTypes.shape({
     isPlaying: PropTypes.bool,
+    isRepeatMode: PropTypes.bool,
     cover: PropTypes.string,
     singerName: PropTypes.string,
     trackName: PropTypes.string,
@@ -67,7 +92,7 @@ Player.propTypes = {
     duration: PropTypes.number,
   }),
   playerActions: PropTypes.shape({
-    playerStart: PropTypes.func,
+    playerPlay: PropTypes.func,
     playerStop: PropTypes.func,
     playerPause: PropTypes.func,
     playerResume: PropTypes.func,
@@ -75,10 +100,12 @@ Player.propTypes = {
 };
 
 export default connect((state) => {
-  const { player } = state;
+  const { player, feed } = state;
+  const { data } = feed;
 
   return {
     player,
+    data,
   };
 }, (dispatch) => ({
   playerActions: bindActionCreators(PlayerActions, dispatch),

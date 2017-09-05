@@ -16,18 +16,6 @@ export default class Container extends Component {
     console.log('Download');
   }
 
-  _handleClickPrevious = () => {
-    console.log('Previous');
-  }
-
-  _handleClickPlay= () => {
-    console.log('Play');
-  }
-
-  _handleClickNext = () => {
-    console.log('Next');
-  }
-
   _handleClickDislike= () => {
     console.log('Dislike');
   }
@@ -40,12 +28,9 @@ export default class Container extends Component {
     console.log('Plus');
   }
 
-  _handleClickRepeat = () => {
-    console.log('Repeat');
-  }
-
   render() {
     const {
+<<<<<<< HEAD:src/components/FullPlayer/Container/index.js
       playerState: {
         trackName, singerName, isPlaying,
         trackPercentage, minutesLeft, secondsLeft,
@@ -55,6 +40,14 @@ export default class Container extends Component {
 
     const onTogglePlay = this.props.onTogglePlay;
 
+=======
+      trackName, singerName, trackPercentage,
+      minutesLeft, secondsLeft, cover,
+      isPlaying, isRepeatMode,
+      onTogglePlay, onClickPrevious,
+      onClickNext, onClickRepeat,
+    } = this.props;
+>>>>>>> bb2b32bbc27cf0c217d5e20eea8f69789fcec1de:src/components/player/Container/index.js
     return (
       <div className={style.wrapper}>
         <div className={style.headerRow}>
@@ -84,7 +77,7 @@ export default class Container extends Component {
           </div>
         </div>
         <div className={style.controlsRow}>
-          <Button style={style.buttonPrevious} onClick={this._handleClickPrevious} />
+          <Button style={style.buttonPrevious} onClick={onClickPrevious} />
           <Button
             style={
               cl(
@@ -95,11 +88,14 @@ export default class Container extends Component {
             isPlaying={isPlaying}
             onClick={onTogglePlay}
           />
-          <Button style={style.buttonNext} onClick={this._handleClickNext} />
+          <Button style={style.buttonNext} onClick={onClickNext} />
         </div>
         <div className={style.bottomRow}>
           <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
-          <Button style={style.buttonRepeat} onClick={this._handleClickRepeat} />
+          <Button
+            style={isRepeatMode ? style.buttonRepeatActive : style.buttonRepeatInactive}
+            onClick={onClickRepeat}
+          />
         </div>
         <Background
           cover={cover}
@@ -110,6 +106,21 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
+<<<<<<< HEAD:src/components/FullPlayer/Container/index.js
   onTogglePlay: PropTypes.func,
   playerState: PropTypes.object,
+=======
+  trackName: React.PropTypes.string,
+  singerName: React.PropTypes.string,
+  trackPercentage: React.PropTypes.number,
+  minutesLeft: React.PropTypes.string,
+  secondsLeft: React.PropTypes.string,
+  cover: React.PropTypes.string,
+  isPlaying: PropTypes.bool,
+  isRepeatMode: PropTypes.bool,
+  onTogglePlay: PropTypes.func,
+  onClickPrevious: PropTypes.func,
+  onClickNext: PropTypes.func,
+  onClickRepeat: PropTypes.func,
+>>>>>>> bb2b32bbc27cf0c217d5e20eea8f69789fcec1de:src/components/player/Container/index.js
 };
