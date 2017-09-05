@@ -1,17 +1,19 @@
 .miniPlayer {
   height: 56px;
-  background-color: #ffffff;
-  border: solid 1px #9e9e9e;
+  background-color: $color-white;
+  border: solid 0px $color-gray;
 
   &-wrapper {
-    width: 100%;
+    width: 100vw;
+    height: 56px;
     background-color: rgba(55, 55, 55, 0.3);
     padding-top: 4px;
+    align-self: flex-end;
     position: relative;
   }
 
   &-progress {
-    width: 100%;
+    width: 100vw;
     height: 4px;
     position: absolute;
     top: 3.5px;

@@ -5,8 +5,6 @@ import Background from '_components/player/Background';
 import Container from '_components/player/Container'
 import YaPlayer from '_helpers/YaPlayer';
 
-import style from './style.scss';
-
 export default class Player extends Component {
 
   state = {

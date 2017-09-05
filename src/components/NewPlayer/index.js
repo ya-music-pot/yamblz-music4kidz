@@ -2,22 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 import PlayerToggle from '_decorators/PlayerToggle';
-
-import style from './style.scss';
+import MiniPlayer from '_components/MiniPlayer';
+import Player from '_components/Player';
 
 export default class NewPlayer extends Component {
 
   render() {
-    const { wrapper, leftWrapper, rightWrapper } = style;
-    console.log("render");
-
     return (
-      <div className={wrapper}>
-        <PlayerToggle>
-          <div id="1">miniPlayer</div>
-          <div id="2">bigPlayer</div>
-        </PlayerToggle>
-      </div>
+      <PlayerToggle>
+        <MiniPlayer id="1" key="MiniPlayer"/>
+        <Player id="2" key="FullPlayer"/>
+      </PlayerToggle>
     );
   }
 }
@@ -25,13 +20,3 @@ export default class NewPlayer extends Component {
 NewPlayer.propTypes = {
 
 };
-
-// Player.propTypes = {
-//   trackName: PropTypes.string,
-//   singerName: PropTypes.string,
-//   trackPercentage: PropTypes.number,
-//   isPlaying: PropTypes.bool,
-//   onTogglePlay: PropTypes.func,
-//   onDownload: PropTypes.func,
-//   className: PropTypes.string,
-// };

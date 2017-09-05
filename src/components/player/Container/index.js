@@ -66,7 +66,7 @@ export default class Container extends Component {
           <CircularAvatar
             image={cover}
             progress={trackPercentage}
-            radius={0.32}
+            radius={0.18}
             time={`${minutesLeft}:${secondsLeft}`}
           />
         </div>
@@ -102,6 +102,6 @@ export default class Container extends Component {
 }
 
 Container.propTypes = {
-  playerState: PropTypes.obj,
+  playerState: PropTypes.object,
   onTogglePlay: PropTypes.func,
 };

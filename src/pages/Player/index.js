@@ -39,10 +39,6 @@ class Player extends Component {
     return (
       <div className={style.wrapper}>
         <Container
-<<<<<<< HEAD
-          playerState = {playerState}
-          onTogglePlay = {this._handleButtonPressed}
-=======
           trackName={trackName}
           singerName={singerName}
           trackPercentage={percentage}
@@ -51,7 +47,6 @@ class Player extends Component {
           cover={cover}
           isPlaying={isPlaying}
           onTogglePlay={this._handleButtonPressed}
->>>>>>> bdf1d97220931de80333caf956256228d5a23eff
         />
         <Background
           cover={cover}

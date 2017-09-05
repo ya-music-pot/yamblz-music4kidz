@@ -15,11 +15,6 @@ class Action extends Component {
    * @param  {Number} newId
    */
   _handleChangeAction = (newId) => {
-<<<<<<< HEAD
-    const activeAction = this.props.listActions[newId];
-    this.props.saveAction(activeAction.typeIcon);
-  };
-=======
     const actionId = this.props.listActions.order[newId];
     this.props.saveAction(actionId);
   }
@@ -35,7 +30,6 @@ class Action extends Component {
       />
     );
   }
->>>>>>> bdf1d97220931de80333caf956256228d5a23eff
 
   render() {
     const { order, data } = this.props.listActions;
@@ -66,4 +60,3 @@ export default connect((state, props) => ({
   listActions: state.dictionaries.listActions,
   ...props,
 }), { saveAction })(Action);
-

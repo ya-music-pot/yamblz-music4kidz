@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
 import cl from 'classname';
 import Hammer from 'hammerjs';
 
-import style from './style.scss';
+import style from './style.styl';
 
 export default class PlayerToggle extends Component {
   state = {
     currentPlayer: 'mini',
-    slideTransform: document.body.clientWidth,
+    slideTransform: 0,
   };
 
   componentDidMount() {
@@ -17,39 +18,36 @@ export default class PlayerToggle extends Component {
 
   _initToggle() {
     const { children } = this.props;
-    this.hammer = Hammer(this.toggleNode);
+    this.hammerMiniPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-0']));
+    this.hammerFullPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-1']));
 
-    console.log("_initSlider");
-
-    this.hammer.on('tap', this._toFullPlayer);
-    this.hammer.on('swiperight', this._toMiniPlayer);
+    this.hammerMiniPlayer.on('tap', this._toFullPlayer);
+    this.hammerFullPlayer.on('swiperight', this._toMiniPlayer);
   }
 
-  _toFullPlayer = () => {
+  _toFullPlayer = (ev) => {
     this.setState({
-      currentPlayer: 'full'
+      currentPlayer: 'full',
+      slideTransform: -document.body.clientWidth,
     });
-    this._slide(-document.body.clientWidth);
-    console.log('Changed to FullPlayer');
   }
 
-  _toMiniPlayer = () => {
+  _toMiniPlayer = (ev) => {
     this.setState({
-      currentPlayer: 'mini'
+      currentPlayer: 'mini',
+      slideTransform: 0,
     });
-    this._slide(document.body.clientWidth);
-    console.log('Changed to MiniPlayer');
   }
 
-  _slide = (dx) => {
-    console.log(dx);
-
+  _slide = () => {
+    console.log(this.state.currentPlayer, this.toggleNode);
     return {
       transform: `translateX(${this.state.slideTransform}px)`,
     };
   }
 
   _saveToggle = (target) => {
+    console.log("target", target);
     this.toggleNode = target;
   }
 
@@ -62,11 +60,13 @@ export default class PlayerToggle extends Component {
         ref={this._saveToggle}
         style={this._slide()}
       >
-        { this.props.children.map((child) => (
-          <div className={style.slide} key={child.props.id}>
-            { child }
-          </div>
-        ))}
+        {
+          this.props.children.map((child, iter) => {
+              return React.cloneElement(child, {
+                  ref: `item-${iter}`
+              });
+          })
+        }
       </div>
     );
   }
