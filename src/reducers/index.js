@@ -5,7 +5,6 @@ import settings from '_reducers/settings';
 import player from '_reducers/player';
 import feed from '_reducers/feed';
 import setup from '_reducers/setup';
-import tracks from '_reducers/tracks';
 import user from '_reducers/user';
 
 export default combineReducers({
@@ -14,6 +13,5 @@ export default combineReducers({
   player,
   feed,
   setup,
-  tracks,
   user,
 });
