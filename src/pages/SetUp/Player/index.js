@@ -19,10 +19,14 @@ class Player extends Component {
     isSound: true,
   }
 
-  componentDidMount() {
-    const playlist = this.props.playlist;
-    this.props.setPlaylist(playlist);
-    this.props.playerPlay(playlist[0].id);
+  componentWillReceiveProps(nextProps) {
+    const inited = nextProps.playerInfo.inited;
+
+    if (this.props.playerInfo.inited !== inited && inited) {
+      const playlist = this.props.playlist;
+      this.props.setPlaylist(playlist);
+      this.props.playerPlay(playlist[0].id);
+    }
   }
 
   componentWillUnmount() {
@@ -125,6 +129,9 @@ Player.propTypes = {
   playerClear: PropTypes.func,
   likesCount: PropTypes.number,
   playlist: PropTypes.array,
+  playerInfo: PropTypes.shape({
+    inited: PropTypes.bool,
+  }),
   player: PropTypes.shape({
     cover: PropTypes.string,
     singerName: PropTypes.string,
@@ -134,6 +141,7 @@ Player.propTypes = {
 };
 
 export default connect((state, props) => ({
+  playerInfo: state.playerInfo,
   likesCount: state.settings.likesCount,
   listEmoji: state.dictionaries.listEmoji,
   tracksIds: state.settings.tracksIds,
