@@ -36,6 +36,7 @@ export default function (state = defaultState, action) {
 
     case PlayerActions.PLAYER_PLAYED:
       return {
+        ...state,
         isPlaying: true,
       };
 

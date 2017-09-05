@@ -27,12 +27,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
         },
       });
 
-      const trackUrl = track.mp3_url;
-      return AudioPlayer.player.play(trackUrl).catch(() => {
-        dispatch({
-          type: ActionTypes.PLAYER_STOP,
-        });
-      });
+      return playerPlay(dispatch, track.mp3_url);
     }
 
     case ActionTypes.PLAYER_STOP: {
@@ -79,7 +74,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
         },
       });
 
-      return AudioPlayer.player.play(trackUrl);
+      return playerPlay(dispatch, trackUrl);
     }
 
     case ActionTypes.PLAYER_PREV: {
@@ -110,7 +105,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
         },
       });
 
-      return AudioPlayer.player.play(trackUrl);
+      return playerPlay(dispatch, trackUrl);
     }
 
     case UPDATE_EMOJI:
@@ -141,3 +136,17 @@ export default ({ dispatch, getState }) => (next) => (action) => {
 
   return next(action);
 };
+
+/**
+ * playerPlay
+ * @param  {Function} dispatch
+ * @param  {String} trackUrl
+ * @return {Promise}
+ */
+function playerPlay(dispatch, trackUrl) {
+  return AudioPlayer.player.play(trackUrl).then(() => {
+    dispatch({ type: ActionTypes.PLAYER_PLAYED });
+  }).catch(() => {
+    dispatch({ type: ActionTypes.PLAYER_STOP });
+  });
+}
