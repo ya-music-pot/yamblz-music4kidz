@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import Hammer from 'hammerjs';
+import { playerModeUpdate } from '_actions/playerInfo';
 
 import style from './style.styl';
 
-export default class PlayerToggle extends Component {
+class PlayerToggle extends Component {
   state = {
     currentPlayer: 'mini',
     slideTransform: 0,
@@ -34,6 +36,7 @@ export default class PlayerToggle extends Component {
         slideTransform: -window.innerHeight,
       });
     }
+    this.props.playerModeUpdate(this.state.currentPlayer);
   }
 
   _toMiniPlayer = () => {
@@ -41,6 +44,7 @@ export default class PlayerToggle extends Component {
       currentPlayer: 'mini',
       slideTransform: 0,
     });
+    this.props.playerModeUpdate(this.state.currentPlayer);
   }
 
   _slide() {
@@ -71,3 +75,9 @@ export default class PlayerToggle extends Component {
 PlayerToggle.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
 };
+
+export default connect((state, props) => ({
+  ...props,
+}), {
+  playerModeUpdate,
+})(PlayerToggle);

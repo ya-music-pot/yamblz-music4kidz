@@ -25,7 +25,6 @@ export default function (state = defaultState, action) {
         trackId: payload.trackId,
         position: 0,
         duration: 0,
-        isPlaying: true,
       };
 
     case PlayerActions.PLAYER_RESUME:
@@ -51,7 +50,6 @@ export default function (state = defaultState, action) {
     case PlayerActions.PLAYER_PREV:
       return {
         ...state,
-        isPlaying: true,
       };
 
     case PlayerActions.PLAYER_CLEAR:

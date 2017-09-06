@@ -10,8 +10,6 @@ import style from './style.styl';
 
 export default class PersonalCard extends Component {
   _handleCardClick = () => {
-    console.log('PersonalCard');
-
     const {
       data: { tracks },
       callbacks: { onCardClick },

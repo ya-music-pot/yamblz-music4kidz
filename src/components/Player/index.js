@@ -56,7 +56,6 @@ class Player extends Component {
 
   render() {
     const { player } = this.props;
-    console.log(player);
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -94,9 +93,9 @@ export default connect((state, props) => ({
 })(Player);
 
 Player.propTypes = {
-  playerInfo: PropTypes.obj,
-  playlist: PropTypes.obj,
-  player: PropTypes.obj,
+  playerInfo: PropTypes.object,
+  playlist: PropTypes.array,
+  player: PropTypes.object,
   setPlaylist: PropTypes.func,
   playerPlay: PropTypes.func,
   playerClear: PropTypes.func,

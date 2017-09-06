@@ -6,9 +6,6 @@ import Button from '_components/Button';
 import style from './style.styl';
 
 export default class MiniPlayer extends Component {
-  _handlePlayButton = () => {
-    console.log('play');
-  };
   /**
    * Функция вычисляет заполенение прогрессбара
    * @param  {Number} trackPercentage
@@ -25,15 +22,17 @@ export default class MiniPlayer extends Component {
 
     const {
       trackName, singerName, isPlaying,
-      position,
+      position, duration,
     } = this.props.playerState;
+
+    const percentage = position / duration;
 
     return (
       <div className={cl(style['miniPlayer-wrapper'], className)}>
         <div className={style.miniPlayer}>
           <div
             className={style['miniPlayer-progress']}
-            style={this._calculateProgressStyle(position)}
+            style={this._calculateProgressStyle(percentage * 100)}
           />
           <Button
             style={

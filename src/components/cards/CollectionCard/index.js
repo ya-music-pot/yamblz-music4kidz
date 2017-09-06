@@ -8,7 +8,6 @@ import style from './style.styl';
 
 export default class CollectionCard extends Component {
   _handleCardClick = () => {
-    console.log('CollectionCard');
     const {
       data: { tracks },
       callbacks: { onCardClick },
