@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import CARDS from '_data/cardsType';
-import store from '_settings/store';
 import { getFeed } from '_actions/feed';
 
 import SingleCard from '_components/cards/SingleCard';
@@ -14,11 +13,10 @@ import GameCard from '_components/cards/GameCard/index';
 
 class CardList extends Component {
   componentWillMount() {
-    let { userId } = this.props;
-    userId = userId === undefined ? 1 : userId;
+    const { userId } = this.props;
 
     if (userId !== undefined) {
-      store.dispatch(getFeed(userId));
+      this.props.getFeed(userId);
     }
   }
 
@@ -57,11 +55,12 @@ class CardList extends Component {
 export default connect((state, props) => ({
   ...props,
   feed: state.feed,
-  userId: state.user.data.id,
+  userId: state.user.data.id === undefined ? 1 : state.user.data.id,
 }), { getFeed })(CardList);
 
 CardList.propTypes = {
   callbacks: PropTypes.object,
   feed: PropTypes.object,
   userId: PropTypes.number,
+  getFeed: PropTypes.func,
 };
