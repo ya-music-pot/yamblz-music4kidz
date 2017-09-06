@@ -30,24 +30,27 @@ export default class Container extends Component {
 
   render() {
     const {
-      playerState: {
         trackName, singerName, isPlaying,
-        trackPercentage, minutesLeft, secondsLeft,
-        cover,
-      },
+        position, duration, cover,
+        isRepeatMode,
     } = this.props.playerState;
 
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat, isRepeatMode,
+      onClickRepeat,
     } = this.props;
+
+    const percentage = position / duration;
+    const diffTrackPosition = position - duration;
+    const minutesLeft = parseInt(diffTrackPosition / 60, 10).toString();
+    const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
+    const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
 
     return (
       <div className={style.wrapper}>
         <div className={style.headerRow}>
           <Button style={style.buttonArrowDown} onClick={this._handleClickArrowDown} />
           <div className={style.moodIcons} />
-          <Button style={style.buttonDownload} onClick={this._handleClickDownload} />
         </div>
         <div>
           <div className={style.vote}>
@@ -57,7 +60,7 @@ export default class Container extends Component {
           </div>
           <CircularAvatar
             image={cover}
-            progress={trackPercentage}
+            progress={percentage}
             radius={0.18}
             time={`${minutesLeft}:${secondsLeft}`}
           />

@@ -24,10 +24,8 @@ export default class MiniPlayer extends Component {
     } = this.props;
 
     const {
-      playerState: {
         trackName, singerName, isPlaying,
-        trackPercentage,
-      },
+        position,
     } = this.props.playerState;
 
     return (
@@ -35,7 +33,7 @@ export default class MiniPlayer extends Component {
         <div className={style.miniPlayer}>
           <div
             className={style['miniPlayer-progress']}
-            style={this._calculateProgressStyle(trackPercentage)}
+            style={this._calculateProgressStyle(position)}
           />
           <Button
             style={

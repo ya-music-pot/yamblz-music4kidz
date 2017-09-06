@@ -61,7 +61,7 @@ export default class PlayerToggle extends Component {
           this.props.children.map((child, iter) =>
             React.cloneElement(child, {
               ref: `item-${iter}`,
-              key: child.props.key,
+              key: child.props.type,
             },
             ))
         }

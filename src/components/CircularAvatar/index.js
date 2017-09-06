@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
+import cl from 'classname';
 
 import style from './style.styl';
-import defaultImage from './images/avatar.jpg';
 
 export default class CircularAvatar extends Component {
   _handleClickShazam = () => {
@@ -35,7 +35,6 @@ export default class CircularAvatar extends Component {
       progress, image, radius,
       time,
     } = this.props;
-    const imageUri = (image !== '') ? image : defaultImage;
 
     return (
 
@@ -60,9 +59,13 @@ export default class CircularAvatar extends Component {
           />
         </svg>
         <img
-          src={imageUri}
-          className={style.circularImage}
-          alt="Аватар"
+          src={image}
+          className={
+            cl(
+              style['circularImage'],
+              image ? style['circularImage'] : style['circularImageDefault'],
+            )}
+          alt=""
         />
         <div className={style.controls}>
           <div className={style.timeLeft}>

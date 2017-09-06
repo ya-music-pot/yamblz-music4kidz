@@ -26,12 +26,13 @@ export default function (state = defaultState, action) {
         trackId: payload.trackId,
         position: 0,
         duration: 0,
-        isPlaying: false,
+        isPlaying: true,
       };
 
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
+        isPlaying: true,
       };
 
     case PlayerActions.PLAYER_PLAYED:
@@ -41,11 +42,16 @@ export default function (state = defaultState, action) {
 
     case PlayerActions.PLAYER_STOP:
     case PlayerActions.PLAYER_PAUSE:
+      return {
+        ...state,
+        isPlaying: false,
+      };
+
     case PlayerActions.PLAYER_NEXT:
     case PlayerActions.PLAYER_PREV:
       return {
         ...state,
-        isPlaying: false,
+        isPlaying: true,
       };
 
     case PlayerActions.PLAYER_CLEAR:
