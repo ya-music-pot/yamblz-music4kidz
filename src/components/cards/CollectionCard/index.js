@@ -7,6 +7,20 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class CollectionCard extends Component {
+  _handleCardClick = () => {
+    const {
+      data: { tracks },
+      callbacks: { onCardClick },
+    } = this.props;
+
+    if (
+      typeof onCardClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onCardClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, title,
@@ -15,7 +29,7 @@ export default class CollectionCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onCardClick, onButtonClick },
+      callbacks: { onButtonClick },
     } = this.props;
 
 
@@ -26,7 +40,7 @@ export default class CollectionCard extends Component {
     }
 
     return (
-      <div className={container} onClick={onCardClick}>
+      <div className={container} style={backgroundStyles} onClick={this._handleCardClick}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
