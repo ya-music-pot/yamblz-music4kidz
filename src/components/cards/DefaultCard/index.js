@@ -8,9 +8,7 @@ import Button from '_components/Button';
 import style from './style.styl';
 
 export default class DefaultCard extends Component {
-  _onClick = () => {
-    console.log('show me the info about creating playlist');
-  };
+  _onClick = () => { };
 
   render() {
     const {
