@@ -55,7 +55,7 @@ export default class SingleCard extends Component {
     return (
       <div className={container} style={backgroundStyles} onClick={this._handleCardClick}>
         <div className={content}>
-          <CardTitle text="Модный трек" styles={title} />
+          <CardTitle text="Новый трек" styles={title} />
           <div className={info}>
             <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="single" />
             <div>
