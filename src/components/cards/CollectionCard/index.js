@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
@@ -29,23 +30,25 @@ export default class CollectionCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onButtonClick },
+      callbacks: { onButtonClick }, bgs,
     } = this.props;
 
 
-    const backgroundStyles = {};
-
+    const imageStyles = {};
     if (imageUrl) {
-      backgroundStyles.backgroundImage = `url(${imageUrl})`;
+      imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
+    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
+    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
+
     return (
-      <div className={container} onClick={this._handleCardClick}>
+      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
-        <div className={image} style={backgroundStyles}>image</div>
+        <div className={image} style={imageStyles}>image</div>
       </div>
     );
   }
@@ -54,4 +57,5 @@ export default class CollectionCard extends Component {
 CollectionCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  bgs: PropTypes.object,
 };

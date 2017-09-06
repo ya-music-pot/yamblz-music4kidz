@@ -11,7 +11,6 @@ import style from './style.styl';
 
 export default class RadioCard extends Component {
   _handleCardClick = () => {
-    console.log('RadioCard');
     const {
       data: { tracks },
       callbacks: { onCardClick },
@@ -25,12 +24,6 @@ export default class RadioCard extends Component {
     }
   };
 
-  _generateBackground() {
-    const bgs = ['282d32', '3a5272', '413d72'];
-    const color = bgs[getRandomInteger(0, 2)];
-    return { backgroundColor: `#${color}` };
-  }
-
   render() {
     const {
       container, title, circle,
@@ -41,16 +34,16 @@ export default class RadioCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onButtonClick },
+      callbacks: { onButtonClick }, bgs,
     } = this.props;
 
     const imageStyles = {};
-
     if (imageUrl) {
       imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
-    const backgroundStyles = this._generateBackground();
+    const color = bgs.colors[getRandomInteger(0, bgs.colors.length - 1)];
+    const backgroundStyles = { backgroundColor: `#${color}` };
 
     return (
       <div style={backgroundStyles} className={container} onClick={this._handleCardClick}>
@@ -71,4 +64,5 @@ export default class RadioCard extends Component {
 RadioCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  bgs: PropTypes.object,
 };
