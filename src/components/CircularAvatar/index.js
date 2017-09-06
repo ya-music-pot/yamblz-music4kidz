@@ -15,7 +15,7 @@ export default class CircularAvatar extends Component {
   }
 
   _describeArc = (x, y, radius, startAngle, endAngle) => {
-    const start = this._polarToCartesian(x, y, radius, parseInt(endAngle));
+    const start = this._polarToCartesian(x, y, radius, endAngle);
     const end = this._polarToCartesian(x, y, radius, startAngle);
     const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
