@@ -35,20 +35,16 @@ export default class ButtonMiniplayer extends Component {
     }
   }
 
-  renderButtonStyle() {
-    if (this.props.type === 'single') {
-      return style.single;
-    }
-    return style.yellow;
-  }
-
   render() {
-    const { onClick, position } = this.props;
+    const { onClick, position, type } = this.props;
+    const typeStyles = type === 'single' ?
+      style.single :
+      style.yellow;
 
     return (
       <Button
         onClick={onClick}
-        style={cl(style.button, position, this.renderButtonStyle())}
+        style={cl(style.button, position, typeStyles)}
       >
         { this.renderButtonContent() }
       </Button>
