@@ -9,7 +9,7 @@ const defaultState = {
   singerName: '',
   trackName: '',
   position: 0,
-  trackId: 4451438,
+  trackId: null,
   playlist: [],
   duration: 0,
 };

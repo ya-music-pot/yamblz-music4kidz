@@ -8,21 +8,13 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class Container extends Component {
-  _handleClickArrowDown = () => {
-    console.log('ArrowDown');
-  }
+  _handleClickArrowDown = () => {}
 
-  _handleClickDislike= () => {
-    console.log('Dislike');
-  }
+  _handleClickDislike= () => {}
 
-  _handleClickLike = () => {
-    console.log('Like');
-  }
+  _handleClickLike = () => {}
 
-  _handleClickPlus= () => {
-    console.log('Plus');
-  }
+  _handleClickPlus= () => {}
 
   render() {
     const {
