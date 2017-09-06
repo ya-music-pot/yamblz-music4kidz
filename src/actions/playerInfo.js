@@ -1,5 +1,6 @@
 export const PLAYER_INITED = 'PLAYER_INITED';
 export const PLAYER_MODE_UPDATE = 'PLAYER_MODE_UPDATE';
+export const SHOW_PLAYER = 'SHOW_PLAYER';
 
 export function playerInit() {
   return {
@@ -13,5 +14,11 @@ export function playerModeUpdate(mode) {
     payload: {
       mode,
     },
+  };
+}
+
+export function showPlayer() {
+  return {
+    type: SHOW_PLAYER,
   };
 }

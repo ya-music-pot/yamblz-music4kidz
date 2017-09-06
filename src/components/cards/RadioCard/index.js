@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cl from 'classname';
 
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
@@ -25,8 +26,10 @@ export default class RadioCard extends Component {
 
   render() {
     const {
-      container, title,
+      container, title, circle,
       subtitle, image, button,
+      circleL, circleM, circleS,
+      imageContainer,
     } = style;
 
     const {
@@ -44,7 +47,12 @@ export default class RadioCard extends Component {
       <div className={container} onClick={this._handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
-        <div className={image} style={backgroundStyles}>photo</div>
+        <div className={imageContainer}>
+          <div className={cl(circle, circleL)} />
+          <div className={cl(circle, circleM)} />
+          <div className={cl(circle, circleS)} />
+          <div className={image} style={backgroundStyles} />
+        </div>
         <ButtonMiniplayer onClick={onButtonClick} position={button} />
       </div>
     );

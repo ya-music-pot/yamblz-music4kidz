@@ -59,8 +59,8 @@ Entrance.propTypes = {
 
 // TODO данные должны приходить из store
 const data = {
-  title: 'Тачки 3',
-  text: '16 песен из мультика',
-  imageUrl: '',
+  name: 'Тачки 3',
+  description: '16 песен из мультика',
+  image_url: 'https://dl.dropboxusercontent.com/s/m0t3ehvokmcdhdd/%D1%81ars.png?dl=0',
 };
 

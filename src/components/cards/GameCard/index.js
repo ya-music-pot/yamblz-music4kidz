@@ -41,7 +41,7 @@ export default class GameCard extends Component {
     return (
       <div className={container} onClick={this._handleCardClick}>
         <CardTitle text={name} styles={titleStyles} />
-        <ButtonMiniplayer onClick={onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={onButtonClick} position={button} type="game" />
         <div className={image} style={backgroundStyles}>image</div>
       </div>
     );
