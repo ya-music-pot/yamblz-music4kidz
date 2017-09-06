@@ -17,7 +17,6 @@ export default function (state = defaultState, action) {
       };
 
     case PLAYER_MODE_UPDATE:
-      console.log('reducer', payload.mode);
       return {
         ...state,
         mode: payload.mode,

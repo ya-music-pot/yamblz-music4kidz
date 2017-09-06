@@ -41,7 +41,6 @@ class Player extends Component {
   };
 
   _handleClickArrowDown = () => {
-    console.log('arrowDown');
     this.props.playerModeUpdate('mini');
   }
 

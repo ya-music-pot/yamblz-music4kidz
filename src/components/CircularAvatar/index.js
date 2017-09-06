@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '_components/Button';
-import cl from 'classname';
 
 import style from './style.styl';
 import defaultCover from './images/default.jpg';

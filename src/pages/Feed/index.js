@@ -13,7 +13,6 @@ import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
   _onButtonClick = (trackId, playlist, isRadio = false) => {
-    console.log('mini');
     this.props.playerModeUpdate('mini');
     this.props.showPlayer(playlist, isRadio);
     this.props.setPlaylist(playlist, isRadio);
