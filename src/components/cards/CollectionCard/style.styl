@@ -1,6 +1,5 @@
 .container {
   position: relative;
-  padding: 24px 24px 16px;
   margin-bottom: 24px;
   border-radius: 15px;
   background-color: #7f44ff;
@@ -9,20 +8,20 @@
   background-position: right bottom;
   background-size: cover;
   box-shadow: 0 12px 14px 0 rgba(0, 0, 0, 0.22);
+}
 
-  &::before {
-    content: '';
-    right: 0;
-    bottom: 0;
-    top: 24px;
-    left: 24px;
-    display: block;
-    position: absolute;
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-size: contain;
-    border-radius: 15px;
-  }
+.image {
+  font-size: 0;
+  top: 0;
+  right 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  position: absolute;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
 }
 
 .title {
@@ -31,6 +30,8 @@
 
 .content {
   position: relative;
+  padding: 24px 24px 16px;
+  z-index: 1;
 }
 
 .button {

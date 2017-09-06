@@ -24,12 +24,12 @@ export default class RadioCard extends Component {
 
   render() {
     const {
-      container, title: titleStyles,
+      container, title,
       subtitle, image, button,
     } = style;
 
     const {
-      data: { title, imageUrl },
+      data: { name, image_url: imageUrl },
       callbacks: { onButtonClick },
     } = this.props;
 
@@ -41,7 +41,7 @@ export default class RadioCard extends Component {
 
     return (
       <div className={container} onClick={this._handleCardClick}>
-        <CardTitle text={title} styles={titleStyles} />
+        <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={image} style={backgroundStyles}>photo</div>
         <ButtonMiniplayer onClick={onButtonClick} position={button} />

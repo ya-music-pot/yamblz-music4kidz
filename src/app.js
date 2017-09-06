@@ -9,7 +9,6 @@ import store from '_settings/store';
 import routes from '_settings/routes';
 
 import { getUser } from '_actions/user';
-import { getFeed } from '_actions/feed';
 import { playerInit } from '_actions/playerInfo';
 
 import history from '_settings/history';
@@ -32,7 +31,6 @@ AudioPlayer.init().then(() => {
 
 const userId = 1;
 store.dispatch(getUser(userId));
-store.dispatch(getFeed(userId));
 
 ReactDOM.render((
   <div>
