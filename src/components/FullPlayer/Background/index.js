@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from './style.styl';
 
-import defaultImage from './images/egorka.jpg';
+import defaultBackground from './images/default.jpg';
 
 export default class Background extends Component {
   render() {
     const { cover } = this.props;
-    const imageUri = (cover !== '') ? cover : defaultImage;
+    const imageUri = (cover !== 'null') ? cover : defaultBackground;
 
     return (
       <div className={style.wrapper}>

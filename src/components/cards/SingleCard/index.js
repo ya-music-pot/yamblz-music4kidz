@@ -22,15 +22,28 @@ export default class SingleCard extends Component {
     }
   };
 
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, content, title,
       info, singer, button, overlay,
     } = style;
 
-    const {
-      callbacks: { onButtonClick }, bgs, data,
-    } = this.props;
+    const { bgs, data } = this.props;
     const {
       artist, name, image_url: imageUrl,
     } = data.tracks[0];
@@ -49,7 +62,7 @@ export default class SingleCard extends Component {
         <div className={content}>
           <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
-            <ButtonMiniplayer onClick={onButtonClick} position={button} type="single" />
+            <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="single" />
             <div>
               <div className={singer}>{artist}</div>
               <div>{name}</div>

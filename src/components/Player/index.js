@@ -40,6 +40,10 @@ class Player extends Component {
     this.props.toggleRepeatMode();
   };
 
+  _handleClickArrowDown = () => {
+    this.props.playerModeUpdate('mini');
+  }
+
   render() {
     const { player } = this.props;
     return (
@@ -55,6 +59,7 @@ class Player extends Component {
           onClickNext={this._handleNextButton}
           onClickPrevious={this._handlePreviousButton}
           onClickRepeat={this._handleRepeatButton}
+          onClickArrowDown={this._handleClickArrowDown}
           type="full"
         />
       </PlayerToggle>
@@ -63,7 +68,6 @@ class Player extends Component {
 }
 
 export default connect((state, props) => ({
-  playerInfo: state.playerInfo,
   player: state.player,
   ...props,
 }), {
@@ -86,4 +90,5 @@ Player.propTypes = {
   playerPause: PropTypes.func,
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
+  playerModeUpdate: PropTypes.func,
 };
