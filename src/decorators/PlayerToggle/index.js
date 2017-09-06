@@ -9,7 +9,6 @@ export default class PlayerToggle extends Component {
   state = {
     currentPlayer: 'mini',
     slideTransform: 0,
-    topPadding: '',
   };
 
   componentDidMount() {
@@ -20,15 +19,16 @@ export default class PlayerToggle extends Component {
     this.hammerMiniPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-0']));
     this.hammerFullPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-1']));
 
+    this.hammerFullPlayer.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
+
     this.hammerMiniPlayer.on('tap', this._toFullPlayer);
-    this.hammerFullPlayer.on('swiperight', this._toMiniPlayer);
+    this.hammerFullPlayer.on('swipedown', this._toMiniPlayer);
   }
 
   _toFullPlayer = () => {
     this.setState({
       currentPlayer: 'full',
-      slideTransform: -document.body.clientWidth,
-      topPadding: 0,
+      slideTransform: -window.innerHeight,
     });
   }
 
@@ -37,17 +37,11 @@ export default class PlayerToggle extends Component {
       currentPlayer: 'mini',
       slideTransform: 0,
     });
-    setTimeout(() => {
-      this.setState({
-        topPadding: '',
-      });
-    }, 500);
   }
 
   _slide() {
     return {
-      transform: `translateX(${this.state.slideTransform}px)`,
-      top: `${this.state.topPadding}`,
+      transform: `translateY(${this.state.slideTransform}px)`,
     };
   }
 
