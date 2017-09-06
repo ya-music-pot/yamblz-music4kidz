@@ -2,11 +2,11 @@ import { PLAYER_INITED, PLAYER_MODE_UPDATE } from '_actions/playerInfo.js';
 
 const defaultState = {
   inited: false,
-  mode: 'full'
+  mode: 'full',
 };
 
 export default function (state = defaultState, action) {
-  const { type, payload, response } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case PLAYER_INITED:

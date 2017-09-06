@@ -74,6 +74,7 @@ class PlayerToggle extends Component {
 
 PlayerToggle.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
+  playerModeUpdate: PropTypes.func,
 };
 
 export default connect((state, props) => ({
