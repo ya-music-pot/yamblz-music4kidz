@@ -1,7 +1,8 @@
-import { PLAYER_INITED, PLAYER_MODE_UPDATE } from '_actions/playerInfo.js';
+import { PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER } from '_actions/playerInfo.js';
 
 const defaultState = {
   inited: false,
+  isShow: false,
   mode: 'full',
 };
 
@@ -19,6 +20,12 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         mode: payload.mode,
+      };
+
+    case SHOW_PLAYER:
+      return {
+        ...state,
+        isShow: true,
       };
 
     default:

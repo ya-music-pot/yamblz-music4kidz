@@ -5,15 +5,17 @@ import PropTypes from 'prop-types';
 import Topbar from '_components/Topbar';
 
 import { playerPlay, setPlaylist } from '_actions/player';
+import { showPlayer } from '_actions/playerInfo';
 
 import style from './style.styl';
 import CardList from './CardList';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  _onButtonClick = () => { };
+  _onButtonClick = () => {};
 
   _onCardClick = (trackId, playlist, isRadio = false) => {
+    this.props.showPlayer(playlist, isRadio);
     this.props.setPlaylist(playlist, isRadio);
     this.props.playerPlay(trackId);
   };
@@ -41,6 +43,7 @@ class Feed extends Component {
 Feed.propTypes = {
   playerPlay: PropTypes.func,
   setPlaylist: PropTypes.func,
+  showPlayer: PropTypes.func,
 };
 
 export default connect((state, props) => ({
@@ -51,4 +54,5 @@ export default connect((state, props) => ({
 }), {
   playerPlay,
   setPlaylist,
+  showPlayer,
 })(Feed);

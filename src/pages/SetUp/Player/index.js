@@ -18,6 +18,13 @@ class Player extends Component {
     countChoose: 0,
     isSound: true,
   }
+  componentWillMount() {
+    if (this.props.playerInfo.inited) {
+      const playlist = this.props.playlist;
+      this.props.setPlaylist(playlist);
+      this.props.playerPlay(playlist[0].id);
+    }
+  }
 
   componentWillReceiveProps(nextProps) {
     const inited = nextProps.playerInfo.inited;

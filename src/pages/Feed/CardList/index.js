@@ -45,6 +45,7 @@ class CardList extends Component {
 
   render() {
     const { data } = this.props.feed;
+
     return (
       <div>
         { data && data.map((card) => this.renderCard(card)) }
