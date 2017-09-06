@@ -15,7 +15,7 @@ export default class CircularAvatar extends Component {
   }
 
   _describeArc = (x, y, radius, startAngle, endAngle) => {
-    const start = this._polarToCartesian(x, y, radius, endAngle);
+    const start = this._polarToCartesian(x, y, radius, parseInt(endAngle));
     const end = this._polarToCartesian(x, y, radius, startAngle);
     const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
@@ -32,9 +32,9 @@ export default class CircularAvatar extends Component {
     } = this.props;
 
     const imageUri = (image !== 'null') ? image : defaultCover;
+    const percentage = (isNaN(progress)) ? 0 : progress;
 
     return (
-
       <div className={style.wrapper}>
         <svg className={style.progressBar}>
           <defs>
@@ -49,7 +49,7 @@ export default class CircularAvatar extends Component {
               document.documentElement.clientHeight * radius,
               document.documentElement.clientHeight * radius,
               0,
-              progress * 360,
+              percentage * 360,
             )}
             stroke="url(#linear-gradient)"
             strokeWidth="11"
