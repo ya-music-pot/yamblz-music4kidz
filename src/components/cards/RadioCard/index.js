@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
+import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
@@ -24,6 +25,12 @@ export default class RadioCard extends Component {
     }
   };
 
+  _generateBackground() {
+    const bgs = ['282d32', '3a5272', '413d72'];
+    const color = bgs[getRandomInteger(0, 2)];
+    return { backgroundColor: `#${color}` };
+  }
+
   render() {
     const {
       container, title, circle,
@@ -37,21 +44,23 @@ export default class RadioCard extends Component {
       callbacks: { onButtonClick },
     } = this.props;
 
-    const backgroundStyles = {};
+    const imageStyles = {};
 
     if (imageUrl) {
-      backgroundStyles.backgroundImage = `url(${imageUrl})`;
+      imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
+    const backgroundStyles = this._generateBackground();
+
     return (
-      <div className={container} onClick={this._handleCardClick}>
+      <div style={backgroundStyles} className={container} onClick={this._handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={imageContainer}>
           <div className={cl(circle, circleL)} />
           <div className={cl(circle, circleM)} />
           <div className={cl(circle, circleS)} />
-          <div className={image} style={backgroundStyles} />
+          <div className={image} style={imageStyles} />
         </div>
         <ButtonMiniplayer onClick={onButtonClick} position={button} />
       </div>
