@@ -31,4 +31,8 @@ export default class FullPlayer extends Component {
 
 FullPlayer.propTypes = {
   playerState: PropTypes.object,
+  onTogglePlay: PropTypes.func,
+  onClickPrevious: PropTypes.func,
+  onClickNext: PropTypes.func,
+  onClickRepeat: PropTypes.func,
 };

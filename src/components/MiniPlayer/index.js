@@ -20,12 +20,12 @@ export default class MiniPlayer extends Component {
 
   render() {
     const {
-      className,
+      className, onTogglePlay,
     } = this.props;
 
     const {
-        trackName, singerName, isPlaying,
-        position,
+      trackName, singerName, isPlaying,
+      position,
     } = this.props.playerState;
 
     return (
@@ -43,7 +43,7 @@ export default class MiniPlayer extends Component {
               )
             }
             isPlaying={isPlaying}
-            onClick={this._handlePlayButton}
+            onClick={onTogglePlay}
           />
           <Title
             trackName={trackName}
@@ -58,6 +58,7 @@ export default class MiniPlayer extends Component {
 MiniPlayer.propTypes = {
   playerState: PropTypes.object,
   className: PropTypes.string,
+  onTogglePlay: PropTypes.func,
 };
 
 const Title = (props) => (

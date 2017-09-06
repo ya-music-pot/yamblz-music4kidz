@@ -9,15 +9,31 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class PersonalCard extends Component {
+  _handleCardClick = () => {
+    console.log('PersonalCard');
+
+    const {
+      data: { tracks },
+      callbacks: { onCardClick },
+    } = this.props;
+
+    if (
+      typeof onCardClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onCardClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const { container, title, subtitle, button } = style;
     const {
       settings,
-      callbacks: { onCardClick, onButtonClick },
+      callbacks: { onButtonClick },
     } = this.props;
 
     return (
-      <div className={container} onClick={onCardClick}>
+      <div className={container} onClick={this._handleCardClick}>
         <EmojiStatus settings={settings} />
         <CardTitle text={settings.title} styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
@@ -28,6 +44,7 @@ export default class PersonalCard extends Component {
 }
 
 PersonalCard.propTypes = {
+  data: PropTypes.object,
   settings: PropTypes.object,
   callbacks: PropTypes.object,
 };

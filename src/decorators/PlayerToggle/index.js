@@ -20,16 +20,21 @@ export default class PlayerToggle extends Component {
     this.hammerMiniPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-0']));
     this.hammerFullPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-1']));
 
+    this.hammerMiniPlayer.domEvents = true;
+
     this.hammerMiniPlayer.on('tap', this._toFullPlayer);
     this.hammerFullPlayer.on('swiperight', this._toMiniPlayer);
   }
 
-  _toFullPlayer = () => {
-    this.setState({
-      currentPlayer: 'full',
-      slideTransform: -document.body.clientWidth,
-      topPadding: 0,
-    });
+  _toFullPlayer = (e) => {
+    e.srcEvent.stopPropagation();
+    if (e.srcEvent.srcElement.nodeName !== 'BUTTON') {
+      this.setState({
+        currentPlayer: 'full',
+        slideTransform: -document.body.clientWidth,
+        topPadding: 0,
+      });
+    }
   }
 
   _toMiniPlayer = () => {

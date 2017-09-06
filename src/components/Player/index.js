@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import PlayerToggle from '_decorators/PlayerToggle';
 import MiniPlayer from '_components/MiniPlayer';
 import FullPlayer from '_components/FullPlayer';
@@ -91,3 +92,17 @@ export default connect((state, props) => ({
   playerResume,
   toggleRepeatMode,
 })(Player);
+
+Player.propTypes = {
+  playerInfo: PropTypes.obj,
+  playlist: PropTypes.obj,
+  player: PropTypes.obj,
+  setPlaylist: PropTypes.func,
+  playerPlay: PropTypes.func,
+  playerClear: PropTypes.func,
+  playerNext: PropTypes.func,
+  playerPrev: PropTypes.func,
+  playerPause: PropTypes.func,
+  playerResume: PropTypes.func,
+  toggleRepeatMode: PropTypes.func,
+};

@@ -9,6 +9,7 @@ import style from './style.styl';
 
 export default class RadioCard extends Component {
   _handleCardClick = () => {
+    console.log('RadioCard');
     const {
       data: { tracks },
       callbacks: { onCardClick },

@@ -9,6 +9,7 @@ import style from './style.styl';
 
 export default class CartoonCard extends Component {
   _handleCardClick = () => {
+    console.log('CartoonCard');
     const {
       data: { tracks },
       callbacks: { onCardClick },

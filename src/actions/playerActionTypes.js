@@ -2,6 +2,10 @@ export const PLAYER_START = 'PLAYER_START';
 export const PLAYER_STOP = 'PLAYER_STOP';
 export const PLAYER_PLAYED = 'PLAYER_PLAYED';
 
+export const PLAYER_SHOW = 'PLAYER_SHOW';
+export const PLAYER_HIDE = 'PLAYER_HIDE';
+export const PLAYER_TOGGLE = 'PLAYER_TOGGLE';
+
 export const PLAYER_SAVE_TRACK = 'PLAYER_SAVE_TRACK';
 
 export const PLAYER_PAUSE = 'PLAYER_PAUSE';
@@ -19,4 +23,3 @@ export const SET_PLAYLIST = 'SET_PLAYLIST';
 export const PLAYER_GET_RADIO = 'PLAYER_GET_RADIO';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
-

@@ -12,10 +12,6 @@ export default class Container extends Component {
     console.log('ArrowDown');
   }
 
-  _handleClickDownload = () => {
-    console.log('Download');
-  }
-
   _handleClickDislike= () => {
     console.log('Dislike');
   }
@@ -30,9 +26,9 @@ export default class Container extends Component {
 
   render() {
     const {
-        trackName, singerName, isPlaying,
-        position, duration, cover,
-        isRepeatMode,
+      trackName, singerName, isPlaying,
+      position, duration, cover,
+      isRepeatMode,
     } = this.props.playerState;
 
     const {

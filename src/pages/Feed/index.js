@@ -22,8 +22,6 @@ class Feed extends Component {
   _onCardClick = (trackId, playlist, isRadio = false) => {
     this.props.setPlaylist(playlist, isRadio);
     this.props.playerPlay(trackId);
-
-    this.props.router.push('/player');
   };
 
   render() {
@@ -46,12 +44,17 @@ class Feed extends Component {
   }
 }
 
-export default connect((state, props) => ({
-  ...props,
-}), { playerPlay, setPlaylist })(Feed);
-
 Feed.propTypes = {
-  router: PropTypes.object,
   playerPlay: PropTypes.func,
   setPlaylist: PropTypes.func,
 };
+
+export default connect((state, props) => ({
+  playerInfo: state.playerInfo,
+  player: state.player,
+  playlist: state.feed.data,
+  ...props,
+}), {
+  playerPlay,
+  setPlaylist,
+})(Feed);
