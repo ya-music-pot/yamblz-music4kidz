@@ -19,4 +19,3 @@ export const SET_PLAYLIST = 'SET_PLAYLIST';
 export const PLAYER_GET_RADIO = 'PLAYER_GET_RADIO';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
-
