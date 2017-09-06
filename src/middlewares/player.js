@@ -1,6 +1,5 @@
 import AudioPlayer from '_helpers/AudioPlayer';
 import * as ActionTypes from '_actions/playerActionTypes.js';
-import { UPDATE_EMOJI, UPDATE_ACTION } from '_actions/settings.js';
 
 export default ({ dispatch, getState }) => (next) => (action) => {
   const { player, type, ...rest } = action;
@@ -14,6 +13,7 @@ export default ({ dispatch, getState }) => (next) => (action) => {
   const store = getState();
   const { playlist } = store.player;
   const { trackId } = player;
+
   const track = playlist.find(item => item.id === trackId);
 
   switch (type) {
@@ -108,8 +108,6 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       return playerPlay(dispatch, trackUrl);
     }
 
-    case UPDATE_EMOJI:
-    case UPDATE_ACTION:
     case ActionTypes.SET_PLAYLIST: {
       let { isRadio } = player;
       const { id } = store.user.data;
