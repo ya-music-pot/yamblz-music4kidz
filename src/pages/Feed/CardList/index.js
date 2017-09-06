@@ -31,13 +31,14 @@ class CardList extends Component {
 
     const CardsType = cards[data.type];
 
-    const { callbacks } = this.props;
+    const { callbacks, backgroundsList } = this.props;
 
     return (
       <CardsType
         key={data.id}
         data={data}
         callbacks={callbacks}
+        bgs={backgroundsList}
       />
     );
   };
@@ -57,6 +58,7 @@ export default connect((state, props) => ({
   ...props,
   feed: state.feed,
   userId: state.user.data.id === undefined ? 1 : state.user.data.id,
+  backgroundsList: state.dictionaries.backgroundsList,
 }), { getFeed })(CardList);
 
 CardList.propTypes = {
@@ -64,4 +66,5 @@ CardList.propTypes = {
   feed: PropTypes.object,
   userId: PropTypes.number,
   getFeed: PropTypes.func,
+  backgroundsList: PropTypes.object,
 };
