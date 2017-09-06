@@ -17,6 +17,22 @@ class PlayerToggle extends Component {
     this._initToggle();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if ((nextProps.playerInfo.mode === 'full') && (this.state.currentPlayer === 'mini')) {
+      this.props.playerModeUpdate('full');
+      this.setState({
+        currentPlayer: 'full',
+        slideTransform: -window.innerHeight,
+      });
+    } else if ((nextProps.playerInfo.mode === 'mini') && (this.state.currentPlayer === 'full')) {
+      this.props.playerModeUpdate('mini');
+      this.setState({
+        currentPlayer: 'mini',
+        slideTransform: 0,
+      });
+    }
+  }
+
   _initToggle() {
     this.hammerMiniPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-0']));
     this.hammerFullPlayer = Hammer(ReactDOM.findDOMNode(this.refs['item-1']));
@@ -75,9 +91,13 @@ class PlayerToggle extends Component {
 PlayerToggle.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   playerModeUpdate: PropTypes.func,
+  playerInfo: PropTypes.shape({
+    mode: PropTypes.string,
+  }),
 };
 
 export default connect((state, props) => ({
+  playerInfo: state.playerInfo,
   ...props,
 }), {
   playerModeUpdate,

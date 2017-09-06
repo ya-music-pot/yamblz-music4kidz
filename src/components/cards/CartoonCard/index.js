@@ -22,8 +22,19 @@ export default class CartoonCard extends Component {
     }
   };
 
-  _handleButtonClick = () => {
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
 
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
   };
 
   render() {

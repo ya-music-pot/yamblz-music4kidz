@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '_components/Button';
-import cl from 'classname';
 
 import style from './style.styl';
+import defaultCover from './images/default.jpg';
 
 export default class CircularAvatar extends Component {
-  _handleClickShazam = () => {
-
-  }
-
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
@@ -20,7 +15,7 @@ export default class CircularAvatar extends Component {
   }
 
   _describeArc = (x, y, radius, startAngle, endAngle) => {
-    const start = this._polarToCartesian(x, y, radius, endAngle);
+    const start = this._polarToCartesian(x, y, radius, parseInt(endAngle));
     const end = this._polarToCartesian(x, y, radius, startAngle);
     const largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1';
 
@@ -36,8 +31,10 @@ export default class CircularAvatar extends Component {
       time,
     } = this.props;
 
-    return (
+    const imageUri = (image !== 'null') ? image : defaultCover;
+    const percentage = (isNaN(progress)) ? 0 : progress;
 
+    return (
       <div className={style.wrapper}>
         <svg className={style.progressBar}>
           <defs>
@@ -52,19 +49,15 @@ export default class CircularAvatar extends Component {
               document.documentElement.clientHeight * radius,
               document.documentElement.clientHeight * radius,
               0,
-              progress * 360,
+              percentage * 360,
             )}
             stroke="url(#linear-gradient)"
             strokeWidth="11"
           />
         </svg>
         <img
-          src={image}
-          className={
-            cl(
-              style['circularImage'],
-              image ? style['circularImage'] : style['circularImageDefault'],
-            )}
+          src={imageUri}
+          className={style.circularImage}
           alt=""
         />
         <div className={style.controls}>
@@ -72,9 +65,6 @@ export default class CircularAvatar extends Component {
             {time}
           </div>
           <div className={style.spacer} />
-          <div className={style.buttonWrapper}>
-            <Button style={style.buttonShazam} onClick={this._handleClickShazam} />
-          </div>
         </div>
       </div>
     );

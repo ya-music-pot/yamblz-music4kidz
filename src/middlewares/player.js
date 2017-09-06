@@ -143,7 +143,6 @@ export default ({ dispatch, getState }) => (next) => (action) => {
  */
 function playerPlay(dispatch, trackUrl) {
   return AudioPlayer.player.play(trackUrl).then(() => {
-    console.log('playerPlay');
     dispatch({ type: ActionTypes.PLAYER_PLAYED });
   }).catch(() => {
     dispatch({ type: ActionTypes.PLAYER_STOP });

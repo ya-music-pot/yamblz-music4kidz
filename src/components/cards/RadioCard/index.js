@@ -10,7 +10,6 @@ import style from './style.styl';
 
 export default class RadioCard extends Component {
   _handleCardClick = () => {
-    console.log('RadioCard');
     const {
       data: { tracks },
       callbacks: { onCardClick },
@@ -24,6 +23,21 @@ export default class RadioCard extends Component {
     }
   };
 
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, title, circle,
@@ -34,7 +48,6 @@ export default class RadioCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onButtonClick },
     } = this.props;
 
     const backgroundStyles = {};
@@ -53,7 +66,7 @@ export default class RadioCard extends Component {
           <div className={cl(circle, circleS)} />
           <div className={image} style={backgroundStyles} />
         </div>
-        <ButtonMiniplayer onClick={onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
       </div>
     );
   }
