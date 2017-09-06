@@ -12,7 +12,7 @@ export default class FullPlayer extends Component {
     const playerState = this.props.playerState;
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat,
+      onClickRepeat, onClickArrowDown
     } = this.props;
 
     return (
@@ -23,6 +23,7 @@ export default class FullPlayer extends Component {
           onClickNext={onClickNext}
           onClickPrevious={onClickPrevious}
           onClickRepeat={onClickRepeat}
+          onClickArrowDown={onClickArrowDown}
         />
       </div>
     );
@@ -35,4 +36,5 @@ FullPlayer.propTypes = {
   onClickPrevious: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
+  onClickArrowDown: PropTypes.func,
 };
