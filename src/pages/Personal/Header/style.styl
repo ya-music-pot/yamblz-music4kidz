@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 13px 0;
+}
+
+.avatar {
+  display: block;
+  width: 68px;
+  height: 68px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userName {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+}
+
+.button {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: transparent;
+
+  &Back {
+    left: 16px;
+    top: 23px;
+    width: 16px;
+    height: 16px;
+    background-image: url('./images/back.svg');
+  }
+
+  &Settings {
+    right: 16px;
+    top: 19px;
+    width: 24px;
+    height: 24px;
+    background-image: url('./images/settings.svg');
+  }
+}
