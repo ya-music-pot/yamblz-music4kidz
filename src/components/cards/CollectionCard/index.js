@@ -21,6 +21,21 @@ export default class CollectionCard extends Component {
     }
   };
 
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, title,
@@ -29,9 +44,7 @@ export default class CollectionCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      callbacks: { onButtonClick },
     } = this.props;
-
 
     const backgroundStyles = {};
 
@@ -43,7 +56,7 @@ export default class CollectionCard extends Component {
       <div className={container} onClick={this._handleCardClick}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
-          <ButtonMiniplayer onClick={onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
         </div>
         <div className={image} style={backgroundStyles}>image</div>
       </div>

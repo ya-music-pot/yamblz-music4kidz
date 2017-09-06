@@ -13,6 +13,24 @@ class PlayerToggle extends Component {
     slideTransform: 0,
   };
 
+  componentWillReceiveProps(nextProps) {
+    if ((nextProps.playerInfo.mode === 'full') && (this.state.currentPlayer === 'mini')) {
+      console.log('decorator full');
+      this.props.playerModeUpdate('full');
+      this.setState({
+        currentPlayer: 'full',
+        slideTransform: -window.innerHeight,
+      });
+    } else if ((nextProps.playerInfo.mode === 'mini') && (this.state.currentPlayer === 'full')) {
+        console.log('decorator mini');
+        this.props.playerModeUpdate('mini');
+        this.setState({
+          currentPlayer: 'mini',
+          slideTransform: 0,
+        });
+      }
+  }
+
   componentDidMount() {
     this._initToggle();
   }
@@ -78,6 +96,7 @@ PlayerToggle.propTypes = {
 };
 
 export default connect((state, props) => ({
+  playerInfo: state.playerInfo,
   ...props,
 }), {
   playerModeUpdate,
