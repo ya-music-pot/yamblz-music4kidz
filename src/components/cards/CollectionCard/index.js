@@ -24,8 +24,8 @@ export default class CollectionCard extends Component {
 
   render() {
     const {
-      container, title: titleStyles,
-      content, button,
+      container, title,
+      content, button, image,
     } = style;
 
     const {
@@ -43,9 +43,10 @@ export default class CollectionCard extends Component {
     return (
       <div className={container} style={backgroundStyles} onClick={this._handleCardClick}>
         <div className={content}>
-          <CardTitle text={name} styles={titleStyles} />
+          <CardTitle text={name} styles={title} />
           <ButtonMiniplayer onClick={onButtonClick} position={button} />
         </div>
+        <div className={image} style={backgroundStyles}>image</div>
       </div>
     );
   }

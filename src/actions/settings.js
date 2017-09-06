@@ -5,7 +5,6 @@ export const UPDATE_COUNT_LIKES = 'UPDATE_COUNT_LIKES';
 export function saveEmoji(moodId) {
   return {
     type: UPDATE_EMOJI,
-    player: {},
     payload: {
       moodId,
     },
@@ -15,7 +14,6 @@ export function saveEmoji(moodId) {
 export function saveAction(actionId) {
   return {
     type: UPDATE_ACTION,
-    player: {},
     payload: {
       actionId,
     },

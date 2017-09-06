@@ -11,10 +11,6 @@ import CardList from './CardList';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  componentWillMount() {
-
-  }
-
   _onButtonClick = () => {
     console.log('I click on button!');
   };
