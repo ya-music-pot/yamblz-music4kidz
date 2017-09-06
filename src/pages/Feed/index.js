@@ -11,9 +11,7 @@ import CardList from './CardList';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  _onButtonClick = () => {
-    console.log('I click on button!');
-  };
+  _onButtonClick = () => { };
 
   _onCardClick = (trackId, playlist, isRadio = false) => {
     this.props.setPlaylist(playlist, isRadio);
