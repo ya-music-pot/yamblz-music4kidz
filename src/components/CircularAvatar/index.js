@@ -4,12 +4,9 @@ import Button from '_components/Button';
 import cl from 'classname';
 
 import style from './style.styl';
+import defaultCover from './images/default.jpg';
 
 export default class CircularAvatar extends Component {
-  _handleClickShazam = () => {
-
-  }
-
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
@@ -36,6 +33,8 @@ export default class CircularAvatar extends Component {
       time,
     } = this.props;
 
+    const imageUri = (image !== 'null') ? image : defaultCover;
+
     return (
 
       <div className={style.wrapper}>
@@ -59,12 +58,8 @@ export default class CircularAvatar extends Component {
           />
         </svg>
         <img
-          src={image}
-          className={
-            cl(
-              style['circularImage'],
-              image ? style['circularImage'] : style['circularImageDefault'],
-            )}
+          src={imageUri}
+          className={style.circularImage}
           alt=""
         />
         <div className={style.controls}>
@@ -72,9 +67,6 @@ export default class CircularAvatar extends Component {
             {time}
           </div>
           <div className={style.spacer} />
-          <div className={style.buttonWrapper}>
-            <Button style={style.buttonShazam} onClick={this._handleClickShazam} />
-          </div>
         </div>
       </div>
     );
