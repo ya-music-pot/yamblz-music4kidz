@@ -29,7 +29,7 @@ export default class CollectionCard extends Component {
       <div className={container} onClick={onCardClick}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
-          <ButtonMiniplayer onClick={onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={onButtonClick} position={button} type="pause" />
         </div>
         <div className={image} style={backgroundStyles}>image</div>
       </div>
