@@ -8,7 +8,6 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class Container extends Component {
-
   _handleClickDislike= () => {}
 
   _handleClickLike = () => {}

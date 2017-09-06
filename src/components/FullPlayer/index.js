@@ -12,7 +12,7 @@ export default class FullPlayer extends Component {
     const playerState = this.props.playerState;
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat, onClickArrowDown
+      onClickRepeat, onClickArrowDown,
     } = this.props;
 
     return (

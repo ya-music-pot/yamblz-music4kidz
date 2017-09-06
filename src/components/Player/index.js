@@ -91,4 +91,5 @@ Player.propTypes = {
   playerPause: PropTypes.func,
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
+  playerModeUpdate: PropTypes.func,
 };
