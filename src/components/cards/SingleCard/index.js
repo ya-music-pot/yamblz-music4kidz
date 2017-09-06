@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import CardTitle from '_components/cards/CardTitle';
-import Button from '_components/Button';
-import Icon from '_components/Icon';
+import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 import style from './style.styl';
 
@@ -30,9 +29,7 @@ export default class SingleCard extends Component {
         <div className={content}>
           <CardTitle text="Новый трек" styles={title} />
           <div className={info}>
-            <Button onClick={onButtonClick} style={button}>
-              <Icon typeIcon="play-card" />
-            </Button>
+            <ButtonMiniplayer onClick={onButtonClick} position={button} type="single" />
             <div>
               <div className={singer}>{artist}</div>
               <div>{name}</div>
