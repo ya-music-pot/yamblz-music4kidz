@@ -8,7 +8,7 @@ import style from '../style.styl';
 export default class PlaylistCalibration extends Component {
   render() {
     return (
-      <div className={style.container}>
+      <div className={cl(style.container, style.containerLeft)}>
         <div className={style.calibrationTitleContainer}>
           <div className={style.title}>
             А давай создадим<br />лучший в мире<br />плейлист для тебя?
