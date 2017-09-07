@@ -104,6 +104,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         playlist: [...state.playlist, response.data],
+        radio: [response.data],
       };
 
     default:

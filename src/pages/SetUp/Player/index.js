@@ -8,7 +8,7 @@ import ButtonCircle from '_components/ButtonCircle';
 import { saveLikesCount } from '_actions/settings';
 import {
   setPlaylist, playerPlay, playerClear,
-  playerNext,
+  playerNext, playerResume, playerPause,
 } from '_actions/player';
 
 import style from './style.styl';
@@ -54,6 +54,16 @@ class Player extends Component {
   }
 
   _handleToggleSound = () => {
+    const newSound = !this.state.isSound;
+
+    if (newSound) {
+      this.props.playerResume();
+    }
+
+    if (!newSound) {
+      this.props.playerPause();
+    }
+
     this.setState({ isSound: !this.state.isSound });
   }
 
@@ -133,6 +143,8 @@ Player.propTypes = {
   setPlaylist: PropTypes.func,
   playerPlay: PropTypes.func,
   playerNext: PropTypes.func,
+  playerResume: PropTypes.func,
+  playerPause: PropTypes.func,
   playerClear: PropTypes.func,
   likesCount: PropTypes.number,
   playlist: PropTypes.array,
@@ -161,4 +173,6 @@ export default connect((state, props) => ({
   playerPlay,
   playerClear,
   playerNext,
+  playerResume,
+  playerPause,
 })(Player);

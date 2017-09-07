@@ -23,5 +23,8 @@ export function updateUser(data) {
       method: 'POST',
       url: `${API_URL}user/${id}?mood_id=${moodId}&action_id=${actionId}`,
     },
+    player: {
+      id,
+    },
   };
 }
