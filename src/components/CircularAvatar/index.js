@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Hammer from 'hammerjs';
-import {
-  setPosition,
-} from '_actions/player';
+import { setPosition } from '_actions/player';
 
 import style from './style.styl';
 import defaultCover from './images/default.jpg';
@@ -50,6 +48,7 @@ class CircularAvatar extends Component {
   }
 
   _seekBarProcess = (e) => {
+    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const { player } = this.props;
 
     const dx = e.center.x - this.state.pivotX;
@@ -59,7 +58,7 @@ class CircularAvatar extends Component {
       this.setState({
         seekActive: true,
         xStart: 0,
-        yStart: -this.state.pivotY + document.documentElement.clientHeight * 0.14,
+        yStart: -this.state.pivotY + h * 0.14,
       });
     }
 
@@ -85,9 +84,11 @@ class CircularAvatar extends Component {
   }
 
   _getPivotCoordinates() {
+    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     this.setState({
-      pivotX: document.documentElement.clientWidth / 2,
-      pivotY: document.documentElement.clientHeight * 0.33,
+      pivotX: w / 2,
+      pivotY: h * 0.33,
     });
   }
 
@@ -101,7 +102,7 @@ class CircularAvatar extends Component {
     let percentage = (isNaN(progress)) ? 0 : progress;
     percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
 
-    console.log(this.props.player.position);
+    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
     return (
       <div className={style.wrapper} ref={this._seekBar} >
@@ -114,9 +115,9 @@ class CircularAvatar extends Component {
           </defs>
           <path
             d={this._describeArc(
-              document.documentElement.clientHeight * radius,
-              document.documentElement.clientHeight * radius,
-              document.documentElement.clientHeight * radius,
+              h * radius,
+              h * radius,
+              h * radius,
               0,
               ((this.state.seekActive) ? (this.state.curAngle / 2) : percentage) * 360,
             )}
@@ -148,7 +149,9 @@ export default connect((state, props) => ({
 })(CircularAvatar);
 
 CircularAvatar.propTypes = {
-  player: PropTypes.obj,
+  player: PropTypes.shape({
+    duration: PropTypes.number,
+  }),
   progress: PropTypes.number,
   radius: PropTypes.number,
   time: PropTypes.string,
