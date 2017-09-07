@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import Icon from '_components/Icon';
@@ -8,7 +10,9 @@ import Button from '_components/Button';
 import style from './style.styl';
 
 export default class DefaultCard extends Component {
-  _onClick = () => { };
+  _onClick = () => {
+    this.props.callbacks.onRouterPush('/setup');
+  };
 
   render() {
     const {
@@ -33,3 +37,9 @@ export default class DefaultCard extends Component {
     );
   }
 }
+
+DefaultCard.propTypes = {
+  callbacks: PropTypes.shape({
+    onRouterPush: PropTypes.func,
+  }),
+};
