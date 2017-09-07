@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Hammer from 'hammerjs';
-
-import style from './style.styl';
-import defaultCover from './images/default.jpg';
-
 import {
   setPosition,
 } from '_actions/player';
+
+import style from './style.styl';
+import defaultCover from './images/default.jpg';
 
 class CircularAvatar extends Component {
   state = {
@@ -19,6 +18,12 @@ class CircularAvatar extends Component {
     yStart: 0,
     seekActive: false,
   };
+
+  componentDidMount() {
+    this._getPivotCoordinates();
+    this.hammerSeekBar = Hammer(this.seekBarNode);
+    this.hammerSeekBar.on('hammer.input', this._seekBarProcess);
+  }
 
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
@@ -47,14 +52,14 @@ class CircularAvatar extends Component {
   _seekBarProcess = (e) => {
     const { player } = this.props;
 
-    let dx = e.center.x - this.state.pivotX,
-        dy = e.center.y - this.state.pivotY;
+    const dx = e.center.x - this.state.pivotX;
+    const dy = e.center.y - this.state.pivotY;
 
-    if (e.eventType == 1) {
+    if (e.eventType === 1) {
       this.setState({
         seekActive: true,
         xStart: 0,
-        yStart: - this.state.pivotY + document.documentElement.clientHeight * 0.14,
+        yStart: -this.state.pivotY + document.documentElement.clientHeight * 0.14,
       });
     }
 
@@ -62,21 +67,20 @@ class CircularAvatar extends Component {
       curAngle: (dx > 0) ? this._calculateAngle(dx, dy) : 2 - this._calculateAngle(dx, dy),
     });
 
-    if (e.eventType == 4) {
+    if (e.eventType === 4) {
       this.setState({
         seekActive: false,
       });
-      this.props.setPosition(this.props.player.duration * this.state.curAngle / 2);
+      this.props.setPosition(player.duration * this.state.curAngle / 2);
     }
   }
 
   _calculateAngle = (x, y) => {
-    let numerator,
-        denumerator;
+    let numerator = 0;
+    let denumerator = 1;
     numerator = this.state.xStart * x + this.state.yStart * y;
-    denumerator = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
-                * Math.sqrt(Math.pow(this.state.xStart, 2)
-                + Math.pow(this.state.yStart, 2));
+    denumerator = Math.sqrt(x ** 2 + y ** 2)
+                * Math.sqrt(this.state.xStart ** 2 + this.state.yStart ** 2);
     return Math.acos(numerator / denumerator) / Math.PI;
   }
 
@@ -85,12 +89,6 @@ class CircularAvatar extends Component {
       pivotX: document.documentElement.clientWidth / 2,
       pivotY: document.documentElement.clientHeight * 0.33,
     });
-  }
-
-  componentDidMount() {
-    this._getPivotCoordinates();
-    this.hammerSeekBar = Hammer(this.seekBarNode);
-    this.hammerSeekBar.on('hammer.input', this._seekBarProcess);
   }
 
   render() {
@@ -150,6 +148,7 @@ export default connect((state, props) => ({
 })(CircularAvatar);
 
 CircularAvatar.propTypes = {
+  player: PropTypes.obj,
   progress: PropTypes.number,
   radius: PropTypes.number,
   time: PropTypes.string,
