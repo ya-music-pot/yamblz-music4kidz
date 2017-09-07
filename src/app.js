@@ -7,7 +7,6 @@ import initReactFastclick from 'react-fastclick';
 import store from '_settings/store';
 import routes from '_settings/routes';
 
-import { getUser } from '_actions/user';
 import { playerInit } from '_actions/playerInfo';
 
 import history from '_settings/history';
@@ -27,9 +26,6 @@ AudioPlayer.init().then(() => {
   console.error('Не удалось инициализировать аудио-плеер');
 });
 
-
-const userId = 1;
-store.dispatch(getUser(userId));
 
 ReactDOM.render((
   <div>

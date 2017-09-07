@@ -8,10 +8,10 @@ import style from '../style.styl';
 export default class PlaylistCalibration extends Component {
   render() {
     return (
-      <div className={style.container}>
+      <div className={cl(style.container, style.containerLeft)}>
         <div className={style.calibrationTitleContainer}>
           <div className={style.title}>
-            А давай создадим лучший в мире плейлист для тебя?
+            А&nbsp;давай создадим<br />лучший в&nbsp;мире<br />плейлист для тебя?
           </div>
         </div>
         <div className={style.calibrationButtonWrapper}>
