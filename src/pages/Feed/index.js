@@ -12,17 +12,17 @@ import CardList from './CardList';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  _onButtonClick = (trackId, playlist, isRadio = false) => {
+  _onButtonClick = (trackId, playlist, isRadio = false, playlistId) => {
     this.props.playerModeUpdate('mini');
     this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
     this.props.playerPlay(trackId);
   };
 
-  _onCardClick = (trackId, playlist, isRadio = false) => {
+  _onCardClick = (trackId, playlist, isRadio = false, playlistId) => {
     this.props.playerModeUpdate('full');
     this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
     this.props.playerPlay(trackId);
   };
 

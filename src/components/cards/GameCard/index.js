@@ -9,7 +9,7 @@ import style from './style.styl';
 export default class GameCard extends Component {
   _handleCardClick = () => {
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onCardClick },
     } = this.props;
 
@@ -17,14 +17,14 @@ export default class GameCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks);
+      onCardClick(tracks[0].id, tracks, false, playlistId);
     }
   };
 
   _handleButtonClick = (e) => {
     e.stopPropagation();
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onButtonClick },
     } = this.props;
 
@@ -32,7 +32,7 @@ export default class GameCard extends Component {
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks);
+      onButtonClick(tracks[0].id, tracks, false, playlistId);
     }
   };
 

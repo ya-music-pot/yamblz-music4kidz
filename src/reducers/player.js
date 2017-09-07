@@ -12,6 +12,7 @@ const defaultState = {
   trackId: null,
   playlist: [],
   duration: 0,
+  playlistId: null,
 };
 
 export default function (state = defaultState, action) {
