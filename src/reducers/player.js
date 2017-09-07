@@ -88,6 +88,12 @@ export default function (state = defaultState, action) {
         ...payload,
       };
 
+    case PlayerActions.SET_POSITION:
+      return {
+        ...state,
+        ...payload,
+      };
+
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,

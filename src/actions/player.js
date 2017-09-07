@@ -75,3 +75,13 @@ export function toggleRepeatMode() {
     type: ActionType.TOGGLE_REPEAT,
   };
 }
+
+export function setPosition(position) {
+  return {
+    type: ActionType.SET_POSITION,
+    player: {},
+    payload: {
+      position,
+    },
+  };
+}
