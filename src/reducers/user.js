@@ -3,7 +3,9 @@ import { GET_USER, UPDATE_USER } from '_actions/user';
 const defaultState = {
   loading: false,
   loaded: false,
-  data: {},
+  data: {
+    id: 1,
+  },
 };
 
 export default function (state = { ...defaultState }, action) {

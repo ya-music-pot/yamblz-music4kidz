@@ -27,7 +27,7 @@ class PersonalRadio extends Component {
 
     if (!actionId || !moodId) {
       return (
-        <DefaultCard />
+        <DefaultCard callbacks={this.props.callbacks} />
       );
     }
 
