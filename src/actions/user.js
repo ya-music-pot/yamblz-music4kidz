@@ -25,6 +25,6 @@ export function updateUser(data) {
     },
     player: {
       id,
-    }
+    },
   };
 }
