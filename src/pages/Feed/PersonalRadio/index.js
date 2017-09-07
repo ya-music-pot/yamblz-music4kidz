@@ -34,6 +34,7 @@ class PersonalRadio extends Component {
     const {
       callbacks,
       dictionaries: { listEmoji, listActions },
+      radio,
     } = this.props;
 
     const settings = {
@@ -46,6 +47,7 @@ class PersonalRadio extends Component {
       <PersonalCard
         settings={settings}
         callbacks={callbacks}
+        tracks={radio}
       />
     );
   };
@@ -62,11 +64,13 @@ class PersonalRadio extends Component {
 export default connect((state, props) => {
   const { moodId, actionId } = state.user.data;
   const { listEmoji, listActions } = state.dictionaries;
+  const { radio } = state.player;
 
   return {
     ...props,
     settings: { moodId, actionId },
     dictionaries: { listEmoji, listActions },
+    radio,
   };
 })(PersonalRadio);
 
@@ -74,4 +78,5 @@ PersonalRadio.propTypes = {
   settings: PropTypes.object,
   callbacks: PropTypes.object,
   dictionaries: PropTypes.object,
+  radio: PropTypes.object,
 };

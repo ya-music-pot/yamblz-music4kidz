@@ -20,7 +20,7 @@ export default class RadioCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks, true);
+      onCardClick(tracks[0].id, tracks);
     }
   };
 

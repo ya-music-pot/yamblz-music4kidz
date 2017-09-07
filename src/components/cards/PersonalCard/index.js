@@ -11,7 +11,7 @@ import style from './style.styl';
 export default class PersonalCard extends Component {
   _handleCardClick = () => {
     const {
-      data: { tracks },
+      tracks,
       callbacks: { onCardClick },
     } = this.props;
 
@@ -19,30 +19,42 @@ export default class PersonalCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks);
+      onCardClick(tracks[0].id, tracks, true);
+    }
+  };
+
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      tracks,
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks, true);
     }
   };
 
   render() {
     const { container, title, subtitle, button } = style;
-    const {
-      settings,
-      callbacks: { onButtonClick },
-    } = this.props;
+    const { settings } = this.props;
 
     return (
       <div className={container} onClick={this._handleCardClick}>
         <EmojiStatus settings={settings} />
         <CardTitle text={settings.title} styles={title} />
         <CardSubtitle text="Мой плейлист" styles={subtitle} />
-        <ButtonMiniplayer onClick={onButtonClick} position={button} />
+        <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
       </div>
     );
   }
 }
 
 PersonalCard.propTypes = {
-  data: PropTypes.object,
+  tracks: PropTypes.arrayOf(PropTypes.object),
   settings: PropTypes.object,
   callbacks: PropTypes.object,
 };
