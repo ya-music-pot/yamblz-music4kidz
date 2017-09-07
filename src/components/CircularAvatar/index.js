@@ -48,7 +48,7 @@ class CircularAvatar extends Component {
   }
 
   _seekBarProcess = (e) => {
-    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const { player } = this.props;
 
     const dx = e.center.x - this.state.pivotX;
@@ -84,8 +84,8 @@ class CircularAvatar extends Component {
   }
 
   _getPivotCoordinates() {
-    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    let w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     this.setState({
       pivotX: w / 2,
       pivotY: h * 0.33,
@@ -102,7 +102,7 @@ class CircularAvatar extends Component {
     let percentage = (isNaN(progress)) ? 0 : progress;
     percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
 
-    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
     return (
       <div className={style.wrapper} ref={this._seekBar} >

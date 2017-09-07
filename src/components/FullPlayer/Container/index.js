@@ -8,11 +8,14 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class Container extends Component {
-  _handleClickDislike= () => {}
+  _handleClickDislike = () => {
+  }
 
-  _handleClickLike = () => {}
+  _handleClickLike = () => {
+  }
 
-  _handleClickPlus= () => {}
+  _handleClickPlus = () => {
+  }
 
   render() {
     const {
@@ -39,11 +42,6 @@ export default class Container extends Component {
           <div className={style.moodIcons} />
         </div>
         <div>
-          <div className={style.vote}>
-            <Button style={style.buttonDislike} onClick={this._handleClickDislike} />
-            <div className={style.spacer} />
-            <Button style={style.buttonLike} onClick={this._handleClickLike} />
-          </div>
           <CircularAvatar
             image={cover}
             progress={percentage}
