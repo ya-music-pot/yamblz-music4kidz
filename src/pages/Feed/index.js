@@ -36,8 +36,8 @@ class Feed extends Component {
 
   render() {
     const { playlist, container } = style;
-
     const callbacks = {
+      onRouterPush: this.props.router.push,
       onButtonClick: this._onButtonClick,
       onCardClick: this._onCardClick,
     };
@@ -55,6 +55,7 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
+  router: PropTypes.object,
   playerPlay: PropTypes.func,
   setPlaylist: PropTypes.func,
   showPlayer: PropTypes.func,

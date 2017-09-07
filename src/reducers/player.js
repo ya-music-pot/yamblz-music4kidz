@@ -95,6 +95,12 @@ export default function (state = defaultState, action) {
         ...payload,
       };
 
+    case PlayerActions.SET_POSITION:
+      return {
+        ...state,
+        ...payload,
+      };
+
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
@@ -105,6 +111,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         playlist: [...state.playlist, response.data],
+        radio: [response.data],
       };
 
     default:

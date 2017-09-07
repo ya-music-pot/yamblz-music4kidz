@@ -8,9 +8,6 @@ import Button from '_components/Button';
 import CartoonCard from '_components/cards/CartoonCard';
 
 import style from '../style.styl';
-import entranceCloud from '../images/entrance-cloud.png';
-import entranceCloud2x from '../images/entrance-cloud@2x.png';
-import entranceCloud3x from '../images/entrance-cloud@3x.png';
 
 class EntranceScreen extends Component {
   state = {
@@ -114,13 +111,7 @@ class EntranceScreen extends Component {
           className={cl(style.background, isCardShown ? style['background--opacity20'] : style['background--opacity100'])}
           ref={(el) => { this.content = el; }}
         >
-          <div className={style.imageContainer}>
-            <img
-              alt="flying-cloud"
-              src={entranceCloud}
-              srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
-            />
-          </div>
+          <div className={style.imageContainer} />
           <Title />
           <div className={style.buttonWrapper}>
             <Button

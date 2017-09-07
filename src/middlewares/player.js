@@ -1,5 +1,6 @@
 import AudioPlayer from '_helpers/AudioPlayer';
 import * as ActionTypes from '_actions/playerActionTypes.js';
+import { UPDATE_USER } from '_actions/user';
 
 export default ({ dispatch, getState }) => (next) => (action) => {
   const { player, type, ...rest } = action;
@@ -40,6 +41,11 @@ export default ({ dispatch, getState }) => (next) => (action) => {
 
     case ActionTypes.PLAYER_RESUME: {
       return AudioPlayer.player.resume();
+    }
+
+    case ActionTypes.SET_POSITION: {
+      const { position } = action.payload;
+      return AudioPlayer.player.setPosition(position);
     }
 
     case ActionTypes.PLAYER_NEXT: {
@@ -126,6 +132,17 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       }
 
       return next(action);
+    }
+
+    case `${UPDATE_USER}_SUCCESS`: {
+      const { id } = player;
+
+      return dispatch({
+        type: ActionTypes.PLAYER_GET_RADIO,
+        callAPI: {
+          url: `${API_URL}user/${id}/radio`,
+        },
+      });
     }
 
     default:
