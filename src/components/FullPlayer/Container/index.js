@@ -8,21 +8,11 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class Container extends Component {
-  _handleClickArrowDown = () => {
-    console.log('ArrowDown');
-  }
+  _handleClickDislike= () => {}
 
-  _handleClickDislike= () => {
-    console.log('Dislike');
-  }
+  _handleClickLike = () => {}
 
-  _handleClickLike = () => {
-    console.log('Like');
-  }
-
-  _handleClickPlus= () => {
-    console.log('Plus');
-  }
+  _handleClickPlus= () => {}
 
   render() {
     const {
@@ -33,7 +23,7 @@ export default class Container extends Component {
 
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat,
+      onClickRepeat, onClickArrowDown,
     } = this.props;
 
     const percentage = position / duration;
@@ -45,7 +35,7 @@ export default class Container extends Component {
     return (
       <div className={style.wrapper}>
         <div className={style.headerRow}>
-          <Button style={style.buttonArrowDown} onClick={this._handleClickArrowDown} />
+          <Button style={style.buttonArrowDown} onClick={onClickArrowDown} />
           <div className={style.moodIcons} />
         </div>
         <div>
@@ -103,6 +93,7 @@ Container.propTypes = {
   onClickPrevious: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
+  onClickArrowDown: PropTypes.func,
   isRepeatMode: PropTypes.bool,
   playerState: PropTypes.object,
 };

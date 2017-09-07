@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
@@ -21,29 +22,47 @@ export default class SingleCard extends Component {
     }
   };
 
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, content, title,
-      info, singer, button,
+      info, singer, button, overlay,
     } = style;
 
-    const { onButtonClick } = this.props.callbacks;
+    const { bgs, data } = this.props;
     const {
       artist, name, image_url: imageUrl,
-    } = this.props.data.tracks[0];
+    } = data.tracks[0];
 
-    const backgroundStyles = {};
-
+    const imageStyles = {};
     if (imageUrl) {
-      backgroundStyles.backgroundImage = `url(${imageUrl})`;
+      imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
+    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
+    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
+
     return (
-      <div className={container} style={backgroundStyles} onClick={this._handleCardClick}>
+      <div className={container} style={imageStyles} onClick={this._handleCardClick}>
+        <div className={overlay} style={backgroundStyles} />
         <div className={content}>
-          <CardTitle text="Новый трек" styles={title} />
+          <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
-            <ButtonMiniplayer onClick={onButtonClick} position={button} type="single" />
+            <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="single" />
             <div>
               <div className={singer}>{artist}</div>
               <div>{name}</div>
@@ -58,4 +77,5 @@ export default class SingleCard extends Component {
 SingleCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  bgs: PropTypes.object,
 };

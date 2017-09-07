@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
@@ -21,6 +22,21 @@ export default class CollectionCard extends Component {
     }
   };
 
+  _handleButtonClick = (e) => {
+    e.stopPropagation();
+    const {
+      data: { tracks },
+      callbacks: { onButtonClick },
+    } = this.props;
+
+    if (
+      typeof onButtonClick === 'function'
+      && Array.isArray(tracks) && tracks.length > 0
+    ) {
+      onButtonClick(tracks[0].id, tracks);
+    }
+  };
+
   render() {
     const {
       container, title,
@@ -28,24 +44,25 @@ export default class CollectionCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl },
-      callbacks: { onButtonClick },
+      data: { name, image_url: imageUrl }, bgs,
     } = this.props;
 
 
-    const backgroundStyles = {};
-
+    const imageStyles = {};
     if (imageUrl) {
-      backgroundStyles.backgroundImage = `url(${imageUrl})`;
+      imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
+    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
+    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
+
     return (
-      <div className={container} onClick={this._handleCardClick}>
+      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
-          <ButtonMiniplayer onClick={onButtonClick} position={button} />
+          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
         </div>
-        <div className={image} style={backgroundStyles}>image</div>
+        <div className={image} style={imageStyles}>image</div>
       </div>
     );
   }
@@ -54,4 +71,5 @@ export default class CollectionCard extends Component {
 CollectionCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  bgs: PropTypes.object,
 };

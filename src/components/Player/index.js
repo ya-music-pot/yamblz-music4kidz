@@ -11,22 +11,12 @@ import {
   playerResume, toggleRepeatMode,
 } from '_actions/player';
 
+import { playerModeUpdate } from '_actions/playerInfo';
+
 class Player extends Component {
-  componentWillReceiveProps(nextProps) {
-    const inited = nextProps.playerInfo.inited;
-
-    if (this.props.playerInfo.inited !== inited && inited) {
-      const playlist = this.props.playlist;
-      this.props.setPlaylist(playlist);
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.playerClear();
-  }
-
   _handlePlayButton = () => {
     const { player } = this.props;
+
     if (player.isPlaying) {
       this.props.playerPause();
     } else if (player.position !== 0) {
@@ -34,25 +24,25 @@ class Player extends Component {
     } else {
       this.props.playerPlay(player.trackId);
     }
-    console.log('play');
   };
 
   _handleNextButton = () => {
     const { player } = this.props;
     this.props.playerNext(player.trackId);
-    console.log('next');
   };
 
   _handlePreviousButton = () => {
     const { player } = this.props;
     this.props.playerPrev(player.trackId);
-    console.log('previous');
   };
 
   _handleRepeatButton = () => {
     this.props.toggleRepeatMode();
-    console.log('repeat');
   };
+
+  _handleClickArrowDown = () => {
+    this.props.playerModeUpdate('mini');
+  }
 
   render() {
     const { player } = this.props;
@@ -69,6 +59,7 @@ class Player extends Component {
           onClickNext={this._handleNextButton}
           onClickPrevious={this._handlePreviousButton}
           onClickRepeat={this._handleRepeatButton}
+          onClickArrowDown={this._handleClickArrowDown}
           type="full"
         />
       </PlayerToggle>
@@ -77,9 +68,7 @@ class Player extends Component {
 }
 
 export default connect((state, props) => ({
-  playerInfo: state.playerInfo,
   player: state.player,
-  playlist: state.setup.playlist,
   ...props,
 }), {
   setPlaylist,
@@ -90,18 +79,16 @@ export default connect((state, props) => ({
   playerPause,
   playerResume,
   toggleRepeatMode,
+  playerModeUpdate,
 })(Player);
 
 Player.propTypes = {
-  playerInfo: PropTypes.object,
-  playlist: PropTypes.array,
   player: PropTypes.object,
-  setPlaylist: PropTypes.func,
   playerPlay: PropTypes.func,
-  playerClear: PropTypes.func,
   playerNext: PropTypes.func,
   playerPrev: PropTypes.func,
   playerPause: PropTypes.func,
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
+  playerModeUpdate: PropTypes.func,
 };
