@@ -42,6 +42,11 @@ export default ({ dispatch, getState }) => (next) => (action) => {
       return AudioPlayer.player.resume();
     }
 
+    case ActionTypes.SET_POSITION: {
+      const { position } = action.payload;
+      return AudioPlayer.player.setPosition(position);
+    }
+
     case ActionTypes.PLAYER_NEXT: {
       const trackIndex = playlist.indexOf(track);
 

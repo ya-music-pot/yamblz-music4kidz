@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Hammer from 'hammerjs';
 
 import style from './style.styl';
 import defaultCover from './images/default.jpg';
 
-export default class CircularAvatar extends Component {
+import {
+  setPosition,
+} from '_actions/player';
+
+class CircularAvatar extends Component {
+  state = {
+    curAngle: 0,
+    pivotX: 0,
+    pivotY: 0,
+    xStart: 0,
+    yStart: 0,
+    seekActive: false,
+  };
+
   _polarToCartesian = (centerX, centerY, radius, angleInDegrees) => {
     const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
 
@@ -25,6 +40,59 @@ export default class CircularAvatar extends Component {
     ].join(' ');
   }
 
+  _seekBar = (target) => {
+    this.seekBarNode = target;
+  }
+
+  _seekBarProcess = (e) => {
+    const { player } = this.props;
+
+    let dx = e.center.x - this.state.pivotX,
+        dy = e.center.y - this.state.pivotY;
+
+    if (e.eventType == 1) {
+      this.setState({
+        seekActive: true,
+        xStart: 0,
+        yStart: - this.state.pivotY + document.documentElement.clientHeight * 0.14,
+      });
+    }
+
+    this.setState({
+      curAngle: (dx > 0) ? this._calculateAngle(dx, dy) : 2 - this._calculateAngle(dx, dy),
+    });
+
+    if (e.eventType == 4) {
+      this.setState({
+        seekActive: false,
+      });
+      this.props.setPosition(this.props.player.duration * this.state.curAngle / 2);
+    }
+  }
+
+  _calculateAngle = (x, y) => {
+    let numerator,
+        denumerator;
+    numerator = this.state.xStart * x + this.state.yStart * y;
+    denumerator = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2))
+                * Math.sqrt(Math.pow(this.state.xStart, 2)
+                + Math.pow(this.state.yStart, 2));
+    return Math.acos(numerator / denumerator) / Math.PI;
+  }
+
+  _getPivotCoordinates() {
+    this.setState({
+      pivotX: document.documentElement.clientWidth / 2,
+      pivotY: document.documentElement.clientHeight * 0.33,
+    });
+  }
+
+  componentDidMount() {
+    this._getPivotCoordinates();
+    this.hammerSeekBar = Hammer(this.seekBarNode);
+    this.hammerSeekBar.on('hammer.input', this._seekBarProcess);
+  }
+
   render() {
     const {
       progress, image, radius,
@@ -32,11 +100,14 @@ export default class CircularAvatar extends Component {
     } = this.props;
 
     const imageUri = (image !== 'null') ? image : defaultCover;
-    const percentage = (isNaN(progress)) ? 0 : progress;
+    let percentage = (isNaN(progress)) ? 0 : progress;
+    percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
+
+    console.log(this.props.player.position);
 
     return (
-      <div className={style.wrapper}>
-        <svg className={style.progressBar}>
+      <div className={style.wrapper} ref={this._seekBar} >
+        <svg className={style.progressBar} >
           <defs>
             <linearGradient id="linear-gradient" x2="0%" y2="100%">
               <stop offset="5%" stopColor="#ffde5a" />
@@ -49,7 +120,7 @@ export default class CircularAvatar extends Component {
               document.documentElement.clientHeight * radius,
               document.documentElement.clientHeight * radius,
               0,
-              percentage * 360,
+              ((this.state.seekActive) ? (this.state.curAngle / 2) : percentage) * 360,
             )}
             stroke="url(#linear-gradient)"
             strokeWidth="11"
@@ -71,9 +142,17 @@ export default class CircularAvatar extends Component {
   }
 }
 
+export default connect((state, props) => ({
+  player: state.player,
+  ...props,
+}), {
+  setPosition,
+})(CircularAvatar);
+
 CircularAvatar.propTypes = {
   progress: PropTypes.number,
   radius: PropTypes.number,
   time: PropTypes.string,
   image: PropTypes.string,
+  setPosition: PropTypes.func,
 };
