@@ -14,13 +14,14 @@ export default class RadioCard extends Component {
     const {
       data: { tracks, id: playlistId },
       callbacks: { onCardClick },
+      isPlaying,
     } = this.props;
 
     if (
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks, false, playlistId);
+      onCardClick(tracks[0].id, tracks, false, playlistId, isPlaying);
     }
   };
 
@@ -29,13 +30,14 @@ export default class RadioCard extends Component {
     const {
       data: { tracks, id: playlistId },
       callbacks: { onButtonClick },
+      isPlaying,
     } = this.props;
 
     if (
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks, false, playlistId);
+      onButtonClick(tracks[0].id, tracks, false, playlistId, isPlaying);
     }
   };
 
@@ -48,7 +50,7 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl }, bgs,
+      data: { name, image_url: imageUrl }, bgs, isPlaying,
     } = this.props;
 
     const imageStyles = {};
@@ -69,7 +71,11 @@ export default class RadioCard extends Component {
           <div className={cl(circle, circleS)} />
           <div className={image} style={imageStyles} />
         </div>
-        <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+        <ButtonMiniplayer
+          onClick={this._handleButtonClick}
+          position={button}
+          isPlaying={isPlaying}
+        />
       </div>
     );
   }
@@ -79,4 +85,5 @@ RadioCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

@@ -18,7 +18,7 @@ export default class CollectionCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks, false, playlistId);
+      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
@@ -29,13 +29,11 @@ export default class CollectionCard extends Component {
       callbacks: { onButtonClick },
     } = this.props;
 
-    console.log(this.props.data);
-
     if (
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks, false, playlistId);
+      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
@@ -46,7 +44,8 @@ export default class CollectionCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl }, bgs,
+      data: { name, image_url: imageUrl },
+      bgs, isPlaying,
     } = this.props;
 
 
@@ -62,7 +61,11 @@ export default class CollectionCard extends Component {
       <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+          <ButtonMiniplayer
+            onClick={this._handleButtonClick}
+            position={button}
+            isPlaying={isPlaying}
+          />
         </div>
         <div className={image} style={imageStyles}>image</div>
       </div>
@@ -74,4 +77,5 @@ CollectionCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

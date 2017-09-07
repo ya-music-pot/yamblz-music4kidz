@@ -2,6 +2,8 @@ import * as PlayerActions from '_actions/playerActionTypes.js';
 
 const defaultState = {
   isPlaying: false,
+  shouldPlay: false,
+  loaded: false,
   isRadio: false,
   isRepeatMode: false,
 
@@ -26,18 +28,21 @@ export default function (state = defaultState, action) {
         trackId: payload.trackId,
         position: 0,
         duration: 0,
+        shouldPlay: true,
       };
 
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
         isPlaying: true,
+        shouldPlay: true,
       };
 
     case PlayerActions.PLAYER_PLAYED:
       return {
         ...state,
         isPlaying: true,
+        loaded: true,
       };
 
     case PlayerActions.PLAYER_STOP:
@@ -45,6 +50,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isPlaying: false,
+        shouldPlay: false,
       };
 
     case PlayerActions.PLAYER_NEXT:
