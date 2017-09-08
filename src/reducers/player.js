@@ -29,6 +29,7 @@ export default function (state = defaultState, action) {
         position: 0,
         duration: 0,
         shouldPlay: true,
+        loaded: false,
       };
 
     case PlayerActions.PLAYER_RESUME:
