@@ -23,15 +23,11 @@ class Feed extends Component {
     }
   };
 
-  _onCardClick = (trackId, playlist, isRadio = false, playlistId, isPlaying) => {
-    if (isPlaying) {
-      this.props.playerPause();
-    } else {
-      this.props.playerModeUpdate('full');
-      this.props.showPlayer(playlist, isRadio);
-      this.props.setPlaylist(playlist, isRadio, playlistId);
-      this.props.playerPlay(trackId);
-    }
+  _onCardClick = (trackId, playlist, isRadio = false, playlistId) => {
+    this.props.playerModeUpdate('full');
+    this.props.showPlayer(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
+    this.props.playerPlay(trackId);
   };
 
   render() {
