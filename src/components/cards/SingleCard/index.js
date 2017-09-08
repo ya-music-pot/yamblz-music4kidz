@@ -21,42 +21,17 @@ export default class SingleCard extends Component {
     }
   }
 
-  _handleCardClick = () => {
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onCardClick },
-    } = this.props;
-
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
-    }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
-    }
-  };
-
   render() {
     const {
       container, content, title,
       info, singer, button, overlay,
     } = style;
 
-    const { data, isPlaying } = this.props;
+    const {
+      data, isPlaying,
+      callbacks: { handleCardClick, handleButtonClick },
+    } = this.props;
+
     const {
       artist, name, image_url: imageUrl,
     } = data.tracks[0];
@@ -67,13 +42,13 @@ export default class SingleCard extends Component {
     }
 
     return (
-      <div className={container} style={imageStyles} onClick={this._handleCardClick}>
+      <div className={container} style={imageStyles} onClick={handleCardClick}>
         <div className={overlay} style={this._bg} />
         <div className={content}>
           <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
             <ButtonMiniplayer
-              onClick={this._handleButtonClick}
+              onClick={handleButtonClick}
               position={button}
               type="single"
               isPlaying={isPlaying}

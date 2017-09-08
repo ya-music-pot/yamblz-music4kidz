@@ -21,35 +21,6 @@ export default class CollectionCard extends Component {
     }
   }
 
-  _handleCardClick = () => {
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onCardClick },
-    } = this.props;
-
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
-    }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
-    }
-  };
-
   render() {
     const {
       container, title,
@@ -58,6 +29,7 @@ export default class CollectionCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
       isPlaying,
     } = this.props;
 
@@ -68,11 +40,11 @@ export default class CollectionCard extends Component {
     }
 
     return (
-      <div className={container} onClick={this._handleCardClick} style={this._bg}>
+      <div className={container} onClick={handleCardClick} style={this._bg}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <ButtonMiniplayer
-            onClick={this._handleButtonClick}
+            onClick={handleButtonClick}
             position={button}
             isPlaying={isPlaying}
           />

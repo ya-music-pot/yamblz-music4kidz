@@ -12,7 +12,8 @@ import CardList from './CardList';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  _onButtonClick = (trackId, playlist, isRadio = false, playlistId, isPlaying) => {
+  _onButtonClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
     if (isPlaying) {
       this.props.playerPause();
     } else {
@@ -23,7 +24,8 @@ class Feed extends Component {
     }
   };
 
-  _onCardClick = (trackId, playlist, isRadio = false, playlistId) => {
+  _onCardClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId } = params;
     this.props.playerModeUpdate('full');
     this.props.showPlayer(playlist, isRadio);
     this.props.setPlaylist(playlist, isRadio, playlistId);
