@@ -9,7 +9,7 @@ import style from './style.styl';
 export default class GameCard extends Component {
   _handleCardClick = () => {
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onCardClick },
     } = this.props;
 
@@ -17,14 +17,14 @@ export default class GameCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks);
+      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
   _handleButtonClick = (e) => {
     e.stopPropagation();
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onButtonClick },
     } = this.props;
 
@@ -32,7 +32,7 @@ export default class GameCard extends Component {
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks);
+      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
@@ -43,7 +43,7 @@ export default class GameCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl },
+      data: { name, image_url: imageUrl }, isPlaying,
     } = this.props;
 
     const backgroundStyles = {};
@@ -56,7 +56,12 @@ export default class GameCard extends Component {
       <div className={container} onClick={this._handleCardClick}>
         <CardTitle text={name} styles={titleStyles} />
         <div className={buttonWrapper}>
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="game" />
+          <ButtonMiniplayer
+            onClick={this._handleButtonClick}
+            position={button}
+            type="game"
+            isPlaying={isPlaying}
+          />
         </div>
         <div className={image} style={backgroundStyles}>image</div>
       </div>
@@ -67,4 +72,5 @@ export default class GameCard extends Component {
 GameCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

@@ -23,7 +23,7 @@ export default class SingleCard extends Component {
 
   _handleCardClick = () => {
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onCardClick },
     } = this.props;
 
@@ -31,14 +31,14 @@ export default class SingleCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks);
+      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
   _handleButtonClick = (e) => {
     e.stopPropagation();
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onButtonClick },
     } = this.props;
 
@@ -46,7 +46,7 @@ export default class SingleCard extends Component {
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks);
+      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
@@ -56,9 +56,10 @@ export default class SingleCard extends Component {
       info, singer, button, overlay,
     } = style;
 
+    const { data, isPlaying } = this.props;
     const {
       artist, name, image_url: imageUrl,
-    } = this.props.data.tracks[0];
+    } = data.tracks[0];
 
     const imageStyles = {};
     if (imageUrl) {
@@ -71,7 +72,12 @@ export default class SingleCard extends Component {
         <div className={content}>
           <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
-            <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="single" />
+            <ButtonMiniplayer
+              onClick={this._handleButtonClick}
+              position={button}
+              type="single"
+              isPlaying={isPlaying}
+            />
             <div>
               <div className={singer}>{artist}</div>
               <div>{name}</div>
@@ -87,4 +93,5 @@ SingleCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

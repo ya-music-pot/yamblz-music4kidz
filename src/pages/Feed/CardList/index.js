@@ -31,7 +31,15 @@ class CardList extends Component {
 
     const CardsType = cards[data.type];
 
-    const { callbacks, backgroundsList } = this.props;
+    const {
+      callbacks, backgroundsList,
+      playlistId, shouldPlay,
+    } = this.props;
+
+    let isPlaying = false;
+    if (data.id === playlistId && shouldPlay) {
+      isPlaying = true;
+    }
 
     return (
       <CardsType
@@ -39,6 +47,7 @@ class CardList extends Component {
         data={data}
         callbacks={callbacks}
         bgs={backgroundsList}
+        isPlaying={isPlaying}
       />
     );
   };
@@ -54,12 +63,22 @@ class CardList extends Component {
   }
 }
 
-export default connect((state, props) => ({
-  ...props,
-  feed: state.feed,
-  userId: state.user.data.id === undefined ? 1 : state.user.data.id,
-  backgroundsList: state.dictionaries.backgroundsList,
-}), { getFeed })(CardList);
+export default connect((state, props) => {
+  const {
+    feed, user: { data },
+    dictionaries: { backgroundsList },
+    player: { playlistId, shouldPlay },
+  } = state;
+  const userId = data.id === undefined ? 1 : data.id;
+  return {
+    ...props,
+    feed,
+    userId,
+    backgroundsList,
+    playlistId,
+    shouldPlay,
+  };
+}, { getFeed })(CardList);
 
 CardList.propTypes = {
   callbacks: PropTypes.object,
@@ -67,4 +86,6 @@ CardList.propTypes = {
   userId: PropTypes.number,
   getFeed: PropTypes.func,
   backgroundsList: PropTypes.object,
+  playlistId: PropTypes.number,
+  shouldPlay: PropTypes.bool,
 };

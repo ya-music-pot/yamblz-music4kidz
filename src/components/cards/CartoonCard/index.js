@@ -10,7 +10,7 @@ import style from './style.styl';
 export default class CartoonCard extends Component {
   _handleCardClick = () => {
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onCardClick },
     } = this.props;
 
@@ -18,14 +18,14 @@ export default class CartoonCard extends Component {
       typeof onCardClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onCardClick(tracks[0].id, tracks);
+      onCardClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
   _handleButtonClick = (e) => {
     e.stopPropagation();
     const {
-      data: { tracks },
+      data: { tracks, id: playlistId },
       callbacks: { onButtonClick },
     } = this.props;
 
@@ -33,7 +33,7 @@ export default class CartoonCard extends Component {
       typeof onButtonClick === 'function'
       && Array.isArray(tracks) && tracks.length > 0
     ) {
-      onButtonClick(tracks[0].id, tracks);
+      onButtonClick(tracks[0].id, tracks, false, playlistId, this.props.isPlaying);
     }
   };
 
@@ -58,7 +58,11 @@ export default class CartoonCard extends Component {
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <CardSubtitle text={description} styles={subtitle} />
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+          <ButtonMiniplayer
+            onClick={this._handleButtonClick}
+            position={button}
+            isPlaying={this.props.isPlaying}
+          />
         </div>
       </div>
     );
@@ -68,4 +72,5 @@ export default class CartoonCard extends Component {
 CartoonCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };
