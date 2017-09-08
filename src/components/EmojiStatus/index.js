@@ -12,8 +12,8 @@ export default class EmojiStatus extends Component {
 
     return (
       <div className={container}>
-        { actionIcon && <Icon typeIcon={actionIcon} className={icon} /> }
         { moodIcon && <Icon typeIcon={moodIcon} className={icon} /> }
+        { actionIcon && <Icon typeIcon={actionIcon} className={icon} /> }
       </div>
     );
   }

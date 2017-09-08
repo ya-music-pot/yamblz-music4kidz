@@ -23,37 +23,6 @@ export default class RadioCard extends Component {
     }
   }
 
-  _handleCardClick = () => {
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onCardClick },
-      isPlaying,
-    } = this.props;
-
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks, false, playlistId, isPlaying);
-    }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks, id: playlistId },
-      callbacks: { onButtonClick },
-      isPlaying,
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks, false, playlistId, isPlaying);
-    }
-  };
-
   render() {
     const {
       container, title, circle,
@@ -63,7 +32,9 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl }, isPlaying,
+      data: { name, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
+      isPlaying,
     } = this.props;
 
     const imageStyles = {};
@@ -72,7 +43,7 @@ export default class RadioCard extends Component {
     }
 
     return (
-      <div style={this._bg} className={container} onClick={this._handleCardClick}>
+      <div style={this._bg} className={container} onClick={handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={imageContainer}>
@@ -82,7 +53,7 @@ export default class RadioCard extends Component {
           <div className={image} style={imageStyles} />
         </div>
         <ButtonMiniplayer
-          onClick={this._handleButtonClick}
+          onClick={handleButtonClick}
           position={button}
           isPlaying={isPlaying}
         />
