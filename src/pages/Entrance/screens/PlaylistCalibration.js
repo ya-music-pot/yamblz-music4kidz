@@ -11,7 +11,7 @@ export default class PlaylistCalibration extends Component {
       <div className={cl(style.container, style.containerLeft)}>
         <div className={style.calibrationTitleContainer}>
           <div className={style.title}>
-            А&nbsp;давай создадим<br />лучший в&nbsp;мире<br />плейлист для тебя?
+            Катя, давай создадим лучший в&nbsp;мире плейлист для&nbsp;тебя?
           </div>
         </div>
         <div className={style.calibrationButtonWrapper}>

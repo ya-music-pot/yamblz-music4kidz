@@ -34,7 +34,7 @@ export default {
     {
       step: 2,
       type: 'emoji',
-      title: 'Выберите свое настроение!',
+      title: 'Выбери своё настроение!',
     },
     {
       step: 3,
