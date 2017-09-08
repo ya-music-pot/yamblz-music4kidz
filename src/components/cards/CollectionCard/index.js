@@ -8,6 +8,19 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class CollectionCard extends Component {
+  constructor() {
+    super();
+    this._bg = null;
+  }
+
+  componentWillMount() {
+    if (this._bg === null) {
+      const { gradients } = this.props.bgs;
+      const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
+      this._bg = { backgroundImage: `linear-gradient(${gradient})` };
+    }
+  }
+
   _handleCardClick = () => {
     const {
       data: { tracks, id: playlistId },
@@ -45,7 +58,7 @@ export default class CollectionCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
-      bgs, isPlaying,
+      isPlaying,
     } = this.props;
 
 
@@ -54,11 +67,8 @@ export default class CollectionCard extends Component {
       imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
-    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
-    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
-
     return (
-      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
+      <div className={container} onClick={this._handleCardClick} style={this._bg}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <ButtonMiniplayer
