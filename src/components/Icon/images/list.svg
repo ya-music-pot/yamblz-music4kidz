@@ -1,15 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="32px" height="20px" viewBox="0 0 32 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 45.1 (43504) - http://www.bohemiancoding.com/sketch -->
-    <title>list</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="playlist" transform="translate(-169.000000, -566.000000)">
-            <g id="list" transform="translate(169.000000, 560.000000)">
-                <rect id="Rectangle-2" fill="#D8D8D8" opacity="0" x="0" y="0" width="32" height="32"></rect>
-                <path d="M0,17.4285714 L2.90909091,17.4285714 L2.90909091,14.5714286 L0,14.5714286 L0,17.4285714 Z M0,26 L2.90909091,26 L2.90909091,23.1428571 L0,23.1428571 L0,26 Z M0,8.85714286 L2.90909091,8.85714286 L2.90909091,6 L0,6 L0,8.85714286 Z M5.81818182,17.4285714 L32,17.4285714 L32,14.5714286 L5.81818182,14.5714286 L5.81818182,17.4285714 Z M5.81818182,26 L32,26 L32,23.1428571 L5.81818182,23.1428571 L5.81818182,26 Z M5.81818182,6 L5.81818182,8.85714286 L32,8.85714286 L32,6 L5.81818182,6 Z" id="Shape" fill="#FFFFFF" fill-rule="nonzero"></path>
-            </g>
-        </g>
-    </g>
-</svg>
+<svg width="32" height="20" viewBox="0 0 32 20" xmlns="http://www.w3.org/2000/svg"><title>list</title><path d="M0 11.429h2.91V8.57H0v2.858zM0 20h2.91v-2.857H0V20zM0 2.857h2.91V0H0v2.857zm5.818 8.572H32V8.57H5.818v2.858zm0 8.571H32v-2.857H5.818V20zm0-20v2.857H32V0H5.818z" fill="#FFF" fill-rule="nonzero"/></svg>

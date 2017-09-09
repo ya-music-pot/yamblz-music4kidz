@@ -20,9 +20,6 @@ export default class Container extends Component {
   _handleClickPlus = () => {
   }
 
-  _handleClickList = () => {
-  }
-
   render() {
     const {
       trackName, singerName, isPlaying,
