@@ -9,10 +9,10 @@ import style from './style.styl';
 
 export default class Header extends Component {
   render() {
-    const { avatar, userName } = this.props;
+    const { avatar, userName, className } = this.props;
 
     return (
-      <div className={style.header}>
+      <div className={cl(style.header, style[className])}>
         <div className={cl(style.button, style.buttonBack)} />
         <div className={cl(style.button, style.buttonSettings)} />
         <Avatar
@@ -33,4 +33,5 @@ export default class Header extends Component {
 Header.propTypes = {
   avatar: PropTypes.string,
   userName: PropTypes.string,
+  className: PropTypes.string,
 };
