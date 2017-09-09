@@ -8,34 +8,18 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class CollectionCard extends Component {
-  _handleCardClick = () => {
-    const {
-      data: { tracks },
-      callbacks: { onCardClick },
-    } = this.props;
+  constructor() {
+    super();
+    this._bg = null;
+  }
 
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks);
+  componentWillMount() {
+    if (this._bg === null) {
+      const { gradients } = this.props.bgs;
+      const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
+      this._bg = { backgroundImage: `linear-gradient(${gradient})` };
     }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks);
-    }
-  };
+  }
 
   render() {
     const {
@@ -44,7 +28,9 @@ export default class CollectionCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl }, bgs,
+      data: { name, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
+      isPlaying,
     } = this.props;
 
 
@@ -53,14 +39,15 @@ export default class CollectionCard extends Component {
       imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
-    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
-    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
-
     return (
-      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
+      <div className={container} onClick={handleCardClick} style={this._bg}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+          <ButtonMiniplayer
+            onClick={handleButtonClick}
+            position={button}
+            isPlaying={isPlaying}
+          />
         </div>
         <div className={image} style={imageStyles}>image</div>
       </div>
@@ -72,4 +59,5 @@ CollectionCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

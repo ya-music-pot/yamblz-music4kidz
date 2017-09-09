@@ -10,34 +10,18 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class RadioCard extends Component {
-  _handleCardClick = () => {
-    const {
-      data: { tracks },
-      callbacks: { onCardClick },
-    } = this.props;
+  constructor() {
+    super();
+    this._bg = null;
+  }
 
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks);
+  componentWillMount() {
+    if (this._bg === null) {
+      const { colors } = this.props.bgs;
+      const color = colors[getRandomInteger(0, colors.length - 1)];
+      this._bg = { backgroundColor: `#${color}` };
     }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks);
-    }
-  };
+  }
 
   render() {
     const {
@@ -48,7 +32,9 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl }, bgs,
+      data: { name, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
+      isPlaying,
     } = this.props;
 
     const imageStyles = {};
@@ -56,11 +42,8 @@ export default class RadioCard extends Component {
       imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
-    const color = bgs.colors[getRandomInteger(0, bgs.colors.length - 1)];
-    const backgroundStyles = { backgroundColor: `#${color}` };
-
     return (
-      <div style={backgroundStyles} className={container} onClick={this._handleCardClick}>
+      <div style={this._bg} className={container} onClick={handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={imageContainer}>
@@ -69,7 +52,11 @@ export default class RadioCard extends Component {
           <div className={cl(circle, circleS)} />
           <div className={image} style={imageStyles} />
         </div>
-        <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+        <ButtonMiniplayer
+          onClick={handleButtonClick}
+          position={button}
+          isPlaying={isPlaying}
+        />
       </div>
     );
   }
@@ -79,4 +66,5 @@ RadioCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

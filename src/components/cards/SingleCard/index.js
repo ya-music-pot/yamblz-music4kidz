@@ -8,34 +8,18 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class SingleCard extends Component {
-  _handleCardClick = () => {
-    const {
-      data: { tracks },
-      callbacks: { onCardClick },
-    } = this.props;
+  constructor() {
+    super();
+    this._bg = null;
+  }
 
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks);
+  componentWillMount() {
+    if (this._bg === null) {
+      const { gradients } = this.props.bgs;
+      const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
+      this._bg = { backgroundImage: `linear-gradient(${gradient})` };
     }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks);
-    }
-  };
+  }
 
   render() {
     const {
@@ -43,7 +27,11 @@ export default class SingleCard extends Component {
       info, singer, button, overlay,
     } = style;
 
-    const { bgs, data } = this.props;
+    const {
+      data, isPlaying,
+      callbacks: { handleCardClick, handleButtonClick },
+    } = this.props;
+
     const {
       artist, name, image_url: imageUrl,
     } = data.tracks[0];
@@ -53,16 +41,18 @@ export default class SingleCard extends Component {
       imageStyles.backgroundImage = `url(${imageUrl})`;
     }
 
-    const gradient = bgs.gradients[getRandomInteger(0, bgs.gradients.length - 1)];
-    const backgroundStyles = { backgroundImage: `linear-gradient(${gradient})` };
-
     return (
-      <div className={container} style={imageStyles} onClick={this._handleCardClick}>
-        <div className={overlay} style={backgroundStyles} />
+      <div className={container} style={imageStyles} onClick={handleCardClick}>
+        <div className={overlay} style={this._bg} />
         <div className={content}>
           <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
-            <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="single" />
+            <ButtonMiniplayer
+              onClick={handleButtonClick}
+              position={button}
+              type="single"
+              isPlaying={isPlaying}
+            />
             <div>
               <div className={singer}>{artist}</div>
               <div>{name}</div>
@@ -78,4 +68,5 @@ SingleCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

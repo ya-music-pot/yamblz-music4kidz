@@ -4,4 +4,5 @@ export default {
   single: 2,
   collection: 3,
   game: 4,
+  personal: 5,
 };
