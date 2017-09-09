@@ -26,6 +26,7 @@ class Card extends Component {
         isRadio: playlistId === 'radio',
         playlistId,
         isPlaying,
+        cardType: data.type,
       };
       callback(params);
     }

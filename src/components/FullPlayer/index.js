@@ -12,7 +12,7 @@ export default class FullPlayer extends Component {
     const playerState = this.props.playerState;
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat, onClickArrowDown,
+      onClickRepeat, onClickArrowDown, cardType,
     } = this.props;
 
     return (
@@ -24,6 +24,7 @@ export default class FullPlayer extends Component {
           onClickPrevious={onClickPrevious}
           onClickRepeat={onClickRepeat}
           onClickArrowDown={onClickArrowDown}
+          cardType={cardType}
         />
       </div>
     );
@@ -37,4 +38,5 @@ FullPlayer.propTypes = {
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
   onClickArrowDown: PropTypes.func,
+  cardType: PropTypes.number,
 };

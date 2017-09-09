@@ -53,7 +53,7 @@ class PlayerToggle extends Component {
       });
     }
     this.props.playerModeUpdate(this.state.currentPlayer);
-  }
+  };
 
   _toMiniPlayer = () => {
     this.setState({
@@ -61,7 +61,7 @@ class PlayerToggle extends Component {
       slideTransform: 0,
     });
     this.props.playerModeUpdate(this.state.currentPlayer);
-  }
+  };
 
   _slide() {
     return {

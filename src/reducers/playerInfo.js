@@ -4,6 +4,7 @@ const defaultState = {
   inited: false,
   isShow: false,
   mode: 'full',
+  cardType: null,
 };
 
 export default function (state = defaultState, action) {

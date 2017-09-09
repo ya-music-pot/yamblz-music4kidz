@@ -45,7 +45,7 @@ class Player extends Component {
   };
 
   render() {
-    const { player } = this.props;
+    const { player, cardType } = this.props;
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -61,6 +61,7 @@ class Player extends Component {
           onClickRepeat={this._handleRepeatButton}
           onClickArrowDown={this._handleClickArrowDown}
           type="full"
+          cardType={cardType}
         />
       </PlayerToggle>
     );
@@ -69,6 +70,7 @@ class Player extends Component {
 
 export default connect((state, props) => ({
   player: state.player,
+  cardType: state.playerInfo.cardType,
   ...props,
 }), {
   setPlaylist,
@@ -91,4 +93,5 @@ Player.propTypes = {
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
   playerModeUpdate: PropTypes.func,
+  cardType: PropTypes.number,
 };
