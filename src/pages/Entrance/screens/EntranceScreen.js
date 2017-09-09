@@ -118,7 +118,7 @@ class EntranceScreen extends Component {
               style={style.button}
               onClick={this.props.onNavigate}
             >
-              Поехали
+              Войти
             </Button>
           </div>
         </div>
@@ -153,7 +153,7 @@ const Title = () => (
       Привет!
     </div>
     <div className={style.subTitle}>
-        Давай слушать музыку и веселиться?
+        Будем слушать музыку и веселиться?
     </div>
   </div>
 );
