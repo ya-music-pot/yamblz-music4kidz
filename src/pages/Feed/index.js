@@ -7,11 +7,20 @@ import CardList from '_components/CardList';
 
 import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
+import { getFeed } from '_actions/feed';
 
 import style from './style.styl';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
+  componentWillMount() {
+    const { userId } = this.props;
+
+    if (userId !== undefined) {
+      this.props.getFeed(userId);
+    }
+  }
+
   _onButtonClick = (params) => {
     const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
     if (isPlaying) {
@@ -39,13 +48,14 @@ class Feed extends Component {
       onButtonClick: this._onButtonClick,
       onCardClick: this._onCardClick,
     };
+    const { data } = this.props.feed;
 
     return (
       <div className={playlist}>
         <div className={container}>
           <Topbar />
           <PersonalRadio callbacks={callbacks} />
-          <CardList />
+          <CardList data={data} callbacks={callbacks} />
         </div>
       </div>
     );
@@ -59,6 +69,9 @@ Feed.propTypes = {
   showPlayer: PropTypes.func,
   playerModeUpdate: PropTypes.func,
   playerPause: PropTypes.func,
+  userId: PropTypes.number,
+  getFeed: PropTypes.func,
+  feed: PropTypes.object,
 };
 
 export default connect((state, props) => ({
@@ -75,4 +88,5 @@ export default connect((state, props) => ({
   showPlayer,
   playerModeUpdate,
   playerPause,
+  getFeed,
 })(Feed);

@@ -3,99 +3,118 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import Slider from '_decorators/Slider';
-import Achievement from '_components/Achievement';
-import Header from './Header';
-import PlaylistToggler from './PlaylistToggler';
-import style from './style.styl';
+import { getUser, getAllTracks, getAllPlaylists } from '_actions/user';
 
-const WIDTH_SLIDE = 160;
-const MAX_TRANSFORM = 0;
+import CardList from '_components/CardList';
+import Button from '_components/Button';
+import Header from './Header';
+import style from './style.styl';
 
 class Personal extends Component {
   state = {
-    className: '',
+    acviveTab: 'playlists',
   }
 
   componentWillMount() {
-    const docWidth = document.body.clientWidth;
-    const { order } = this.props.achievements;
+    const { user } = this.props;
+    const { id } = user.data;
 
-    this.minTransform = -WIDTH_SLIDE * order.length + docWidth;
+    this.props.getUser(id);
+    this.props.getAllTracks(id);
+    this.props.getAllPlaylists(id);
   }
 
-  componentDidMount() {
-    document.addEventListener('scroll', this._handleScroll);
+  _handleToggle = (id) => {
+    this.setState({
+      acviveTab: id,
+    });
   }
 
-  componentWillUnmount() {
-    document.removeEventListener('scroll', this._handleScroll);
+  _handleBack = () => {
+
   }
 
-  _handleScroll = () => {
-    if (document.body.scrollTop > 30) {
-      this.setState({
-        className: 'sticky',
-      });
-    } else {
-      this.setState({
-        className: '',
-      });
-    }
+  _handleSearch = () => {
+    this.props.router.push('/feed');
   }
 
   render() {
-    const {
-      firstName, lastName, avatarUrl,
-    } = this.props.user;
+    const { achievements, user } = this.props;
 
-    const { achievements } = this.props;
+    const { tracks, playlists } = user;
+    const { firstName, lastName, avatarUrl } = user.data;
+
     const { order, data } = achievements;
-    const { className } = this.state;
+    const { acviveTab } = this.state;
+    const cardListData = acviveTab === 'playlists' ? playlists : tracks;
 
     return (
-      <div className={cl(style.container, style[className])}>
+      <div className={style.container}>
         <Header
           avatar={avatarUrl}
           userName={`${firstName} ${lastName}`}
-          className={className}
+          order={order}
+          data={data}
+          onBackClick={this._handleBack}
         />
-        <Slider
-          className={style.slider}
-          widthSlide={WIDTH_SLIDE}
-          initTransform={MAX_TRANSFORM}
-          maxTransform={MAX_TRANSFORM}
-          minTransform={this.minTransform}
-        >
-          {
-            order.map(key => {
-              const { id, typeIcon, title } = data[key];
-              const disabled = true;
-
-              return (
-                <Achievement
-                  typeIcon={typeIcon}
-                  title={title}
-                  disabled={disabled}
-                  key={id}
-                />
-              );
-            })
-          }
-        </Slider>
-        <PlaylistToggler />
+        <div className={style.filter}>
+          <div
+            className={cl(style.filterItem, acviveTab === 'playlists' && style.active)}
+            onClick={this._handleToggle.bind(this, 'playlists')}
+          >
+            Мои подборки
+          </div>
+          <div
+            className={cl(style.filterItem, acviveTab === 'tracks' && style.active)}
+            onClick={this._handleToggle.bind(this, 'tracks')}
+          >
+            Мои песни
+          </div>
+        </div>
+        {
+          cardListData.length > 0 &&
+          <div className={style.cardList}>
+            <CardList
+              data={cardListData}
+            />
+          </div>
+        }
+        {
+          cardListData.length === 0 &&
+          <div className={style.emptyContainer}>
+            <div className={style.emptyText}>
+              Здесь будут твои любимые и сохранённые подборки
+              <br />
+              Нажми нa <span className={style.heart} />, чтобы сохранить
+            </div>
+            <Button
+              onClick={this._handleSearch}
+              style={style.searchButton}
+            >
+              Смотреть
+            </Button>
+          </div>
+        }
       </div>
     );
   }
 }
 
 export default connect((state, props) => ({
-  user: state.user.data,
+  user: state.user,
   achievements: state.dictionaries.achievements,
   ...props,
-}))(Personal);
+}), {
+  getUser,
+  getAllTracks,
+  getAllPlaylists,
+})(Personal);
 
 Personal.propTypes = {
   user: PropTypes.object,
   achievements: PropTypes.object,
+  getUser: PropTypes.func,
+  getAllTracks: PropTypes.func,
+  getAllPlaylists: PropTypes.func,
+  router: PropTypes.object,
 };
