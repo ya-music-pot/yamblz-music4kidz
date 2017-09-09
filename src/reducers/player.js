@@ -2,6 +2,8 @@ import * as PlayerActions from '_actions/playerActionTypes.js';
 
 const defaultState = {
   isPlaying: false,
+  shouldPlay: false,
+  loaded: false,
   isRadio: false,
   isRepeatMode: false,
 
@@ -12,6 +14,7 @@ const defaultState = {
   trackId: null,
   playlist: [],
   duration: 0,
+  playlistId: null,
 };
 
 export default function (state = defaultState, action) {
@@ -25,18 +28,22 @@ export default function (state = defaultState, action) {
         trackId: payload.trackId,
         position: 0,
         duration: 0,
+        shouldPlay: true,
+        loaded: false,
       };
 
     case PlayerActions.PLAYER_RESUME:
       return {
         ...state,
         isPlaying: true,
+        shouldPlay: true,
       };
 
     case PlayerActions.PLAYER_PLAYED:
       return {
         ...state,
         isPlaying: true,
+        loaded: true,
       };
 
     case PlayerActions.PLAYER_STOP:
@@ -44,6 +51,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isPlaying: false,
+        shouldPlay: false,
       };
 
     case PlayerActions.PLAYER_NEXT:
@@ -88,6 +96,12 @@ export default function (state = defaultState, action) {
         ...payload,
       };
 
+    case PlayerActions.SET_POSITION:
+      return {
+        ...state,
+        ...payload,
+      };
+
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
@@ -98,6 +112,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         playlist: [...state.playlist, response.data],
+        radio: [response.data],
       };
 
     default:

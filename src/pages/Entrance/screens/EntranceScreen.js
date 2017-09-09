@@ -5,12 +5,9 @@ import { connect } from 'react-redux';
 import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
-import CartoonCard from '_components/cards/CartoonCard';
+import Card from '_decorators/Card';
 
 import style from '../style.styl';
-import entranceCloud from '../images/entrance-cloud.png';
-import entranceCloud2x from '../images/entrance-cloud@2x.png';
-import entranceCloud3x from '../images/entrance-cloud@3x.png';
 
 class EntranceScreen extends Component {
   state = {
@@ -105,39 +102,45 @@ class EntranceScreen extends Component {
   };
 
   render() {
-    const { data, callbacks } = this.props;
+    const {
+      data, callbacks, playlistId,
+      shouldPlay,
+    } = this.props;
     const { isCardShown } = this.state;
+    let isPlaying = false;
+    if (data.id === playlistId && shouldPlay) {
+      isPlaying = true;
+    }
 
     return (
       <div className={style.container}>
         <div
           className={cl(style.background, isCardShown ? style['background--opacity20'] : style['background--opacity100'])}
-          ref={(el) => { this.content = el; }}
+          ref={(el) => {
+            this.content = el;
+          }}
         >
-          <div className={style.imageContainer}>
-            <img
-              alt="flying-cloud"
-              src={entranceCloud}
-              srcSet={`${entranceCloud} 1x, ${entranceCloud2x} 2x, ${entranceCloud3x} 3x`}
-            />
-          </div>
+          <div className={style.imageContainer} />
           <Title />
           <div className={style.buttonWrapper}>
             <Button
               style={style.button}
               onClick={this.props.onNavigate}
             >
-              Поехали
+              Войти
             </Button>
           </div>
         </div>
         <div
           className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
-          ref={(el) => { this.card = el; }}
+          ref={(el) => {
+            this.card = el;
+          }}
         >
-          <CartoonCard
+          <Card
             data={data}
             callbacks={callbacks}
+            isPlaying={isPlaying}
           />
         </div>
       </div>
@@ -149,11 +152,18 @@ EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  playlistId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  shouldPlay: PropTypes.bool,
 };
 
 export default connect((state, props) => ({
-  settings: state.settings,
   ...props,
+  settings: state.settings,
+  playlistId: state.player.playlistId,
+  shouldPlay: state.player.shouldPlay,
 }))(EntranceScreen);
 
 const Title = () => (
@@ -162,7 +172,7 @@ const Title = () => (
       Привет!
     </div>
     <div className={style.subTitle}>
-        Давай слушать музыку и веселиться?
+      Будем слушать музыку и веселиться?
     </div>
   </div>
 );

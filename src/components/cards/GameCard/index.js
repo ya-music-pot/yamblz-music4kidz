@@ -7,35 +7,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class GameCard extends Component {
-  _handleCardClick = () => {
-    const {
-      data: { tracks },
-      callbacks: { onCardClick },
-    } = this.props;
-
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks);
-    }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks);
-    }
-  };
-
   render() {
     const {
       container, title: titleStyles,
@@ -44,6 +15,8 @@ export default class GameCard extends Component {
 
     const {
       data: { name, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
+      isPlaying,
     } = this.props;
 
     const backgroundStyles = {};
@@ -53,10 +26,15 @@ export default class GameCard extends Component {
     }
 
     return (
-      <div className={container} onClick={this._handleCardClick}>
+      <div className={container} onClick={handleCardClick}>
         <CardTitle text={name} styles={titleStyles} />
         <div className={buttonWrapper}>
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} type="game" />
+          <ButtonMiniplayer
+            onClick={handleButtonClick}
+            position={button}
+            type="game"
+            isPlaying={isPlaying}
+          />
         </div>
         <div className={image} style={backgroundStyles}>image</div>
       </div>
@@ -67,4 +45,5 @@ export default class GameCard extends Component {
 GameCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

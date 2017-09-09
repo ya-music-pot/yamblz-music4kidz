@@ -57,7 +57,7 @@ export function playerPrev(currentTrackId) {
   };
 }
 
-export function setPlaylist(playlist, isRadio) {
+export function setPlaylist(playlist, isRadio, playlistId) {
   return {
     type: ActionType.SET_PLAYLIST,
     player: {
@@ -66,6 +66,7 @@ export function setPlaylist(playlist, isRadio) {
     payload: {
       playlist,
       isRadio,
+      playlistId,
     },
   };
 }
@@ -73,5 +74,15 @@ export function setPlaylist(playlist, isRadio) {
 export function toggleRepeatMode() {
   return {
     type: ActionType.TOGGLE_REPEAT,
+  };
+}
+
+export function setPosition(position) {
+  return {
+    type: ActionType.SET_POSITION,
+    player: {},
+    payload: {
+      position,
+    },
   };
 }

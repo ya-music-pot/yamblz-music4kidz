@@ -10,6 +10,8 @@ export const PLAYER_RESUME = 'PLAYER_RESUME';
 export const PLAYER_NEXT = 'PLAYER_NEXT';
 export const PLAYER_PREV = 'PLAYER_PREV';
 
+export const SET_POSITION = 'SET_POSITION';
+
 export const PLAYER_PROGRESS = 'PLAYER_PROGRESS';
 export const PLAYER_ENDED = 'PLAYER_ENDED';
 export const PLAYER_CLEAR = 'PLAYER_CLEAR';

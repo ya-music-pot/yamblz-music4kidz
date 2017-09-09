@@ -8,35 +8,6 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class CartoonCard extends Component {
-  _handleCardClick = () => {
-    const {
-      data: { tracks },
-      callbacks: { onCardClick },
-    } = this.props;
-
-    if (
-      typeof onCardClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onCardClick(tracks[0].id, tracks);
-    }
-  };
-
-  _handleButtonClick = (e) => {
-    e.stopPropagation();
-    const {
-      data: { tracks },
-      callbacks: { onButtonClick },
-    } = this.props;
-
-    if (
-      typeof onButtonClick === 'function'
-      && Array.isArray(tracks) && tracks.length > 0
-    ) {
-      onButtonClick(tracks[0].id, tracks);
-    }
-  };
-
   render() {
     const {
       container, content, title,
@@ -44,8 +15,10 @@ export default class CartoonCard extends Component {
     } = style;
 
     const {
-      name, description, image_url: imageUrl,
-    } = this.props.data;
+      data: { name, description, image_url: imageUrl },
+      callbacks: { handleCardClick, handleButtonClick },
+      isPlaying,
+    } = this.props;
 
     const backgroundStyles = {};
 
@@ -54,11 +27,15 @@ export default class CartoonCard extends Component {
     }
 
     return (
-      <div className={container} onClick={this._handleCardClick} style={backgroundStyles}>
+      <div className={container} onClick={handleCardClick} style={backgroundStyles}>
         <div className={content}>
           <CardTitle text={name} styles={title} />
           <CardSubtitle text={description} styles={subtitle} />
-          <ButtonMiniplayer onClick={this._handleButtonClick} position={button} />
+          <ButtonMiniplayer
+            onClick={handleButtonClick}
+            position={button}
+            isPlaying={isPlaying}
+          />
         </div>
       </div>
     );
@@ -68,4 +45,5 @@ export default class CartoonCard extends Component {
 CartoonCard.propTypes = {
   data: PropTypes.object,
   callbacks: PropTypes.object,
+  isPlaying: PropTypes.bool,
 };

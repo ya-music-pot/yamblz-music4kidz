@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import Player from '_components/Player';
+import Player from './Player';
 
 class App extends Component {
   render() {

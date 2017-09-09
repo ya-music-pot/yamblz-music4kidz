@@ -8,6 +8,7 @@ import Loader from '_components/Loader';
 
 import { updateStep, clearSetUp } from '_actions/setup';
 import { updateUser } from '_actions/user';
+import { playerClear, playerStop } from '_actions/player';
 
 import Mood from './Mood';
 import Action from './Action';
@@ -26,16 +27,24 @@ class SetUp extends Component {
       actionId, user,
     } = this.props;
     const newStep = activeStep.step + 1;
+    const isStep = steps[newStep - 1];
 
-    if (steps[newStep - 1]) {
+    if (isStep) {
       this.props.updateStep(newStep);
-    } else {
+    }
+
+    if (!isStep) {
       this.props.updateUser({
         id: user.data.id,
         moodId,
         actionId,
         moveNext: '/feed',
       });
+    }
+
+    if (isStep && activeStep.step === 1) {
+      this.props.playerStop();
+      this.props.playerClear();
     }
   }
 
@@ -112,8 +121,10 @@ SetUp.propTypes = {
   }),
   user: PropTypes.object,
   updateUser: PropTypes.func,
+  playerStop: PropTypes.func,
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
+  playerClear: PropTypes.func,
   likesCount: PropTypes.number,
   actionId: PropTypes.number,
   moodId: PropTypes.number,
@@ -139,7 +150,13 @@ export default connect((state, props) => {
     activeStep: steps[activeStep - 1],
     ...props,
   };
-}, { updateStep, clearSetUp, updateUser })(SetUp);
+}, {
+  updateStep,
+  clearSetUp,
+  updateUser,
+  playerClear,
+  playerStop,
+})(SetUp);
 
 /**
  * Helpers

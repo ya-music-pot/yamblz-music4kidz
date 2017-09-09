@@ -2,51 +2,46 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import PersonalCard from '_components/cards/PersonalCard';
+import CARDS from '_data/cardsType';
+import getTitle from '_helpers/getPersonalTitle';
+import Card from '_decorators/Card';
 import DefaultCard from '_components/cards/DefaultCard';
 
 class PersonalRadio extends Component {
-  getTitle = (emoji, action) => {
-    const root = emoji.title.slice(0, -2);
-    switch (action.form) {
-      case 'feminine':
-        return `${root}ая ${action.title}`;
-      case 'plural':
-        return `${root}ые ${action.title}`;
-      case 'neuter':
-        return `${root}ое ${action.title}`;
-      case 'single':
-        return emoji.title;
-      default:
-        return `${emoji.title} ${action.title}`;
-    }
-  };
-
   renderCard = () => {
-    const { settings: { actionId, moodId } } = this.props;
+    const {
+      settings: { actionId, moodId },
+      callbacks,
+    } = this.props;
 
     if (!actionId || !moodId) {
       return (
-        <DefaultCard />
+        <DefaultCard callbacks={callbacks} />
       );
     }
 
-    const {
-      callbacks,
-      dictionaries: { listEmoji, listActions },
-    } = this.props;
-
+    const { listEmoji, listActions } = this.props.dictionaries;
     const settings = {
       moodIcon: listEmoji.data[moodId].typeIcon,
       actionIcon: listActions.data[actionId].typeIcon,
-      title: this.getTitle(listEmoji.data[moodId], listActions.data[actionId]),
+      title: getTitle(listEmoji.data[moodId], listActions.data[actionId]),
+      type: CARDS.personal,
+      id: 'radio',
     };
+    const { playlistId, shouldPlay } = this.props;
+    let isPlaying = false;
+    if (playlistId === 'radio' && shouldPlay) {
+      isPlaying = true;
+    }
 
     return (
-      <PersonalCard
-        settings={settings}
-        callbacks={callbacks}
-      />
+      <div>
+        <Card
+          data={settings}
+          callbacks={callbacks}
+          isPlaying={isPlaying}
+        />
+      </div>
     );
   };
 
@@ -62,11 +57,14 @@ class PersonalRadio extends Component {
 export default connect((state, props) => {
   const { moodId, actionId } = state.user.data;
   const { listEmoji, listActions } = state.dictionaries;
-
+  const { radio, playlistId, shouldPlay } = state.player;
   return {
     ...props,
     settings: { moodId, actionId },
     dictionaries: { listEmoji, listActions },
+    radio,
+    playlistId,
+    shouldPlay,
   };
 })(PersonalRadio);
 
@@ -74,4 +72,9 @@ PersonalRadio.propTypes = {
   settings: PropTypes.object,
   callbacks: PropTypes.object,
   dictionaries: PropTypes.object,
+  playlistId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  shouldPlay: PropTypes.bool,
 };

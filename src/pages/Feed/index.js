@@ -5,41 +5,37 @@ import PropTypes from 'prop-types';
 import Topbar from '_components/Topbar';
 import CardList from '_components/CardList';
 
-import { playerPlay, setPlaylist } from '_actions/player';
+import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
-import { getFeed } from '_actions/feed';
 
 import style from './style.styl';
 import PersonalRadio from './PersonalRadio';
 
 class Feed extends Component {
-  componentWillMount() {
-    const { userId } = this.props;
-
-    if (userId !== undefined) {
-      this.props.getFeed(userId);
+  _onButtonClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
+    if (isPlaying) {
+      this.props.playerPause();
+    } else {
+      this.props.playerModeUpdate('mini');
+      this.props.showPlayer(playlist, isRadio);
+      this.props.setPlaylist(playlist, isRadio, playlistId);
+      this.props.playerPlay(trackId);
     }
-  }
-
-  _onButtonClick = (trackId, playlist, isRadio = false) => {
-    this.props.playerModeUpdate('mini');
-    this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
-    this.props.playerPlay(trackId);
   };
 
-  _onCardClick = (trackId, playlist, isRadio = false) => {
+  _onCardClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId } = params;
     this.props.playerModeUpdate('full');
     this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
     this.props.playerPlay(trackId);
   };
 
   render() {
     const { playlist, container } = style;
-    const { feed, backgroundsList } = this.props;
-
     const callbacks = {
+      onRouterPush: this.props.router.push,
       onButtonClick: this._onButtonClick,
       onCardClick: this._onCardClick,
     };
@@ -49,11 +45,7 @@ class Feed extends Component {
         <div className={container}>
           <Topbar />
           <PersonalRadio callbacks={callbacks} />
-          <CardList
-            feed={feed}
-            callbacks={callbacks}
-            backgroundsList={backgroundsList}
-          />
+          <CardList />
         </div>
       </div>
     );
@@ -61,15 +53,12 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
-  getFeed: PropTypes.func,
+  router: PropTypes.object,
   playerPlay: PropTypes.func,
   setPlaylist: PropTypes.func,
   showPlayer: PropTypes.func,
   playerModeUpdate: PropTypes.func,
-
-  feed: PropTypes.object,
-  backgroundsList: PropTypes.object,
-  userId: PropTypes.number,
+  playerPause: PropTypes.func,
 };
 
 export default connect((state, props) => ({
@@ -85,5 +74,5 @@ export default connect((state, props) => ({
   setPlaylist,
   showPlayer,
   playerModeUpdate,
-  getFeed,
+  playerPause,
 })(Feed);

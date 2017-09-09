@@ -27,7 +27,9 @@ function setStopTrack() {
   let action;
 
   if (isRadio) {
-    const { id } = store.user.data;
+    const state = store.getState();
+    const { id } = state.user.data;
+
     store.dispatch({
       type: PLAYER_GET_RADIO,
       callAPI: {
