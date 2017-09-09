@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
+import Loader from '_components/Loader';
 import Icon from '_components/Icon';
 
 import style from './style.styl';
 
 export default class TrackInfo extends Component {
+  _onClick = () => {
+    const { onClick, trackId } = this.props;
+    onClick(trackId);
+  }
+
   renderImageDefault() {
     return (
       <Icon typeIcon="bird" className={style.icon} />
@@ -14,12 +20,12 @@ export default class TrackInfo extends Component {
   }
 
   renderImage() {
-    const { image_url, name } = this.props;
+    const { imageUrl, name } = this.props;
 
     return (
       <img
         className={style.image}
-        src={image_url}
+        src={imageUrl}
         alt={name}
       />
     );
@@ -27,18 +33,22 @@ export default class TrackInfo extends Component {
 
   render() {
     const {
-      name, artist, image_url,
-      className,
+      name, artist, imageUrl,
+      className, currentTrack, isPlaying,
     } = this.props;
 
     return (
-      <div className={cl(style.container, className)}>
+      <div
+        className={cl(style.container, className, currentTrack && style.active)}
+        onClick={this._onClick}
+      >
         <div className={style.imageWrapper}>
           {
-            image_url && image_url !== 'null'
+            imageUrl && imageUrl !== 'null'
               ? this.renderImage()
               : this.renderImageDefault()
           }
+          { isPlaying && <Loader className={style.loader} />}
         </div>
         <hgroup>
           <h3 className={style.mainTitle}>{name}</h3>
@@ -51,8 +61,12 @@ export default class TrackInfo extends Component {
 
 TrackInfo.propTypes = {
   className: PropTypes.string,
-  image_url: PropTypes.string,
+  imageUrl: PropTypes.string,
   name: PropTypes.string,
+  currentTrack: PropTypes.bool,
+  isPlaying: PropTypes.bool,
   artist: PropTypes.string,
+  onClick: PropTypes.func,
+  trackId: PropTypes.number,
 };
 

@@ -1,6 +1,8 @@
 import { MODAL_OPEN, MODAL_CLOSE } from '_actions/modal';
 
-export default function (state = {}, action) {
+const defaultState = {};
+
+export default function (state = defaultState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -11,8 +13,7 @@ export default function (state = {}, action) {
       };
     case MODAL_CLOSE:
       return {
-        ...state,
-        [payload.name]: false,
+        ...defaultState,
       };
     default:
       return state;
