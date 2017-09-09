@@ -26,6 +26,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isShow: true,
+        cardType: payload.cardType,
       };
 
     default:

@@ -42,7 +42,7 @@ class Player extends Component {
 
   _handleClickArrowDown = () => {
     this.props.playerModeUpdate('mini');
-  }
+  };
 
   render() {
     const { player } = this.props;
