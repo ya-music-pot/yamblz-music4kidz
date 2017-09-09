@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { playerPlay, setPlaylist } from '_actions/player';
+import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 import { getPromo } from '_actions/promo';
 
@@ -32,18 +32,24 @@ class Entrance extends Component {
     this.props.router.push('/feed');
   };
 
-  _handleOpenPlayer = (trackId, playlist, isRadio = false) => {
+  _handleOpenPlayer = (params) => {
+    const { trackId, playlist, isRadio, playlistId } = params;
     this.props.playerModeUpdate('full');
     this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
     this.props.playerPlay(trackId);
   };
 
-  _handlePlayPromo = (trackId, playlist, isRadio = false) => {
-    this.props.playerModeUpdate('mini');
-    this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio);
-    this.props.playerPlay(trackId);
+  _handlePlayPromo = (params) => {
+    const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
+    if (isPlaying) {
+      this.props.playerPause();
+    } else {
+      this.props.playerModeUpdate('mini');
+      this.props.showPlayer(playlist, isRadio);
+      this.props.setPlaylist(playlist, isRadio, playlistId);
+      this.props.playerPlay(trackId);
+    }
   };
 
   render() {
@@ -67,9 +73,19 @@ class Entrance extends Component {
   }
 }
 
+Entrance.propTypes = {
+  router: PropTypes.object,
+  playerModeUpdate: PropTypes.func,
+  showPlayer: PropTypes.func,
+  setPlaylist: PropTypes.func,
+  playerPlay: PropTypes.func,
+  getPromo: PropTypes.func,
+  data: PropTypes.object,
+  playerPause: PropTypes.func,
+};
+
 export default connect((state, props) => {
   const { data } = state.promo;
-
   return {
     ...props,
     data,
@@ -80,14 +96,5 @@ export default connect((state, props) => {
   setPlaylist,
   playerPlay,
   getPromo,
+  playerPause,
 })(Entrance);
-
-Entrance.propTypes = {
-  router: PropTypes.object,
-  playerModeUpdate: PropTypes.func,
-  showPlayer: PropTypes.func,
-  setPlaylist: PropTypes.func,
-  playerPlay: PropTypes.func,
-  getPromo: PropTypes.func,
-  data: PropTypes.object,
-};
