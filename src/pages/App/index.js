@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PropTypes from 'prop-types';
 import modal from '_decorators/modal';
@@ -7,17 +8,36 @@ import modal from '_decorators/modal';
 import ListTracks from './ListTracks';
 import Player from './Player';
 
+import style from './style.styl';
+
 const ModalPlaylist = modal(ListTracks);
 
 class App extends Component {
-  render() {
+  renderListTracks() {
     const { listTracks } = this.props.modal;
 
+    return (
+      <ReactCSSTransitionGroup
+        transitionName={{
+          enter: style.enter,
+          enterActive: style.enterActive,
+          leave: style.leave,
+          leaveActive: style.leaveActive,
+        }}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}
+      >
+        { listTracks && <ModalPlaylist /> }
+      </ReactCSSTransitionGroup>
+    );
+  }
+
+  render() {
     return (
       <div>
         { this.props.children }
         { this.props.isShowPlayer && <Player /> }
-        { listTracks && <ModalPlaylist /> }
+        { this.renderListTracks() }
       </div>
     );
   }
