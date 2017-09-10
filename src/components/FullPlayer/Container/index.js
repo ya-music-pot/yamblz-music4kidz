@@ -109,21 +109,21 @@ export default class Container extends Component {
       playerState: { isRepeatMode },
     } = this.props;
 
-    let playlist = (<div>
+    let playlistControl = (<div>
       <Button style={buttonList} onClick={openListTracks}>
         <Icon className={style.icon} typeIcon="player-list" />
       </Button>
     </div>);
     if (cardType === CARDS.radio || cardType === CARDS.single) {
-      playlist = null;
+      playlistControl = null;
     } else if (cardType === CARDS.personal) {
-      playlist = (<div>balloon</div>);
+      playlistControl = (<div>balloon</div>);
     }
 
     return (
       <div className={bottomRow}>
         <Button style={buttonPlus} onClick={this._handleClickPlus} />
-        { playlist && playlist }
+        { playlistControl }
         <Button
           style={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
           onClick={onClickRepeat}
