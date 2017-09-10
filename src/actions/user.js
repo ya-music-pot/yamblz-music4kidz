@@ -1,5 +1,8 @@
 export const GET_USER = 'GET_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const GET_ALL_TRACKS = 'GET_ALL_TRACKS';
+export const GET_ALL_PLAYLISTS = 'GET_ALL_PLAYLISTS';
+export const GET_ACHIEVEMENTS = 'GET_ACHIEVEMENTS';
 
 export function getUser(id) {
   return {
@@ -25,6 +28,33 @@ export function updateUser(data) {
     },
     player: {
       id,
+    },
+  };
+}
+
+export function getAllTracks(id) {
+  return {
+    type: GET_ALL_TRACKS,
+    callAPI: {
+      url: `${API_URL}user/${id}/add_track`,
+    },
+  };
+}
+
+export function getAllPlaylists(id) {
+  return {
+    type: GET_ALL_PLAYLISTS,
+    callAPI: {
+      url: `${API_URL}user/${id}/add_playlist`,
+    },
+  };
+}
+
+export function getAchievements(id) {
+  return {
+    type: GET_ACHIEVEMENTS,
+    callAPI: {
+      url: `${API_URL}user/${id}/achievements`,
     },
   };
 }

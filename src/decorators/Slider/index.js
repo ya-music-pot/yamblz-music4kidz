@@ -5,14 +5,27 @@ import Hammer from 'hammerjs';
 
 import style from './style.styl';
 
-const WIDTH_SLIDE = 0.7; // 70% from width;
+const WIDTH_SLIDE = 0.7 * document.body.clientWidth; // 70% from width;
 
 export default class Slider extends Component {
-  state = {
-    slidesLength: null,
-    currentId: 0,
-    slideTransform: document.body.clientWidth * (1 - WIDTH_SLIDE) / 2,
-  };
+  componentWillMount() {
+    const { widthSlide, minTransform, maxTransform } = this.props;
+    let { initTransform } = this.props;
+
+    this.widthSlide = widthSlide || WIDTH_SLIDE;
+    this.maxTransform = maxTransform;
+    this.minTransform = minTransform;
+
+    if (typeof initTransform === 'undefined') {
+      initTransform = (document.body.clientWidth - this.widthSlide) / 2;
+    }
+
+    this.setState({
+      slidesLength: null,
+      currentId: 0,
+      slideTransform: initTransform,
+    });
+  }
 
   componentDidMount() {
     this._initSlider();
@@ -48,11 +61,30 @@ export default class Slider extends Component {
   }
 
   _updateCurrentId(currentId) {
-    this.props.onChange(currentId);
+    const { onChange } = this.props;
+
+    if (typeof onChange === 'function') {
+      onChange(currentId);
+    }
+
     this.setState({
       currentId,
-      slideTransform: getShiftSlides(WIDTH_SLIDE, currentId),
+      slideTransform: this._getShiftSlides(this.widthSlide, currentId),
     });
+  }
+
+  _getShiftSlides = (width, slideId) => {
+    const docWidth = document.body.clientWidth;
+    let transform = docWidth / 2 - slideId * width - width / 2;
+
+    if (transform > this.maxTransform) {
+      transform = this.maxTransform;
+    }
+    if (transform < this.minTransform) {
+      transform = this.minTransform;
+    }
+
+    return transform;
   }
 
   _saveSlider = (target) => {
@@ -90,17 +122,15 @@ export default class Slider extends Component {
 
 Slider.propTypes = {
   currentId: PropTypes.number,
+  widthSlide: PropTypes.number,
+
+  initTransform: PropTypes.number,
+  minTransform: PropTypes.number,
+  maxTransform: PropTypes.number,
+
   className: PropTypes.string,
   // TODO: required
   onChange: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node),
 };
 
-/**
- * Helpers
- */
-
-function getShiftSlides(width, slideId) {
-  const docWidth = document.body.clientWidth;
-  return docWidth * ((1 - width) / 2 - slideId * width);
-}

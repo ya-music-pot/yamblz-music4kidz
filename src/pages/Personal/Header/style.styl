@@ -1,0 +1,93 @@
+.container {
+  margin-top: 125px;
+  transition: margin-top .2s ease-in-out;
+
+  &Sticky {
+    margin-top: 56px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #7859ff;
+  padding-top: 13px;
+  box-sizing: border-box;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 125px;
+  z-index: 2;
+  transition: all .2s ease-in-out;
+
+  &Sticky {
+    height: 56px;
+
+    .avatar {
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
+.avatar {
+  background-size: cover;
+  box-shadow: none;
+  width: 68px;
+  height: 68px;
+  margin-bottom: 8px;
+  transition: all .2s ease-in-out;
+}
+
+.userName {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  line-height: 24px;
+}
+
+.totalScore {
+  margin-top: 2px;
+  opacity: .8;
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 17px;
+  text-align: center;
+}
+
+.button {
+  position: fixed;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: transparent;
+
+  &Back {
+    left: 16px;
+    top: 23px;
+    width: 16px;
+    height: 16px;
+    background-image: url('./images/back.svg');
+  }
+
+  &Settings {
+    right: 16px;
+    top: 19px;
+    width: 24px;
+    height: 24px;
+    background-image: url('./images/settings.svg');
+  }
+}
+
+.slider {
+  display: flex;
+  margin: 33px 0;
+  align-items: baseline;
+
+  div[class^='slide'] {
+    flex-basis: 160px;
+  }
+}
