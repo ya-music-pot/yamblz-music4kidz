@@ -28,27 +28,11 @@ export default class Container extends Component {
     // TODO: получать эмоции и класть name в стор
     const { onClickArrowDown, cardType } = this.props;
     const name = 'say my name';
-    let title = name;
-    switch (cardType) {
-      case CARDS.radio:
-        title = `Радио ${name}`;
-        break;
-      case CARDS.single:
-        title = 'Модный трек';
-        break;
-      case CARDS.game:
-        title = 'Слушай и играй';
-        break;
-      case CARDS.personal:
-        title = 'emoji';
-        break;
-      default:
-        break;
-    }
+
     return (
       <div className={headerRow}>
         <Button style={buttonArrowDown} onClick={onClickArrowDown} />
-        <div className={moodIcons}>{title}</div>
+        <div className={moodIcons}>{getTitleByCard(cardType, name)}</div>
       </div>
     );
   }
@@ -87,8 +71,8 @@ export default class Container extends Component {
         <Button
           style={
             cl(
-              style['player-button'],
-              isPlaying ? style['player-button--pause'] : style['player-button--play'],
+              style.playerButton,
+              isPlaying ? style.playerButtonPause : style.playerButtonPlay,
             )
           }
           isPlaying={isPlaying}
@@ -180,3 +164,22 @@ Container.propTypes = {
   playerState: PropTypes.object,
   cardType: PropTypes.number,
 };
+
+/*
+  Helpers
+ */
+
+function getTitleByCard(cardType, name) {
+  switch (cardType) {
+    case CARDS.radio:
+      return `Радио ${name}`;
+    case CARDS.single:
+      return 'Модный трек';
+    case CARDS.game:
+      return 'Слушай и играй';
+    case CARDS.personal:
+      return 'emoji';
+    default:
+      return null;
+  }
+}
