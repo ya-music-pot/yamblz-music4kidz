@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Button from '_components/Button';
 import style from '../style.styl';
 
 export default class Likes extends Component {
-  _handleClickDislike = () => {};
+  _handleClickDislike = () => {
+    this.props.onDislikeClick();
+  };
 
-  _handleClickLike = () => {};
+  _handleClickLike = () => {
+    this.props.onLikeClick();
+  };
 
   render() {
     const {
@@ -24,4 +28,7 @@ export default class Likes extends Component {
   }
 }
 
-Likes.propTypes = {};
+Likes.propTypes = {
+  onLikeClick: PropTypes.func,
+  onDislikeClick: PropTypes.func,
+};

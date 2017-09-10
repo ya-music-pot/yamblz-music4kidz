@@ -8,7 +8,8 @@ import FullPlayer from '_components/FullPlayer';
 import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
-  playerResume, toggleRepeatMode,
+  playerResume, toggleRepeatMode, likeTrack,
+  dislikeTrack,
 } from '_actions/player';
 
 import { openModal } from '_actions/modal';
@@ -48,7 +49,18 @@ class Player extends Component {
 
   _handleOpenListTracks = () => {
     this.props.openModal('listTracks');
-  }
+  };
+
+  _handleLikeButton = () => {
+    const { player, userId } = this.props;
+    this.props.likeTrack(userId, player.trackId);
+  };
+
+  _handleDislikeButton = () => {
+    const { player, userId } = this.props;
+    this.props.dislikeTrack(userId, player.trackId);
+    this._handleNextButton();
+  };
 
   render() {
     const { player, cardType } = this.props;
@@ -67,6 +79,8 @@ class Player extends Component {
           onClickRepeat={this._handleRepeatButton}
           onClickArrowDown={this._handleClickArrowDown}
           openListTracks={this._handleOpenListTracks}
+          onLikeClick={this._handleLikeButton}
+          onDislikeClick={this._handleDislikeButton}
           type="full"
           cardType={cardType}
         />
@@ -77,6 +91,7 @@ class Player extends Component {
 
 export default connect((state, props) => ({
   player: state.player,
+  userId: state.user.data.id,
   cardType: state.playerInfo.cardType,
   ...props,
 }), {
@@ -90,6 +105,8 @@ export default connect((state, props) => ({
   playerResume,
   toggleRepeatMode,
   playerModeUpdate,
+  likeTrack,
+  dislikeTrack,
 })(Player);
 
 Player.propTypes = {
@@ -103,4 +120,7 @@ Player.propTypes = {
   toggleRepeatMode: PropTypes.func,
   playerModeUpdate: PropTypes.func,
   cardType: PropTypes.number,
+  likeTrack: PropTypes.func,
+  dislikeTrack: PropTypes.func,
+  userId: PropTypes.number,
 };

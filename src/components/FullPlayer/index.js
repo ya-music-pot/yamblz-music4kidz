@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import CircularAvatar from '_components/CircularAvatar';
 import CARDS from '_data/cardsType';
+import { getTime } from '_helpers';
 
 import Header from './Header';
 import Likes from './Likes';
@@ -17,7 +18,8 @@ export default class FullPlayer extends Component {
     const {
       playerState, cardType, onTogglePlay,
       onClickNext, onClickPrevious, onClickRepeat,
-      openListTracks, onClickArrowDown,
+      openListTracks, onClickArrowDown, onDislikeClick,
+      onLikeClick,
     } = this.props;
 
     const {
@@ -34,7 +36,8 @@ export default class FullPlayer extends Component {
             cardType={cardType}
           />
           <div>
-            { cardType === CARDS.personal && <Likes /> }
+            { cardType === CARDS.personal &&
+            <Likes onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} /> }
             <CircularAvatar
               image={cover}
               progress={percentage}
@@ -72,22 +75,9 @@ FullPlayer.propTypes = {
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
   onClickArrowDown: PropTypes.func,
+  onLikeClick: PropTypes.func,
+  onDislikeClick: PropTypes.func,
   openListTracks: PropTypes.func,
   playerState: PropTypes.object,
   cardType: PropTypes.number,
 };
-
-/**
- * getTime — get string minutes:seconds
- * @param  {Number} position
- * @param  {Number} duration
- * @return {String}
- */
-function getTime(position, duration) {
-  const diffTrackPosition = position - duration;
-  const minutesLeft = parseInt(diffTrackPosition / 60, 10).toString();
-  const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
-  const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
-
-  return `${minutesLeft}:${secondsLeft}`;
-}
