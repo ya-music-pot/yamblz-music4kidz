@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
 import Background from '_components/FullPlayer/Background';
+import Icon from '_components/Icon';
+
 import cl from 'classname';
 
 import style from './style.styl';
@@ -26,7 +29,7 @@ export default class Container extends Component {
 
     const {
       onTogglePlay, onClickNext, onClickPrevious,
-      onClickRepeat, onClickArrowDown,
+      onClickRepeat, onClickArrowDown, openListTracks,
     } = this.props;
 
     const percentage = position / duration;
@@ -73,6 +76,9 @@ export default class Container extends Component {
         </div>
         <div className={style.bottomRow}>
           <Button style={style.buttonPlus} onClick={this._handleClickPlus} />
+          <Button style={style.buttonList} onClick={openListTracks}>
+            <Icon className={style.icon} typeIcon="player-list" />
+          </Button>
           <Button
             style={isRepeatMode ? style.buttonRepeatActive : style.buttonRepeatInactive}
             onClick={onClickRepeat}
@@ -92,6 +98,7 @@ Container.propTypes = {
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
   onClickArrowDown: PropTypes.func,
+  openListTracks: PropTypes.func,
   isRepeatMode: PropTypes.bool,
   playerState: PropTypes.object,
 };
