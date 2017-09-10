@@ -4,13 +4,14 @@
   position: fixed;
   left: 0;
   bottom: 0;
-  transform: translateY(0);
-  transition: transform .5s ease-in;
+  transform: translateY(0) translateZ(0);
+  backface-visibility: hidden;
+  transition: transform .3s;
   z-index: 2;
 }
 
 .containerShift {
-  transform: translateY(-100vh);
+  transform: translateY(-100vh) translateZ(0);
 }
 
 .slide {
