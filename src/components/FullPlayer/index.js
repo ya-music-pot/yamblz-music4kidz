@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import cl from 'classname';
 
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
@@ -9,6 +8,7 @@ import Icon from '_components/Icon';
 import CARDS from '_data/cardsType';
 
 import Background from './Background';
+import Controls from './Controls';
 
 import style from './style.styl';
 
@@ -50,41 +50,6 @@ export default class FullPlayer extends Component {
     );
   }
 
-  renderControls() {
-    const { controlsRow, buttonPrevious, buttonNext } = style;
-    const {
-      onTogglePlay, onClickNext, onClickPrevious,
-      playerState: { isPlaying }, cardType,
-    } = this.props;
-    let isPrevNeeded = true;
-    switch (cardType) {
-      case CARDS.radio:
-      case CARDS.single:
-      case CARDS.personal:
-        isPrevNeeded = false;
-        break;
-      default:
-        break;
-    }
-
-    return (
-      <div className={controlsRow}>
-        { isPrevNeeded && <Button style={buttonPrevious} onClick={onClickPrevious} /> }
-        <Button
-          style={
-            cl(
-              style.playerButton,
-              isPlaying ? style.playerButtonPause : style.playerButtonPlay,
-            )
-          }
-          isPlaying={isPlaying}
-          onClick={onTogglePlay}
-        />
-        { cardType !== CARDS.single && <Button style={buttonNext} onClick={onClickNext} /> }
-      </div>
-    );
-  }
-
   renderFooter() {
     const {
       bottomRow, buttonPlus, buttonRepeatActive,
@@ -120,11 +85,14 @@ export default class FullPlayer extends Component {
 
   render() {
     const {
-      playerState: {
-        trackName, singerName, position,
-        duration, cover,
-      }, cardType,
+      playerState, cardType, onTogglePlay,
+      onClickNext, onClickPrevious,
     } = this.props;
+
+    const {
+      trackName, singerName, position,
+      duration, cover, isPlaying,
+    } = playerState;
 
     const percentage = position / duration;
     const diffTrackPosition = position - duration;
@@ -149,7 +117,13 @@ export default class FullPlayer extends Component {
             <div className={style.songName}>{trackName}</div>
             <div className={style.artistName}>{singerName}</div>
           </div>
-          { this.renderControls() }
+          <Controls
+            onTogglePlay={onTogglePlay}
+            onClickNext={onClickNext}
+            onClickPrevious={onClickPrevious}
+            isPlaying={isPlaying}
+            cardType={cardType}
+          />
           { this.renderFooter() }
           <Background cover={cover} />
         </div>
