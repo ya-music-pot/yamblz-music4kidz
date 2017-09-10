@@ -6,6 +6,7 @@ import Entrance from '_pages/Entrance';
 import SetUp from '_pages/SetUp';
 import Feed from '_pages/Feed';
 import Personal from '_pages/Personal';
+import PersonalMobile from '_pages/PersonalMobile';
 
 const routes = () => (
   <Route path="/" component={App}>
@@ -13,6 +14,7 @@ const routes = () => (
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
     <Route path="/personal" component={Personal} />
+    <Route path="/mobile/profile" component={PersonalMobile} />
   </Route>
 );
 
