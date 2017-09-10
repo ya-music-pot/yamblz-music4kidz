@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
-import Icon from '_components/Icon';
 
 import CARDS from '_data/cardsType';
 
 import Background from './Background';
 import Controls from './Controls';
+import Footer from './Footer';
 
 import style from './style.styl';
 
@@ -18,10 +18,6 @@ export default class FullPlayer extends Component {
   };
 
   _handleClickLike = () => {
-
-  };
-
-  _handleClickPlus = () => {
 
   };
 
@@ -50,48 +46,16 @@ export default class FullPlayer extends Component {
     );
   }
 
-  renderFooter() {
-    const {
-      bottomRow, buttonPlus, buttonRepeatActive,
-      buttonRepeatInactive, buttonList,
-    } = style;
-    const {
-      onClickRepeat, cardType, openListTracks,
-      playerState: { isRepeatMode },
-    } = this.props;
-
-    let playlistControl = (<div>
-      <Button style={buttonList} onClick={openListTracks}>
-        <Icon className={style.icon} typeIcon="player-list" />
-      </Button>
-    </div>);
-    if (cardType === CARDS.radio || cardType === CARDS.single) {
-      playlistControl = null;
-    } else if (cardType === CARDS.personal) {
-      playlistControl = (<div>balloon</div>);
-    }
-
-    return (
-      <div className={bottomRow}>
-        <Button style={buttonPlus} onClick={this._handleClickPlus} />
-        { playlistControl }
-        <Button
-          style={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
-          onClick={onClickRepeat}
-        />
-      </div>
-    );
-  }
-
   render() {
     const {
       playerState, cardType, onTogglePlay,
-      onClickNext, onClickPrevious,
+      onClickNext, onClickPrevious, onClickRepeat,
+      openListTracks,
     } = this.props;
 
     const {
       trackName, singerName, position,
-      duration, cover, isPlaying,
+      duration, cover, isPlaying, isRepeatMode,
     } = playerState;
 
     const percentage = position / duration;
@@ -124,7 +88,12 @@ export default class FullPlayer extends Component {
             isPlaying={isPlaying}
             cardType={cardType}
           />
-          { this.renderFooter() }
+          <Footer
+            onClickRepeat={onClickRepeat}
+            openListTracks={openListTracks}
+            isRepeatMode={isRepeatMode}
+            cardType={cardType}
+          />
           <Background cover={cover} />
         </div>
       </div>
