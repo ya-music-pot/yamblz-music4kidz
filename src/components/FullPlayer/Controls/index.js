@@ -4,7 +4,6 @@ import cl from 'classname';
 
 import Button from '_components/Button';
 import CARDS from '_data/cardsType';
-
 import style from '../style.styl';
 
 export default class Controls extends Component {
@@ -14,32 +13,44 @@ export default class Controls extends Component {
       isPlaying, cardType,
     } = this.props;
 
+    const {
+      controlsRow, buttonPrevious, buttonNext,
+      flexEnd, playerButton, playerButtonPause,
+      playerButtonPlay,
+    } = style;
+
+    let controlsRowStyles = controlsRow;
     let isPrevNeeded = true;
+    let isNextNeeded = true;
+
     switch (cardType) {
       case CARDS.radio:
-      case CARDS.single:
       case CARDS.personal:
         isPrevNeeded = false;
+        controlsRowStyles = cl(controlsRow, flexEnd);
+        break;
+      case CARDS.single:
+        isPrevNeeded = false;
+        isNextNeeded = false;
         break;
       default:
         break;
     }
 
-    const { controlsRow, buttonPrevious, buttonNext } = style;
     return (
-      <div className={controlsRow}>
+      <div className={controlsRowStyles}>
         { isPrevNeeded && <Button style={buttonPrevious} onClick={onClickPrevious} /> }
         <Button
           style={
             cl(
-              style.playerButton,
-              isPlaying ? style.playerButtonPause : style.playerButtonPlay,
+              playerButton,
+              isPlaying ? playerButtonPause : playerButtonPlay,
             )
           }
           isPlaying={isPlaying}
           onClick={onTogglePlay}
         />
-        { cardType !== CARDS.single && <Button style={buttonNext} onClick={onClickNext} /> }
+        { isNextNeeded && <Button style={buttonNext} onClick={onClickNext} /> }
       </div>
     );
   }
