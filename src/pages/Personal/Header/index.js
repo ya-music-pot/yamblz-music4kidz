@@ -23,7 +23,7 @@ export default class Header extends Component {
   render() {
     const {
       avatar, userName, className,
-      order, data, onBackClick
+      order, data, onBackClick,
     } = this.props;
 
     return (

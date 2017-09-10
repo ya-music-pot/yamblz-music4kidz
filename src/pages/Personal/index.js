@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 
 import { getUser, getAllTracks, getAllPlaylists } from '_actions/user';
+import { playerPlay, setPlaylist, playerPause } from '_actions/player';
+import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 
 import CardList from '_components/CardList';
 import Button from '_components/Button';
@@ -38,6 +40,26 @@ class Personal extends Component {
     this.props.router.push('/feed');
   }
 
+  _onButtonClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
+    if (isPlaying) {
+      this.props.playerPause();
+    } else {
+      this.props.playerModeUpdate('mini');
+      this.props.showPlayer(playlist, isRadio);
+      this.props.setPlaylist(playlist, isRadio, playlistId);
+      this.props.playerPlay(trackId);
+    }
+  };
+
+  _onCardClick = (params) => {
+    const { trackId, playlist, isRadio, playlistId } = params;
+    this.props.playerModeUpdate('full');
+    this.props.showPlayer(playlist, isRadio);
+    this.props.setPlaylist(playlist, isRadio, playlistId);
+    this.props.playerPlay(trackId);
+  };
+
   render() {
     const { achievements, user } = this.props;
 
@@ -47,6 +69,12 @@ class Personal extends Component {
     const { order, data } = achievements;
     const { acviveTab } = this.state;
     const cardListData = acviveTab === 'playlists' ? playlists : tracks;
+
+    const callbacks = {
+      onRouterPush: this.props.router.push,
+      onButtonClick: this._onButtonClick,
+      onCardClick: this._onCardClick,
+    };
 
     return (
       <div className={style.container}>
@@ -76,6 +104,7 @@ class Personal extends Component {
           <div className={style.cardList}>
             <CardList
               data={cardListData}
+              callbacks={callbacks}
             />
           </div>
         }
@@ -103,18 +132,29 @@ class Personal extends Component {
 export default connect((state, props) => ({
   user: state.user,
   achievements: state.dictionaries.achievements,
+  feed: state.feed,
   ...props,
 }), {
   getUser,
   getAllTracks,
   getAllPlaylists,
+  playerPlay,
+  setPlaylist,
+  showPlayer,
+  playerModeUpdate,
+  playerPause,
 })(Personal);
 
 Personal.propTypes = {
-  user: PropTypes.object,
   achievements: PropTypes.object,
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,
+  playerPlay: PropTypes.func,
+  setPlaylist: PropTypes.func,
+  showPlayer: PropTypes.func,
+  playerModeUpdate: PropTypes.func,
+  playerPause: PropTypes.func,
   router: PropTypes.object,
+  user: PropTypes.object,
 };
