@@ -15,7 +15,7 @@ const MAX_TRANSFORM = 0;
 export default class Header extends Component {
   componentWillMount() {
     const docWidth = document.body.clientWidth;
-    const { order } = this.props;
+    const { order } = this.props.achievementsDict;
 
     this.minTransform = -WIDTH_SLIDE * order.length + docWidth;
   }
@@ -23,8 +23,10 @@ export default class Header extends Component {
   render() {
     const {
       avatar, userName, sticky,
-      order, data, onBackClick,
+      achievementsDict, onBackClick,
+      userAchievements,
     } = this.props;
+    const { order, data } = achievementsDict;
 
     return (
       <div className={cl(style.container, sticky && style.containerSticky)}>
@@ -44,7 +46,7 @@ export default class Header extends Component {
         </div>
 
         <div className={style.totalScore}>
-          {plural(8, '%d награда', '%d награды', '%d наград')}
+          {plural(userAchievements.length, '%d награда', '%d награды', '%d наград')}
         </div>
 
         <Slider
@@ -57,7 +59,7 @@ export default class Header extends Component {
           {
             order.map(key => {
               const { id, typeIcon, title } = data[key];
-              const disabled = true;
+              const disabled = !userAchievements.find(item => item.id === id);
 
               return (
                 <Achievement
@@ -79,7 +81,7 @@ Header.propTypes = {
   avatar: PropTypes.string,
   userName: PropTypes.string,
   sticky: PropTypes.bool,
-  order: PropTypes.arrayOf(PropTypes.number),
-  data: PropTypes.object,
+  achievementsDict: PropTypes.object,
   onBackClick: PropTypes.func,
+  userAchievements: PropTypes.array,
 };

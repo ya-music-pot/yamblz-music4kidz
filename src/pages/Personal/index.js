@@ -3,7 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import { getUser, getAllTracks, getAllPlaylists } from '_actions/user';
+import {
+  getUser, getAllTracks, getAllPlaylists,
+  getAchievements,
+} from '_actions/user';
 import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 
@@ -23,6 +26,7 @@ class Personal extends Component {
     this.props.getUser(id);
     this.props.getAllTracks(id);
     this.props.getAllPlaylists(id);
+    this.props.getAchievements(id);
   }
 
   componentDidMount() {
@@ -110,15 +114,17 @@ class Personal extends Component {
   }
 
   render() {
-    const { achievements, user, player } = this.props;
+    const { user, player } = this.props;
 
     const { trackId, isPlaying } = player;
     const { tracks, playlists } = user;
+
+    const userAchievements = user.achievements;
+    const achievementsDict = this.props.achievements;
+
     const { firstName, lastName, avatarUrl } = user.data;
 
-    const { order, data } = achievements;
     const { acviveTab, stickyHeader, stickyFilter } = this.state;
-
     const cardListData = acviveTab === 'playlists' ? playlists : tracks;
 
     const callbacks = {
@@ -131,11 +137,11 @@ class Personal extends Component {
       <div className={cl(style.container, stickyFilter && style.containerSticky)}>
         <Header
           avatar={avatarUrl}
-          userName={`${firstName} ${lastName}`}
-          order={order}
-          data={data}
+          achievementsDict={achievementsDict}
           onBackClick={this._handleBack}
           sticky={stickyHeader}
+          userAchievements={userAchievements}
+          userName={`${firstName} ${lastName}`}
         />
         <ListSection
           trackId={trackId}
@@ -162,6 +168,7 @@ export default connect((state, props) => ({
   getUser,
   getAllTracks,
   getAllPlaylists,
+  getAchievements,
   playerPlay,
   setPlaylist,
   showPlayer,
@@ -178,6 +185,7 @@ Personal.propTypes = {
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,
+  getAchievements: PropTypes.func,
   playerPlay: PropTypes.func,
   playerModeUpdate: PropTypes.func,
   playerPause: PropTypes.func,
