@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PropTypes from 'prop-types';
-import modal from '_decorators/Modal';
+import Modal from '_decorators/Modal';
 
 import ListTracks from './ListTracks';
 import Player from './Player';
 
 import style from './style.styl';
 
-const ModalPlaylist = modal(ListTracks);
+const ModalPlaylist = Modal(ListTracks);
 
 class App extends Component {
   renderListTracks() {

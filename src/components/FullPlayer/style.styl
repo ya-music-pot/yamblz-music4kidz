@@ -104,7 +104,7 @@
 }
 
 .buttonLike {
-  background-image: url(./images/like.svg);
+  background-image: url('./images/like.svg');
   background-color: #ff3333;
   @extend .buttonRoundCommon;
 }
@@ -112,7 +112,7 @@
 .buttonLike:focus { outline: none; }
 
 .buttonDislike {
-  background-image: url(./images/skip.svg);
+  background-image: url('./images/skip.svg');
   background-color: #0065d9;
   @extend .buttonRoundCommon;
 }
@@ -120,14 +120,14 @@
 .buttonDislike:focus { outline: none; }
 
 .buttonArrowDown {
-  background-image: url(./images/arrow_down.svg);
+  background-image: url('./images/arrow_down.svg');
   @extend .buttonCommon24;
 }
 
 .buttonArrowDown:focus { outline: none; }
 
 .buttonDownload {
-  background-image: url(./images/download.svg);
+  background-image: url('./images/download.svg');
   @extend .buttonCommon24;
 }
 
@@ -138,32 +138,32 @@
 }
 
 .buttonPrevious {
-  background: url(./images/previous.svg) center center no-repeat;
+  background: url('./images/previous.svg') center center no-repeat;
   @extend .buttonCommon30;
 }
 
 .buttonPrevious:focus { outline: none; }
 
-.player-button {
+.playerButton {
   display: inline-block;
   background-size: contain;
   border: none;
   height: 36px;
   width: 36px;
+}
 
-  &--play {
-    background: url(./images/play.svg) center center no-repeat;
-  }
+.playerButtonPlay {
+  background: url('./images/play.svg') center center no-repeat;
+}
 
-  &--pause {
-    background: url(./images/pause.svg) center center no-repeat;
-  }
+.playerButtonPause {
+  background: url('./images/pause.svg') center center no-repeat;
 }
 
 .player-button:focus { outline: none; }
 
 .buttonNext {
-  background: url(./images/next.svg) center center no-repeat;
+  background: url('./images/next.svg') center center no-repeat;
   @extend .buttonCommon30;
 }
 
@@ -177,7 +177,7 @@
 
 .buttonRepeat {
   &Active {
-    background-image: url(./images/repeat.svg);
+    background-image: url('./images/repeat.svg');
     @extend .buttonCommon30;
 
     &:focus {
@@ -186,7 +186,7 @@
   }
 
   &Inactive {
-    background-image: url(./images/repeat-inactive.svg);
+    background-image: url('./images/repeat-inactive.svg');
     @extend .buttonCommon30;
 
     &:focus {

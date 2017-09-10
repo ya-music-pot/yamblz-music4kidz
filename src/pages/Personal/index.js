@@ -9,6 +9,7 @@ import {
 } from '_actions/user';
 import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
+import callbacks from '_helpers/cardCallbacks';
 
 import Header from './Header';
 import ListSection from './ListSection';
@@ -76,26 +77,6 @@ class Personal extends Component {
     this.props.router.push('/feed');
   }
 
-  _onButtonClick = (params) => {
-    const { trackId, playlist, isRadio, playlistId, isPlaying } = params;
-    if (isPlaying) {
-      this.props.playerPause();
-    } else {
-      this.props.playerModeUpdate('mini');
-      this.props.showPlayer(playlist, isRadio);
-      this.props.setPlaylist(playlist, isRadio, playlistId);
-      this.props.playerPlay(trackId);
-    }
-  }
-
-  _onCardClick = (params) => {
-    const { trackId, playlist, isRadio, playlistId } = params;
-    this.props.playerModeUpdate('full');
-    this.props.showPlayer(playlist, isRadio);
-    this.props.setPlaylist(playlist, isRadio, playlistId);
-    this.props.playerPlay(trackId);
-  }
-
   _handleTrackClick = (id) => {
     const { isPlaying, trackId } = this.props.player;
     const { tracks } = this.props.user;
@@ -127,11 +108,7 @@ class Personal extends Component {
     const { acviveTab, stickyHeader, stickyFilter } = this.state;
     const cardListData = acviveTab === 'playlists' ? playlists : tracks;
 
-    const callbacks = {
-      onRouterPush: this.props.router.push,
-      onButtonClick: this._onButtonClick,
-      onCardClick: this._onCardClick,
-    };
+    callbacks.onRouterPush = this.props.router.push;
 
     return (
       <div className={cl(style.container, stickyFilter && style.containerSticky)}>

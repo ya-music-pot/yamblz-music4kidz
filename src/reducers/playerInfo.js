@@ -4,6 +4,7 @@ const defaultState = {
   inited: false,
   isShow: false,
   mode: 'full',
+  cardType: null,
 };
 
 export default function (state = defaultState, action) {
@@ -26,6 +27,7 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isShow: true,
+        cardType: payload.cardType,
       };
 
     default:
