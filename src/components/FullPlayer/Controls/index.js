@@ -14,20 +14,29 @@ export default class Controls extends Component {
       isPlaying, cardType,
     } = this.props;
 
+    const {
+      controlsRow, buttonPrevious, buttonNext,
+      flexEnd,
+    } = style;
+
+    let controlsRowStyles = controlsRow;
     let isPrevNeeded = true;
+
     switch (cardType) {
       case CARDS.radio:
-      case CARDS.single:
       case CARDS.personal:
+        isPrevNeeded = false;
+        controlsRowStyles = cl(controlsRow, flexEnd);
+        break;
+      case CARDS.single:
         isPrevNeeded = false;
         break;
       default:
         break;
     }
 
-    const { controlsRow, buttonPrevious, buttonNext } = style;
     return (
-      <div className={controlsRow}>
+      <div className={controlsRowStyles}>
         { isPrevNeeded && <Button style={buttonPrevious} onClick={onClickPrevious} /> }
         <Button
           style={

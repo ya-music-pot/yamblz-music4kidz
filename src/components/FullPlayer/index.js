@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import CircularAvatar from '_components/CircularAvatar';
-
 import CARDS from '_data/cardsType';
 
 import Header from './Header';

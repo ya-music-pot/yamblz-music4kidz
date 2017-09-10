@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
 
 import Button from '_components/Button';
-
 import style from '../style.styl';
 
 export default class Likes extends Component {
-  _handleClickDislike = () => {}
+  _handleClickDislike = () => {};
 
-  _handleClickLike = () => {}
+  _handleClickLike = () => {};
 
   render() {
     const {
