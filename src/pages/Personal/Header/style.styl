@@ -1,3 +1,12 @@
+.container {
+  margin-top: 125px;
+  transition: margin-top .2s ease-in-out;
+
+  &Sticky {
+    margin-top: 56px;
+  }
+}
+
 .header {
   display: flex;
   flex-direction: column;
@@ -5,6 +14,22 @@
   background-color: #7859ff;
   padding-top: 13px;
   box-sizing: border-box;
+
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 125px;
+  z-index: 2;
+  transition: all .2s ease-in-out;
+
+  &Sticky {
+    height: 56px;
+
+    .avatar {
+      width: 0;
+      height: 0;
+    }
+  }
 }
 
 .avatar {
@@ -13,6 +38,7 @@
   width: 68px;
   height: 68px;
   margin-bottom: 8px;
+  transition: all .2s ease-in-out;
 }
 
 .userName {
@@ -30,10 +56,11 @@
   font-weight: 500;
   color: #ffffff;
   line-height: 17px;
+  text-align: center;
 }
 
 .button {
-  position: absolute;
+  position: fixed;
   background-repeat: no-repeat;
   background-position: 50%;
   background-color: transparent;

@@ -22,29 +22,33 @@ export default class Header extends Component {
 
   render() {
     const {
-      avatar, userName, className,
+      avatar, userName, sticky,
       order, data, onBackClick,
     } = this.props;
 
     return (
-      <div className={cl(style.header, style[className])}>
-        <div
-          className={cl(style.button, style.buttonBack)}
-          onClick={onBackClick}
-        />
-        <div className={cl(style.button, style.buttonSettings)} />
-        <Avatar
-          className={style.avatar}
-          avatar={avatar}
-        />
-        <div className={style.userName}>
-          {userName}
+      <div className={cl(style.container, sticky && style.containerSticky)}>
+        <div className={cl(style.header, sticky && style.headerSticky)}>
+          <div
+            className={cl(style.button, style.buttonBack)}
+            onClick={onBackClick}
+          />
+          <div className={cl(style.button, style.buttonSettings)} />
+          <Avatar
+            className={style.avatar}
+            avatar={avatar}
+          />
+          <div className={style.userName}>
+            {userName}
+          </div>
         </div>
+
         <div className={style.totalScore}>
           {plural(8, '%d награда', '%d награды', '%d наград')}
         </div>
+
         <Slider
-          className={cl(style.slider, style[className])}
+          className={style.slider}
           widthSlide={WIDTH_SLIDE}
           initTransform={MAX_TRANSFORM}
           maxTransform={MAX_TRANSFORM}
@@ -74,7 +78,7 @@ export default class Header extends Component {
 Header.propTypes = {
   avatar: PropTypes.string,
   userName: PropTypes.string,
-  className: PropTypes.string,
+  sticky: PropTypes.bool,
   order: PropTypes.arrayOf(PropTypes.number),
   data: PropTypes.object,
   onBackClick: PropTypes.func,

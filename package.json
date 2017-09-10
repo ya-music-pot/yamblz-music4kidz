@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --public localhost:8080",
+    "start": "webpack-dev-server --public --host 0.0.0.0 --port 3000",
     "dev": "webpack",
     "lint": "eslint 'src/**/*.js'",
     "prod": "webpack --optimize-minimize",

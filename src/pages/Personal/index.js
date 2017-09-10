@@ -26,6 +26,39 @@ class Personal extends Component {
     this.props.getAllPlaylists(id);
   }
 
+  componentDidMount() {
+    document.addEventListener('scroll', this._handleScroll);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this._handleScroll);
+  }
+
+  _handleScroll = () => {
+    const scrollTop = document.body.scrollTop;
+    const { stickyHeader, stickyFilter } = this.state;
+
+    if (scrollTop > 0 && !stickyHeader) {
+      this.setState({
+        stickyHeader: true,
+      });
+    } else if (scrollTop === 0 && stickyHeader) {
+      this.setState({
+        stickyHeader: false,
+      });
+    }
+
+    if (scrollTop > 255 && !stickyFilter) {
+      this.setState({
+        stickyFilter: true,
+      });
+    } else if (scrollTop <= 255 && stickyFilter) {
+      this.setState({
+        stickyFilter: false,
+      });
+    }
+  }
+
   _handleToggle = (id) => {
     this.setState({
       acviveTab: id,
@@ -33,7 +66,7 @@ class Personal extends Component {
   }
 
   _handleBack = () => {
-
+    this.props.router.goBack();
   }
 
   _handleSearch = () => {
@@ -50,7 +83,7 @@ class Personal extends Component {
       this.props.setPlaylist(playlist, isRadio, playlistId);
       this.props.playerPlay(trackId);
     }
-  };
+  }
 
   _onCardClick = (params) => {
     const { trackId, playlist, isRadio, playlistId } = params;
@@ -58,7 +91,7 @@ class Personal extends Component {
     this.props.showPlayer(playlist, isRadio);
     this.props.setPlaylist(playlist, isRadio, playlistId);
     this.props.playerPlay(trackId);
-  };
+  }
 
   render() {
     const { achievements, user } = this.props;
@@ -67,7 +100,7 @@ class Personal extends Component {
     const { firstName, lastName, avatarUrl } = user.data;
 
     const { order, data } = achievements;
-    const { acviveTab } = this.state;
+    const { acviveTab, stickyHeader, stickyFilter } = this.state;
     const cardListData = acviveTab === 'playlists' ? playlists : tracks;
 
     const callbacks = {
@@ -77,15 +110,16 @@ class Personal extends Component {
     };
 
     return (
-      <div className={style.container}>
+      <div className={cl(style.container, stickyFilter && style.containerSticky)}>
         <Header
           avatar={avatarUrl}
           userName={`${firstName} ${lastName}`}
           order={order}
           data={data}
           onBackClick={this._handleBack}
+          sticky={stickyHeader}
         />
-        <div className={style.filter}>
+        <div className={cl(style.filter, stickyFilter && style.filterSticky)}>
           <div
             className={cl(style.filterItem, acviveTab === 'playlists' && style.active)}
             onClick={this._handleToggle.bind(this, 'playlists')}

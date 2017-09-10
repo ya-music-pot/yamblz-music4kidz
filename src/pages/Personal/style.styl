@@ -1,6 +1,10 @@
 .container {
   background-color: #7859ff;
   min-height: 100vh;
+
+  &Sticky {
+    margin-top: 112px;
+  }
 }
 
 .filter {
@@ -17,6 +21,14 @@
     border-bottom: 4px solid #6c50e6;
     box-sizing: border-box;
     padding: 19px 0 15px;
+  }
+
+  &Sticky {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 2;
+    width: 100%;
   }
 }
 
