@@ -1,9 +1,10 @@
-import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_COUNT_LIKES } from '_actions/settings';
+import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_TRACKS } from '_actions/settings';
 
 const settingsDefault = {
-  likesCount: 0,
+  tracks: [],
   actionId: 1,
   moodId: 1,
+  likesCount: 0,
 };
 
 export default function (list = { ...settingsDefault }, action) {
@@ -20,11 +21,18 @@ export default function (list = { ...settingsDefault }, action) {
         ...list,
         actionId: payload.actionId,
       };
-    case UPDATE_COUNT_LIKES:
+    case UPDATE_TRACKS: {
+      const { trackId, liked } = payload;
+      const likesCount = liked ? list.likesCount + 1 : list.likesCount;
       return {
         ...list,
-        likesCount: payload.likesCount,
+        likesCount,
+        tracks: list.tracks.concat({
+          track_id: trackId,
+          liked,
+        }),
       };
+    }
     default:
       return list;
   }
