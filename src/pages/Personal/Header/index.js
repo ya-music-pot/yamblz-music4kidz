@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 import plural from 'plural-ru';
 
+import Icon from '_components/Icon';
 import Avatar from '_components/Avatar';
 import Slider from '_decorators/Slider';
 import Achievement from '_components/Achievement';
@@ -31,11 +32,15 @@ export default class Header extends Component {
     return (
       <div className={cl(style.container, sticky && style.containerSticky)}>
         <div className={cl(style.header, sticky && style.headerSticky)}>
-          <div
+          <Icon
+            typeIcon="back"
             className={cl(style.button, style.buttonBack)}
             onClick={onBackClick}
           />
-          <div className={cl(style.button, style.buttonSettings)} />
+          <Icon
+            typeIcon="settings"
+            className={cl(style.button, style.buttonSettings)}
+          />
           <Avatar
             className={style.avatar}
             avatar={avatar}

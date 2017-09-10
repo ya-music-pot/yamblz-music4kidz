@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
+import Icon from '_components/Icon';
 import CardList from '_components/CardList';
 import Button from '_components/Button';
 import TrackInfo from '_components/TrackInfo';
@@ -77,7 +78,7 @@ export default class ListSection extends Component {
             <div className={style.emptyText}>
               Здесь будут твои любимые и сохранённые подборки
               <br />
-              Нажми нa <span className={style.heart} />, чтобы сохранить
+              Нажми нa <Icon typeIcon="like" className={style.heart} />, чтобы сохранить
             </div>
             <Button
               onClick={onSearch}
