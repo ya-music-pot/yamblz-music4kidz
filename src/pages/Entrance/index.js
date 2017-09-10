@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getPromo } from '_actions/promo';
 import callbacks from '_helpers/cardCallbacks';
 
 import EntranceScreen from './screens/EntranceScreen';
@@ -12,10 +11,6 @@ class Entrance extends Component {
   state = {
     showEntranceScreen: true,
   };
-
-  componentWillMount() {
-    this.props.getPromo();
-  }
 
   _handleNavigate = () => {
     this.setState({
@@ -49,7 +44,6 @@ class Entrance extends Component {
 
 Entrance.propTypes = {
   router: PropTypes.object,
-  getPromo: PropTypes.func,
   data: PropTypes.object,
 };
 
@@ -59,4 +53,4 @@ export default connect((state, props) => {
     ...props,
     data,
   };
-}, { getPromo })(Entrance);
+})(Entrance);
