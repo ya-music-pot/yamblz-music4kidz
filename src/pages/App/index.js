@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PropTypes from 'prop-types';
-import modal from '_decorators/modal';
+import modal from '_decorators/Modal';
 
 import ListTracks from './ListTracks';
 import Player from './Player';

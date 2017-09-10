@@ -7,9 +7,8 @@ import { getUser, getAllTracks, getAllPlaylists } from '_actions/user';
 import { playerPlay, setPlaylist, playerPause } from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 
-import CardList from '_components/CardList';
-import Button from '_components/Button';
 import Header from './Header';
+import ListSection from './ListSection';
 import style from './style.styl';
 
 class Personal extends Component {
@@ -93,14 +92,33 @@ class Personal extends Component {
     this.props.playerPlay(trackId);
   }
 
-  render() {
-    const { achievements, user } = this.props;
+  _handleTrackClick = (id) => {
+    const { isPlaying, trackId } = this.props.player;
+    const { tracks } = this.props.user;
 
+    if (id === trackId && isPlaying) {
+      this.props.playerPause();
+    } else if (isPlaying) {
+      this.props.setPlaylist(tracks);
+      this.props.playerPlay(id);
+    } else {
+      this.props.playerModeUpdate('mini');
+      this.props.showPlayer(tracks);
+      this.props.setPlaylist(tracks);
+      this.props.playerPlay(id);
+    }
+  }
+
+  render() {
+    const { achievements, user, player } = this.props;
+
+    const { trackId, isPlaying } = player;
     const { tracks, playlists } = user;
     const { firstName, lastName, avatarUrl } = user.data;
 
     const { order, data } = achievements;
     const { acviveTab, stickyHeader, stickyFilter } = this.state;
+
     const cardListData = acviveTab === 'playlists' ? playlists : tracks;
 
     const callbacks = {
@@ -119,45 +137,17 @@ class Personal extends Component {
           onBackClick={this._handleBack}
           sticky={stickyHeader}
         />
-        <div className={cl(style.filter, stickyFilter && style.filterSticky)}>
-          <div
-            className={cl(style.filterItem, acviveTab === 'playlists' && style.active)}
-            onClick={this._handleToggle.bind(this, 'playlists')}
-          >
-            Мои подборки
-          </div>
-          <div
-            className={cl(style.filterItem, acviveTab === 'tracks' && style.active)}
-            onClick={this._handleToggle.bind(this, 'tracks')}
-          >
-            Мои песни
-          </div>
-        </div>
-        {
-          cardListData.length > 0 &&
-          <div className={style.cardList}>
-            <CardList
-              data={cardListData}
-              callbacks={callbacks}
-            />
-          </div>
-        }
-        {
-          cardListData.length === 0 &&
-          <div className={style.emptyContainer}>
-            <div className={style.emptyText}>
-              Здесь будут твои любимые и сохранённые подборки
-              <br />
-              Нажми нa <span className={style.heart} />, чтобы сохранить
-            </div>
-            <Button
-              onClick={this._handleSearch}
-              style={style.searchButton}
-            >
-              Смотреть
-            </Button>
-          </div>
-        }
+        <ListSection
+          trackId={trackId}
+          isPlaying={isPlaying}
+          stickyFilter={stickyFilter}
+          acviveTab={acviveTab}
+          cardListData={cardListData}
+          callbacks={callbacks}
+          onToggle={this._handleToggle}
+          onTrackClick={this._handleTrackClick}
+          onSearch={this._handleSearch}
+        />
       </div>
     );
   }
@@ -166,7 +156,7 @@ class Personal extends Component {
 export default connect((state, props) => ({
   user: state.user,
   achievements: state.dictionaries.achievements,
-  feed: state.feed,
+  player: state.player,
   ...props,
 }), {
   getUser,
@@ -181,14 +171,16 @@ export default connect((state, props) => ({
 
 Personal.propTypes = {
   achievements: PropTypes.object,
+  player: PropTypes.object,
+  router: PropTypes.object,
+  user: PropTypes.object,
+
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,
   playerPlay: PropTypes.func,
-  setPlaylist: PropTypes.func,
-  showPlayer: PropTypes.func,
   playerModeUpdate: PropTypes.func,
   playerPause: PropTypes.func,
-  router: PropTypes.object,
-  user: PropTypes.object,
+  setPlaylist: PropTypes.func,
+  showPlayer: PropTypes.func,
 };

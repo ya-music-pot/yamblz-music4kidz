@@ -55,9 +55,10 @@ export default function (state = { ...defaultState }, action) {
       };
     case `${GET_ALL_TRACKS}_SUCCESS`:
       return {
+        ...state,
         loading: false,
         loaded: true,
-        tracks: response,
+        tracks: response.data,
       };
 
     case `${GET_ALL_PLAYLISTS}_START`:
@@ -74,9 +75,10 @@ export default function (state = { ...defaultState }, action) {
       };
     case `${GET_ALL_PLAYLISTS}_SUCCESS`:
       return {
+        ...state,
         loading: false,
         loaded: true,
-        playlists: response,
+        playlists: response.data,
       };
 
     default:
