@@ -68,3 +68,18 @@ export const getLocalStorage = () => {
   return {};
 };
 
+/*
+ * getTime — get string minutes:seconds
+ * @param  {Number} position
+ * @param  {Number} duration
+ * @return {String}
+ */
+export function getTime(position, duration) {
+  const diffTrackPosition = position - duration;
+  const minutesLeft = parseInt(diffTrackPosition / 60, 10).toString();
+  const sec = -(parseInt(diffTrackPosition, 10) - minutesLeft * 60);
+  const secondsLeft = (sec < 10 ? `0${sec}` : sec).toString();
+
+  return `${minutesLeft}:${secondsLeft}`;
+}
+
