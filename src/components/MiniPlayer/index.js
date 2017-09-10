@@ -16,9 +16,7 @@ export default class MiniPlayer extends Component {
   });
 
   render() {
-    const {
-      className, onTogglePlay,
-    } = this.props;
+    const { className, onTogglePlay, openFullPlayer } = this.props;
 
     const {
       trackName, singerName, isPlaying,
@@ -28,26 +26,31 @@ export default class MiniPlayer extends Component {
     const percentage = position / duration;
 
     return (
-      <div className={cl(style['miniPlayer-wrapper'], className)}>
+      <div className={cl(style.wrapper, className)}>
         <div className={style.miniPlayer}>
           <div
-            className={style['miniPlayer-progress']}
+            className={style.progress}
             style={this._calculateProgressStyle(percentage * 100)}
           />
           <Button
             style={
               cl(
-                style['miniPlayer-button'],
-                isPlaying ? style['miniPlayer-button--pause'] : style['miniPlayer-button--play'],
+                style.button,
+                isPlaying ? style.buttonPause : style.buttonPlay,
               )
             }
             isPlaying={isPlaying}
             onClick={onTogglePlay}
           />
-          <Title
-            trackName={trackName}
-            singerName={singerName}
-          />
+
+          <div className={style.title} onClick={openFullPlayer}>
+            <div className={style.songTitle}>
+              {trackName}
+            </div>
+            <div className={style.singerName}>
+              {singerName}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -55,24 +58,8 @@ export default class MiniPlayer extends Component {
 }
 
 MiniPlayer.propTypes = {
+  openFullPlayer: PropTypes.func,
   playerState: PropTypes.object,
   className: PropTypes.string,
   onTogglePlay: PropTypes.func,
-};
-
-const Title = (props) => (
-  <div className={style['miniPlayer-title']}>
-    <div className={style['miniPlayer-songTitle']}>
-      {props.trackName}
-    </div>
-    <div className={style['miniPlayer-singerName']}>
-      {props.singerName}
-    </div>
-  </div>
-);
-
-
-Title.propTypes = {
-  trackName: PropTypes.string,
-  singerName: PropTypes.string,
 };
