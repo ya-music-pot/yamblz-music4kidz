@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import CircularAvatar from '_components/CircularAvatar';
 import Background from '_components/FullPlayer/Background';
+import Icon from '_components/Icon';
+
 import cl from 'classname';
 import CARDS from '_data/cardsType';
 
@@ -100,24 +102,28 @@ export default class Container extends Component {
   renderFooter() {
     const {
       bottomRow, buttonPlus, buttonRepeatActive,
-      buttonRepeatInactive,
+      buttonRepeatInactive, buttonList,
     } = style;
     const {
-      onClickRepeat, cardType,
+      onClickRepeat, cardType, openListTracks,
       playerState: { isRepeatMode },
     } = this.props;
 
-    let playlist = 'playlist';
+    let playlist = (<div>
+      <Button style={buttonList} onClick={openListTracks}>
+        <Icon className={style.icon} typeIcon="player-list" />
+      </Button>
+    </div>);
     if (cardType === CARDS.radio || cardType === CARDS.single) {
       playlist = null;
     } else if (cardType === CARDS.personal) {
-      playlist = 'balloon';
+      playlist = (<div>balloon</div>);
     }
 
     return (
       <div className={bottomRow}>
         <Button style={buttonPlus} onClick={this._handleClickPlus} />
-        { playlist && <div>{playlist}</div> }
+        { playlist && playlist }
         <Button
           style={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
           onClick={onClickRepeat}
@@ -170,6 +176,7 @@ Container.propTypes = {
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
   onClickArrowDown: PropTypes.func,
+  openListTracks: PropTypes.func,
   playerState: PropTypes.object,
   cardType: PropTypes.number,
 };

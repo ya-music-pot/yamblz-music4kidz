@@ -97,6 +97,8 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
     stats: 'minimal',
+    host: 'localhost',
+    port: '8080',
     setup(app) {
       app.get('/api/*', function(req, res) {
         got(`${API_URL}/${req.url.substr(5)}`)

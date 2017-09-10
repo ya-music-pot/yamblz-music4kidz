@@ -1,71 +1,70 @@
-
-
 .miniPlayer {
   height: 56px;
   background-color: white;
   border: none;
+}
 
-  &-wrapper {
-    width: 100vw;
-    height: 56px;
-    background-color: rgba(55, 55, 55, 0.3);
-    padding-top: 4px;
-    align-self: flex-end;
-    position: relative;
+.wrapper {
+  width: 100vw;
+  height: 56px;
+  background-color: rgba(55, 55, 55, 0.3);
+  padding-top: 4px;
+  align-self: flex-end;
+  position: relative;
+}
+
+.progress {
+  width: 100vw;
+  height: 4px;
+  position: absolute;
+  top: 0px;
+  right: 100%;
+  background-color: #fee05b;
+}
+
+.button {
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-color: transparent;
+  position: absolute;
+  padding: 16px;
+  box-sizing: content-box;
+  -webkit-tap-highlight-color: $color-black;
+
+  &:focus {
+    outline: none;
   }
+}
 
-  &-progress {
-    width: 100vw;
-    height: 4px;
-    position: absolute;
-    top: 0px;
-    right: 100%;
-    background-color: #fee05b;
-  }
+.buttonPlay {
+  background-image: url('./images/play.svg');
+  left: 0;
+}
 
-  &-button {
-    width: 24px;
-    height: 24px;
-    background-repeat: no-repeat;
-    background-position: 50%;
-    background-color: transparent;
-    position: absolute;
-    margin: 16px;
-    -webkit-tap-highlight-color: $color-black;
+.buttonPause {
+  background-image: url('./images/pause.svg');
+}
 
-    &--play {
-      background-image: url('./images/play.svg');
-      left: 0;
-    }
+.buttonDownload {
+  background-image: url('./images/download.svg');
+  right: 0;
+}
 
-    &--pause {
-      background-image: url('./images/pause.svg');
-    }
+.title {
+  display: inline-block;
+  line-height: 20px;
+  padding: 8px 0 8px 56px;
+}
 
-    &--download {
-      background-image: url('./images/download.svg');
-      right: 0;
-    }
+.songTitle {
+  font-size: 16px;
+  color: $color-black;
+  margin-bottom: 1px;
+}
 
-    &:focus {
-      outline: none;
-    }
-  }
-
-  &-title {
-    display: inline-block;
-    line-height: 20px;
-    padding: 8px 0 8px 56px;
-  }
-
-  &-songTitle {
-    font-size: 16px;
-    color: $color-black;
-    margin-bottom: 1px;
-  }
-
-  &-singerName {
-    font-size: 12px;
-    color: #b4b4b4;
-  }
+.singerName {
+  font-size: 12px;
+  color: #b4b4b4;
 }

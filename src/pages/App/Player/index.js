@@ -11,6 +11,8 @@ import {
   playerResume, toggleRepeatMode,
 } from '_actions/player';
 
+import { openModal } from '_actions/modal';
+
 import { playerModeUpdate } from '_actions/playerInfo';
 
 class Player extends Component {
@@ -44,6 +46,10 @@ class Player extends Component {
     this.props.playerModeUpdate('mini');
   };
 
+  _handleOpenListTracks = () => {
+    this.props.openModal('listTracks');
+  }
+
   render() {
     const { player, cardType } = this.props;
     return (
@@ -60,6 +66,7 @@ class Player extends Component {
           onClickPrevious={this._handlePreviousButton}
           onClickRepeat={this._handleRepeatButton}
           onClickArrowDown={this._handleClickArrowDown}
+          openListTracks={this._handleOpenListTracks}
           type="full"
           cardType={cardType}
         />
@@ -73,6 +80,7 @@ export default connect((state, props) => ({
   cardType: state.playerInfo.cardType,
   ...props,
 }), {
+  openModal,
   setPlaylist,
   playerPlay,
   playerClear,
@@ -86,6 +94,7 @@ export default connect((state, props) => ({
 
 Player.propTypes = {
   player: PropTypes.object,
+  openModal: PropTypes.func,
   playerPlay: PropTypes.func,
   playerNext: PropTypes.func,
   playerPrev: PropTypes.func,
