@@ -44,14 +44,14 @@ class Player extends Component {
 
   _handleClickArrowDown = () => {
     this.props.playerModeUpdate('mini');
-  }
+  };
 
   _handleOpenListTracks = () => {
     this.props.openModal('listTracks');
   }
 
   render() {
-    const { player } = this.props;
+    const { player, cardType } = this.props;
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -68,6 +68,7 @@ class Player extends Component {
           onClickArrowDown={this._handleClickArrowDown}
           openListTracks={this._handleOpenListTracks}
           type="full"
+          cardType={cardType}
         />
       </PlayerToggle>
     );
@@ -76,6 +77,7 @@ class Player extends Component {
 
 export default connect((state, props) => ({
   player: state.player,
+  cardType: state.playerInfo.cardType,
   ...props,
 }), {
   openModal,
@@ -100,4 +102,5 @@ Player.propTypes = {
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
   playerModeUpdate: PropTypes.func,
+  cardType: PropTypes.number,
 };
