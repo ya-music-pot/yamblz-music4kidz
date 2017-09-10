@@ -19,6 +19,7 @@ if (authToken) {
 const routes = () => (
   <Route path="/" component={App}>
     <IndexRoute component={authToken ? Feed : Entrance} />
+    <Route path="/entrance" component={Entrance} />
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
     <Route path="/personal" component={Personal} />
