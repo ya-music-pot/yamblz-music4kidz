@@ -24,6 +24,10 @@ export default class SingleCard extends Component {
     );
   }
 
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
   _getBg() {
     const { gradients } = this.props.bgs;
     const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
