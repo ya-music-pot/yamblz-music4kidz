@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 
 import Icon from '_components/Icon';
-
 import style from './style.styl';
 
 export default class Achievement extends Component {

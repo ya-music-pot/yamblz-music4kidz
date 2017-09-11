@@ -17,8 +17,8 @@ import style from './style.styl';
 
 class Personal extends Component {
   state = {
-    acviveTab: 'playlists',
-  }
+    activeTab: 'playlists',
+  };
 
   componentWillMount() {
     const { user } = this.props;
@@ -61,21 +61,21 @@ class Personal extends Component {
         stickyFilter: false,
       });
     }
-  }
+  };
 
   _handleToggle = (id) => {
     this.setState({
-      acviveTab: id,
+      activeTab: id,
     });
-  }
+  };
 
   _handleBack = () => {
     this.props.router.goBack();
-  }
+  };
 
   _handleSearch = () => {
     this.props.router.push('/feed');
-  }
+  };
 
   _handleTrackClick = (id) => {
     const { isPlaying, trackId } = this.props.player;
@@ -92,7 +92,7 @@ class Personal extends Component {
       this.props.setPlaylist(tracks);
       this.props.playerPlay(id);
     }
-  }
+  };
 
   render() {
     const { user, player } = this.props;
@@ -105,8 +105,8 @@ class Personal extends Component {
 
     const { firstName, lastName, avatarUrl } = user.data;
 
-    const { acviveTab, stickyHeader, stickyFilter } = this.state;
-    const cardListData = acviveTab === 'playlists' ? playlists : tracks;
+    const { activeTab, stickyHeader, stickyFilter } = this.state;
+    const cardListData = activeTab === 'playlists' ? playlists : tracks;
 
     callbacks.onRouterPush = this.props.router.push;
 
@@ -124,7 +124,7 @@ class Personal extends Component {
           trackId={trackId}
           isPlaying={isPlaying}
           stickyFilter={stickyFilter}
-          acviveTab={acviveTab}
+          activeTab={activeTab}
           cardListData={cardListData}
           callbacks={callbacks}
           onToggle={this._handleToggle}
