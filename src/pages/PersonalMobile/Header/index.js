@@ -65,7 +65,8 @@ export default class Header extends Component {
                   title={title}
                   disabled={disabled}
                   key={id}
-                  onClick={this._handleAchievementClick.bind(null, id)}
+                  id={id}
+                  onClick={this._handleAchievementClick.bind(this, id)}
                 />
               );
             })
