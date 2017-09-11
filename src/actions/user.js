@@ -28,7 +28,7 @@ export function createUser(data) {
       url: `${API_URL}user/register`,
       body: {
         login: new Date().getTime(),
-        first_name: 'Екатерина',
+        first_name: 'Катя',
         last_name: 'Соловьева',
         mood_id: moodId,
         action_id: actionId,

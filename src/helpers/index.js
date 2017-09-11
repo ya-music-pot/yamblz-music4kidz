@@ -1,4 +1,4 @@
-const localStorageUniqKey = 'MUSIC-';
+const localStorageUniqKey = 'YAMBLZ-MUSIC-';
 
 /**
  * Определяет операционную систему устройства.
