@@ -17,7 +17,7 @@ import style from './style.styl';
 
 class Personal extends Component {
   state = {
-    acviveTab: 'playlists',
+    activeTab: 'playlists',
   }
 
   componentWillMount() {
@@ -39,7 +39,7 @@ class Personal extends Component {
   }
 
   _handleScroll = () => {
-    const scrollTop = document.body.scrollTop;
+    const scrollTop = document.documentElement.scrollTop;
     const { stickyHeader, stickyFilter } = this.state;
 
     if (scrollTop > 0 && !stickyHeader) {
@@ -65,7 +65,7 @@ class Personal extends Component {
 
   _handleToggle = (id) => {
     this.setState({
-      acviveTab: id,
+      activeTab: id,
     });
   }
 
@@ -105,8 +105,8 @@ class Personal extends Component {
 
     const { firstName, lastName, avatarUrl } = user.data;
 
-    const { acviveTab, stickyHeader, stickyFilter } = this.state;
-    const cardListData = acviveTab === 'playlists' ? playlists : tracks;
+    const { activeTab, stickyHeader, stickyFilter } = this.state;
+    const cardListData = activeTab === 'playlists' ? playlists : tracks;
 
     callbacks.onRouterPush = this.props.router.push;
 
@@ -124,7 +124,7 @@ class Personal extends Component {
           trackId={trackId}
           isPlaying={isPlaying}
           stickyFilter={stickyFilter}
-          acviveTab={acviveTab}
+          activeTab={activeTab}
           cardListData={cardListData}
           callbacks={callbacks}
           onToggle={this._handleToggle}
