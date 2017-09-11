@@ -43,7 +43,7 @@ export default class ListSection extends Component {
 
   render() {
     const {
-      stickyFilter, acviveTab, cardListData,
+      stickyFilter, activeTab, cardListData,
       onToggle,
     } = this.props;
 
@@ -56,13 +56,13 @@ export default class ListSection extends Component {
       <div>
         <div className={cl(style.filter, stickyFilter && style.filterSticky)}>
           <div
-            className={cl(style.filterItem, acviveTab === 'playlists' && style.active)}
+            className={cl(style.filterItem, activeTab === 'playlists' && style.active)}
             onClick={onToggle.bind(this, 'playlists')}
           >
             Мои подборки
           </div>
           <div
-            className={cl(style.filterItem, acviveTab === 'tracks' && style.active)}
+            className={cl(style.filterItem, activeTab === 'tracks' && style.active)}
             onClick={onToggle.bind(this, 'tracks')}
           >
             Мои песни
@@ -70,7 +70,7 @@ export default class ListSection extends Component {
         </div>
         {
           (cardListData.length > 0 &&
-          acviveTab === 'playlists') &&
+          activeTab === 'playlists') &&
           <div className={style.cardList}>
             <CardList
               data={cardListData}
@@ -87,7 +87,7 @@ export default class ListSection extends Component {
 
         {
           (cardListData.length > 0 &&
-          acviveTab === 'tracks') &&
+          activeTab === 'tracks') &&
           <div className={style.trackInfo}>
             {cardListData.map((item) => this._renderTrack(item))}
           </div>
@@ -117,7 +117,7 @@ export default class ListSection extends Component {
 
 ListSection.propTypes = {
   stickyFilter: PropTypes.bool,
-  acviveTab: PropTypes.string,
+  activeTab: PropTypes.string,
   cardListData: PropTypes.arrayOf(PropTypes.object),
   onToggle: PropTypes.func,
 };
