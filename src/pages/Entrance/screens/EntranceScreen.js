@@ -27,13 +27,12 @@ class EntranceScreen extends Component {
     this.cardHeight = this.card.offsetHeight;
 
     this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
-    this.bottomPosition = this.content.offsetHeight + 16;
+    this.bottomPosition = this.windowHeight * 0.9; // Карточка торчит на 10% высоты экрана
     this.threshhold = this.windowHeight / 2;
   };
 
   /**
    * _initializeCardActions — Функция инициаллизирует обработчик жестов
-   * @param  {Node} el
    */
   _initializeCardActions = () => {
     this.isPanning = null;
@@ -68,9 +67,12 @@ class EntranceScreen extends Component {
     }
 
     const newCardY = event.deltaY + this.lastCardY;
-    this.card.style.top = `${newCardY}px`;
 
     if (newCardY <= this.threshhold) {
+      if (this.state.isCardShown) {
+        return;
+      }
+
       if (this.posTimeout) {
         clearTimeout(this.posTimeout);
       }
@@ -96,6 +98,8 @@ class EntranceScreen extends Component {
       }, 300);
     }
 
+    this.card.style.top = `${newCardY}px`;
+
     if (event.isFinal) {
       this.isPanning = false;
     }
@@ -106,7 +110,9 @@ class EntranceScreen extends Component {
       data, callbacks, playlistId,
       shouldPlay,
     } = this.props;
+
     const { isCardShown } = this.state;
+
     let isPlaying = false;
     if (data.id === playlistId && shouldPlay) {
       isPlaying = true;
@@ -132,14 +138,14 @@ class EntranceScreen extends Component {
           </div>
         </div>
         <div
-          className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
+          className={cl(style.cardContainer, isCardShown && style.cardShown)}
           ref={(el) => {
             this.card = el;
           }}
         >
           <Card
             data={data}
-            callbacks={callbacks}
+            callbacks={isCardShown ? callbacks : {}}
             isPlaying={isPlaying}
           />
         </div>
