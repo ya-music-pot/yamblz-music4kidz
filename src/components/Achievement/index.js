@@ -9,7 +9,7 @@ export default class Achievement extends Component {
   render() {
     const {
       title, typeIcon, disabled,
-      className,
+      className, onClick,
     } = this.props;
 
     return (
@@ -17,6 +17,7 @@ export default class Achievement extends Component {
         <Icon
           typeIcon={typeIcon}
           className={style.logo}
+          onClick={onClick}
         />
         <div className={style.title}>{title}</div>
       </div>
@@ -29,4 +30,5 @@ Achievement.propTypes = {
   title: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
