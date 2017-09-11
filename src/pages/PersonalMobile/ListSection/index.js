@@ -9,12 +9,10 @@ import style from './style.styl';
 
 export default class ListSection extends Component {
   _handleCardClick = (params) => {
-    console.log('card');
     window.jsHandler.playlistClick(params.playlistId);
   };
 
   _handleTrackClick = (id) => {
-    console.log('track');
     window.jsHandler.trackClick(id);
   };
 

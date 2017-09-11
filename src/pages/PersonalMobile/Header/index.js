@@ -20,7 +20,6 @@ export default class Header extends Component {
   }
 
   _handleAchievementClick = (id) => {
-    console.log('achi');
     window.jsHandler.achievementClick(id);
   };
 
