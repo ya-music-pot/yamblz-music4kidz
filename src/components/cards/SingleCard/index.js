@@ -8,17 +8,30 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class SingleCard extends Component {
-  constructor() {
-    super();
-    this._bg = null;
-  }
+  state = {
+    bg: this._getBg(),
+  };
 
   componentWillMount() {
-    if (this._bg === null) {
-      const { gradients } = this.props.bgs;
-      const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
-      this._bg = { backgroundImage: `linear-gradient(${gradient})` };
-    }
+    this.timerID = setInterval(
+      () => {
+        if (this.props.isPlaying) {
+          this.setState({
+            bg: this._getBg(),
+          });
+        }
+      }, 400,
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  _getBg() {
+    const { gradients } = this.props.bgs;
+    const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
+    return { backgroundImage: `linear-gradient(${gradient})` };
   }
 
   render() {
@@ -43,7 +56,7 @@ export default class SingleCard extends Component {
 
     return (
       <div className={container} style={imageStyles} onClick={handleCardClick}>
-        <div className={overlay} style={this._bg} />
+        <div className={overlay} style={this.state.bg} />
         <div className={content}>
           <CardTitle text="Модный трек" styles={title} />
           <div className={info}>
