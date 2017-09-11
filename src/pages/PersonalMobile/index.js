@@ -15,7 +15,7 @@ import style from './style.styl';
 class Personal extends Component {
   state = {
     activeTab: 'playlists',
-  }
+  };
 
   componentWillMount() {
     const { user } = this.props;
@@ -58,13 +58,13 @@ class Personal extends Component {
         stickyFilter: false,
       });
     }
-  }
+  };
 
   _handleToggle = (id) => {
     this.setState({
       activeTab: id,
     });
-  }
+  };
 
   render() {
     const { user, player } = this.props;
@@ -118,7 +118,6 @@ Personal.propTypes = {
   achievements: PropTypes.object,
   player: PropTypes.object,
   user: PropTypes.object,
-
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,

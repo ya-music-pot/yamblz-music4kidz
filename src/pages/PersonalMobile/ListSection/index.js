@@ -4,42 +4,39 @@ import cl from 'classname';
 
 import Icon from '_components/Icon';
 import CardList from '_components/CardList';
-import Button from '_components/Button';
 import TrackInfo from '_components/TrackInfo';
 import style from './style.styl';
 
 export default class ListSection extends Component {
+  _handleCardClick = (params) => {
+    window.jsHandler.playlistClick(params.playlistId);
+  };
+
+  _handleTrackClick = (id) => {
+    window.jsHandler.trackClick(id);
+  };
+
   _renderTrack = (data) => {
     const {
       id, name, artist,
       image_url,
     } = data;
+    const { trackId, isPlaying } = this.props;
 
     return (
-      <a
-        href={`/#/mobile/profile?track_id=${id}`}
+      <TrackInfo
+        key={id}
+        currentTrack={id === trackId}
         className={style.trackInfoItem}
-      >
-        <TrackInfo
-          key={id}
-          currentTrack={false}
-          isPlaying={false}
-          trackId={id}
-          name={name}
-          artist={artist}
-          imageUrl={image_url}
-        />
-      </a>
+        isPlaying={id === trackId && isPlaying}
+        trackId={id}
+        name={name}
+        artist={artist}
+        imageUrl={image_url}
+        onClick={this._handleTrackClick.bind(null, id)}
+      />
     );
-  }
-
-  _handleCardClick = (params) => {
-    const { playlistId } = params;
-    const link = document.querySelector('#playlistLink');
-    link.setAttribute('href', `/#/mobile/profile?playlist_id=${playlistId}`);
-    link.click();
-    link.removeAttribute('href');
-  }
+  };
 
   render() {
     const {
@@ -48,8 +45,8 @@ export default class ListSection extends Component {
     } = this.props;
 
     const callbacks = {
-      onCardClick: this._handleCardClick,
       onButtonClick: this._handleCardClick,
+      onCardClick: this._handleCardClick,
     };
 
     return (
@@ -76,12 +73,6 @@ export default class ListSection extends Component {
               data={cardListData}
               callbacks={callbacks}
             />
-            <a
-              id="playlistLink"
-              style={{ display: 'none' }}
-            >
-              playlist link
-            </a>
           </div>
         }
 
@@ -101,13 +92,6 @@ export default class ListSection extends Component {
               <br />
               Нажми нa <Icon typeIcon="like" className={style.heart} />, чтобы сохранить
             </div>
-            <a href="/#/mobile/profile?search=true">
-              <Button
-                style={style.searchButton}
-              >
-                Смотреть
-              </Button>
-            </a>
           </div>
         }
       </div>
@@ -116,9 +100,10 @@ export default class ListSection extends Component {
 }
 
 ListSection.propTypes = {
+  trackId: PropTypes.number,
+  isPlaying: PropTypes.bool,
   stickyFilter: PropTypes.bool,
   activeTab: PropTypes.string,
   cardListData: PropTypes.arrayOf(PropTypes.object),
   onToggle: PropTypes.func,
 };
-

@@ -29,7 +29,7 @@ export default class ListSection extends Component {
         onClick={onTrackClick.bind(null, id)}
       />
     );
-  }
+  };
 
   render() {
     const {

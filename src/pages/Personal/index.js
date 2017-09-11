@@ -18,7 +18,7 @@ import style from './style.styl';
 class Personal extends Component {
   state = {
     activeTab: 'playlists',
-  }
+  };
 
   componentWillMount() {
     const { user } = this.props;
@@ -61,21 +61,21 @@ class Personal extends Component {
         stickyFilter: false,
       });
     }
-  }
+  };
 
   _handleToggle = (id) => {
     this.setState({
       activeTab: id,
     });
-  }
+  };
 
   _handleBack = () => {
     this.props.router.goBack();
-  }
+  };
 
   _handleSearch = () => {
     this.props.router.push('/feed');
-  }
+  };
 
   _handleTrackClick = (id) => {
     const { isPlaying, trackId } = this.props.player;
@@ -92,7 +92,7 @@ class Personal extends Component {
       this.props.setPlaylist(tracks);
       this.props.playerPlay(id);
     }
-  }
+  };
 
   render() {
     const { user, player } = this.props;
