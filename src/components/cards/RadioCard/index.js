@@ -10,17 +10,30 @@ import ButtonMiniplayer from '_components/ButtonMiniplayer';
 import style from './style.styl';
 
 export default class RadioCard extends Component {
-  constructor() {
-    super();
-    this._bg = null;
-  }
+  state = {
+    bg: this._getBg(),
+  };
 
   componentWillMount() {
-    if (this._bg === null) {
-      const { colors } = this.props.bgs;
-      const color = colors[getRandomInteger(0, colors.length - 1)];
-      this._bg = { backgroundColor: `#${color}` };
-    }
+    this.timerID = setInterval(
+      () => {
+        if (this.props.isPlaying) {
+          this.setState({
+            bg: this._getBg(),
+          });
+        }
+      }, 400,
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  _getBg() {
+    const { colors } = this.props.bgs;
+    const color = colors[getRandomInteger(0, colors.length - 1)];
+    return { backgroundColor: `#${color}` };
   }
 
   render() {
@@ -43,7 +56,7 @@ export default class RadioCard extends Component {
     }
 
     return (
-      <div style={this._bg} className={container} onClick={handleCardClick}>
+      <div style={this.state.bg} className={container} onClick={handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={imageContainer}>
