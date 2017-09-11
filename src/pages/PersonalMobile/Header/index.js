@@ -15,7 +15,6 @@ export default class Header extends Component {
   componentWillMount() {
     const docWidth = document.body.clientWidth;
     const { order } = this.props.achievementsDict;
-
     this.minTransform = -WIDTH_SLIDE * order.length + docWidth;
   }
 
