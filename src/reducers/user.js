@@ -1,20 +1,19 @@
 import {
   GET_USER, UPDATE_USER, GET_ALL_TRACKS,
   GET_ALL_PLAYLISTS, GET_ACHIEVEMENTS,
+  CREATE_USER,
 } from '_actions/user';
 
 const defaultState = {
   loading: false,
   loaded: false,
-  data: {
-    id: 1,
-  },
+  data: {},
   tracks: [],
   playlists: [],
   achievements: [],
 };
 
-export default function (state = { ...defaultState }, action) {
+export default function (state = defaultState, action) {
   const { type, response } = action;
 
   switch (type) {
@@ -38,6 +37,26 @@ export default function (state = { ...defaultState }, action) {
         loaded: true,
       };
     case `${UPDATE_USER}_SUCCESS`:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        ...response,
+      };
+
+    case `${CREATE_USER}_START`:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
+    case `${CREATE_USER}_FAIL`:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+      };
+    case `${CREATE_USER}_SUCCESS`:
       return {
         ...state,
         loading: false,

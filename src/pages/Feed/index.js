@@ -13,9 +13,7 @@ import PersonalRadio from './PersonalRadio';
 class Feed extends Component {
   componentWillMount() {
     const { userId } = this.props;
-    if (userId !== undefined) {
-      this.props.getFeed(userId);
-    }
+    this.props.getFeed(userId);
   }
 
   render() {
@@ -45,5 +43,5 @@ Feed.propTypes = {
 export default connect((state, props) => ({
   ...props,
   feed: state.feed,
-  userId: state.user.data.id === undefined ? 1 : state.user.data.id,
+  userId: state.user.data.id,
 }), { getFeed })(Feed);

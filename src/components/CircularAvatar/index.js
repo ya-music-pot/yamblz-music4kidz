@@ -98,7 +98,7 @@ class CircularAvatar extends Component {
       time,
     } = this.props;
 
-    const imageUri = (image !== 'null') ? image : defaultCover;
+    const imageUri = (image && image !== 'null') ? image : defaultCover;
     let percentage = (isNaN(progress)) ? 0 : progress;
     percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
 
