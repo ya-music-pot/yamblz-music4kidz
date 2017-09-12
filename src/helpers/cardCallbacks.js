@@ -2,6 +2,8 @@ import {
   playerPlay, setPlaylist, playerPause,
   setTrackInfo,
 } from '_actions/player';
+import { likePlaylist, dislikePlaylist } from '_actions/feed';
+import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 import { openModal } from '_actions/modal';
 
@@ -63,14 +65,25 @@ const onButtonClick = (params) => {
 };
 
 /**
- * Функция, обрабатывающая клик по карточке плейлиста
- * @param {Object} params
+ * Функция, добавляющая плейлист в плейлисты пользователя
+ * или удаляющая его из него (если он уже там)
+ * @param {Boolean} isLiked
+ * @param {Object} playlist
  */
-const onCardClick = (params) => {
-  openListTracks(params);
+const onAddClick = (isLiked, playlist) => {
+  const state = store.getState();
+  const { id: userId } = state.user.data;
+  if (isLiked) {
+    store.dispatch(dislikePlaylist(userId, playlist.id));
+    store.dispatch(deleteUserPlaylist(playlist));
+  } else {
+    store.dispatch(likePlaylist(userId, playlist.id));
+    store.dispatch(addUserPlaylist(playlist));
+  }
 };
 
 export default {
   onButtonClick,
-  onCardClick,
+  onCardClick: openListTracks,
+  onAddClick,
 };

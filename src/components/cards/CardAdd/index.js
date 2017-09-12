@@ -5,11 +5,11 @@ import cl from 'classname';
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-export default class CardTitle extends Component {
+export default class CardAdd extends Component {
   _handleAddClick = (e) => {
     e.stopPropagation();
-    const { isLiked, playlistId } = this.props;
-    this.props.onAddClick(isLiked, playlistId);
+    const { isLiked, playlist } = this.props;
+    this.props.onAddClick(isLiked, playlist);
   };
 
   render() {
@@ -28,9 +28,9 @@ export default class CardTitle extends Component {
   }
 }
 
-CardTitle.propTypes = {
+CardAdd.propTypes = {
   styles: PropTypes.string,
   isLiked: PropTypes.bool,
   onAddClick: PropTypes.func,
-  playlistId: PropTypes.number,
+  playlist: PropTypes.object,
 };

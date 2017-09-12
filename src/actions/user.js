@@ -4,6 +4,8 @@ export const CREATE_USER = 'CREATE_USER';
 export const GET_ALL_TRACKS = 'GET_ALL_TRACKS';
 export const GET_ALL_PLAYLISTS = 'GET_ALL_PLAYLISTS';
 export const GET_ACHIEVEMENTS = 'GET_ACHIEVEMENTS';
+export const ADD_PLAYLIST = 'ADD_PLAYLIST';
+export const DELETE_PLAYLIST = 'DELETE_PLAYLIST';
 
 export function getUser(id) {
   return {
@@ -68,6 +70,24 @@ export function getAllPlaylists(id) {
     type: GET_ALL_PLAYLISTS,
     callAPI: {
       url: `${API_URL}user/${id}/add_playlist`,
+    },
+  };
+}
+
+export function addUserPlaylist(playlist) {
+  return {
+    type: ADD_PLAYLIST,
+    payload: {
+      playlist,
+    },
+  };
+}
+
+export function deleteUserPlaylist(playlist) {
+  return {
+    type: DELETE_PLAYLIST,
+    payload: {
+      playlist,
     },
   };
 }

@@ -59,7 +59,10 @@ class Card extends Component {
       [CARDS.personal]: PersonalCard,
     };
 
-    const { backgroundsList, data, isPlaying } = this.props;
+    const {
+      backgroundsList, data, isPlaying,
+      userId,
+    } = this.props;
     const CardsType = cards[data.type];
     const callbacks = {
       handleCardClick: this._handleCardClick,
@@ -74,6 +77,7 @@ class Card extends Component {
         bgs={backgroundsList}
         isPlaying={isPlaying}
         isLiked={this._isPlaylistLiked(data.id)}
+        isAuth={userId !== null}
       />
     );
   };
@@ -98,7 +102,8 @@ export default connect((state, props) => {
     playlistId,
     shouldPlay,
     radio,
-    userPlaylists: user.data.playlists,
+    userPlaylists: user.playlists,
+    userId: user.data.id,
   };
 })(Card);
 
@@ -109,4 +114,5 @@ Card.propTypes = {
   radio: PropTypes.array,
   isPlaying: PropTypes.bool,
   userPlaylists: PropTypes.array,
+  userId: PropTypes.number,
 };

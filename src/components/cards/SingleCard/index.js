@@ -42,7 +42,7 @@ export default class SingleCard extends Component {
     } = style;
 
     const {
-      data, isPlaying, isLiked,
+      data, isPlaying, isLiked, isAuth,
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
     } = this.props;
 
@@ -72,7 +72,11 @@ export default class SingleCard extends Component {
               <div>{name}</div>
             </div>
           </div>
-          <CardAdd onAddClick={onAddClick} isLiked={isLiked} playlistId={data.id} />
+          { isAuth && <CardAdd
+            onAddClick={onAddClick}
+            isLiked={isLiked}
+            playlist={data}
+          /> }
         </div>
       </div>
     );
@@ -85,4 +89,5 @@ SingleCard.propTypes = {
   bgs: PropTypes.object,
   isPlaying: PropTypes.bool,
   isLiked: PropTypes.bool,
+  isAuth: PropTypes.bool,
 };

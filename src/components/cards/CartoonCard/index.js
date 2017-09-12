@@ -12,17 +12,16 @@ export default class CartoonCard extends Component {
   render() {
     const {
       container, content, title,
-      subtitle, button, cardAdd,
+      subtitle, button,
     } = style;
 
     const {
-      data: { name, description, image_url: imageUrl, id },
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
-      isPlaying, isLiked,
+      isPlaying, isLiked, isAuth, data,
     } = this.props;
+    const { name, description, image_url: imageUrl } = data;
 
     const backgroundStyles = {};
-
     if (imageUrl) {
       backgroundStyles.backgroundImage = `url(${imageUrl})`;
     }
@@ -37,12 +36,11 @@ export default class CartoonCard extends Component {
             position={button}
             isPlaying={isPlaying}
           />
-          <CardAdd
+          { isAuth && <CardAdd
             onAddClick={onAddClick}
             isLiked={isLiked}
-            playlistId={id}
-            styles={cardAdd}
-          />
+            playlist={data}
+          /> }
         </div>
       </div>
     );
@@ -54,4 +52,5 @@ CartoonCard.propTypes = {
   callbacks: PropTypes.object,
   isPlaying: PropTypes.bool,
   isLiked: PropTypes.bool,
+  isAuth: PropTypes.bool,
 };
