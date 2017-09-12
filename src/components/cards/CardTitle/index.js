@@ -4,19 +4,24 @@ import cl from 'classname';
 import style from './style.styl';
 
 export default class CardTitle extends Component {
-  renderSplittedTitle(arr) {
-    return (<span>
-      {arr.map((string, i) => <span key={string}>{string}{i !== arr.length - 1 && '\u00a0'}</span>)}
-    </span>
+  renderSplittedTitle(titleParts) {
+    return (
+      <span>
+        {titleParts.map((part, i) => (
+          <span key={part}>
+            {part}{i !== titleParts.length - 1 && '\u00a0'}
+          </span>
+        ))}
+      </span>
     );
   }
 
   render() {
     const { styles, text } = this.props;
-    const arr = text.split('\\u00a0');
+    const titleParts = text.split('\\u00a0');
     return (
       <h2 className={cl(style.title, styles)}>
-        { arr.length === 1 ? text : this.renderSplittedTitle(arr) }
+        { titleParts.length === 1 ? text : this.renderSplittedTitle(titleParts) }
       </h2>
     );
   }

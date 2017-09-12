@@ -3,7 +3,7 @@ import {
   setTrackInfo,
 } from '_actions/player';
 import { likePlaylist, dislikePlaylist } from '_actions/feed';
-import { addPlaylist, deletePlaylist } from '_actions/user';
+import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
 import { openModal } from '_actions/modal';
 
@@ -67,18 +67,18 @@ const onButtonClick = (params) => {
 /**
  * Функция, добавляющая плейлист в плейлисты пользователя
  * или удаляющая его из него (если он уже там)
- * @param isLiked
- * @param playlist
+ * @param {Boolean} isLiked
+ * @param {Object} playlist
  */
 const onAddClick = (isLiked, playlist) => {
   const state = store.getState();
   const { id: userId } = state.user.data;
   if (isLiked) {
     store.dispatch(dislikePlaylist(userId, playlist.id));
-    store.dispatch(deletePlaylist(playlist));
+    store.dispatch(deleteUserPlaylist(playlist));
   } else {
     store.dispatch(likePlaylist(userId, playlist.id));
-    store.dispatch(addPlaylist(playlist));
+    store.dispatch(addUserPlaylist(playlist));
   }
 };
 

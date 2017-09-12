@@ -74,7 +74,7 @@ export function getAllPlaylists(id) {
   };
 }
 
-export function addPlaylist(playlist) {
+export function addUserPlaylist(playlist) {
   return {
     type: ADD_PLAYLIST,
     payload: {
@@ -83,7 +83,7 @@ export function addPlaylist(playlist) {
   };
 }
 
-export function deletePlaylist(playlist) {
+export function deleteUserPlaylist(playlist) {
   return {
     type: DELETE_PLAYLIST,
     payload: {

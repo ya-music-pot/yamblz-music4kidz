@@ -121,11 +121,13 @@ export default function (state = defaultState, action) {
         ...state,
         playlists: [...state.playlists, payload.playlist],
       };
-    case DELETE_PLAYLIST:
+    case DELETE_PLAYLIST: {
+      const { id } = payload.playlist;
       return {
         ...state,
-        playlists: state.playlists.filter((playlist) => playlist.id !== payload.playlist.id),
+        playlists: state.playlists.filter((playlist) => (playlist.id !== id)),
       };
+    }
     default:
       return state;
   }

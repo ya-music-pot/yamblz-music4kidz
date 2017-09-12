@@ -5,7 +5,7 @@ import cl from 'classname';
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-export default class CardTitle extends Component {
+export default class CardAdd extends Component {
   _handleAddClick = (e) => {
     e.stopPropagation();
     const { isLiked, playlist } = this.props;
@@ -28,7 +28,7 @@ export default class CardTitle extends Component {
   }
 }
 
-CardTitle.propTypes = {
+CardAdd.propTypes = {
   styles: PropTypes.string,
   isLiked: PropTypes.bool,
   onAddClick: PropTypes.func,
