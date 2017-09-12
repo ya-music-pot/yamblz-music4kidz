@@ -40,11 +40,12 @@ class ListTracks extends Component {
   }
 
   render() {
-    const { playlist, trackId, isPlaying } = this.props.player;
+    const { info, player } = this.props;
+    const { playlist, trackId, isPlaying } = player;
 
     return playlist && playlist.length && (
       <div>
-        <h3 className={style.title}>Что сейчас играет</h3>
+        <h3 className={style.title}>{info.title}</h3>
         <div className={style.list}>
           { playlist.map((item) => this.renderTrack(item, trackId, isPlaying))}
         </div>
@@ -56,6 +57,7 @@ class ListTracks extends Component {
 export default connect((state, props) => ({
   ...props,
   player: state.player,
+  info: state.modal.listTracks || {},
 }), { playerPlay, playerPause })(ListTracks);
 
 ListTracks.propTypes = {
@@ -63,6 +65,9 @@ ListTracks.propTypes = {
     playlist: PropTypes.array,
     trackId: PropTypes.number,
     isPlaying: PropTypes.bool,
+  }),
+  info: PropTypes.shape({
+    title: PropTypes.string,
   }),
   playerPause: PropTypes.func,
   playerPlay: PropTypes.func,
