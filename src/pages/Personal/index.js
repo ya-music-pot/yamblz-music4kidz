@@ -39,7 +39,10 @@ class Personal extends Component {
   }
 
   _handleScroll = () => {
-    const scrollTop = document.documentElement.scrollTop;
+    const scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop,
+    );
     const { stickyHeader, stickyFilter } = this.state;
 
     if (scrollTop > 0 && !stickyHeader) {
