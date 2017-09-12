@@ -11,12 +11,11 @@ export default class Topbar extends Component {
 
     return (
       <div className={style.topbar}>
-        {user.id &&
-          <Avatar
-            onClick={onClick}
-            avatar={user.avatarUrl}
-            className={cl(user.avatarUrl && style.avatarCover)}
-          />}
+        <Avatar
+          onClick={onClick}
+          avatar={user.id && user.avatarUrl}
+          className={cl(user.id && style.avatarCover)}
+        />
       </div>
     );
   }

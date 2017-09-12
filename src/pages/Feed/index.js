@@ -28,7 +28,10 @@ class Feed extends Component {
   };
 
   _handleAvatarClick = () => {
-    this.props.router.push('/personal');
+    const { id } = this.props.user;
+    if (id) {
+      this.props.router.push('/personal');
+    }
   };
 
   render() {
