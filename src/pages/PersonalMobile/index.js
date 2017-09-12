@@ -20,7 +20,7 @@ class Personal extends Component {
   componentWillMount() {
     const { router } = this.props;
     const { query } = router.location;
-    const id = query.userId || 1;
+    const id = query.user_id || 1;
 
     this.props.getUser(id);
     this.props.getAllTracks(id);
