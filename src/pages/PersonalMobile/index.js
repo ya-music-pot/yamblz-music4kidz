@@ -18,8 +18,9 @@ class Personal extends Component {
   };
 
   componentWillMount() {
-    const { user } = this.props;
-    const { id } = user.data;
+    const { router } = this.props;
+    const { query } = router.location;
+    const id = query.user_id || 1;
 
     this.props.getUser(id);
     this.props.getAllTracks(id);
@@ -36,7 +37,10 @@ class Personal extends Component {
   }
 
   _handleScroll = () => {
-    const scrollTop = document.documentElement.scrollTop;
+    const scrollTop = Math.max(
+      document.documentElement.scrollTop,
+      document.body.scrollTop,
+    );
     const { stickyHeader, stickyFilter } = this.state;
 
     if (scrollTop > 0 && !stickyHeader) {
@@ -118,6 +122,7 @@ Personal.propTypes = {
   achievements: PropTypes.object,
   player: PropTypes.object,
   user: PropTypes.object,
+  router: PropTypes.object,
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,

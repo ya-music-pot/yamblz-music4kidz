@@ -9,7 +9,10 @@ export default function (state = defaultState, action) {
     case MODAL_OPEN:
       return {
         ...state,
-        [payload.name]: true,
+        [payload.name]: {
+          title: 'Что сейчас играет',
+          ...payload.data,
+        },
       };
     case MODAL_CLOSE:
       return {

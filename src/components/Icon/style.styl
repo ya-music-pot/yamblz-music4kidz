@@ -202,6 +202,60 @@
   background-image: url('./images/achi-pop.svg');
 }
 
+.achievement-friend {
+  width: 110px;
+  height: 110px;
+  background-image: url('./images/achi-friend.svg');
+}
+
+.achievement-hype {
+  width: 108px;
+  height: 108px;
+  background-image: url('./images/achi-hype.svg');
+}
+
+.achievement-superb {
+  width: 108px;
+  height: 108px;
+  background-image: url('./images/achi-superb.svg');
+}
+
+.achievement-taste {
+  width: 137px;
+  height: 110px;
+  background-image: url('./images/achi-taste.svg');
+}
+
+.achievement-disabled {
+  width: 160px;
+  height: 108px;
+
+  &::before {
+    content: '';
+    display: block;
+    margin: 0 auto;
+    width: 108px;
+    height: 108px;
+    background-color: #323535;
+    background-image: url('./images/glasses.png');
+    background-size: 50%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  .achievement-disabled::before {
+    background-image: url('./images/glasses@2x.png');
+  }
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 2.5) {
+  .achievement-disabled::before {
+    background-image: url('./images/glasses@3x.png');
+  }
+}
+
 .close {
   width: 24px;
   height: 24px;
@@ -231,4 +285,16 @@
   height: 33px;
   background: url('./images/entrance-emoji.png') no-repeat;
   vertical-align: text-top;
+}
+
+.check {
+  width: 25px;
+  height: 24px;
+  background: url('./images/check.svg') no-repeat;
+}
+
+.plus {
+  width: 24px;
+  height: 24px;
+  background: url('./images/plus.svg') no-repeat;
 }

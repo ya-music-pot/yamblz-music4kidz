@@ -33,7 +33,20 @@
 
 .trackInfo {
   padding: 16px;
-  background-color: #ffffff;
+
+  &Item {
+    color: #ffffff;
+
+    hgroup {
+      h3 {
+        line-height: 23px;
+      }
+      h4[class^='subTitle'] {
+        color: #b4a3ff;
+        line-height: 23px;
+      }
+    }
+  }
 
   &Item:not(:last-child) {
     margin-bottom: 16px;
@@ -55,9 +68,15 @@
   max-width: 248px;
 }
 
-.heart {
+.icon {
+  width: 16px;
+  height: 16px;
   display: inline-block;
-  vertical-align: middle;
+  background-size: contain;
+
+  &Heart {
+    vertical-align: middle;
+  }
 }
 
 .searchButton {

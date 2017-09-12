@@ -85,12 +85,25 @@ export default class ListSection extends Component {
         }
 
         {
-          cardListData.length === 0 &&
+          (cardListData.length === 0 &&
+          activeTab === 'playlists') &&
           <div className={style.emptyContainer}>
             <div className={style.emptyText}>
               Здесь будут твои любимые и сохранённые подборки
               <br />
-              Нажми нa <Icon typeIcon="like" className={style.heart} />, чтобы сохранить
+              Нажми нa <Icon typeIcon="like" className={style.iconHeart} />, чтобы сохранить
+            </div>
+          </div>
+        }
+
+        {
+          (cardListData.length === 0 &&
+          activeTab === 'tracks') &&
+          <div className={style.emptyContainer}>
+            <div className={style.emptyText}>
+              Здесь будут твои любимые и сохранённые песни
+              <br />
+              Нажми нa <Icon typeIcon="plus" className={style.icon} />, чтобы сохранить
             </div>
           </div>
         }

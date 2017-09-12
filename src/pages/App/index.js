@@ -47,7 +47,7 @@ App.propTypes = {
   children: PropTypes.node.isRequired,
   isShowPlayer: PropTypes.bool,
   modal: PropTypes.shape({
-    listTracks: PropTypes.bool,
+    listTracks: PropTypes.object,
   }),
 };
 
