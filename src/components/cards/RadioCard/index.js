@@ -5,6 +5,7 @@ import cl from 'classname';
 import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
+import CardAdd from '_components/cards/CardAdd';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 import style from './style.styl';
@@ -45,9 +46,9 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl },
-      callbacks: { handleCardClick, handleButtonClick },
-      isPlaying,
+      data: { name, image_url: imageUrl, id },
+      callbacks: { handleCardClick, handleButtonClick, onAddClick },
+      isPlaying, isLiked,
     } = this.props;
 
     const imageStyles = {};
@@ -70,6 +71,7 @@ export default class RadioCard extends Component {
           position={button}
           isPlaying={isPlaying}
         />
+        <CardAdd onAddClick={onAddClick} isLiked={isLiked} playlistId={id} />
       </div>
     );
   }
@@ -80,4 +82,5 @@ RadioCard.propTypes = {
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
   isPlaying: PropTypes.bool,
+  isLiked: PropTypes.bool,
 };
