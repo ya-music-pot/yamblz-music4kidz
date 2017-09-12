@@ -15,13 +15,12 @@ export default class GameCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl, id },
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
-      isPlaying, isLiked,
+      isPlaying, isLiked, isAuth, data,
     } = this.props;
+    const { name, image_url: imageUrl } = data;
 
     const backgroundStyles = {};
-
     if (imageUrl) {
       backgroundStyles.backgroundImage = `url(${imageUrl})`;
     }
@@ -38,7 +37,11 @@ export default class GameCard extends Component {
           />
         </div>
         <div className={image} style={backgroundStyles}>image</div>
-        <CardAdd onAddClick={onAddClick} isLiked={isLiked} playlistId={id} />
+        { isAuth && <CardAdd
+          onAddClick={onAddClick}
+          isLiked={isLiked}
+          playlist={data}
+        /> }
       </div>
     );
   }
@@ -49,4 +52,5 @@ GameCard.propTypes = {
   callbacks: PropTypes.object,
   isPlaying: PropTypes.bool,
   isLiked: PropTypes.bool,
+  isAuth: PropTypes.bool,
 };

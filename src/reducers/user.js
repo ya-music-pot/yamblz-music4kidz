@@ -1,20 +1,25 @@
 import {
   GET_USER, UPDATE_USER, GET_ALL_TRACKS,
   GET_ALL_PLAYLISTS, GET_ACHIEVEMENTS,
-  CREATE_USER,
+  CREATE_USER, ADD_PLAYLIST, DELETE_PLAYLIST,
 } from '_actions/user';
+import { getLocalStorage } from '_helpers';
+
+const { authToken } = getLocalStorage();
 
 const defaultState = {
   loading: false,
   loaded: false,
-  data: {},
+  data: {
+    id: Number(authToken) || null,
+  },
   tracks: [],
   playlists: [],
   achievements: [],
 };
 
 export default function (state = defaultState, action) {
-  const { type, response } = action;
+  const { type, response, payload } = action;
 
   switch (type) {
     case `${GET_USER}_SUCCESS`:
@@ -111,7 +116,16 @@ export default function (state = defaultState, action) {
         loaded: true,
         achievements: response.data,
       };
-
+    case ADD_PLAYLIST:
+      return {
+        ...state,
+        playlists: [...state.playlists, payload.playlist],
+      };
+    case DELETE_PLAYLIST:
+      return {
+        ...state,
+        playlists: state.playlists.filter((playlist) => playlist.id !== payload.playlist.id),
+      };
     default:
       return state;
   }

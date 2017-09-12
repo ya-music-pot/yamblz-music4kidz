@@ -46,10 +46,10 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl, id },
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
-      isPlaying, isLiked,
+      isPlaying, isLiked, isAuth, data,
     } = this.props;
+    const { name, image_url: imageUrl } = data;
 
     const imageStyles = {};
     if (imageUrl) {
@@ -71,7 +71,11 @@ export default class RadioCard extends Component {
           position={button}
           isPlaying={isPlaying}
         />
-        <CardAdd onAddClick={onAddClick} isLiked={isLiked} playlistId={id} />
+        { isAuth && <CardAdd
+          onAddClick={onAddClick}
+          isLiked={isLiked}
+          playlist={data}
+        /> }
       </div>
     );
   }
@@ -83,4 +87,5 @@ RadioCard.propTypes = {
   bgs: PropTypes.object,
   isPlaying: PropTypes.bool,
   isLiked: PropTypes.bool,
+  isAuth: PropTypes.bool,
 };

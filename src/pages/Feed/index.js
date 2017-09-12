@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Topbar from '_components/Topbar';
 import CardList from '_components/CardList';
 import { getFeed, likePlaylist, dislikePlaylist } from '_actions/feed';
-import { getAllPlaylists } from '_actions/user';
+import { getAllPlaylists, addPlaylist, deletePlaylist } from '_actions/user';
 import callbacks from '_helpers/cardCallbacks';
 
 import style from './style.styl';
@@ -18,12 +18,14 @@ class Feed extends Component {
     this.props.getAllPlaylists(userId);
   }
 
-  _handleAddClick = (isLiked, playlistId) => {
+  _handleAddClick = (isLiked, playlist) => {
     const { userId } = this.props;
     if (isLiked) {
-      this.props.dislikePlaylist(userId, playlistId);
+      this.props.dislikePlaylist(userId, playlist.id);
+      this.props.deletePlaylist(playlist);
     } else {
-      this.props.likePlaylist(userId, playlistId);
+      this.props.likePlaylist(userId, playlist.id);
+      this.props.addPlaylist(playlist);
     }
   };
 
@@ -53,10 +55,19 @@ Feed.propTypes = {
   likePlaylist: PropTypes.func,
   dislikePlaylist: PropTypes.func,
   getAllPlaylists: PropTypes.func,
+  addPlaylist: PropTypes.func,
+  deletePlaylist: PropTypes.func,
 };
 
 export default connect((state, props) => ({
   ...props,
   feed: state.feed,
   userId: state.user.data.id,
-}), { getFeed, likePlaylist, dislikePlaylist, getAllPlaylists })(Feed);
+}), {
+  getFeed,
+  likePlaylist,
+  dislikePlaylist,
+  getAllPlaylists,
+  addPlaylist,
+  deletePlaylist,
+})(Feed);
