@@ -45,6 +45,7 @@ class Player extends Component {
 
     this.props.playerNext(player.trackId);
     this.props.saveTracks(player.trackId, true);
+    this._handleSetSound(true);
     this._handleUpdateChoose();
   }
 
@@ -52,6 +53,7 @@ class Player extends Component {
     const trackId = this.props.player.trackId;
     this.props.saveTracks(trackId, false);
     this.props.playerNext(trackId);
+    this._handleSetSound(true);
     this._handleUpdateChoose();
   }
 
@@ -66,7 +68,11 @@ class Player extends Component {
       this.props.playerPause();
     }
 
-    this.setState({ isSound: !this.state.isSound });
+    this._handleSetSound(!this.state.isSound);
+  }
+
+  _handleSetSound(isSound) {
+    this.setState({ isSound });
   }
 
   _handleUpdateChoose() {
