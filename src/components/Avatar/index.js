@@ -6,7 +6,7 @@ import styles from './style.styl';
 
 export default class Avatar extends Component {
   render() {
-    const { className, avatar } = this.props;
+    const { className, avatar, onClick } = this.props;
     const style = {
       backgroundImage: `url(${avatar})`,
     };
@@ -15,6 +15,7 @@ export default class Avatar extends Component {
       <div
         className={cl(styles.avatar, className || '')}
         style={avatar && style}
+        onClick={onClick}
       />
     );
   }
@@ -23,4 +24,5 @@ export default class Avatar extends Component {
 Avatar.propTypes = {
   avatar: PropTypes.string,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
