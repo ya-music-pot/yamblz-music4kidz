@@ -25,6 +25,12 @@ export default class ButtonMiniplayer extends Component {
             className={style.joystick}
           />
         );
+      case 'single':
+        return (
+          <Icon
+            typeIcon="play-card"
+          />
+        );
       default:
         return (
           <Icon

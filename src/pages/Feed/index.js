@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import Topbar from '_components/Topbar';
 import CardList from '_components/CardList';
-import { getFeed, likePlaylist, dislikePlaylist } from '_actions/feed';
-import { getAllPlaylists, addPlaylist, deletePlaylist } from '_actions/user';
+import { getFeed } from '_actions/feed';
+import { getAllPlaylists } from '_actions/user';
 import callbacks from '_helpers/cardCallbacks';
 
 import style from './style.styl';
@@ -18,21 +18,9 @@ class Feed extends Component {
     this.props.getAllPlaylists(userId);
   }
 
-  _handleAddClick = (isLiked, playlist) => {
-    const { userId } = this.props;
-    if (isLiked) {
-      this.props.dislikePlaylist(userId, playlist.id);
-      this.props.deletePlaylist(playlist);
-    } else {
-      this.props.likePlaylist(userId, playlist.id);
-      this.props.addPlaylist(playlist);
-    }
-  };
-
   render() {
     const { playlist, container } = style;
     callbacks.onRouterPush = this.props.router.push;
-    callbacks.onAddClick = this._handleAddClick;
     const { data } = this.props.feed;
 
     return (
@@ -52,11 +40,7 @@ Feed.propTypes = {
   getFeed: PropTypes.func,
   feed: PropTypes.object,
   userId: PropTypes.number,
-  likePlaylist: PropTypes.func,
-  dislikePlaylist: PropTypes.func,
   getAllPlaylists: PropTypes.func,
-  addPlaylist: PropTypes.func,
-  deletePlaylist: PropTypes.func,
 };
 
 export default connect((state, props) => ({
@@ -65,9 +49,5 @@ export default connect((state, props) => ({
   userId: state.user.data.id,
 }), {
   getFeed,
-  likePlaylist,
-  dislikePlaylist,
   getAllPlaylists,
-  addPlaylist,
-  deletePlaylist,
 })(Feed);

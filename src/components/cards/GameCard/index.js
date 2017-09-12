@@ -18,7 +18,7 @@ export default class GameCard extends Component {
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
       isPlaying, isLiked, isAuth, data,
     } = this.props;
-    const { name, image_url: imageUrl } = data;
+    const { image_url: imageUrl } = data;
 
     const backgroundStyles = {};
     if (imageUrl) {
@@ -27,7 +27,7 @@ export default class GameCard extends Component {
 
     return (
       <div className={container} onClick={handleCardClick}>
-        <CardTitle text={name} styles={titleStyles} />
+        <CardTitle text="Слушай и\u00a0играй" styles={titleStyles} />
         <div className={buttonWrapper}>
           <ButtonMiniplayer
             onClick={handleButtonClick}
