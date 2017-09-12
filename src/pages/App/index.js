@@ -36,7 +36,7 @@ class App extends Component {
     return (
       <div>
         { this.props.children }
-        { this.props.isShowPlayer && <Player /> }
+        { this.props.isModePlayer && <Player /> }
         { this.renderListTracks() }
       </div>
     );
@@ -45,7 +45,7 @@ class App extends Component {
 
 App.propTypes = {
   children: PropTypes.node.isRequired,
-  isShowPlayer: PropTypes.bool,
+  isModePlayer: PropTypes.string,
   modal: PropTypes.shape({
     listTracks: PropTypes.object,
   }),
@@ -54,5 +54,5 @@ App.propTypes = {
 export default connect((state, props) => ({
   ...props,
   modal: state.modal,
-  isShowPlayer: state.playerInfo.isShow,
+  isModePlayer: state.playerInfo.mode,
 }))(App);

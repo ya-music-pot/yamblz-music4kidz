@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import callbacks from '_helpers/cardCallbacks';
+import { removePlayerPage } from '_helpers/player';
 
 import EntranceScreen from './screens/EntranceScreen';
 import PlaylistCalibration from './screens/PlaylistCalibration';
@@ -12,7 +13,12 @@ class Entrance extends Component {
     showEntranceScreen: true,
   };
 
+  componentWillMount() {
+    removePlayerPage();
+  }
+
   _handleNavigate = () => {
+    removePlayerPage();
     this.setState({
       showEntranceScreen: false,
     });
