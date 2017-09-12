@@ -18,8 +18,9 @@ class Personal extends Component {
   };
 
   componentWillMount() {
-    const { user } = this.props;
-    const { id } = user.data;
+    const { router } = this.props;
+    const { query } = router.location;
+    const id = query.user_id || 1;
 
     this.props.getUser(id);
     this.props.getAllTracks(id);
@@ -121,6 +122,7 @@ Personal.propTypes = {
   achievements: PropTypes.object,
   player: PropTypes.object,
   user: PropTypes.object,
+  router: PropTypes.object,
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,
   getAllPlaylists: PropTypes.func,
