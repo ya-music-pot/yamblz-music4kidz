@@ -1,5 +1,10 @@
-import { playerPlay, setPlaylist, playerPause } from '_actions/player';
+import {
+  playerPlay, setPlaylist, playerPause,
+  setTrackInfo,
+} from '_actions/player';
 import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
+import { openModal } from '_actions/modal';
+
 import store from '_settings/store';
 
 /**
@@ -11,9 +16,33 @@ const runPlayer = (params) => {
     trackId, playlist, isRadio,
     playlistId, cardType,
   } = params;
+
   store.dispatch(showPlayer(cardType));
   store.dispatch(setPlaylist(playlist, isRadio, playlistId));
   store.dispatch(playerPlay(trackId));
+};
+
+const openListTracks = (params) => {
+  const {
+    trackId, playlist, isRadio,
+    playlistId,
+  } = params;
+
+  const track = playlist.find(item => item.id === trackId);
+
+  store.dispatch(setPlaylist(playlist, isRadio, playlistId));
+  store.dispatch(setTrackInfo({
+    cover: track.image_url,
+    singerName: track.artist,
+    trackName: track.name,
+    position: 0,
+    duration: 0,
+    shouldPlay: false,
+    loaded: false,
+  }));
+  store.dispatch(openModal('listTracks', {
+    title: 'Список треков',
+  }));
 };
 
 /**
@@ -34,8 +63,7 @@ const onButtonClick = (params) => {
  * @param {Object} params
  */
 const onCardClick = (params) => {
-  store.dispatch(playerModeUpdate('full'));
-  runPlayer(params);
+  openListTracks(params);
 };
 
 export default {

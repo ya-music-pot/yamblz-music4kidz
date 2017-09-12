@@ -91,6 +91,13 @@ export function setPlaylist(playlist, isRadio, playlistId) {
   };
 }
 
+export function setTrackInfo(payload) {
+  return {
+    type: ActionType.SET_TRACK_INFO,
+    payload,
+  };
+}
+
 export function toggleRepeatMode() {
   return {
     type: ActionType.TOGGLE_REPEAT,
