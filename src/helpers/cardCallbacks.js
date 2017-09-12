@@ -9,7 +9,7 @@ import store from '_settings/store';
 
 /**
  * Функция, запускающая плеер
- * @param params
+ * @param {Object} params
  */
 const runPlayer = (params) => {
   const {
@@ -22,6 +22,10 @@ const runPlayer = (params) => {
   store.dispatch(playerPlay(trackId));
 };
 
+/**
+ * Открывает список плейлиста в модальном окне
+ * @param  {Object} params
+ */
 const openListTracks = (params) => {
   const {
     trackId, playlist, isRadio,
