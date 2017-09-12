@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 
 import callbacks from '_helpers/cardCallbacks';
 
-import EntranceScreen from './screens/EntranceScreen';
-import PlaylistCalibration from './screens/PlaylistCalibration';
+import EntranceScreen from './EntranceScreen';
+import PlaylistCalibration from './PlaylistCalibration';
+import style from './style.styl';
 
 class Entrance extends Component {
   state = {
@@ -28,16 +29,21 @@ class Entrance extends Component {
 
   render() {
     return (
-      this.state.showEntranceScreen ?
-        <EntranceScreen
-          onNavigate={this._handleNavigate}
-          data={this.props.data}
-          callbacks={callbacks}
-        /> :
-        <PlaylistCalibration
-          onAccept={this._handleCalibrationAccept}
-          onDeny={this._handleCalibrationDeny}
-        />
+      <div className={style.container}>
+        {
+          this.state.showEntranceScreen ?
+            <EntranceScreen
+              onNavigate={this._handleNavigate}
+              onDeny={this._handleCalibrationDeny}
+              data={this.props.data}
+              callbacks={callbacks}
+            /> :
+            <PlaylistCalibration
+              onAccept={this._handleCalibrationAccept}
+              onDeny={this._handleCalibrationDeny}
+            />
+        }
+      </div>
     );
   }
 }

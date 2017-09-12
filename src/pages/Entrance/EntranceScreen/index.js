@@ -7,7 +7,7 @@ import cl from 'classname';
 import Button from '_components/Button';
 import Card from '_decorators/Card';
 
-import style from '../style.styl';
+import style from './style.styl';
 
 class EntranceScreen extends Component {
   state = {
@@ -56,7 +56,6 @@ class EntranceScreen extends Component {
     if (this.isPanning == null) {
       this._updateThreshholds();
 
-      this.card.style.left = '16px';
       this.card.style.top = `${this.bottomPosition}px`;
       this.card.style.position = 'absolute';
     }
@@ -119,9 +118,12 @@ class EntranceScreen extends Component {
     }
 
     return (
-      <div className={style.container}>
+      <div>
         <div
-          className={cl(style.background, isCardShown ? style['background--opacity20'] : style['background--opacity100'])}
+          className={
+            cl(style.background, isCardShown ?
+              style.backgroundOpacity20 : style.backgroundOpacity100)
+          }
           ref={(el) => {
             this.content = el;
           }}
@@ -134,6 +136,12 @@ class EntranceScreen extends Component {
               onClick={this.props.onNavigate}
             >
               Войти
+            </Button>
+            <Button
+              style={style.buttonSmall}
+              onClick={this.props.onDeny}
+            >
+              Продолжить без входа
             </Button>
           </div>
         </div>
@@ -156,6 +164,7 @@ class EntranceScreen extends Component {
 
 EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
+  onDeny: PropTypes.func,
   data: PropTypes.object,
   callbacks: PropTypes.object,
   playlistId: PropTypes.oneOfType([
