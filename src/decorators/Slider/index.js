@@ -5,12 +5,12 @@ import Hammer from 'hammerjs';
 
 import style from './style.styl';
 
-const WIDTH_SLIDE = 0.7 * document.body.clientWidth; // 70% from width;
-
 export default class Slider extends Component {
   componentWillMount() {
     const { widthSlide, minTransform, maxTransform } = this.props;
     let { initTransform } = this.props;
+
+    const WIDTH_SLIDE = 0.7 * document.body.clientWidth; // 70% from width;
 
     this.widthSlide = widthSlide || WIDTH_SLIDE;
     this.maxTransform = maxTransform;
