@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
+import CardAdd from '_components/cards/CardAdd';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 import style from './style.styl';
@@ -41,8 +42,8 @@ export default class SingleCard extends Component {
     } = style;
 
     const {
-      data, isPlaying,
-      callbacks: { handleCardClick, handleButtonClick },
+      data, isPlaying, isLiked,
+      callbacks: { handleCardClick, handleButtonClick, onAddClick },
     } = this.props;
 
     const {
@@ -71,6 +72,7 @@ export default class SingleCard extends Component {
               <div>{name}</div>
             </div>
           </div>
+          <CardAdd onAddClick={onAddClick} isLiked={isLiked} playlistId={data.id} />
         </div>
       </div>
     );
@@ -82,4 +84,5 @@ SingleCard.propTypes = {
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
   isPlaying: PropTypes.bool,
+  isLiked: PropTypes.bool,
 };

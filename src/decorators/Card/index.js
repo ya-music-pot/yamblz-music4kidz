@@ -41,6 +41,14 @@ class Card extends Component {
     this._onClick(this.props.callbacks.onButtonClick);
   };
 
+  _isPlaylistLiked = (playlistId) => {
+    const { userPlaylists } = this.props;
+    if (userPlaylists) {
+      return userPlaylists.some((playlist) => playlist.id === playlistId);
+    }
+    return false;
+  };
+
   renderCard = () => {
     const cards = {
       [CARDS.radio]: RadioCard,
@@ -56,6 +64,7 @@ class Card extends Component {
     const callbacks = {
       handleCardClick: this._handleCardClick,
       handleButtonClick: this._handleButtonClick,
+      onAddClick: this.props.callbacks.onAddClick,
     };
 
     return (
@@ -64,6 +73,7 @@ class Card extends Component {
         callbacks={callbacks}
         bgs={backgroundsList}
         isPlaying={isPlaying}
+        isLiked={this._isPlaylistLiked(data.id)}
       />
     );
   };
@@ -79,7 +89,7 @@ class Card extends Component {
 
 export default connect((state, props) => {
   const {
-    dictionaries: { backgroundsList },
+    dictionaries: { backgroundsList }, user,
     player: { playlistId, shouldPlay, radio },
   } = state;
   return {
@@ -88,6 +98,7 @@ export default connect((state, props) => {
     playlistId,
     shouldPlay,
     radio,
+    userPlaylists: user.data.playlists,
   };
 })(Card);
 
@@ -97,4 +108,5 @@ Card.propTypes = {
   backgroundsList: PropTypes.object,
   radio: PropTypes.array,
   isPlaying: PropTypes.bool,
+  userPlaylists: PropTypes.array,
 };

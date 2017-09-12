@@ -10,7 +10,7 @@ export default class Icon extends Component {
 
     return (
       <span
-        onClick={onClick && this._onClick}
+        onClick={onClick}
         className={cl(style.icon, style[typeIcon], className)}
       />
     );

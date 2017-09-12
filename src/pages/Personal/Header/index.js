@@ -72,6 +72,7 @@ export default class Header extends Component {
                   title={title}
                   disabled={disabled}
                   key={id}
+                  id={id}
                 />
               );
             })
