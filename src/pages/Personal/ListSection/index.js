@@ -79,7 +79,7 @@ export default class ListSection extends Component {
             <div className={style.emptyText}>
               Здесь будут твои любимые и сохранённые подборки
               <br />
-              Нажми нa <Icon typeIcon="like" className={style['icon-heart']} />, чтобы сохранить
+              Нажми нa <Icon typeIcon="like" className={style.iconHeart} />, чтобы сохранить
             </div>
             <Button
               onClick={onSearch}
