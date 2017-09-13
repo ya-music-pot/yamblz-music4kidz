@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import cl from 'classname';
 
 import Topbar from '_components/Topbar';
 import CardList from '_components/CardList';
@@ -26,13 +27,13 @@ class Feed extends Component {
   };
 
   render() {
-    const { playlist, container } = style;
+    const { playlist, container, paddingBottom } = style;
     callbacks.onRouterPush = this.props.router.push;
     const { data } = this.props.feed;
-    const { user } = this.props;
+    const { user, isPlayerVisible } = this.props;
 
     return (
-      <div className={playlist}>
+      <div className={cl(playlist, isPlayerVisible && paddingBottom)}>
         <div className={container}>
           <Topbar
             onClick={this._handleAvatarClick}
@@ -52,12 +53,14 @@ Feed.propTypes = {
   feed: PropTypes.object,
   user: PropTypes.object,
   getAllPlaylists: PropTypes.func,
+  isPlayerVisible: PropTypes.bool,
 };
 
 export default connect((state, props) => ({
   ...props,
   feed: state.feed,
   user: state.user.data,
+  isPlayerVisible: state.playerInfo.isShow,
 }), {
   getFeed,
   getAllPlaylists,
