@@ -6,7 +6,6 @@ import Button from '_components/Button';
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-
 export default class ButtonMiniplayer extends Component {
   renderButtonContent() {
     if (this.props.isPlaying) {

@@ -52,18 +52,27 @@ class Player extends Component {
   };
 
   _handleLikeButton = () => {
-    const { player, userId } = this.props;
-    this.props.likeTrack(userId, player.trackId);
+    const { player, userInfo } = this.props;
+    this.props.likeTrack(userInfo.id, player.trackId);
   };
 
   _handleDislikeButton = () => {
-    const { player, userId } = this.props;
-    this.props.dislikeTrack(userId, player.trackId);
+    const { player, userInfo } = this.props;
+    this.props.dislikeTrack(userInfo.id, player.trackId);
     this._handleNextButton();
   };
 
   render() {
-    const { player, cardType } = this.props;
+    const {
+      player, cardType, cardTitle,
+      userInfo: { moodId, actionId },
+      dictionaries: { listEmoji, listActions },
+    } = this.props;
+    const emojiStatus = {
+      moodIcon: listEmoji.data[moodId].typeIcon,
+      actionIcon: listActions.data[actionId].typeIcon,
+    };
+
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -83,6 +92,8 @@ class Player extends Component {
           onDislikeClick={this._handleDislikeButton}
           type="full"
           cardType={cardType}
+          cardTitle={cardTitle}
+          emojiStatus={emojiStatus}
         />
       </PlayerToggle>
     );
@@ -91,8 +102,10 @@ class Player extends Component {
 
 export default connect((state, props) => ({
   player: state.player,
-  userId: state.user.data.id,
+  userInfo: state.user.data,
   cardType: state.playerInfo.cardType,
+  cardTitle: state.playerInfo.cardTitle,
+  dictionaries: state.dictionaries,
   ...props,
 }), {
   openModal,
@@ -122,5 +135,7 @@ Player.propTypes = {
   cardType: PropTypes.number,
   likeTrack: PropTypes.func,
   dislikeTrack: PropTypes.func,
-  userId: PropTypes.number,
+  userInfo: PropTypes.object,
+  cardTitle: PropTypes.string,
+  dictionaries: PropTypes.object,
 };
