@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import Icon from '_components/Icon';
+import SvgIcon from '_components/SvgIcon';
 import style from './style.styl';
 
 export default class GradientPlayer extends Component {
   renderDefaultIcon() {
     return (
       <div className={style.defaultImage}>
-        <Icon
+        <SvgIcon
           className={style.icon}
-          typeIcon="bird"
+          name="bird"
         />
       </div>
     );
@@ -50,7 +50,7 @@ export default class GradientPlayer extends Component {
 }
 
 GradientPlayer.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   isPlaying: PropTypes.bool,
   className: PropTypes.string,
 };

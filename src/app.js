@@ -13,6 +13,7 @@ import history from '_settings/history';
 
 import AudioPlayer from '_helpers/AudioPlayer';
 import playerListeners from '_helpers/playerListeners';
+import loaderSvg from '_helpers/svgxhr';
 
 import '_settings/main.styl';
 
@@ -26,6 +27,11 @@ AudioPlayer.init().then(() => {
   console.error('Не удалось инициализировать аудио-плеер');
 });
 
+const __svg__ = {
+  path: '../assets/images/icons/**/*.svg',
+  name: '[hash].logos.svg',
+};
+
 
 ReactDOM.render((
   <div>
@@ -36,3 +42,6 @@ ReactDOM.render((
     </Provider>
   </div>
 ), document.getElementById('root'));
+
+loaderSvg(__svg__);
+

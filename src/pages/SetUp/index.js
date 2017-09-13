@@ -76,7 +76,7 @@ class SetUp extends Component {
             <ButtonCircle
               onClick={this._handleNextStep}
               className={style.btn}
-              typeIcon="arrow-right"
+              nameIcon="arrow-right"
             />
           }
           {
