@@ -6,6 +6,7 @@ import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
 import Card from '_decorators/Card';
+import Icon from '_components/Icon';
 
 import style from './style.styl';
 
@@ -142,6 +143,7 @@ class EntranceScreen extends Component {
               onClick={this.props.onDeny}
             >
               Продолжить без входа
+              <Icon typeIcon="entrance-emoji-stop" />
             </Button>
           </div>
         </div>
