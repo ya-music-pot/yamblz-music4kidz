@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import GradientPlayer from '_components/GradientPlayer';
 import ButtonCircle from '_components/ButtonCircle';
 
-import { saveLikesCount } from '_actions/settings';
+import { saveTracks } from '_actions/settings';
 import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerResume, playerPause,
@@ -41,15 +41,19 @@ class Player extends Component {
   }
 
   _handleLike = () => {
-    const { player, likesCount } = this.props;
-
-    this.props.playerNext(player.trackId);
-    this.props.saveLikesCount(likesCount + 1);
-    this._handleUpdateChoose();
+    this._handleNextTrack(true);
   }
 
   _handleSkip = () => {
-    this.props.playerNext(this.props.player.trackId);
+    this._handleNextTrack(false);
+  }
+
+  _handleNextTrack(isLiked) {
+    const { player } = this.props;
+
+    this.props.playerNext(player.trackId);
+    this.props.saveTracks(player.trackId, isLiked);
+    this._handleSetSound(true);
     this._handleUpdateChoose();
   }
 
@@ -64,7 +68,11 @@ class Player extends Component {
       this.props.playerPause();
     }
 
-    this.setState({ isSound: !this.state.isSound });
+    this._handleSetSound(!this.state.isSound);
+  }
+
+  _handleSetSound(isSound) {
+    this.setState({ isSound });
   }
 
   _handleUpdateChoose() {
@@ -138,7 +146,7 @@ class Player extends Component {
 }
 
 Player.propTypes = {
-  saveLikesCount: PropTypes.func,
+  saveTracks: PropTypes.func,
   onNextStep: PropTypes.func,
   setPlaylist: PropTypes.func,
   playerPlay: PropTypes.func,
@@ -146,7 +154,6 @@ Player.propTypes = {
   playerResume: PropTypes.func,
   playerPause: PropTypes.func,
   playerClear: PropTypes.func,
-  likesCount: PropTypes.number,
   playlist: PropTypes.array,
   playerInfo: PropTypes.shape({
     inited: PropTypes.bool,
@@ -168,11 +175,11 @@ export default connect((state, props) => ({
   playlist: state.setup.playlist,
   ...props,
 }), {
-  saveLikesCount,
   setPlaylist,
   playerPlay,
   playerClear,
   playerNext,
   playerResume,
   playerPause,
+  saveTracks,
 })(Player);

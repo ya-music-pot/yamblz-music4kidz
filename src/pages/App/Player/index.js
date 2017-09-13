@@ -8,8 +8,11 @@ import FullPlayer from '_components/FullPlayer';
 import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
-  playerResume, toggleRepeatMode,
+  playerResume, toggleRepeatMode, likeTrack,
+  dislikeTrack, getRadio,
 } from '_actions/player';
+
+import { openModal } from '_actions/modal';
 
 import { playerModeUpdate } from '_actions/playerInfo';
 
@@ -27,7 +30,12 @@ class Player extends Component {
   };
 
   _handleNextButton = () => {
-    const { player } = this.props;
+    const { player, userInfo } = this.props;
+
+    if (player.isRadio && userInfo.id) {
+      this.props.getRadio(userInfo.id);
+    }
+
     this.props.playerNext(player.trackId);
   };
 
@@ -42,10 +50,34 @@ class Player extends Component {
 
   _handleClickArrowDown = () => {
     this.props.playerModeUpdate('mini');
-  }
+  };
+
+  _handleOpenListTracks = () => {
+    this.props.openModal('listTracks');
+  };
+
+  _handleLikeButton = () => {
+    const { player, userInfo } = this.props;
+    this.props.likeTrack(userInfo.id, player.trackId);
+  };
+
+  _handleDislikeButton = () => {
+    const { player, userInfo } = this.props;
+    this.props.dislikeTrack(userInfo.id, player.trackId);
+    this._handleNextButton();
+  };
 
   render() {
-    const { player } = this.props;
+    const {
+      player, cardType, cardTitle,
+      userInfo: { moodId, actionId },
+      dictionaries: { listEmoji, listActions },
+    } = this.props;
+    const emojiStatus = {
+      moodIcon: listEmoji.data[moodId].typeIcon,
+      actionIcon: listActions.data[actionId].typeIcon,
+    };
+
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -60,7 +92,13 @@ class Player extends Component {
           onClickPrevious={this._handlePreviousButton}
           onClickRepeat={this._handleRepeatButton}
           onClickArrowDown={this._handleClickArrowDown}
+          openListTracks={this._handleOpenListTracks}
+          onLikeClick={this._handleLikeButton}
+          onDislikeClick={this._handleDislikeButton}
           type="full"
+          cardType={cardType}
+          cardTitle={cardTitle}
+          emojiStatus={emojiStatus}
         />
       </PlayerToggle>
     );
@@ -69,8 +107,13 @@ class Player extends Component {
 
 export default connect((state, props) => ({
   player: state.player,
+  userInfo: state.user.data,
+  cardType: state.playerInfo.cardType,
+  cardTitle: state.playerInfo.cardTitle,
+  dictionaries: state.dictionaries,
   ...props,
 }), {
+  openModal,
   setPlaylist,
   playerPlay,
   playerClear,
@@ -80,10 +123,14 @@ export default connect((state, props) => ({
   playerResume,
   toggleRepeatMode,
   playerModeUpdate,
+  likeTrack,
+  dislikeTrack,
+  getRadio,
 })(Player);
 
 Player.propTypes = {
   player: PropTypes.object,
+  openModal: PropTypes.func,
   playerPlay: PropTypes.func,
   playerNext: PropTypes.func,
   playerPrev: PropTypes.func,
@@ -91,4 +138,11 @@ Player.propTypes = {
   playerResume: PropTypes.func,
   toggleRepeatMode: PropTypes.func,
   playerModeUpdate: PropTypes.func,
+  cardType: PropTypes.number,
+  likeTrack: PropTypes.func,
+  dislikeTrack: PropTypes.func,
+  userInfo: PropTypes.object,
+  cardTitle: PropTypes.string,
+  dictionaries: PropTypes.object,
+  getRadio: PropTypes.func,
 };

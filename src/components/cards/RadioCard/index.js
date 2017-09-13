@@ -5,22 +5,36 @@ import cl from 'classname';
 import getRandomInteger from '_helpers/randomNumber';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
+import CardAdd from '_components/cards/CardAdd';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
 
 import style from './style.styl';
 
 export default class RadioCard extends Component {
-  constructor() {
-    super();
-    this._bg = null;
-  }
+  state = {
+    bg: this._getBg(),
+  };
 
   componentWillMount() {
-    if (this._bg === null) {
-      const { colors } = this.props.bgs;
-      const color = colors[getRandomInteger(0, colors.length - 1)];
-      this._bg = { backgroundColor: `#${color}` };
-    }
+    this.timerID = setInterval(
+      () => {
+        if (this.props.isPlaying) {
+          this.setState({
+            bg: this._getBg(),
+          });
+        }
+      }, 400,
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  _getBg() {
+    const { colors } = this.props.bgs;
+    const color = colors[getRandomInteger(0, colors.length - 1)];
+    return { backgroundColor: `#${color}` };
   }
 
   render() {
@@ -32,10 +46,10 @@ export default class RadioCard extends Component {
     } = style;
 
     const {
-      data: { name, image_url: imageUrl },
-      callbacks: { handleCardClick, handleButtonClick },
-      isPlaying,
+      callbacks: { handleCardClick, handleButtonClick, onAddClick },
+      isPlaying, isLiked, isAuth, data,
     } = this.props;
+    const { name, image_url: imageUrl } = data;
 
     const imageStyles = {};
     if (imageUrl) {
@@ -43,7 +57,7 @@ export default class RadioCard extends Component {
     }
 
     return (
-      <div style={this._bg} className={container} onClick={handleCardClick}>
+      <div style={this.state.bg} className={container} onClick={handleCardClick}>
         <CardTitle text={name} styles={title} />
         <CardSubtitle text="Радио исполнителя" styles={subtitle} />
         <div className={imageContainer}>
@@ -57,6 +71,11 @@ export default class RadioCard extends Component {
           position={button}
           isPlaying={isPlaying}
         />
+        { isAuth && <CardAdd
+          onAddClick={onAddClick}
+          isLiked={isLiked}
+          playlist={data}
+        /> }
       </div>
     );
   }
@@ -67,4 +86,6 @@ RadioCard.propTypes = {
   callbacks: PropTypes.object,
   bgs: PropTypes.object,
   isPlaying: PropTypes.bool,
+  isLiked: PropTypes.bool,
+  isAuth: PropTypes.bool,
 };

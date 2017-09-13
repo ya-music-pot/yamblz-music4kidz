@@ -6,7 +6,6 @@ import Button from '_components/Button';
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-
 export default class ButtonMiniplayer extends Component {
   renderButtonContent() {
     if (this.props.isPlaying) {
@@ -23,6 +22,12 @@ export default class ButtonMiniplayer extends Component {
           <Icon
             typeIcon="action-game"
             className={style.joystick}
+          />
+        );
+      case 'single':
+        return (
+          <Icon
+            typeIcon="play-card"
           />
         );
       default:

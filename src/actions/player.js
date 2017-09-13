@@ -57,6 +57,26 @@ export function playerPrev(currentTrackId) {
   };
 }
 
+export function likeTrack(id, trackId) {
+  return {
+    type: ActionType.LIKE_TRACK,
+    callAPI: {
+      method: 'POST',
+      url: `${API_URL}user/${id}/like_track?track_id=${trackId}&liked=true`,
+    },
+  };
+}
+
+export function dislikeTrack(id, trackId) {
+  return {
+    type: ActionType.DISLIKE_TRACK,
+    callAPI: {
+      method: 'POST',
+      url: `${API_URL}user/${id}/like_track?track_id=${trackId}&liked=false`,
+    },
+  };
+}
+
 export function setPlaylist(playlist, isRadio, playlistId) {
   return {
     type: ActionType.SET_PLAYLIST,
@@ -68,6 +88,13 @@ export function setPlaylist(playlist, isRadio, playlistId) {
       isRadio,
       playlistId,
     },
+  };
+}
+
+export function setTrackInfo(payload) {
+  return {
+    type: ActionType.SET_TRACK_INFO,
+    payload,
   };
 }
 
@@ -83,6 +110,15 @@ export function setPosition(position) {
     player: {},
     payload: {
       position,
+    },
+  };
+}
+
+export function getRadio(id) {
+  return {
+    type: ActionType.PLAYER_GET_RADIO,
+    callAPI: {
+      url: `${API_URL}user/${id}/radio`,
     },
   };
 }

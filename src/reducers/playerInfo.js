@@ -3,7 +3,9 @@ import { PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER } from '_actions/playerI
 const defaultState = {
   inited: false,
   isShow: false,
-  mode: 'full',
+  mode: '',
+  cardType: null,
+  cardTitle: null,
 };
 
 export default function (state = defaultState, action) {
@@ -26,6 +28,8 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isShow: true,
+        cardType: payload.cardType,
+        cardTitle: payload.cardTitle,
       };
 
     default:

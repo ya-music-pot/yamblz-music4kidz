@@ -12,7 +12,6 @@ export default () => {
   AudioPlayer.player.on(Audio.EVENT_ENDED, setStopTrack);
 };
 
-
 function setProgress(times) {
   store.dispatch({
     type: PLAYER_PROGRESS,

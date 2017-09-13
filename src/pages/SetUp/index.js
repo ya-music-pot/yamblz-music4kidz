@@ -7,8 +7,9 @@ import ListSettings from '_components/ListSettings';
 import Loader from '_components/Loader';
 
 import { updateStep, clearSetUp } from '_actions/setup';
-import { updateUser } from '_actions/user';
+import { createUser } from '_actions/user';
 import { playerClear, playerStop } from '_actions/player';
+import { removePlayerPage } from '_helpers/player';
 
 import Mood from './Mood';
 import Action from './Action';
@@ -17,15 +18,16 @@ import Player from './Player';
 import style from './style.styl';
 
 class SetUp extends Component {
+  componentWillMount() {
+    removePlayerPage();
+  }
   componentWillUnmount() {
     this.props.clearSetUp();
+    removePlayerPage();
   }
 
   _handleNextStep = () => {
-    const {
-      steps, activeStep, moodId,
-      actionId, user,
-    } = this.props;
+    const { steps, activeStep, settings } = this.props;
     const newStep = activeStep.step + 1;
     const isStep = steps[newStep - 1];
 
@@ -34,10 +36,8 @@ class SetUp extends Component {
     }
 
     if (!isStep) {
-      this.props.updateUser({
-        id: user.data.id,
-        moodId,
-        actionId,
+      this.props.createUser({
+        ...settings,
         moveNext: '/feed',
       });
     }
@@ -50,10 +50,11 @@ class SetUp extends Component {
 
   renderSteps() {
     const {
-      activeStep, likesCount, actionId,
-      moodId, steps, listActions,
-      listEmoji,
+      activeStep, settings, steps,
+      listActions, listEmoji,
     } = this.props;
+
+    const { likesCount, moodId, actionId } = settings;
     const { title, step } = activeStep;
 
     const stepEmoji = getStepByType(steps, 'emoji');
@@ -120,14 +121,17 @@ SetUp.propTypes = {
     data: PropTypes.object,
   }),
   user: PropTypes.object,
-  updateUser: PropTypes.func,
+  settings: PropTypes.shape({
+    likesCount: PropTypes.number,
+    actionId: PropTypes.number,
+    moodId: PropTypes.number,
+    tracks: PropTypes.array,
+  }),
+  createUser: PropTypes.func,
   playerStop: PropTypes.func,
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
   playerClear: PropTypes.func,
-  likesCount: PropTypes.number,
-  actionId: PropTypes.number,
-  moodId: PropTypes.number,
   activeStep: PropTypes.shape({
     step: PropTypes.number,
     type: PropTypes.string,
@@ -137,14 +141,12 @@ SetUp.propTypes = {
 
 export default connect((state, props) => {
   const { steps, activeStep } = state.setup;
-  const { likesCount, actionId, moodId } = state.settings;
   const { listEmoji, listActions } = state.dictionaries;
+
   return {
     user: state.user,
     steps,
-    likesCount,
-    moodId,
-    actionId,
+    settings: state.settings,
     listEmoji,
     listActions,
     activeStep: steps[activeStep - 1],
@@ -153,7 +155,7 @@ export default connect((state, props) => {
 }, {
   updateStep,
   clearSetUp,
-  updateUser,
+  createUser,
   playerClear,
   playerStop,
 })(SetUp);

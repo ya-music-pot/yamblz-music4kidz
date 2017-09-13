@@ -1,6 +1,6 @@
 export const UPDATE_EMOJI = 'UPDATE_EMOJI';
 export const UPDATE_ACTION = 'UPDATE_ACTION';
-export const UPDATE_COUNT_LIKES = 'UPDATE_COUNT_LIKES';
+export const UPDATE_TRACKS = 'UPDATE_TRACKS';
 
 export function saveEmoji(moodId) {
   return {
@@ -20,11 +20,12 @@ export function saveAction(actionId) {
   };
 }
 
-export function saveLikesCount(likesCount) {
+export function saveTracks(trackId, liked) {
   return {
-    type: UPDATE_COUNT_LIKES,
+    type: UPDATE_TRACKS,
     payload: {
-      likesCount,
+      trackId,
+      liked,
     },
   };
 }

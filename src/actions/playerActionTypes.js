@@ -21,3 +21,6 @@ export const SET_PLAYLIST = 'SET_PLAYLIST';
 export const PLAYER_GET_RADIO = 'PLAYER_GET_RADIO';
 
 export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
+
+export const LIKE_TRACK = 'LIKE_TRACK';
+export const DISLIKE_TRACK = 'DISLIKE_TRACK';

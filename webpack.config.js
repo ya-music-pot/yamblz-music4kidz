@@ -3,6 +3,7 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const got = require('got');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const API_URL = 'https://musicforchildren.herokuapp.com/';
 
 const ENV = process.env.NODE_ENV;
@@ -46,27 +47,33 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-        ],
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader',
+            'postcss-loader',
+          ],
+        }),
       },
       {
         test: /\.styl$/,
         exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              sourceMap: true,
-              localIdentName: '[local]___[hash:base64:8]',
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[name]__[local]--[hash:base64:10]',
+              },
             },
-          },
-          'postcss-loader',
-          'stylus-loader',
-        ],
+            'postcss-loader',
+            'stylus-loader',
+          ],
+        }),
       },
     ],
   },
@@ -92,11 +99,17 @@ module.exports = {
       isProduction: ENV === 'production',
       API_URL: JSON.stringify('https://musicforchildren.herokuapp.com/'),
     }),
+    new ExtractTextPlugin({
+      filename: 'styles.css',
+      allChunks: true,
+    }),
   ],
 
   devServer: {
     disableHostCheck: true,
     stats: 'minimal',
+    host: 'localhost',
+    port: '8080',
     setup(app) {
       app.get('/api/*', function(req, res) {
         got(`${API_URL}/${req.url.substr(5)}`)
