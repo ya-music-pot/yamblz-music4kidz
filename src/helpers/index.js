@@ -83,3 +83,15 @@ export function getTime(position, duration) {
   return `${minutesLeft}:${secondsLeft}`;
 }
 
+export function API(url, options) {
+  const defOptions = {
+    credentials: 'same-origin',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    method: 'GET',
+  };
+
+  return window.fetch(url, { ...defOptions, ...options });
+}

@@ -13,7 +13,7 @@ import history from '_settings/history';
 
 import AudioPlayer from '_helpers/AudioPlayer';
 import playerListeners from '_helpers/playerListeners';
-import loaderSvg from '_helpers/svgxhr';
+import loaderSvg from '_helpers/svgLoad';
 
 import { getUser } from '_actions/user';
 import { getLocalStorage } from '_helpers';
@@ -24,11 +24,10 @@ initReactFastclick();
 
 /* Player */
 AudioPlayer.init().then(() => {
-  console.log('Аудио-плеер готов к работе');
   playerListeners();
   store.dispatch(playerInit());
 }, () => {
-  console.error('Не удалось инициализировать аудио-плеер');
+  throw Error('Не удалось инициализировать аудио-плеер');
 });
 
 /* SVG */
