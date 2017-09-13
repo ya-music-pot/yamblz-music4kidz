@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import SvgIcon from '_components/SvgIcon';
+import Icon from '_components/Icon';
 import style from './style.styl';
 
 export default class GradientPlayer extends Component {
   renderDefaultIcon() {
     return (
       <div className={style.defaultImage}>
-        <SvgIcon
+        <Icon
           className={style.icon}
-          name="bird"
+          typeIcon="bird"
         />
       </div>
     );

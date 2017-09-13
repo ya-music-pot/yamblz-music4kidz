@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import SvgIcon from '_components/SvgIcon';
+import Icon from '_components/Icon';
 
 import style from './style.styl';
 
@@ -23,7 +23,7 @@ export default class ButtonCircle extends Component {
         style={customStyle}
         onClick={onClick}
       >
-        { nameIcon && <SvgIcon name={nameIcon} className={style.icon} /> }
+        { nameIcon && <Icon typeIcon={nameIcon} className={style.icon} /> }
       </div>
     );
   }

@@ -35,14 +35,20 @@ const __svg__ = {
   path: '../assets/images/icons/**/*.svg',
   name: '[hash].logos.svg',
 };
-loaderSvg(__svg__);
+
 
 /* Render */
 const { authToken } = getLocalStorage();
 if (authToken) {
-  store.dispatch(getUser(authToken)).then(() => render());
+  store.dispatch(getUser(authToken))
+    .then(() => loaderSvg(__svg__))
+    .then(render)
+    .catch(() => {
+      loadDataAndRender();
+      throw Error('Ошибка первоначальной загрузки данных!');
+    });
 } else {
-  render();
+  loadDataAndRender();
 }
 
 function render() {
@@ -55,4 +61,14 @@ function render() {
       </Provider>
     </div>
   ), document.getElementById('root'));
+}
+
+/**
+ * @return {Promise}
+ */
+function loadDataAndRender() {
+  return loaderSvg(__svg__).then(render).catch(() => {
+    render();
+    throw Error('Ошибка загрузки!');
+  });
 }

@@ -8,11 +8,11 @@ export default function svgLoad(options) {
 
   if (!url) return false;
 
-  API(url)
+  return API(url)
     .then((response) => response.text())
     .then((responseText) => {
       if (!responseText || responseText.substr(0, 4) !== '<svg') {
-        throw Error('Invalid SVG Data');
+        throw Error('Загружены не SVG файлы.');
       }
 
       const div = document.createElement('div');
@@ -20,6 +20,6 @@ export default function svgLoad(options) {
       document.body.insertBefore(div, document.body.childNodes[0]);
     })
     .catch(() => {
-      throw Error('Invalid SVG Response');
+      throw Error('Ошибка запроса за SVG файлами.');
     });
 }

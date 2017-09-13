@@ -57,5 +57,5 @@ export default ({ dispatch }) => (next) => (action) => {
  */
 function generateError(rest, error, type, dispatch) {
   dispatch({ ...rest, error, type: type + FAIL });
-  return new Error(error);
+  throw Error(error);
 }
