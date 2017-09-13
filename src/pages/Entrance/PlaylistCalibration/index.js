@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import cl from 'classname';
 
-import style from '../style.styl';
+import Icon from '_components/Icon';
+import style from './style.styl';
 
 export default class PlaylistCalibration extends Component {
   render() {
     return (
-      <div className={cl(style.container, style.containerLeft)}>
-        <div className={style.calibrationTitleContainer}>
+      <div>
+        <div className={style.titleContainer}>
           <div className={style.title}>
             Катя, давай создадим лучший в&nbsp;мире плейлист для&nbsp;тебя?
+            <Icon typeIcon="entrance-emoji" />
           </div>
         </div>
-        <div className={style.calibrationButtonWrapper}>
+        <div className={style.buttonWrapper}>
           <Button
-            style={cl(style.button, style.buttonLower)}
+            style={cl(style.button)}
             onClick={this.props.onAccept}
           >
             Создать

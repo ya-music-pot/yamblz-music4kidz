@@ -13,6 +13,7 @@ const defaultState = {
   position: 0,
   trackId: null,
   playlist: [],
+  radio: [],
   duration: 0,
   playlistId: null,
 };
@@ -111,7 +112,7 @@ export default function (state = defaultState, action) {
     case `${PlayerActions.PLAYER_GET_RADIO}_SUCCESS`:
       return {
         ...state,
-        playlist: [...state.playlist, response.data],
+        playlist: [...state.playlist.slice(-1), response.data],
         radio: [response.data],
       };
 

@@ -113,3 +113,12 @@ export function setPosition(position) {
     },
   };
 }
+
+export function getRadio(id) {
+  return {
+    type: ActionType.PLAYER_GET_RADIO,
+    callAPI: {
+      url: `${API_URL}user/${id}/radio`,
+    },
+  };
+}

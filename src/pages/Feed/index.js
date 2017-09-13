@@ -6,6 +6,7 @@ import cl from 'classname';
 import Topbar from '_components/Topbar';
 import CardList from '_components/CardList';
 import { getFeed } from '_actions/feed';
+import { getRadio } from '_actions/player';
 import { getAllPlaylists } from '_actions/user';
 import callbacks from '_helpers/cardCallbacks';
 
@@ -16,7 +17,14 @@ class Feed extends Component {
   componentWillMount() {
     const { id } = this.props.user;
     this.props.getFeed(id);
+    this.props.getRadio(id);
     this.props.getAllPlaylists(id);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.user.id !== nextProps.user.id && nextProps.user.id) {
+      this.props.getRadio(nextProps.user.id);
+    }
   }
 
   _handleAvatarClick = () => {
@@ -50,6 +58,7 @@ class Feed extends Component {
 Feed.propTypes = {
   router: PropTypes.object,
   getFeed: PropTypes.func,
+  getRadio: PropTypes.func,
   feed: PropTypes.object,
   user: PropTypes.object,
   getAllPlaylists: PropTypes.func,
@@ -63,5 +72,6 @@ export default connect((state, props) => ({
   isPlayerVisible: state.playerInfo.isShow,
 }), {
   getFeed,
+  getRadio,
   getAllPlaylists,
 })(Feed);

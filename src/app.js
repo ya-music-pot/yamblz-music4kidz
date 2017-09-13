@@ -14,7 +14,10 @@ import history from '_settings/history';
 import AudioPlayer from '_helpers/AudioPlayer';
 import playerListeners from '_helpers/playerListeners';
 
-import '_settings/main.styl';
+import { getUser } from '_actions/user';
+import { getLocalStorage } from '_helpers';
+
+import '_settings/global.css';
 
 initReactFastclick();
 
@@ -26,13 +29,21 @@ AudioPlayer.init().then(() => {
   console.error('Не удалось инициализировать аудио-плеер');
 });
 
+const { authToken } = getLocalStorage();
+if (authToken) {
+  store.dispatch(getUser(authToken)).then(() => render());
+} else {
+  render();
+}
 
-ReactDOM.render((
-  <div>
-    <Provider store={store}>
-      <Router history={history}>
-        { routes }
-      </Router>
-    </Provider>
-  </div>
-), document.getElementById('root'));
+function render() {
+  ReactDOM.render((
+    <div>
+      <Provider store={store}>
+        <Router history={history}>
+          { routes }
+        </Router>
+      </Provider>
+    </div>
+  ), document.getElementById('root'));
+}

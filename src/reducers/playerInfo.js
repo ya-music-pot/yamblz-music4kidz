@@ -3,7 +3,7 @@ import { PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER } from '_actions/playerI
 const defaultState = {
   inited: false,
   isShow: false,
-  mode: 'full',
+  mode: '',
   cardType: null,
   cardTitle: null,
 };
