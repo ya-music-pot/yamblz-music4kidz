@@ -19,7 +19,7 @@ export default class FullPlayer extends Component {
       playerState, cardType, onTogglePlay,
       onClickNext, onClickPrevious, onClickRepeat,
       openListTracks, onClickArrowDown, onDislikeClick,
-      onLikeClick,
+      onLikeClick, cardTitle, emojiStatus,
     } = this.props;
 
     const {
@@ -34,6 +34,8 @@ export default class FullPlayer extends Component {
           <Header
             onClickArrowDown={onClickArrowDown}
             cardType={cardType}
+            cardTitle={cardTitle}
+            emojiStatus={emojiStatus}
           />
           <div>
             { cardType === CARDS.personal &&
@@ -80,4 +82,6 @@ FullPlayer.propTypes = {
   openListTracks: PropTypes.func,
   playerState: PropTypes.object,
   cardType: PropTypes.number,
+  cardTitle: PropTypes.string,
+  emojiStatus: PropTypes.object,
 };

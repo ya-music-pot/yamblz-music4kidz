@@ -12,10 +12,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   height: 8vh;
-  padding-top: 1vh;
-  padding-bottom: 5vh;
+  padding-top: 4vh;
+  padding-bottom: 3vh;
 }
 
 .titleRow {
@@ -124,6 +124,7 @@
 .buttonDislike:focus { outline: none; }
 
 .buttonArrowDown {
+  background-position: center;
   background-image: url('./images/arrow_down.svg');
   @extend .buttonCommon24;
 }
@@ -137,8 +138,12 @@
 
 .buttonDownload:focus { outline: none; }
 
-.moodIcons {
+.playerTitle {
   width: 78vw;
+  padding-right: 24px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
 }
 
 .buttonPrevious {
@@ -201,4 +206,9 @@
       outline: none;
     }
   }
+}
+
+.emojiStyles {
+  margin-bottom: 0;
+  padding-left: 12px;
 }
