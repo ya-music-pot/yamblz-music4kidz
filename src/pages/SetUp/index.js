@@ -9,6 +9,7 @@ import Loader from '_components/Loader';
 import { updateStep, clearSetUp } from '_actions/setup';
 import { createUser } from '_actions/user';
 import { playerClear, playerStop } from '_actions/player';
+import { removePlayerPage } from '_helpers/player';
 
 import Mood from './Mood';
 import Action from './Action';
@@ -17,8 +18,12 @@ import Player from './Player';
 import style from './style.styl';
 
 class SetUp extends Component {
+  componentWillMount() {
+    removePlayerPage();
+  }
   componentWillUnmount() {
     this.props.clearSetUp();
+    removePlayerPage();
   }
 
   _handleNextStep = () => {
