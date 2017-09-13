@@ -9,7 +9,7 @@ import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
   playerResume, toggleRepeatMode, likeTrack,
-  dislikeTrack,
+  dislikeTrack, getRadio,
 } from '_actions/player';
 
 import { openModal } from '_actions/modal';
@@ -30,7 +30,12 @@ class Player extends Component {
   };
 
   _handleNextButton = () => {
-    const { player } = this.props;
+    const { player, userId } = this.props;
+
+    if (player.isRadio && userId) {
+      this.props.getRadio(userId);
+    }
+
     this.props.playerNext(player.trackId);
   };
 
@@ -107,6 +112,7 @@ export default connect((state, props) => ({
   playerModeUpdate,
   likeTrack,
   dislikeTrack,
+  getRadio,
 })(Player);
 
 Player.propTypes = {
@@ -123,4 +129,5 @@ Player.propTypes = {
   likeTrack: PropTypes.func,
   dislikeTrack: PropTypes.func,
   userId: PropTypes.number,
+  getRadio: PropTypes.func,
 };
