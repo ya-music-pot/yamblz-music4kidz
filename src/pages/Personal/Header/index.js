@@ -42,7 +42,7 @@ export default class Header extends Component {
             className={cl(style.button, style.buttonSettings)}
           />
           <Avatar
-            className={style.avatar}
+            className={cl(style.avatar, avatar && style.avatarCover)}
             avatar={avatar}
           />
           <div className={style.userName}>

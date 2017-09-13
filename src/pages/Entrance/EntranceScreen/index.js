@@ -6,8 +6,9 @@ import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
 import Card from '_decorators/Card';
+import Icon from '_components/Icon';
 
-import style from '../style.styl';
+import style from './style.styl';
 
 class EntranceScreen extends Component {
   state = {
@@ -27,13 +28,12 @@ class EntranceScreen extends Component {
     this.cardHeight = this.card.offsetHeight;
 
     this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
-    this.bottomPosition = this.content.offsetHeight + 16;
+    this.bottomPosition = this.windowHeight * 0.9; // Карточка торчит на 10% высоты экрана
     this.threshhold = this.windowHeight / 2;
   };
 
   /**
    * _initializeCardActions — Функция инициаллизирует обработчик жестов
-   * @param  {Node} el
    */
   _initializeCardActions = () => {
     this.isPanning = null;
@@ -57,7 +57,6 @@ class EntranceScreen extends Component {
     if (this.isPanning == null) {
       this._updateThreshholds();
 
-      this.card.style.left = '16px';
       this.card.style.top = `${this.bottomPosition}px`;
       this.card.style.position = 'absolute';
     }
@@ -68,9 +67,12 @@ class EntranceScreen extends Component {
     }
 
     const newCardY = event.deltaY + this.lastCardY;
-    this.card.style.top = `${newCardY}px`;
 
     if (newCardY <= this.threshhold) {
+      if (this.state.isCardShown) {
+        return;
+      }
+
       if (this.posTimeout) {
         clearTimeout(this.posTimeout);
       }
@@ -96,6 +98,8 @@ class EntranceScreen extends Component {
       }, 300);
     }
 
+    this.card.style.top = `${newCardY}px`;
+
     if (event.isFinal) {
       this.isPanning = false;
     }
@@ -106,16 +110,21 @@ class EntranceScreen extends Component {
       data, callbacks, playlistId,
       shouldPlay,
     } = this.props;
+
     const { isCardShown } = this.state;
+
     let isPlaying = false;
     if (data.id === playlistId && shouldPlay) {
       isPlaying = true;
     }
 
     return (
-      <div className={style.container}>
+      <div>
         <div
-          className={cl(style.background, isCardShown ? style['background--opacity20'] : style['background--opacity100'])}
+          className={
+            cl(style.background, isCardShown ?
+              style.backgroundOpacity20 : style.backgroundOpacity100)
+          }
           ref={(el) => {
             this.content = el;
           }}
@@ -129,17 +138,24 @@ class EntranceScreen extends Component {
             >
               Войти
             </Button>
+            <Button
+              style={style.buttonSmall}
+              onClick={this.props.onDeny}
+            >
+              Продолжить без входа
+              <Icon typeIcon="entrance-emoji-stop" />
+            </Button>
           </div>
         </div>
         <div
-          className={cl(style.cardContainer, this.state.isCardShown && style.cardShown)}
+          className={cl(style.cardContainer, isCardShown && style.cardShown)}
           ref={(el) => {
             this.card = el;
           }}
         >
           <Card
             data={data}
-            callbacks={callbacks}
+            callbacks={isCardShown ? callbacks : {}}
             isPlaying={isPlaying}
           />
         </div>
@@ -150,6 +166,7 @@ class EntranceScreen extends Component {
 
 EntranceScreen.propTypes = {
   onNavigate: PropTypes.func.isRequired,
+  onDeny: PropTypes.func,
   data: PropTypes.object,
   callbacks: PropTypes.object,
   playlistId: PropTypes.oneOfType([
