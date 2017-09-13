@@ -16,7 +16,7 @@
 
   &Sticky {
     position: fixed;
-    top: 56px;
+    top: 55px;
     left: 0;
     z-index: 2;
     width: 100%;
@@ -37,11 +37,11 @@
   &Item {
     color: #ffffff;
     
-    hgroup {
-      h3 {
+    :global hgroup {
+      :global h3 {
         line-height: 23px;
       }
-      h4[class^='subTitle'] {
+      :global h4[class*='subTitle'] {
         color: #b4a3ff;
         line-height: 23px;
       }
