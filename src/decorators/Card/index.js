@@ -27,6 +27,7 @@ class Card extends Component {
         playlistId,
         isPlaying,
         cardType: data.type,
+        cardTitle: data.name,
       };
       callback(params);
     }

@@ -17,11 +17,12 @@ export function playerModeUpdate(mode) {
   };
 }
 
-export function showPlayer(cardType) {
+export function showPlayer(cardType, cardTitle) {
   return {
     type: SHOW_PLAYER,
     payload: {
       cardType,
+      cardTitle,
     },
   };
 }

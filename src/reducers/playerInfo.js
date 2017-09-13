@@ -5,6 +5,7 @@ const defaultState = {
   isShow: false,
   mode: '',
   cardType: null,
+  cardTitle: null,
 };
 
 export default function (state = defaultState, action) {
@@ -28,6 +29,7 @@ export default function (state = defaultState, action) {
         ...state,
         isShow: true,
         cardType: payload.cardType,
+        cardTitle: payload.cardTitle,
       };
 
     default:

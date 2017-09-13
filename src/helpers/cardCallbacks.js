@@ -16,10 +16,10 @@ import store from '_settings/store';
 const runPlayer = (params) => {
   const {
     trackId, playlist, isRadio,
-    playlistId, cardType,
+    playlistId, cardType, cardTitle,
   } = params;
 
-  store.dispatch(showPlayer(cardType));
+  store.dispatch(showPlayer(cardType, cardTitle));
   store.dispatch(setPlaylist(playlist, isRadio, playlistId));
   store.dispatch(playerPlay(trackId));
 };
