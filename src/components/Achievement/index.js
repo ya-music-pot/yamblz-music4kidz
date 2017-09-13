@@ -3,9 +3,30 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 
 import Icon from '_components/Icon';
+import SvgIcon from '_components/SvgIcon';
 import style from './style.styl';
 
 export default class Achievement extends Component {
+  renderSvgIcon(typeIcon, onClick) {
+    return (
+      <SvgIcon
+        nameIcon={typeIcon}
+        className={style.logo}
+        onClick={onClick}
+      />
+    );
+  }
+
+  renderIcon(typeIcon, onClick) {
+    return (
+      <Icon
+        typeIcon={typeIcon}
+        className={style.logo}
+        onClick={onClick}
+      />
+    );
+  }
+
   render() {
     const { disabled, className, onClick } = this.props;
 
@@ -14,11 +35,10 @@ export default class Achievement extends Component {
 
     return (
       <div className={cl(style.achievement, className)}>
-        <Icon
-          typeIcon={typeIcon}
-          className={style.logo}
-          onClick={onClick}
-        />
+        { disabled
+          ? this.renderIcon(typeIcon, onClick)
+          : this.renderSvgIcon(typeIcon, onClick)
+        }
         <div className={cl(style.title, disabled && style.titleDisabled)}>{title}</div>
       </div>
     );
