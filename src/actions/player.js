@@ -114,6 +114,24 @@ export function setPosition(position) {
   };
 }
 
+export function showSelector(isSelector) {
+  return {
+    type: ActionType.SHOW_SELECTOR,
+    player: {
+      isSelector,
+    },
+  };
+}
+
+export function closeSelector(isSelector) {
+  return {
+    type: ActionType.CLOSE_SELECTOR,
+    player: {
+      isSelector,
+    },
+  };
+}
+
 export function getRadio(id) {
   return {
     type: ActionType.PLAYER_GET_RADIO,

@@ -9,7 +9,8 @@ import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
   playerResume, toggleRepeatMode, likeTrack,
-  dislikeTrack, getRadio,
+  dislikeTrack, getRadio, showSelector,
+  closeSelector,
 } from '_actions/player';
 
 import { openModal } from '_actions/modal';
@@ -17,6 +18,10 @@ import { openModal } from '_actions/modal';
 import { playerModeUpdate } from '_actions/playerInfo';
 
 class Player extends Component {
+  state = {
+    isSelector: false,
+  }
+
   _handlePlayButton = () => {
     const { player } = this.props;
 
@@ -67,40 +72,62 @@ class Player extends Component {
     this._handleNextButton();
   };
 
+  _handleClickSelector = () => {
+    this.setState({
+      isSelector: true,
+    });
+    this.props.showSelector(true);
+  }
+
+  _handleCloseSelector = () => {
+    this.setState({
+      isSelector: false,
+    });
+    this.props.closeSelector(false);
+  }
+
   render() {
     const {
       player, cardType, cardTitle,
-      userInfo: { moodId, actionId },
-      dictionaries: { listEmoji, listActions },
+      userInfo, dictionaries: { listEmoji,
+        listActions },
     } = this.props;
     const emojiStatus = {
-      moodIcon: listEmoji.data[moodId].typeIcon,
-      actionIcon: listActions.data[actionId].typeIcon,
+      moodIcon: listEmoji.data[userInfo.moodId].typeIcon,
+      actionIcon: listActions.data[userInfo.actionId].typeIcon,
     };
 
     return (
-      <PlayerToggle>
-        <MiniPlayer
-          playerState={player}
-          onTogglePlay={this._handlePlayButton}
-          type="mini"
-        />
-        <FullPlayer
-          playerState={player}
-          onTogglePlay={this._handlePlayButton}
-          onClickNext={this._handleNextButton}
-          onClickPrevious={this._handlePreviousButton}
-          onClickRepeat={this._handleRepeatButton}
-          onClickArrowDown={this._handleClickArrowDown}
-          openListTracks={this._handleOpenListTracks}
-          onLikeClick={this._handleLikeButton}
-          onDislikeClick={this._handleDislikeButton}
-          type="full"
-          cardType={cardType}
-          cardTitle={cardTitle}
-          emojiStatus={emojiStatus}
-        />
-      </PlayerToggle>
+      <div>
+        <PlayerToggle>
+          <MiniPlayer
+            playerState={player}
+            onTogglePlay={this._handlePlayButton}
+            type="mini"
+          />
+          <FullPlayer
+            playerState={player}
+            onTogglePlay={this._handlePlayButton}
+            onClickNext={this._handleNextButton}
+            onClickPrevious={this._handlePreviousButton}
+            onClickRepeat={this._handleRepeatButton}
+            onClickArrowDown={this._handleClickArrowDown}
+            openListTracks={this._handleOpenListTracks}
+            onLikeClick={this._handleLikeButton}
+            onDislikeClick={this._handleDislikeButton}
+            onClickSelector={this._handleClickSelector}
+            type="full"
+            cardType={cardType}
+            cardTitle={cardTitle}
+            emojiStatus={emojiStatus}
+            listEmoji={listEmoji}
+            listActions={listActions}
+            userInfo={userInfo}
+            isSelector={this.state.isSelector}
+            onCloseSelector={this._handleCloseSelector}
+          />
+        </PlayerToggle>
+      </div>
     );
   }
 }
@@ -126,6 +153,8 @@ export default connect((state, props) => ({
   likeTrack,
   dislikeTrack,
   getRadio,
+  showSelector,
+  closeSelector,
 })(Player);
 
 Player.propTypes = {
@@ -145,4 +174,6 @@ Player.propTypes = {
   cardTitle: PropTypes.string,
   dictionaries: PropTypes.object,
   getRadio: PropTypes.func,
+  showSelector: PropTypes.func,
+  closeSelector: PropTypes.func,
 };

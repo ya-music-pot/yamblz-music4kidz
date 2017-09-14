@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import CircularAvatar from '_components/CircularAvatar';
+import MoodSelector from '_components/MoodSelector';
 import CARDS from '_data/cardsType';
 import { getTime } from '_helpers';
 
@@ -20,11 +21,14 @@ export default class FullPlayer extends Component {
       onClickNext, onClickPrevious, onClickRepeat,
       openListTracks, onClickArrowDown, onDislikeClick,
       onLikeClick, cardTitle, emojiStatus,
+      userInfo, listEmoji, listActions,
+      onClickSelector, isSelector, onCloseSelector,
     } = this.props;
 
     const {
       trackName, singerName, position,
-      duration, cover, isPlaying, isRepeatMode,
+      duration, cover, isPlaying,
+      isRepeatMode,
     } = playerState;
 
     const percentage = position / duration;
@@ -63,9 +67,18 @@ export default class FullPlayer extends Component {
             openListTracks={openListTracks}
             isRepeatMode={isRepeatMode}
             cardType={cardType}
+            onClickSelector={onClickSelector}
           />
           <Background cover={cover} />
         </div>
+        { cardType === CARDS.personal && isSelector &&
+          <MoodSelector
+            onCloseSelector={onCloseSelector}
+            listEmoji={listEmoji}
+            listActions={listActions}
+            userInfo={userInfo}
+          />
+        }
       </div>
     );
   }
@@ -73,6 +86,8 @@ export default class FullPlayer extends Component {
 
 FullPlayer.propTypes = {
   onTogglePlay: PropTypes.func,
+  onClickSelector: PropTypes.func,
+  onCloseSelector: PropTypes.func,
   onClickPrevious: PropTypes.func,
   onClickNext: PropTypes.func,
   onClickRepeat: PropTypes.func,
@@ -84,4 +99,8 @@ FullPlayer.propTypes = {
   cardType: PropTypes.number,
   cardTitle: PropTypes.string,
   emojiStatus: PropTypes.object,
+  userInfo: PropTypes.object,
+  listEmoji: PropTypes.object,
+  listActions: PropTypes.object,
+  isSelector: PropTypes.bool,
 };

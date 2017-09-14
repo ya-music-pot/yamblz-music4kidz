@@ -1,0 +1,67 @@
+ul {
+  white-space: nowrap;
+}
+
+li {
+  display: inline-block;
+}
+
+.wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  margin-top: 50vw;
+  margin-left: 50vw;
+  z-index: 12;
+}
+
+.emojiList {
+  position: fixed;
+  margin-left: 50vw;
+  margin-top: 50vw;   //65vh
+  padding: 0;
+  z-index: 12;
+}
+
+.actionList {
+  position: fixed;
+  margin-left: 50vw;
+  margin-top: 50vw;   //-5vh
+  padding: 0;
+  z-index: 12;
+}
+
+.item {
+  width: 32px;
+  transition-timing-function: easeInOutSine;
+  transition: all 0.06s;
+  cursor: pointer;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.spacer {
+  width: 66px;
+  height: 36px;
+}
+
+.emojiRing {
+ background-color: yellow;
+}
+
+.actionRing {
+ background-color: tomato;
+}
+
+.title {
+  font-family: 'YandexSans';
+  font-size: 1em;
+  position: fixed;
+  width: 100vw;
+  margin-top: -45vw;
+  text-align: center;
+  z-index: 12;
+}
