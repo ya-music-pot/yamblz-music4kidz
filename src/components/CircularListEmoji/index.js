@@ -187,5 +187,4 @@ ListEmoji.propTypes = {
   ).isRequired,
   onChangeAction: PropTypes.func,
   onChangeEmoji: PropTypes.func,
-  userInfo: PropTypes.object,
 };
