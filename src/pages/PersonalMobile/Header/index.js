@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import cl from 'classname';
 import plural from 'plural-ru';
 
+import Icon from '_components/Icon';
 import Avatar from '_components/Avatar';
 import Slider from '_decorators/Slider';
 import Achievement from '_components/Achievement';
@@ -22,6 +23,10 @@ export default class Header extends Component {
     window.jsHandler.achievementClick(id);
   };
 
+  _handleBackClick = () => {
+    window.jsHandler.backClick();
+  };
+
   render() {
     const {
       avatar, userName, sticky,
@@ -33,6 +38,11 @@ export default class Header extends Component {
     return (
       <div className={cl(style.container, sticky && style.containerSticky)}>
         <div className={cl(style.header, sticky && style.headerSticky)}>
+          <Icon
+            typeIcon="back"
+            className={cl(style.button, style.buttonBack)}
+            onClick={this._handleBackClick}
+          />
           <Avatar
             className={style.avatar}
             avatar={avatar}
