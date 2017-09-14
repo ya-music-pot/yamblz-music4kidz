@@ -12,14 +12,14 @@ export default class Footer extends Component {
   _handleClickPlus = () => {}
 
   renderPlaylistControl() {
-    const { cardType, openListTracks } = this.props;
+    const { cardType, openListTracks, onClickSelector } = this.props;
 
     if (cardType === CARDS.radio || cardType === CARDS.single) {
       return null;
     }
 
     if (cardType === CARDS.personal) {
-      return <div>balloon</div>;
+      return <div onClick={onClickSelector} >balloon</div>;
     }
 
     return (
@@ -53,6 +53,7 @@ export default class Footer extends Component {
 }
 
 Footer.propTypes = {
+  onClickSelector: PropTypes.func,
   onClickRepeat: PropTypes.func,
   openListTracks: PropTypes.func,
   isRepeatMode: PropTypes.bool,
