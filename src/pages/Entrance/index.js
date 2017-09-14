@@ -9,6 +9,9 @@ import EntranceScreen from './EntranceScreen';
 import PlaylistCalibration from './PlaylistCalibration';
 import style from './style.styl';
 
+const BACKGROUND_COLOR = '#fee05b';
+const DEFAULT_COLOR = '#7859ff';
+
 class Entrance extends Component {
   state = {
     showEntranceScreen: true,
@@ -16,6 +19,12 @@ class Entrance extends Component {
 
   componentWillMount() {
     removePlayerPage();
+    this._metaThemeColor = document.querySelector('meta[name=theme-color]');
+    this._metaThemeColor.setAttribute('content', BACKGROUND_COLOR);
+  }
+
+  componentWillUnmount() {
+    this._metaThemeColor.setAttribute('content', DEFAULT_COLOR);
   }
 
   _handleNavigate = () => {

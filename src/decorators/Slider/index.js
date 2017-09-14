@@ -34,6 +34,7 @@ export default class Slider extends Component {
   _initSlider() {
     const { currentId, children } = this.props;
     this.hammer = Hammer(this.sliderNode);
+    this.hammer.get('swipe').set({ threshold: 0 });
 
     this.setState({
       currentId: currentId || 0,

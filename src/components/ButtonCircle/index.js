@@ -9,7 +9,7 @@ import style from './style.styl';
 export default class ButtonCircle extends Component {
   render() {
     const {
-      onClick, className, typeIcon,
+      onClick, className, nameIcon,
       background,
     } = this.props;
 
@@ -23,7 +23,7 @@ export default class ButtonCircle extends Component {
         style={customStyle}
         onClick={onClick}
       >
-        { typeIcon && <Icon typeIcon={typeIcon} className={style.icon} /> }
+        { nameIcon && <Icon typeIcon={nameIcon} className={style.icon} /> }
       </div>
     );
   }
@@ -31,7 +31,7 @@ export default class ButtonCircle extends Component {
 
 ButtonCircle.propTypes = {
   onClick: PropTypes.func,
-  typeIcon: PropTypes.string,
+  nameIcon: PropTypes.string,
   background: PropTypes.string,
   className: PropTypes.string,
 };

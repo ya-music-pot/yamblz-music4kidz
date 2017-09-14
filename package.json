@@ -41,6 +41,7 @@
     "express": "4.15.4",
     "file-loader": "0.11.2",
     "got": "7.1.0",
+    "jest": "21.0.2",
     "merge-descriptors": "1.0.1",
     "pre-commit": "1.2.2",
     "stylus": "0.54.5",
@@ -90,6 +91,7 @@
     "style-loader": "0.18.2",
     "url-loader": "0.5.9",
     "webpack": "3.5.5",
+    "webpack-svgstore-plugin": "4.0.1",
     "whatwg-fetch": "2.0.3"
   }
 }

@@ -50,7 +50,7 @@ export default class GradientPlayer extends Component {
 }
 
 GradientPlayer.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   isPlaying: PropTypes.bool,
   className: PropTypes.string,
 };
