@@ -13,6 +13,7 @@ import history from '_settings/history';
 
 import AudioPlayer from '_helpers/AudioPlayer';
 import playerListeners from '_helpers/playerListeners';
+import loaderSvg from '_helpers/svgLoad';
 
 import { getUser } from '_actions/user';
 import { getLocalStorage } from '_helpers';
@@ -21,19 +22,33 @@ import '_settings/global.css';
 
 initReactFastclick();
 
+/* Player */
 AudioPlayer.init().then(() => {
-  console.log('Аудио-плеер готов к работе');
   playerListeners();
   store.dispatch(playerInit());
 }, () => {
-  console.error('Не удалось инициализировать аудио-плеер');
+  throw Error('Не удалось инициализировать аудио-плеер');
 });
 
+/* SVG */
+const __svg__ = {
+  path: '../assets/images/icons/**/*.svg',
+  name: '[hash].logos.svg',
+};
+
+
+/* Render */
 const { authToken } = getLocalStorage();
 if (authToken) {
-  store.dispatch(getUser(authToken)).then(() => render());
+  store.dispatch(getUser(authToken))
+    .then(() => loaderSvg(__svg__))
+    .then(render)
+    .catch(() => {
+      loadDataAndRender();
+      throw Error('Ошибка первоначальной загрузки данных!');
+    });
 } else {
-  render();
+  loadDataAndRender();
 }
 
 function render() {
@@ -46,4 +61,14 @@ function render() {
       </Provider>
     </div>
   ), document.getElementById('root'));
+}
+
+/**
+ * @return {Promise}
+ */
+function loadDataAndRender() {
+  return loaderSvg(__svg__).then(render).catch(() => {
+    render();
+    throw Error('Ошибка загрузки!');
+  });
 }

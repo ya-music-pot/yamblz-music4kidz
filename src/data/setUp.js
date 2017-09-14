@@ -9,7 +9,7 @@ export default {
       mp3_url: '/assets/music/egor.mp3',
     },
     {
-      id: 112,
+      id: 34976783,
       name: '',
       artist: 'Dragons',
       lyrics: null,

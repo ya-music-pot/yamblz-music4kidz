@@ -90,20 +90,20 @@ class Player extends Component {
       <div className={style.wrapperButtons}>
         <ButtonCircle
           background="#ff3333"
-          typeIcon="heart"
+          nameIcon="heart"
           onClick={this._handleLike}
           className={style.like}
         />
         <ButtonCircle
           onClick={this._handleSkip}
-          typeIcon="skip"
+          nameIcon="skip"
           className={style.skip}
         />
         <div className={style.sound}>
           { isSound &&
             <ButtonCircle
               onClick={this._handleToggleSound}
-              typeIcon="sound"
+              nameIcon="sound"
               background="rgba(0,0,0,0)"
               className={style.soundIn}
             />
@@ -111,7 +111,7 @@ class Player extends Component {
           { !isSound &&
             <ButtonCircle
               onClick={this._handleToggleSound}
-              typeIcon="sound-off"
+              nameIcon="sound-off"
               background="rgba(0,0,0,0)"
               className={style.soundOut}
             />

@@ -9,10 +9,12 @@ export default class Icon extends Component {
     const { typeIcon, className, onClick } = this.props;
 
     return (
-      <span
-        onClick={onClick}
+      <svg
         className={cl(style.icon, style[typeIcon], className)}
-      />
+        onClick={onClick}
+      >
+        <use xlinkHref={`#icon-${typeIcon}`} />
+      </svg>
     );
   }
 }

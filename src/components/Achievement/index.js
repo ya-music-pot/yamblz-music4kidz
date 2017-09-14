@@ -14,11 +14,13 @@ export default class Achievement extends Component {
 
     return (
       <div className={cl(style.achievement, className)}>
-        <Icon
-          typeIcon={typeIcon}
-          className={style.logo}
-          onClick={onClick}
-        />
+        { disabled && (
+          <Icon
+            typeIcon={typeIcon}
+            className={style.logo}
+            onClick={onClick}
+          />
+        )}
         <div className={cl(style.title, disabled && style.titleDisabled)}>{title}</div>
       </div>
     );

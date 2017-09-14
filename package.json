@@ -91,6 +91,7 @@
     "style-loader": "0.18.2",
     "url-loader": "0.5.9",
     "webpack": "3.5.5",
+    "webpack-svgstore-plugin": "4.0.1",
     "whatwg-fetch": "2.0.3"
   }
 }
