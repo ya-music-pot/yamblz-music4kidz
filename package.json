@@ -29,10 +29,13 @@
   "homepage": "https://github.com/thevery/yamblz-music4kidz#readme",
   "jest": {
     "moduleNameMapper": {
-      "\\.css$": "identity-obj-proxy"
+      "\\.css$": "identity-obj-proxy",
+      "^_actions(.*)": "<rootDir>/src/actions/$1.js",
+      "^_reducers(.*)": "<rootDir>/src/reducers/$1.js"
     }
   },
   "devDependencies": {
+    "babel-jest": "^21.0.2",
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-plugin-import": "2.7.0",
