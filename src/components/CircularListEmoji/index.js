@@ -21,15 +21,6 @@ export default class ListEmoji extends Component {
     this.hammerActionCircle.on('panright', this._actionRingRight);
   }
 
-  componentWillReceiveProps() {
-    const { userInfo } = this.props;
-
-    this.setState({
-      activeActionId: userInfo.actionId - 1,
-      activeEmojiId: userInfo.moodId - 1,
-    });
-  }
-
   _emojiRing = (target) => {
     this.emojiRing = target;
   }
