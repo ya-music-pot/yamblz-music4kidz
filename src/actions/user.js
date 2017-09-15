@@ -19,14 +19,10 @@ export function getUser(id) {
 }
 
 export function createUser(data) {
-  const {
-    moveNext, moodId, actionId,
-    tracks,
-  } = data;
+  const { moodId, actionId, tracks } = data;
 
   return {
     type: CREATE_USER,
-    moveNext,
     callAPI: {
       method: 'POST',
       url: `${API_URL}user/register`,
@@ -44,14 +40,10 @@ export function createUser(data) {
 }
 
 export function updateUser(data) {
-  const {
-    id, moodId, actionId,
-    moveNext,
-  } = data;
+  const { id, moodId, actionId } = data;
 
   return {
     type: UPDATE_USER,
-    moveNext,
     callAPI: {
       method: 'POST',
       url: `${API_URL}user/${id}?mood_id=${moodId}&action_id=${actionId}`,
