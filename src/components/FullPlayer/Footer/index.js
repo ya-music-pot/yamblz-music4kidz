@@ -9,14 +9,17 @@ import style from '../style.styl';
 
 export default class Footer extends Component {
   renderPlaylistControl() {
-    const { cardType, callbacks: { openListTracks } } = this.props;
+    const {
+      cardType, onClickSelector,
+      callbacks: { openListTracks },
+    } = this.props;
 
     if (cardType === CARDS.radio || cardType === CARDS.single) {
       return null;
     }
 
     if (cardType === CARDS.personal) {
-      return <div>balloon</div>;
+      return <div onClick={onClickSelector} >balloon</div>;
     }
 
     return (
@@ -55,6 +58,7 @@ export default class Footer extends Component {
 }
 
 Footer.propTypes = {
+  onClickSelector: PropTypes.func,
   callbacks: PropTypes.objectOf(PropTypes.func),
   isRepeatMode: PropTypes.bool,
   cardType: PropTypes.number,

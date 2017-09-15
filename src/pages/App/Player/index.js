@@ -10,13 +10,17 @@ import {
   playerNext, playerPrev, playerPause,
   playerResume, toggleRepeatMode, likeTrack,
   dislikeTrack, getRadio, addTrack,
-  deleteTrack,
+  deleteTrack, showSelector, closeSelector,
 } from '_actions/player';
 import { addUserTrack, deleteUserTrack, getAllTracks } from '_actions/user';
 import { openModal } from '_actions/modal';
 import { playerModeUpdate } from '_actions/playerInfo';
 
 class Player extends Component {
+  state = {
+    isSelector: false,
+  };
+
   componentWillMount() {
     this.props.getAllTracks(this.props.userInfo.id);
   }
@@ -101,15 +105,29 @@ class Player extends Component {
     }
   };
 
+  _handleClickSelector = () => {
+    this.setState({
+      isSelector: true,
+    });
+    this.props.showSelector(true);
+  };
+
+  _handleCloseSelector = () => {
+    this.setState({
+      isSelector: false,
+    });
+    this.props.closeSelector(false);
+  };
+
   render() {
     const {
       player, cardType, cardTitle,
-      userInfo: { moodId, actionId },
-      dictionaries: { listEmoji, listActions },
+      userInfo, dictionaries: { listEmoji,
+        listActions },
     } = this.props;
     const emojiStatus = {
-      moodIcon: listEmoji.data[moodId].typeIcon,
-      actionIcon: listActions.data[actionId].typeIcon,
+      moodIcon: listEmoji.data[userInfo.moodId].typeIcon,
+      actionIcon: listActions.data[userInfo.actionId].typeIcon,
     };
 
     const playerCallbacks = {
@@ -139,6 +157,12 @@ class Player extends Component {
           cardTitle={cardTitle}
           emojiStatus={emojiStatus}
           isAdded={this._isTrackAdded()}
+          listEmoji={listEmoji}
+          listActions={listActions}
+          userInfo={userInfo}
+          isSelector={this.state.isSelector}
+          onClickSelector={this._handleClickSelector}
+          onCloseSelector={this._handleCloseSelector}
         />
       </PlayerToggle>
     );
@@ -172,6 +196,8 @@ export default connect((state, props) => ({
   addUserTrack,
   deleteUserTrack,
   getAllTracks,
+  showSelector,
+  closeSelector,
 })(Player);
 
 Player.propTypes = {
@@ -197,4 +223,6 @@ Player.propTypes = {
   deleteUserTrack: PropTypes.func,
   getAllTracks: PropTypes.func,
   userTracklist: PropTypes.arrayOf(PropTypes.object),
+  showSelector: PropTypes.func,
+  closeSelector: PropTypes.func,
 };

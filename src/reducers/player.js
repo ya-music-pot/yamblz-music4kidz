@@ -103,6 +103,18 @@ export default function (state = defaultState, action) {
         ...payload,
       };
 
+    case PlayerActions.SHOW_SELECTOR:
+      return {
+        ...state,
+        isSelector: true,
+      };
+
+    case PlayerActions.CLOSE_SELECTOR:
+      return {
+        ...state,
+        isSelector: false,
+      };
+
     case PlayerActions.TOGGLE_REPEAT:
       return {
         ...state,
