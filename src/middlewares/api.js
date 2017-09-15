@@ -1,5 +1,6 @@
 import 'whatwg-fetch';
 import { API } from '_helpers';
+import { AppError } from '_helpers/errors';
 
 const START = '_START';
 const FAIL = '_FAIL';
@@ -41,6 +42,7 @@ export default ({ dispatch }) => (next) => (action) => {
       });
     })
     .catch((error) => {
+      // Отлавливать также ошибки по коду выше.
       generateError(rest, error, type, dispatch);
     });
 };
@@ -57,5 +59,5 @@ export default ({ dispatch }) => (next) => (action) => {
  */
 function generateError(rest, error, type, dispatch) {
   dispatch({ ...rest, error, type: type + FAIL });
-  throw Error(error);
+  throw new AppError(type, error);
 }

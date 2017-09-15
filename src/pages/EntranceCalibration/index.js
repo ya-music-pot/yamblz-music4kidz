@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import Button from '_components/Button';
+import entrance from '_decorators/Entrance';
+
 import cl from 'classname';
 
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-export default class PlaylistCalibration extends Component {
+class EntranceCalibration extends Component {
+  componentWillMount() {
+    if (this.props.userId) {
+      this.props.router.push('/feed');
+    }
+  }
+
   render() {
     return (
       <div>
@@ -35,7 +45,14 @@ export default class PlaylistCalibration extends Component {
   }
 }
 
-PlaylistCalibration.propTypes = {
+EntranceCalibration.propTypes = {
   onAccept: PropTypes.func.isRequired,
   onDeny: PropTypes.func.isRequired,
+  userId: PropTypes.number,
+  router: PropTypes.object,
 };
+
+export default connect((state, props) => ({
+  ...props,
+  userId: state.user.data.id,
+}))(entrance(EntranceCalibration));

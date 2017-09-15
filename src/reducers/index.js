@@ -8,6 +8,7 @@ import modal from '_reducers/modal';
 import promo from '_reducers/promo';
 import feed from '_reducers/feed';
 import setup from '_reducers/setup';
+import errors from '_reducers/errors';
 import user from '_reducers/user';
 
 export default combineReducers({
@@ -15,6 +16,7 @@ export default combineReducers({
   settings,
   playerInfo,
   player,
+  errors,
   modal,
   promo,
   feed,
