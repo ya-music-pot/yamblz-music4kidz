@@ -23,7 +23,10 @@ class Player extends Component {
   };
 
   componentWillMount() {
-    this.props.getAllTracks(this.props.userInfo.id);
+    const userId = this.props.userInfo.id;
+    if (userId) {
+      this.props.getAllTracks(userId);
+    }
   }
 
   _isTrackAdded = () => {
@@ -131,9 +134,11 @@ class Player extends Component {
       userInfo, dictionaries: { listEmoji,
         listActions },
     } = this.props;
+    const { moodId, actionId } = userInfo;
+
     const emojiStatus = {
-      moodIcon: listEmoji.data[userInfo.moodId].typeIcon,
-      actionIcon: listActions.data[userInfo.actionId].typeIcon,
+      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
+      actionIcon: actionId && listActions.data[actionId].typeIcon,
     };
 
     const playerCallbacks = {
