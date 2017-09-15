@@ -21,6 +21,7 @@ export default class FullPlayer extends Component {
       cardTitle, emojiStatus, isAdded,
       userInfo, listEmoji, listActions,
       onClickSelector, isSelector, onCloseSelector,
+      dislikeDisabled,
     } = this.props;
 
     const {
@@ -43,9 +44,13 @@ export default class FullPlayer extends Component {
             cardTitle={cardTitle}
             emojiStatus={emojiStatus}
           />
-          <div className={style.mainRow} >
+          <div className={style.mainRow}>
             { cardType === CARDS.personal &&
-            <Likes onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} /> }
+            <Likes
+              onLikeClick={onLikeClick}
+              onDislikeClick={onDislikeClick}
+              dislikeDisabled={dislikeDisabled}
+            /> }
             <CircularAvatar
               image={cover}
               progress={percentage}
@@ -72,12 +77,12 @@ export default class FullPlayer extends Component {
           <Background cover={cover} />
         </div>
         { cardType === CARDS.personal && isSelector &&
-          <MoodSelector
-            onCloseSelector={onCloseSelector}
-            listEmoji={listEmoji}
-            listActions={listActions}
-            userInfo={userInfo}
-          />
+        <MoodSelector
+          onCloseSelector={onCloseSelector}
+          listEmoji={listEmoji}
+          listActions={listActions}
+          userInfo={userInfo}
+        />
         }
       </div>
     );
@@ -97,4 +102,5 @@ FullPlayer.propTypes = {
   listEmoji: PropTypes.object,
   listActions: PropTypes.object,
   isSelector: PropTypes.bool,
+  dislikeDisabled: PropTypes.bool,
 };

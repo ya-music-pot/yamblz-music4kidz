@@ -69,7 +69,6 @@
 }
 
 // main row
-
 .mainRow {
   display: flex;
   align-items: center;
@@ -106,6 +105,12 @@
 .buttonDislike {
   background-image: url('./images/skip.svg');
   background-color: #0065d9;
+  opacity: 1;
+  transition: opacity 0.1s ease-out;
+
+  &Disabled {
+    opacity: 0.5;
+  }
 }
 
 // title row

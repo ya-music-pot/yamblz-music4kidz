@@ -19,6 +19,7 @@ import { playerModeUpdate } from '_actions/playerInfo';
 class Player extends Component {
   state = {
     isSelector: false,
+    dislikeDisabled: false,
   };
 
   componentWillMount() {
@@ -46,6 +47,7 @@ class Player extends Component {
 
   _handleNextButton = () => {
     const { player, userInfo } = this.props;
+    this.setState({ dislikeDisabled: false });
 
     if (player.isRadio && userInfo.id) {
       this.props.getRadio(userInfo.id);
@@ -56,6 +58,7 @@ class Player extends Component {
 
   _handlePreviousButton = () => {
     const { player } = this.props;
+    this.setState({ dislikeDisabled: false });
     this.props.playerPrev(player.trackId);
   };
 
@@ -64,6 +67,7 @@ class Player extends Component {
   };
 
   _handleClickArrowDown = () => {
+    this.setState({ dislikeDisabled: false });
     this.props.playerModeUpdate('mini');
   };
 
@@ -73,12 +77,14 @@ class Player extends Component {
 
   _handleLikeButton = () => {
     const { player, userInfo } = this.props;
+    this.setState({ dislikeDisabled: true });
     this.props.likeTrack(userInfo.id, player.trackId);
   };
 
   _handleDislikeButton = () => {
     const { player, userInfo } = this.props;
     this.props.dislikeTrack(userInfo.id, player.trackId);
+    this.setState({ dislikeDisabled: false });
     this._handleNextButton();
   };
 
@@ -163,6 +169,7 @@ class Player extends Component {
           isSelector={this.state.isSelector}
           onClickSelector={this._handleClickSelector}
           onCloseSelector={this._handleCloseSelector}
+          dislikeDisabled={this.state.dislikeDisabled}
         />
       </PlayerToggle>
     );
