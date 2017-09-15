@@ -20,13 +20,13 @@ function _init() {
     return _audioPlayer.initPromise();
   }
 
-  return Promise.reject({ message: 'ya не определен' });
+  return Promise.reject(new Error('Не удалось инициализировать аудио-плеер'));
 }
 
 export default {
   init: () => {
     if (typeof window === 'undefined') {
-      return false;
+      return Promise.reject(new Error('Не удалось инициализировать аудио-плеер'));
     }
 
     return _init();
