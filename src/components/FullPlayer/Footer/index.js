@@ -36,7 +36,7 @@ export default class Footer extends Component {
 
     const {
       bottomRow, buttonPlus, buttonRepeatActive,
-      buttonRepeatInactive, trackAdded,
+      buttonRepeat, trackAdded, buttonRepeatInactive,
     } = style;
 
     return (
@@ -49,9 +49,14 @@ export default class Footer extends Component {
         </Button>
         { this.renderPlaylistControl() }
         <Button
-          style={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
+          style={buttonRepeat}
           onClick={callbacks.onClickRepeat}
-        />
+        >
+          <Icon
+            typeIcon="repeat"
+            className={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
+          />
+        </Button>
       </div>
     );
   }
