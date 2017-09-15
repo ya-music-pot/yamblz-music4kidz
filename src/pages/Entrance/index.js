@@ -1,77 +1,205 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import Hammer from 'hammerjs';
+import cl from 'classname';
 
-import callbacks from '_helpers/cardCallbacks';
+import Button from '_components/Button';
+import Icon from '_components/Icon';
+
 import { removePlayerPage } from '_helpers/player';
 
-import EntranceScreen from './EntranceScreen';
-import PlaylistCalibration from './PlaylistCalibration';
+import Card from '_decorators/Card';
+import entrance from '_decorators/Entrance';
+
 import style from './style.styl';
 
-const BACKGROUND_COLOR = '#fee05b';
-const DEFAULT_COLOR = '#7859ff';
-
-class Entrance extends Component {
+class EntranceScreen extends Component {
   state = {
-    showEntranceScreen: true,
-  };
+    isCardShown: false,
+  }
 
   componentWillMount() {
     removePlayerPage();
-    this._metaThemeColor = document.querySelector('meta[name=theme-color]');
-    this._metaThemeColor.setAttribute('content', BACKGROUND_COLOR);
+  }
+
+  componentDidMount() {
+    this._initializeCardActions();
   }
 
   componentWillUnmount() {
-    this._metaThemeColor.setAttribute('content', DEFAULT_COLOR);
+    removePlayerPage();
+    this.mc.destroy();
   }
 
-  _handleNavigate = () => {
-    removePlayerPage();
-    this.setState({
-      showEntranceScreen: false,
-    });
+  _updateThreshholds = () => {
+    this.windowHeight = window.innerHeight;
+    this.cardHeight = this.card.offsetHeight;
+
+    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
+    this.bottomPosition = this.windowHeight * 0.9; // Карточка торчит на 10% высоты экрана
+    this.threshhold = this.windowHeight / 2;
   };
 
-  _handleCalibrationAccept = () => {
-    this.props.router.push('/setup');
-  };
+  /**
+   * _initializeCardActions — Функция инициаллизирует обработчик жестов
+   */
+  _initializeCardActions = () => {
+    this.isPanning = null;
+    this._updateThreshholds();
+    this.posTimeout = null;
 
-  _handleCalibrationDeny = () => {
-    this.props.router.push('/feed');
+    this.mc = new Hammer(this.card);
+    this.mc.add(new Hammer.Pan({
+      direction: Hammer.DIRECTION_VERTICAL,
+      threshold: 0,
+    }));
+
+    this.mc.on('pan', this._handlePan);
+  }
+
+  /**
+   * _handlePan — Функция-обработчик для жестов показа и скрытия карточки
+   * @param  {Object} event
+   */
+  _handlePan = (event) => {
+    if (this.isPanning == null) {
+      this._updateThreshholds();
+
+      this.card.style.top = `${this.bottomPosition}px`;
+      this.card.style.position = 'absolute';
+    }
+
+    if (!this.isPanning) {
+      this.isPanning = true;
+      this.lastCardY = this.card.offsetTop;
+    }
+
+    const newCardY = event.deltaY + this.lastCardY;
+
+    if (newCardY <= this.threshhold) {
+      if (this.state.isCardShown) {
+        return;
+      }
+
+      if (this.posTimeout) {
+        clearTimeout(this.posTimeout);
+      }
+
+      this.posTimeout = setTimeout(() => {
+        this.card.style.top = `${this.upperPosition}px`;
+        this.setState({
+          isCardShown: true,
+        });
+      }, 300);
+    }
+
+    if (newCardY > this.threshhold) {
+      if (this.posTimeout) {
+        clearTimeout(this.posTimeout);
+      }
+
+      this.posTimeout = setTimeout(() => {
+        this.card.style.top = `${this.bottomPosition}px`;
+        this.setState({
+          isCardShown: false,
+        });
+      }, 300);
+    }
+
+    this.card.style.top = `${newCardY}px`;
+
+    if (event.isFinal) {
+      this.isPanning = false;
+    }
   };
 
   render() {
+    const {
+      data, callbacks, playlistId,
+      shouldPlay,
+    } = this.props;
+
+    const { isCardShown } = this.state;
+
+    let isPlaying = false;
+    if (data.id === playlistId && shouldPlay) {
+      isPlaying = true;
+    }
+
     return (
-      <div className={style.container}>
-        {
-          this.state.showEntranceScreen ?
-            <EntranceScreen
-              onNavigate={this._handleNavigate}
-              onDeny={this._handleCalibrationDeny}
-              data={this.props.data}
-              callbacks={callbacks}
-            /> :
-            <PlaylistCalibration
-              onAccept={this._handleCalibrationAccept}
-              onDeny={this._handleCalibrationDeny}
-            />
-        }
+      <div>
+        <div
+          className={
+            cl(style.background, isCardShown ?
+              style.backgroundOpacity20 : style.backgroundOpacity100)
+          }
+          ref={(el) => {
+            this.content = el;
+          }}
+        >
+          <div className={style.imageContainer} />
+          <Title />
+          <div className={style.buttonWrapper}>
+            <Button
+              style={style.button}
+              onClick={this.props.onNavigate}
+            >
+              Войти
+            </Button>
+            <Button
+              style={style.buttonSmall}
+              onClick={this.props.onDeny}
+            >
+              Продолжить без входа
+              <Icon typeIcon="entrance-emoji-stop" />
+            </Button>
+          </div>
+        </div>
+        <div
+          className={cl(style.cardContainer, isCardShown && style.cardShown)}
+          ref={(el) => {
+            this.card = el;
+          }}
+        >
+          <Card
+            data={data}
+            callbacks={isCardShown ? callbacks : {}}
+            isPlaying={isPlaying}
+          />
+        </div>
       </div>
     );
   }
 }
 
-Entrance.propTypes = {
-  router: PropTypes.object,
+EntranceScreen.propTypes = {
+  onNavigate: PropTypes.func.isRequired,
+  onDeny: PropTypes.func,
   data: PropTypes.object,
+  callbacks: PropTypes.object,
+  playlistId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  shouldPlay: PropTypes.bool,
 };
 
-export default connect((state, props) => {
-  const { data } = state.promo;
-  return {
-    ...props,
-    data,
-  };
-})(Entrance);
+export default connect((state, props) => ({
+  ...props,
+  data: state.promo && state.promo.data,
+  settings: state.settings,
+  playlistId: state.player.playlistId,
+  shouldPlay: state.player.shouldPlay,
+}))(entrance(EntranceScreen));
+
+const Title = () => (
+  <div className={style.titleWrapper}>
+    <div className={style.title}>
+      Привет!
+    </div>
+    <div className={style.subTitle}>
+      Будем слушать музыку и веселиться?
+    </div>
+  </div>
+);

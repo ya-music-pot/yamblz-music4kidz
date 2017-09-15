@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
+import entrance from '_decorators/Entrance';
+
 import cl from 'classname';
 
 import Icon from '_components/Icon';
 import style from './style.styl';
 
-export default class PlaylistCalibration extends Component {
+class EntranceCalibration extends Component {
   render() {
     return (
       <div>
@@ -35,7 +37,9 @@ export default class PlaylistCalibration extends Component {
   }
 }
 
-PlaylistCalibration.propTypes = {
+EntranceCalibration.propTypes = {
   onAccept: PropTypes.func.isRequired,
   onDeny: PropTypes.func.isRequired,
 };
+
+export default entrance(EntranceCalibration);
