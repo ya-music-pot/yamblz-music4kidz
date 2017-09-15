@@ -6,6 +6,8 @@ export const GET_ALL_PLAYLISTS = 'GET_ALL_PLAYLISTS';
 export const GET_ACHIEVEMENTS = 'GET_ACHIEVEMENTS';
 export const ADD_PLAYLIST = 'ADD_PLAYLIST';
 export const DELETE_PLAYLIST = 'DELETE_PLAYLIST';
+export const ADD_USER_TRACK = 'ADD_USER_TRACK';
+export const DELETE_USER_TRACK = 'DELETE_USER_TRACK';
 
 export function getUser(id) {
   return {
@@ -88,6 +90,24 @@ export function deleteUserPlaylist(playlist) {
     type: DELETE_PLAYLIST,
     payload: {
       playlist,
+    },
+  };
+}
+
+export function addUserTrack(track) {
+  return {
+    type: ADD_USER_TRACK,
+    payload: {
+      track,
+    },
+  };
+}
+
+export function deleteUserTrack(trackId) {
+  return {
+    type: DELETE_USER_TRACK,
+    payload: {
+      trackId,
     },
   };
 }

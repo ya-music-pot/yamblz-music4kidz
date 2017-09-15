@@ -2,6 +2,7 @@ import {
   GET_USER, UPDATE_USER, GET_ALL_TRACKS,
   GET_ALL_PLAYLISTS, GET_ACHIEVEMENTS,
   CREATE_USER, ADD_PLAYLIST, DELETE_PLAYLIST,
+  ADD_USER_TRACK, DELETE_USER_TRACK,
 } from '_actions/user';
 import { getLocalStorage } from '_helpers';
 
@@ -126,6 +127,18 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         playlists: state.playlists.filter((playlist) => (playlist.id !== id)),
+      };
+    }
+    case ADD_USER_TRACK:
+      return {
+        ...state,
+        tracks: [...state.playlists, payload.track],
+      };
+    case DELETE_USER_TRACK: {
+      const { trackId } = payload;
+      return {
+        ...state,
+        tracks: state.tracks.filter((track) => (track.id !== trackId)),
       };
     }
     default:
