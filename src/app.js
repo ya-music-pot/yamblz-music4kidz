@@ -47,17 +47,15 @@ function render() {
   Helpers
  */
 
-/* SVG */
-const __svg__ = {
-  path: '../assets/images/icons/**/*.svg',
-  name: '[hash].logos.svg',
-};
-
 /**
  * @return {Promise}
  */
 function loadCommonData() {
   const { authToken } = getLocalStorage();
+  const __svg__ = {
+    path: '../assets/images/icons/**/*.svg',
+    name: '[hash].logos.svg',
+  };
 
   return Promise.all([
     authToken ? store.dispatch(getUser(authToken)) : Promise.resolve(),

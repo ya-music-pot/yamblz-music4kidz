@@ -7,7 +7,9 @@ import { AppError, SVG_LOAD_ERROR } from '_helpers/errors';
 export default function svgLoad(options) {
   const url = options && options.filename ? options.filename : null;
 
-  if (!url) return false;
+  if (!url) {
+    throw new AppError(SVG_LOAD_ERROR, { message: 'Файл для SVG не найден' });
+  }
 
   return API(url)
     .then((response) => response.text())
