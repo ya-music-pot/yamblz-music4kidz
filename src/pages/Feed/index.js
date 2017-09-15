@@ -21,7 +21,7 @@ class Feed extends Component {
       this.props.getRadio(id);
       this.props.getAllPlaylists(id);
     } else {
-      this.props.getFeed(id);
+      this.props.getFeed();
     }
   }
 
