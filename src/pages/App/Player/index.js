@@ -9,17 +9,28 @@ import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
   playerResume, toggleRepeatMode, likeTrack,
-  dislikeTrack, getRadio,
+  dislikeTrack, getRadio, addTrack,
+  deleteTrack,
 } from '_actions/player';
-
+import { addUserTrack, deleteUserTrack, getAllTracks } from '_actions/user';
 import { openModal } from '_actions/modal';
-
 import { playerModeUpdate } from '_actions/playerInfo';
 
 class Player extends Component {
+  componentWillMount() {
+    this.props.getAllTracks(this.props.userInfo.id);
+  }
+
+  _isTrackAdded = () => {
+    const { userTracklist, player } = this.props;
+    if (userTracklist) {
+      return userTracklist.some((track) => track.id === player.trackId);
+    }
+    return false;
+  };
+
   _handlePlayButton = () => {
     const { player } = this.props;
-
     if (player.isPlaying) {
       this.props.playerPause();
     } else if (player.position !== 0) {
@@ -67,6 +78,29 @@ class Player extends Component {
     this._handleNextButton();
   };
 
+  _handlePlusButton = () => {
+    const { player, userInfo } = this.props;
+    const { playlist, trackId } = player;
+    const isAdded = this._isTrackAdded();
+
+    if (isAdded) {
+      this.props.deleteTrack(userInfo.id, trackId);
+      this.props.deleteUserTrack(trackId);
+    } else {
+      let currentTrack = null;
+      playlist.some((track) => {
+        if (track.id === trackId) {
+          currentTrack = track;
+          return true;
+        }
+        return false;
+      });
+
+      this.props.addTrack(userInfo.id, trackId);
+      this.props.addUserTrack(currentTrack);
+    }
+  };
+
   render() {
     const {
       player, cardType, cardTitle,
@@ -78,6 +112,18 @@ class Player extends Component {
       actionIcon: listActions.data[actionId].typeIcon,
     };
 
+    const playerCallbacks = {
+      onTogglePlay: this._handlePlayButton,
+      onClickNext: this._handleNextButton,
+      onClickPrevious: this._handlePreviousButton,
+      onClickRepeat: this._handleRepeatButton,
+      onClickArrowDown: this._handleClickArrowDown,
+      openListTracks: this._handleOpenListTracks,
+      onLikeClick: this._handleLikeButton,
+      onDislikeClick: this._handleDislikeButton,
+      onPlusClick: this._handlePlusButton,
+    };
+
     return (
       <PlayerToggle>
         <MiniPlayer
@@ -87,18 +133,12 @@ class Player extends Component {
         />
         <FullPlayer
           playerState={player}
-          onTogglePlay={this._handlePlayButton}
-          onClickNext={this._handleNextButton}
-          onClickPrevious={this._handlePreviousButton}
-          onClickRepeat={this._handleRepeatButton}
-          onClickArrowDown={this._handleClickArrowDown}
-          openListTracks={this._handleOpenListTracks}
-          onLikeClick={this._handleLikeButton}
-          onDislikeClick={this._handleDislikeButton}
+          playerCallbacks={playerCallbacks}
           type="full"
           cardType={cardType}
           cardTitle={cardTitle}
           emojiStatus={emojiStatus}
+          isAdded={this._isTrackAdded()}
         />
       </PlayerToggle>
     );
@@ -111,6 +151,7 @@ export default connect((state, props) => ({
   cardType: state.playerInfo.cardType,
   cardTitle: state.playerInfo.cardTitle,
   dictionaries: state.dictionaries,
+  userTracklist: state.user.tracks,
   ...props,
 }), {
   openModal,
@@ -126,6 +167,11 @@ export default connect((state, props) => ({
   likeTrack,
   dislikeTrack,
   getRadio,
+  addTrack,
+  deleteTrack,
+  addUserTrack,
+  deleteUserTrack,
+  getAllTracks,
 })(Player);
 
 Player.propTypes = {
@@ -145,4 +191,10 @@ Player.propTypes = {
   cardTitle: PropTypes.string,
   dictionaries: PropTypes.object,
   getRadio: PropTypes.func,
+  addTrack: PropTypes.func,
+  deleteTrack: PropTypes.func,
+  addUserTrack: PropTypes.func,
+  deleteUserTrack: PropTypes.func,
+  getAllTracks: PropTypes.func,
+  userTracklist: PropTypes.arrayOf(PropTypes.object),
 };

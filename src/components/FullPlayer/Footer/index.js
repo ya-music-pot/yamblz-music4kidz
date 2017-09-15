@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 
 import Button from '_components/Button';
 import Icon from '_components/Icon';
-
 import CARDS from '_data/cardsType';
 
 import style from '../style.styl';
 
 export default class Footer extends Component {
-  _handleClickPlus = () => {}
-
   renderPlaylistControl() {
-    const { cardType, openListTracks } = this.props;
+    const { cardType, callbacks: { openListTracks } } = this.props;
 
     if (cardType === CARDS.radio || cardType === CARDS.single) {
       return null;
@@ -32,20 +29,25 @@ export default class Footer extends Component {
   }
 
   render() {
-    const { onClickRepeat, isRepeatMode } = this.props;
+    const { isRepeatMode, callbacks, isAdded } = this.props;
 
     const {
       bottomRow, buttonPlus, buttonRepeatActive,
-      buttonRepeatInactive,
+      buttonRepeatInactive, trackAdded,
     } = style;
 
     return (
       <div className={bottomRow}>
-        <Button style={buttonPlus} onClick={this._handleClickPlus} />
+        <Button style={buttonPlus} onClick={callbacks.onPlusClick} >
+          { isAdded ?
+            <Icon typeIcon="check" className={trackAdded} /> :
+            <Icon typeIcon="plus" />
+          }
+        </Button>
         { this.renderPlaylistControl() }
         <Button
           style={isRepeatMode ? buttonRepeatActive : buttonRepeatInactive}
-          onClick={onClickRepeat}
+          onClick={callbacks.onClickRepeat}
         />
       </div>
     );
@@ -53,8 +55,8 @@ export default class Footer extends Component {
 }
 
 Footer.propTypes = {
-  onClickRepeat: PropTypes.func,
-  openListTracks: PropTypes.func,
+  callbacks: PropTypes.objectOf(PropTypes.func),
   isRepeatMode: PropTypes.bool,
   cardType: PropTypes.number,
+  isAdded: PropTypes.bool,
 };

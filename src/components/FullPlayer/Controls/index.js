@@ -8,10 +8,8 @@ import style from '../style.styl';
 
 export default class Controls extends Component {
   render() {
-    const {
-      onTogglePlay, onClickNext, onClickPrevious,
-      isPlaying, cardType,
-    } = this.props;
+    const { isPlaying, cardType, callbacks } = this.props;
+    const { onTogglePlay, onClickNext, onClickPrevious } = callbacks;
 
     const {
       controlsRow, buttonPrevious, buttonNext,
@@ -57,9 +55,7 @@ export default class Controls extends Component {
 }
 
 Controls.propTypes = {
-  onTogglePlay: PropTypes.func,
-  onClickPrevious: PropTypes.func,
-  onClickNext: PropTypes.func,
+  callbacks: PropTypes.objectOf(PropTypes.func),
   isPlaying: PropTypes.bool,
   cardType: PropTypes.number,
 };
