@@ -4,9 +4,7 @@ import { saveLocalStorage } from '_helpers';
 export default () => (next) => (action) => {
   const { type, response } = action;
 
-  // Переход на какую либо страницу, после обновления user.
-  // Нужно для первоначальных настроек.
-  if (type === `${CREATE_USER}_SUCCESS` && action.moveNext) {
+  if (type === `${CREATE_USER}_SUCCESS`) {
     saveLocalStorage({ authToken: response.data.id });
   }
 

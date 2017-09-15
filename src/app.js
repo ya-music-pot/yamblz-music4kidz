@@ -75,7 +75,7 @@ function initAudio() {
   }, () => {
     throw new AppError(
       AUDIO_PLAYER_ERROR,
-      { message: 'Не удалось инициализировать аудио-плеер' },
+      { message: 'Не удалось инициализировать Аудиоплеер' },
     );
   });
 }
