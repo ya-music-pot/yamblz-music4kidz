@@ -21,6 +21,9 @@ class EntranceScreen extends Component {
 
   componentWillMount() {
     removePlayerPage();
+    if (this.props.userId) {
+      this.props.router.push('/feed');
+    }
   }
 
   componentDidMount() {
@@ -182,12 +185,15 @@ EntranceScreen.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  userId: PropTypes.number,
+  router: PropTypes.object,
   shouldPlay: PropTypes.bool,
 };
 
 export default connect((state, props) => ({
   ...props,
-  data: state.promo && state.promo.data,
+  userId: state.user.data.id,
+  data: state.promo.data,
   settings: state.settings,
   playlistId: state.player.playlistId,
   shouldPlay: state.player.shouldPlay,

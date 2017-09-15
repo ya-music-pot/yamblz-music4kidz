@@ -20,7 +20,11 @@ import style from './style.styl';
 class SetUp extends Component {
   componentWillMount() {
     removePlayerPage();
+    if (this.props.user.data.id) {
+      this.props.router.push('/feed');
+    }
   }
+
   componentWillUnmount() {
     this.props.clearSetUp();
     removePlayerPage();
@@ -156,6 +160,7 @@ SetUp.propTypes = {
     type: PropTypes.string,
     title: PropTypes.string,
   }),
+  router: PropTypes.object,
 };
 
 export default connect((state, props) => {
