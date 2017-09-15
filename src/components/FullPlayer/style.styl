@@ -131,19 +131,17 @@
 
 .buttonArrowDown:focus { outline: none; }
 
-.buttonDownload {
-  background-image: url('./images/download.svg');
-  @extend .buttonCommon24;
-}
-
-.buttonDownload:focus { outline: none; }
-
 .playerTitle {
+  box-sizing: border-box;
   width: 78vw;
+  padding-left: 10px;
   padding-right: 24px;
   text-align: center;
   font-size: 1.5rem;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .buttonPrevious {
@@ -183,7 +181,8 @@
 .buttonNext:focus { outline: none; }
 
 .buttonPlus {
-  @extend .buttonCommon30;
+  @extend .buttonCommon24;
+  padding: 0;
 }
 
 .trackAdded {
@@ -194,22 +193,18 @@
 .buttonPlus:focus { outline: none; }
 
 .buttonRepeat {
-  &Active {
-    background-image: url('./images/repeat.svg');
-    @extend .buttonCommon30;
+  @extend .buttonCommon24;
+  padding: 0;
+  &:focus {
+    outline: none;
+  }
 
-    &:focus {
-      outline: none;
-    }
+  &Active {
+    fill: #00b341;
   }
 
   &Inactive {
-    background-image: url('./images/repeat-inactive.svg');
-    @extend .buttonCommon30;
-
-    &:focus {
-      outline: none;
-    }
+    fill: #fff;
   }
 }
 
