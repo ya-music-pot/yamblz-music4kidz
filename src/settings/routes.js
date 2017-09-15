@@ -17,7 +17,7 @@ const routes = () => (
     <Route path="/entrance" component={Entrance} />
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
-    <Route path="/personal" component={Personal} />
+    { authToken && <Route path="/personal" component={Personal} /> }
     <Route path="/mobile/profile" component={PersonalMobile} />
     <Route path="/error" component={ServerError} />
     <Route path="*" component={ClientError} />

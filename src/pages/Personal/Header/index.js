@@ -57,6 +57,7 @@ export default class Header extends Component {
         <Slider
           className={style.slider}
           widthSlide={WIDTH_SLIDE}
+          acceleration={1.7}
           initTransform={MAX_TRANSFORM}
           maxTransform={MAX_TRANSFORM}
           minTransform={this.minTransform}
