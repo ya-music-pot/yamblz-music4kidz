@@ -9,7 +9,7 @@ export default class Achievement extends Component {
   render() {
     const { disabled, className, onClick } = this.props;
 
-    const typeIcon = disabled ? 'achievement-disabled' : this.props.typeIcon;
+    const typeIcon = disabled ? 'achievement-pop' : this.props.typeIcon;
     const title = disabled ? 'Тут задание' : this.props.title;
 
     return (
