@@ -7,15 +7,13 @@ import style from '../style.styl';
 export default class Likes extends Component {
   render() {
     const {
-      vote, buttonDislike, spacer,
-      buttonLike,
+      vote, buttonDislike, buttonLike,
     } = style;
 
     const { onLikeClick, onDislikeClick } = this.props;
     return (
       <div className={vote}>
         <Button style={buttonDislike} onClick={onDislikeClick} />
-        <div className={spacer} />
         <Button style={buttonLike} onClick={onLikeClick} />
       </div>
     );

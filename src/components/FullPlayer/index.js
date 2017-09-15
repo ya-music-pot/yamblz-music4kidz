@@ -43,7 +43,7 @@ export default class FullPlayer extends Component {
             cardTitle={cardTitle}
             emojiStatus={emojiStatus}
           />
-          <div>
+          <div className={style.mainRow} >
             { cardType === CARDS.personal &&
             <Likes onLikeClick={onLikeClick} onDislikeClick={onDislikeClick} /> }
             <CircularAvatar
