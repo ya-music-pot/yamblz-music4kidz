@@ -48,7 +48,6 @@ class CircularAvatar extends Component {
   }
 
   _seekBarProcess = (e) => {
-    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
     const h = window.innerHeight;
     const { player } = this.props;
 
@@ -94,8 +93,6 @@ class CircularAvatar extends Component {
   }
 
   _getPivotCoordinates() {
-    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    //const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
     const h = window.innerHeight;
     const w = window.innerWidth;
 
@@ -107,16 +104,13 @@ class CircularAvatar extends Component {
 
   render() {
     const {
-      progress, image, radius,
-      time,
+      progress, image, time,
     } = this.props;
 
     const imageUri = (image && image !== 'null') ? image : defaultCover;
     let percentage = (isNaN(progress)) ? 0 : progress;
     percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
 
-    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    //const h = window.innerHeight;
     return (
       <div className={style.wrapper} ref={this._seekBar}>
         <svg className={style.progressBar} >
@@ -166,7 +160,6 @@ CircularAvatar.propTypes = {
     duration: PropTypes.number,
   }),
   progress: PropTypes.number,
-  radius: PropTypes.number,
   time: PropTypes.string,
   image: PropTypes.string,
   setPosition: PropTypes.func,

@@ -24,11 +24,11 @@ class PlayerToggle extends Component {
   }
 
   render() {
-    const mode = this.props.playerInfo.mode;
-
     return (
-      <div className={cl(style.container)}
-        style={this._containerShift()}>
+      <div
+        className={cl(style.container)}
+        style={this._containerShift()}
+      >
         {
           this.props.children.map((child) =>
             React.cloneElement(child, {

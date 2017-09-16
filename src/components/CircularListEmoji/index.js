@@ -6,13 +6,13 @@ import Icon from '_components/Icon';
 import style from './style.styl';
 
 export default class ListEmoji extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    const { userInfo } = this.props
+    const { userInfo } = this.props;
     this.state = {
       activeEmojiId: userInfo.moodId - 1,
       activeActionId: userInfo.actionId - 1,
-    }
+    };
   }
 
   componentDidMount() {
@@ -198,4 +198,5 @@ ListEmoji.propTypes = {
   ).isRequired,
   onChangeAction: PropTypes.func,
   onChangeEmoji: PropTypes.func,
+  userInfo: PropTypes.obj,
 };
