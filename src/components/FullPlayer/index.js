@@ -15,6 +15,13 @@ import Background from './Background';
 import style from './style.styl';
 
 export default class FullPlayer extends Component {
+  _changeHeight = () => {
+    const height = window.innerHeight;
+    return {
+      height: `${height}px`,
+    };
+  }
+
   render() {
     const {
       playerState, cardType, playerCallbacks,
@@ -37,7 +44,7 @@ export default class FullPlayer extends Component {
     const percentage = position / duration;
     return (
       <div>
-        <div className={style.wrapper}>
+        <div className={style.wrapper} style={this._changeHeight()}>
           <Header
             onClickArrowDown={onClickArrowDown}
             cardType={cardType}
@@ -54,7 +61,6 @@ export default class FullPlayer extends Component {
             <CircularAvatar
               image={cover}
               progress={percentage}
-              radius={0.18}
               time={getTime(position, duration)}
             />
           </div>

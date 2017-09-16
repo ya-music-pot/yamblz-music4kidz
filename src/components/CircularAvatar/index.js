@@ -48,7 +48,8 @@ class CircularAvatar extends Component {
   }
 
   _seekBarProcess = (e) => {
-    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const h = window.innerHeight;
     const { player } = this.props;
 
     const dx = e.center.x - this.state.pivotX;
@@ -62,11 +63,20 @@ class CircularAvatar extends Component {
       });
     }
 
-    this.setState({
-      curAngle: (dx > 0) ? this._calculateAngle(dx, dy) : 2 - this._calculateAngle(dx, dy),
-    });
+    if (e.eventType === 2) {
+      this.setState({
+        curAngle: (dx > 0) ? this._calculateAngle(dx, dy) : 2 - this._calculateAngle(dx, dy),
+      });
+    }
 
     if (e.eventType === 4) {
+      this.setState({
+        seekActive: false,
+      });
+      this.props.setPosition(player.duration * this.state.curAngle / 2);
+    }
+
+    if (e.eventType === 8) {
       this.setState({
         seekActive: false,
       });
@@ -84,8 +94,11 @@ class CircularAvatar extends Component {
   }
 
   _getPivotCoordinates() {
-    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //const w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+    const h = window.innerHeight;
+    const w = window.innerWidth;
+
     this.setState({
       pivotX: w / 2,
       pivotY: h * 0.33,
@@ -102,10 +115,10 @@ class CircularAvatar extends Component {
     let percentage = (isNaN(progress)) ? 0 : progress;
     percentage = this.state.seekActive ? (this.state.curAngle / 2) : percentage;
 
-    const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-
+    //const h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    //const h = window.innerHeight;
     return (
-      <div className={style.wrapper} ref={this._seekBar} >
+      <div className={style.wrapper} ref={this._seekBar}>
         <svg className={style.progressBar} >
           <defs>
             <linearGradient id="linear-gradient" x2="0%" y2="100%">
@@ -115,14 +128,14 @@ class CircularAvatar extends Component {
           </defs>
           <path
             d={this._describeArc(
-              h * radius,
-              h * radius,
-              h * radius,
+              130,
+              130,
+              120,
               0,
               ((this.state.seekActive) ? (this.state.curAngle / 2) : percentage) * 360,
             )}
             stroke="url(#linear-gradient)"
-            strokeWidth="11"
+            strokeWidth="10"
           />
         </svg>
         <img

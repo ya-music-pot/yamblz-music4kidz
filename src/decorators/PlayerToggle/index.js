@@ -15,11 +15,20 @@ class PlayerToggle extends Component {
     this.props.playerModeUpdate('mini');
   }
 
+  _containerShift = () => {
+    const mode = this.props.playerInfo.mode;
+    const shift = (mode === 'full') ? -window.innerHeight : 0;
+    return {
+      transform: `translateY(${shift}px) translateZ(0)`,
+    };
+  }
+
   render() {
     const mode = this.props.playerInfo.mode;
 
     return (
-      <div className={cl(style.container, mode === 'full' && style.containerShift)}>
+      <div className={cl(style.container)}
+        style={this._containerShift()}>
         {
           this.props.children.map((child) =>
             React.cloneElement(child, {

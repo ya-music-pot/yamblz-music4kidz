@@ -11,7 +11,7 @@ export default class Background extends Component {
 
     return (
       <div className={style.wrapper}>
-        <div className={style.overlay} />
+        <div className={style.overlay}/>
         <img
           src={imageUri}
           className={style.backgroundImage}
