@@ -46,8 +46,7 @@ export default class FullPlayer extends Component {
     const { blured } = style;
     return (
       <div>
-        <div className={cl(isSelector && blured)}>
-        <div className={cl(style.wrapper, this._changeHeight())}>
+        <div className={cl(style.wrapper, this._changeHeight(), isSelector && blured)}>
           <Header
             onClickArrowDown={onClickArrowDown}
             cardType={cardType}
@@ -85,7 +84,6 @@ export default class FullPlayer extends Component {
           />
           <Background cover={cover} />
         </div>
-      </div>
         { cardType === CARDS.personal && isSelector &&
         <MoodSelector
           onCloseSelector={onCloseSelector}
@@ -113,5 +111,4 @@ FullPlayer.propTypes = {
   listActions: PropTypes.object,
   isSelector: PropTypes.bool,
   dislikeDisabled: PropTypes.bool,
-  userInfo: PropTypes.object,
 };

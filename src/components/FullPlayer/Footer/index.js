@@ -63,7 +63,7 @@ export default class Footer extends Component {
 }
 
 Footer.propTypes = {
-  onClickSelector: PropTypes.func,
+  onOpenSelector: PropTypes.func,
   callbacks: PropTypes.objectOf(PropTypes.func),
   isRepeatMode: PropTypes.bool,
   cardType: PropTypes.number,
