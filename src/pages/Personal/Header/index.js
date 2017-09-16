@@ -37,10 +37,6 @@ export default class Header extends Component {
             className={cl(style.button, style.buttonBack)}
             onClick={onBackClick}
           />
-          <Icon
-            typeIcon="settings"
-            className={cl(style.button, style.buttonSettings)}
-          />
           <Avatar
             className={cl(style.avatar, avatar && style.avatarCover)}
             avatar={avatar}
