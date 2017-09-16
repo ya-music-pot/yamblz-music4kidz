@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import PropTypes from 'prop-types';
 import Button from '_components/Button';
 import cl from 'classname';
@@ -8,7 +10,13 @@ import style from './style.styl';
 
 const DEFAULT_COLOR = '#7859ff';
 
-export default class PlaylistCalibration extends Component {
+class PlaylistCalibration extends Component {
+  componentWillMount() {
+    if (this.props.userData.id) {
+      this.props.router.push('/feed');
+    }
+  }
+
   componentWillUnmount() {
     this._metaThemeColor = document.querySelector('meta[name=theme-color]');
     this._metaThemeColor.setAttribute('content', DEFAULT_COLOR);
@@ -34,13 +42,13 @@ export default class PlaylistCalibration extends Component {
         <div className={style.buttonWrapper}>
           <Button
             style={cl(style.button)}
-            onClick={this._handleCalibrationDeny}
+            onClick={this._handleCalibrationAccept}
           >
             Создать
           </Button>
           <Button
             style={style.buttonSmall}
-            onClick={this._handleCalibrationAccept}
+            onClick={this._handleCalibrationDeny}
           >
             Не хочу сейчас
           </Button>
@@ -52,4 +60,15 @@ export default class PlaylistCalibration extends Component {
 
 PlaylistCalibration.propTypes = {
   router: PropTypes.object,
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 };
+
+export default connect((state, props) => {
+  const { data } = state.user;
+  return {
+    ...props,
+    userData: data,
+  };
+})(PlaylistCalibration);
