@@ -11,14 +11,14 @@ class OutsideCard extends Component {
 
   render() {
     const {
-      data, isCardShown, isPlaying,
+      data, isPlaying,
       callbacks,
     } = this.props;
 
     return (
       <Card
         data={data}
-        callbacks={isCardShown ? callbacks : {}}
+        callbacks={callbacks}
         isPlaying={isPlaying}
       />
     );
@@ -30,7 +30,6 @@ export default onClickOutside(OutsideCard);
 OutsideCard.propTypes = {
   onClickoutside: PropTypes.func,
   data: PropTypes.object,
-  isCardShown: PropTypes.bool,
   isPlaying: PropTypes.bool,
   callbacks: PropTypes.object,
 };
