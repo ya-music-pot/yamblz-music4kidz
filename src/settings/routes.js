@@ -11,19 +11,18 @@ import PersonalMobile from '_pages/PersonalMobile';
 import ClientError from '_pages/ClientError';
 import ServerError from '_pages/ServerError';
 
-const authToken = false;
-const routes = () => (
+const routes = (authToken) => (
   <Route path="/" component={App}>
     <IndexRoute component={authToken ? Feed : Entrance} />
     <Route path="/entrance" component={Entrance} />
     <Route path="/calibration" component={Calibration} />
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
-    { authToken && <Route path="/personal" component={Personal} /> }
+    <Route path="/personal" component={Personal} />
     <Route path="/mobile/profile" component={PersonalMobile} />
     <Route path="/error" component={ServerError} />
     <Route path="*" component={ClientError} />
   </Route>
 );
 
-export default routes();
+export default routes;

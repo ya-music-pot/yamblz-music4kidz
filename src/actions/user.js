@@ -32,7 +32,7 @@ export function createUser(data) {
         last_name: 'Соловьева',
         mood_id: moodId,
         action_id: actionId,
-        avatar_url: 'http://photos.techfieber.de/wp-content/uploads/2011/10/facebook-default-avatar.jpg',
+        avatar_url: '/assets/images/avatar.jpg',
         tracks,
       },
     },

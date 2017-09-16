@@ -23,7 +23,7 @@ import '_settings/global.css';
 
 initReactFastclick();
 
-
+const { authToken } = getLocalStorage();
 /* Render */
 loadCommonData().then(render).catch((error) => {
   render();
@@ -35,7 +35,7 @@ function render() {
     <div>
       <Provider store={store}>
         <Router history={history}>
-          { routes }
+          { routes(authToken) }
         </Router>
       </Provider>
     </div>
@@ -51,7 +51,6 @@ function render() {
  * @return {Promise}
  */
 function loadCommonData() {
-  const { authToken } = getLocalStorage();
   const __svg__ = {
     path: '../assets/images/icons/**/*.svg',
     name: '[hash].logos.svg',

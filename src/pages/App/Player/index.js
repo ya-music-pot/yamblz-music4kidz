@@ -75,7 +75,7 @@ class Player extends Component {
   };
 
   _handleOpenListTracks = () => {
-    this.props.openModal('listTracks');
+    this.props.openModal('listTracks', { inPlayer: true });
   };
 
   _handleLikeButton = () => {
@@ -114,7 +114,7 @@ class Player extends Component {
     }
   };
 
-  _handleClickSelector = () => {
+  _handleOpenSelector = () => {
     this.setState({
       isSelector: true,
     });
@@ -172,7 +172,7 @@ class Player extends Component {
           listActions={listActions}
           userInfo={userInfo}
           isSelector={this.state.isSelector}
-          onClickSelector={this._handleClickSelector}
+          onOpenSelector={this._handleOpenSelector}
           onCloseSelector={this._handleCloseSelector}
           dislikeDisabled={this.state.dislikeDisabled}
         />
