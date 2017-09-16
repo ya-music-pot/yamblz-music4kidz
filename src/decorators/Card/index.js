@@ -12,7 +12,10 @@ import GameCard from '_components/cards/GameCard';
 
 class Card extends Component {
   _onClick = (callback) => {
-    const { data, radio, isPlaying } = this.props;
+    const {
+      data, radio, isPlaying,
+      position, trackId,
+    } = this.props;
     const playlistId = data.id;
     const tracks = (playlistId === 'radio') ? radio : data.tracks;
 
@@ -22,10 +25,12 @@ class Card extends Component {
     ) {
       const params = {
         trackId: tracks[0].id,
+        prevTrackId: trackId,
         playlist: tracks,
         isRadio: playlistId === 'radio',
         playlistId,
         isPlaying,
+        position,
         cardType: data.type,
         cardTitle: data.name,
       };
@@ -95,7 +100,10 @@ class Card extends Component {
 export default connect((state, props) => {
   const {
     dictionaries: { backgroundsList }, user,
-    player: { playlistId, shouldPlay, radio },
+    player: {
+      playlistId, shouldPlay, radio,
+      position, trackId,
+    },
   } = state;
   return {
     ...props,
@@ -103,6 +111,8 @@ export default connect((state, props) => {
     playlistId,
     shouldPlay,
     radio,
+    position,
+    trackId,
     userPlaylists: user.playlists,
     userId: user.data.id,
   };
@@ -113,6 +123,8 @@ Card.propTypes = {
   data: PropTypes.object,
   backgroundsList: PropTypes.object,
   radio: PropTypes.array,
+  position: PropTypes.number,
+  trackId: PropTypes.number,
   isPlaying: PropTypes.bool,
   userPlaylists: PropTypes.array,
   userId: PropTypes.number,
