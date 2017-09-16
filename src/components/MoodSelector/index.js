@@ -65,7 +65,7 @@ class MoodSelector extends Component {
 
     return (
       <div>
-        <div className={style.circle} style={this._shift()}>
+        <div className={style.circle} style={this._shift()} >
           <div className={style.ringBorderOuter} style={this._shift()} />
           <div className={style.ringBorderMiddle} style={this._shift()} />
           <div className={style.ringBorderInner} style={this._shift()} />
