@@ -6,11 +6,14 @@ li {
   display: inline-block;
 }
 
+.actionRing {
+  background-color: tomato;
+}
+
 .wrapper {
   position: fixed;
   width: 100vw;
   height: 100vw;
-  margin-top: 50vw;
   margin-left: 50vw;
   z-index: 12;
 }
@@ -18,7 +21,7 @@ li {
 .emojiList {
   position: fixed;
   margin-left: 50vw;
-  margin-top: 50vw;   //65vh
+  margin-top: 0vw;
   padding: 0;
   z-index: 12;
 }
@@ -26,7 +29,7 @@ li {
 .actionList {
   position: fixed;
   margin-left: 50vw;
-  margin-top: 50vw;   //-5vh
+  margin-top: 0vw;
   padding: 0;
   z-index: 12;
 }
@@ -44,16 +47,11 @@ li {
 }
 
 .spacer {
-  width: 66px;
-  height: 36px;
-}
-
-.emojiRing {
- background-color: yellow;
-}
-
-.actionRing {
- background-color: tomato;
+  width: 22vh;
+  height: 11vh;
+  margin-left: -8vh;
+  margin-top: -20px;
+  border-radius: 50%;
 }
 
 .title {
@@ -61,7 +59,7 @@ li {
   font-size: 1em;
   position: fixed;
   width: 100vw;
-  margin-top: -45vw;
+  margin-top: -95vw;
   text-align: center;
   z-index: 12;
 }

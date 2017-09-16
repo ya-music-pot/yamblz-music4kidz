@@ -19,7 +19,7 @@ export default class Footer extends Component {
     }
 
     if (cardType === CARDS.personal) {
-      return <div onClick={onClickSelector} >balloon</div>;
+      return <Icon onClick={onClickSelector} typeIcon={'magic'} className={style.icon} />;
     }
 
     return (

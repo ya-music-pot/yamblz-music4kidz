@@ -6,9 +6,13 @@ import Icon from '_components/Icon';
 import style from './style.styl';
 
 export default class ListEmoji extends Component {
-  state = {
-    activeEmojiId: 4,
-    activeActionId: 4,
+  constructor(props) {
+    super(props);
+    const { userInfo } = this.props;
+    this.state = {
+      activeEmojiId: userInfo.moodId - 1,
+      activeActionId: userInfo.actionId - 1,
+    };
   }
 
   componentDidMount() {
@@ -31,7 +35,7 @@ export default class ListEmoji extends Component {
 
     if (delta !== this.state.delta) {
       this.setState({
-        activeEmojiId: Math.min(this.state.activeEmojiId + 1, 9),
+        activeEmojiId: Math.min(this.state.activeEmojiId + 1, 8),
       });
     }
     onChangeEmoji(this.state.activeEmojiId + 1);
@@ -65,7 +69,7 @@ export default class ListEmoji extends Component {
 
     if (delta !== this.state.delta) {
       this.setState({
-        activeActionId: Math.min(this.state.activeActionId + 1, 9),
+        activeActionId: Math.min(this.state.activeActionId + 1, 8),
       });
     }
     onChangeAction(this.state.activeActionId + 1);
@@ -90,7 +94,7 @@ export default class ListEmoji extends Component {
   }
 
   _transformOuterRing(id) {
-    const radius = 75; // 50 - радиус кольца с emoji
+    const radius = 75;
     const stepRadians = Math.PI / 9;
 
     const x = -(id - 1) * 32 - 16;
@@ -105,7 +109,7 @@ export default class ListEmoji extends Component {
   }
 
   _transformInnerRing(id) {
-    const radius = 55; // 45 - радиус кольца с action
+    const radius = 55;
     const stepRadians = Math.PI / 9;
 
     const x = -(id - 1) * 32 - 16;
@@ -126,6 +130,13 @@ export default class ListEmoji extends Component {
     };
   }
 
+  _shift = () => {
+    const margin = window.innerWidth;
+    return {
+      marginTop: `${margin}px`,
+    };
+  }
+
   render() {
     const { emojiData, actionData } = this.props;
 
@@ -133,7 +144,7 @@ export default class ListEmoji extends Component {
     const actionList = actionData;
 
     return (
-      <div className={style.wrapper}>
+      <div className={style.wrapper} style={this._shift()}>
         <div className={style.title}>Настройка</div>
         <div ref={this._emojiRing} className={style.emojiRing}>
           <ul className={style.emojiList}>
@@ -187,4 +198,5 @@ ListEmoji.propTypes = {
   ).isRequired,
   onChangeAction: PropTypes.func,
   onChangeEmoji: PropTypes.func,
+  userInfo: PropTypes.obj,
 };
