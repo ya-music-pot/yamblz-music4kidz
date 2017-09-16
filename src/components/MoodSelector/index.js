@@ -7,13 +7,28 @@ import { updateUser } from '_actions/user';
 import { closeSelector } from '_actions/player';
 
 import CircularListEmoji from '_components/CircularListEmoji';
-import Button from '_components/Button';
 import style from './style.styl';
 
 class MoodSelector extends Component {
-  state = {
-    moodId: 1,
-    actionId: 1,
+  constructor(props) {
+    super(props);
+    const { userInfo } = this.props;
+    this.state = {
+      moodId: userInfo.moodId,
+      actionId: userInfo.actionId,
+      height: 0,
+    };
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this._handleClick);
+  }
+
+  _handleClick = () => {
+    const height = window.innerHeight;
+    this.setState({
+      height,
+    });
   }
 
   _handleChangeEmoji = (id) => {
@@ -38,20 +53,30 @@ class MoodSelector extends Component {
     onCloseSelector();
   }
 
+  _shift = () => {
+    const margin = window.innerHeight - 250;
+    return {
+      marginTop: `${margin}px`,
+    };
+  }
+
   render() {
     const { listEmoji, listActions, userInfo } = this.props;
 
     return (
       <div>
-        <div className={style.circle}>
-          <div className={style.ringBorderOuter} />
-          <div className={style.ringBorderMiddle} />
-          <div className={style.ringBorderInner} />
-          <Button onClick={this._handleButtonClick} style={style.okButton}>
-            <div className={style.okButtonTitle}>OK</div>
-          </Button>
+        <div className={style.circle} style={this._shift()} >
+          <div className={style.ringBorderOuter} style={this._shift()} />
+          <div className={style.ringBorderMiddle} style={this._shift()} />
+          <div className={style.ringBorderInner} style={this._shift()} />
+          <div
+            className={style.ringOk}
+            style={this._shift()}
+            onClick={this._handleButtonClick}
+          >
+            <div className={style.ringOkTitle}>OK</div>
+          </div>
           <CircularListEmoji
-            className={style.list}
             emojiData={serializeData(listEmoji, 1)}
             actionData={serializeData(listActions, 1)}
             onChangeEmoji={this._handleChangeEmoji}

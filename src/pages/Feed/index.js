@@ -37,6 +37,8 @@ class Feed extends Component {
     const { id } = this.props.user;
     if (id) {
       this.props.router.push('/personal');
+    } else {
+      this.props.router.push('/setup');
     }
   };
 

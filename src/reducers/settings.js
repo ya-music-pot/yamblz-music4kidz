@@ -1,7 +1,7 @@
 import { UPDATE_EMOJI, UPDATE_ACTION, UPDATE_TRACKS } from '_actions/settings';
 import { CLEAR_SET_UP } from '_actions/setup';
 
-const settingsDefault = {
+export const settingsDefault = {
   tracks: [],
   actionId: 1,
   moodId: 1,

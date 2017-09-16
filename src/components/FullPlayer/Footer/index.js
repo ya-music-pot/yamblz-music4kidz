@@ -10,7 +10,7 @@ import style from '../style.styl';
 export default class Footer extends Component {
   renderPlaylistControl() {
     const {
-      cardType, onClickSelector,
+      cardType, onOpenSelector,
       callbacks: { openListTracks },
     } = this.props;
 
@@ -19,7 +19,7 @@ export default class Footer extends Component {
     }
 
     if (cardType === CARDS.personal) {
-      return <div onClick={onClickSelector} >balloon</div>;
+      return <Icon onClick={onOpenSelector} typeIcon={'magic'} className={style.icon} />;
     }
 
     return (
@@ -63,7 +63,7 @@ export default class Footer extends Component {
 }
 
 Footer.propTypes = {
-  onClickSelector: PropTypes.func,
+  onOpenSelector: PropTypes.func,
   callbacks: PropTypes.objectOf(PropTypes.func),
   isRepeatMode: PropTypes.bool,
   cardType: PropTypes.number,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import cl from 'classname';
 
 import CircularAvatar from '_components/CircularAvatar';
 import MoodSelector from '_components/MoodSelector';
@@ -15,12 +16,19 @@ import Background from './Background';
 import style from './style.styl';
 
 export default class FullPlayer extends Component {
+  _changeHeight = () => {
+    const height = window.innerHeight;
+    return {
+      height: `${height}px`,
+    };
+  }
+
   render() {
     const {
       playerState, cardType, playerCallbacks,
       cardTitle, emojiStatus, isAdded,
       userInfo, listEmoji, listActions,
-      onClickSelector, isSelector, onCloseSelector,
+      onOpenSelector, isSelector, onCloseSelector,
       dislikeDisabled,
     } = this.props;
 
@@ -35,9 +43,10 @@ export default class FullPlayer extends Component {
     } = playerState;
 
     const percentage = position / duration;
+    const { blured } = style;
     return (
       <div>
-        <div className={style.wrapper}>
+        <div className={cl(style.wrapper, this._changeHeight(), isSelector && blured)}>
           <Header
             onClickArrowDown={onClickArrowDown}
             cardType={cardType}
@@ -54,7 +63,6 @@ export default class FullPlayer extends Component {
             <CircularAvatar
               image={cover}
               progress={percentage}
-              radius={0.18}
               time={getTime(position, duration)}
             />
           </div>
@@ -72,7 +80,7 @@ export default class FullPlayer extends Component {
             isRepeatMode={isRepeatMode}
             cardType={cardType}
             isAdded={isAdded}
-            onClickSelector={onClickSelector}
+            onOpenSelector={onOpenSelector}
           />
           <Background cover={cover} />
         </div>
@@ -91,8 +99,8 @@ export default class FullPlayer extends Component {
 
 FullPlayer.propTypes = {
   playerCallbacks: PropTypes.objectOf(PropTypes.func),
-  onClickSelector: PropTypes.func,
   onCloseSelector: PropTypes.func,
+  onOpenSelector: PropTypes.func,
   playerState: PropTypes.object,
   cardType: PropTypes.number,
   cardTitle: PropTypes.string,

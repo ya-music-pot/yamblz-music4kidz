@@ -8,6 +8,17 @@
   z-index: 2;
 }
 
+.blured {
+  filter: blur(3px);
+}
+
+.faded {
+  position: absolute;
+  background: linear-gradient(to top, rgba(60, 102, 143, 0.8), rgba(148, 184, 207, 0.8));
+  width: 100vw;
+  height: 100vh;
+}
+
 // button common
 .buttonCommon {
   background-color: transparent;
@@ -43,6 +54,7 @@
   height: 8vh;
   padding-top: 4vh;
   padding-bottom: 3vh;
+  touch-action: none;
 }
 
 .buttonArrowDown {
@@ -75,6 +87,7 @@
 .mainRow {
   display: flex;
   align-items: center;
+  touch-action: none;
 }
 
 .vote {
@@ -82,8 +95,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 38vh;
+  width: 260px;
   z-index: 3;
+  touch-action: none;
 }
 
 .buttonLike,
@@ -127,6 +141,7 @@
   color: #ffffff;
   font-family: 'YandexSans';
   line-height: 1.8rem;
+  touch-action: none;
 }
 
 .songName {
@@ -147,6 +162,7 @@
   align-items: center;
   height: 12vh;
   width: 65vw;
+  touch-action: none;
 }
 
 .buttonPrevious {
@@ -191,6 +207,7 @@
   align-items: center;
   height: 18vh;
   width: 90vw;
+  touch-action: none;
 }
 
 .buttonList {
