@@ -7,7 +7,10 @@ import style from './style.styl';
 
 export default class Slider extends Component {
   componentWillMount() {
-    const { widthSlide, minTransform, maxTransform } = this.props;
+    const {
+      widthSlide, minTransform, maxTransform,
+      acceleration,
+    } = this.props;
     let { initTransform } = this.props;
 
     const WIDTH_SLIDE = 0.7 * document.body.clientWidth; // 70% from width;
@@ -15,6 +18,7 @@ export default class Slider extends Component {
     this.widthSlide = widthSlide || WIDTH_SLIDE;
     this.maxTransform = maxTransform;
     this.minTransform = minTransform;
+    this.acceleration = acceleration || 1;
 
     if (typeof initTransform === 'undefined') {
       initTransform = (document.body.clientWidth - this.widthSlide) / 2;
@@ -29,20 +33,6 @@ export default class Slider extends Component {
 
   componentDidMount() {
     this._initSlider();
-  }
-
-  _initSlider() {
-    const { currentId, children } = this.props;
-    this.hammer = Hammer(this.sliderNode);
-    this.hammer.get('swipe').set({ threshold: 0 });
-
-    this.setState({
-      currentId: currentId || 0,
-      slidesLength: children.length,
-    });
-
-    this.hammer.on('swipeleft', this._toNext);
-    this.hammer.on('swiperight', this._toPrev);
   }
 
   _toNext = () => {
@@ -61,6 +51,20 @@ export default class Slider extends Component {
     this._updateCurrentId(newCurrentId);
   }
 
+  _initSlider() {
+    const { currentId, children } = this.props;
+    this.hammer = Hammer(this.sliderNode);
+    this.hammer.get('swipe').set({ threshold: 0 });
+
+    this.setState({
+      currentId: currentId || 0,
+      slidesLength: children.length,
+    });
+
+    this.hammer.on('swipeleft', this._toNext);
+    this.hammer.on('swiperight', this._toPrev);
+  }
+
   _updateCurrentId(currentId) {
     const { onChange } = this.props;
 
@@ -76,11 +80,12 @@ export default class Slider extends Component {
 
   _getShiftSlides = (width, slideId) => {
     const docWidth = document.body.clientWidth;
-    let transform = docWidth / 2 - slideId * width - width / 2;
+    let transform = (docWidth / 2 - slideId * width - width / 2) * this.acceleration;
 
     if (transform > this.maxTransform) {
       transform = this.maxTransform;
     }
+
     if (transform < this.minTransform) {
       transform = this.minTransform;
     }
@@ -114,24 +119,24 @@ export default class Slider extends Component {
             </div>
           ))}
         </div>
-        <div className={style.prev} onClick={this._toPrev} />
-        <div className={style.next} onClick={this._toNext} />
       </div>
     );
   }
 }
 
 Slider.propTypes = {
+  // TO DO: requred
+  onChange: PropTypes.func,
+  children: PropTypes.arrayOf(PropTypes.node).isRequired,
+
   currentId: PropTypes.number,
   widthSlide: PropTypes.number,
 
   initTransform: PropTypes.number,
   minTransform: PropTypes.number,
   maxTransform: PropTypes.number,
+  acceleration: PropTypes.number,
 
   className: PropTypes.string,
-  // TODO: required
-  onChange: PropTypes.func,
-  children: PropTypes.arrayOf(PropTypes.node),
 };
 

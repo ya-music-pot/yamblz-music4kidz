@@ -1,4 +1,7 @@
-import { PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER } from '_actions/playerInfo.js';
+import {
+  PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER,
+  SET_INFO_CARD,
+} from '_actions/playerInfo.js';
 
 const defaultState = {
   inited: false,
@@ -28,8 +31,13 @@ export default function (state = defaultState, action) {
       return {
         ...state,
         isShow: true,
-        cardType: payload.cardType,
-        cardTitle: payload.cardTitle,
+        ...payload,
+      };
+
+    case SET_INFO_CARD:
+      return {
+        ...state,
+        ...payload,
       };
 
     default:

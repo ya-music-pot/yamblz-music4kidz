@@ -15,6 +15,7 @@
   background-size: contain;
   display: inline-block;
   border: none;
+  padding: 10px;
 
   &:focus {
     outline: none;
@@ -23,14 +24,14 @@
 
 .buttonCommon24 {
   @extends .buttonCommon;
-  height: 24px;
-  width: 24px;
+  height: 44px;
+  width: 44px;
 }
 
 .buttonCommon30 {
   @extends .buttonCommon;
-  height: 30px;
-  width: 30px;
+  height: 50px;
+  width: 50px;
 }
 
 //header row
@@ -45,8 +46,10 @@
 }
 
 .buttonArrowDown {
+  margin-left: -10px;
   background-position: center;
   background-image: url('./images/arrow_down.svg');
+  background-size: 24px 24px;
   @extend .buttonCommon24;
 }
 
@@ -91,6 +94,7 @@
   height: 50px;
   width: 50px;
   margin: 0 15px;
+  padding: 0;
 
   &:focus {
     outline: none;
@@ -155,8 +159,8 @@
   display: inline-block;
   background-size: contain;
   border: none;
-  height: 36px;
-  width: 36px;
+  height: 56px;
+  width: 56px;
 
   &:focus {
     outline: none;
@@ -196,7 +200,7 @@
 
 .buttonPlus {
   @extend .buttonCommon24;
-  padding: 0;
+  margin-left: -10px;
 }
 
 .trackAdded {
@@ -206,7 +210,7 @@
 
 .buttonRepeat {
   @extend .buttonCommon24;
-  padding: 0;
+  margin-right: -10px;
 
   &Active {
     fill: #00b341;

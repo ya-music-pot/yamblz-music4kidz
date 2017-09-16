@@ -8,6 +8,8 @@ import SetUp from '_pages/SetUp';
 import Feed from '_pages/Feed';
 import Personal from '_pages/Personal';
 import PersonalMobile from '_pages/PersonalMobile';
+import ClientError from '_pages/ClientError';
+import ServerError from '_pages/ServerError';
 
 const authToken = false;
 const routes = () => (
@@ -17,8 +19,10 @@ const routes = () => (
     <Route path="/calibration" component={Calibration} />
     <Route path="/setup" component={SetUp} />
     <Route path="/feed" component={Feed} />
-    <Route path="/personal" component={Personal} />
+    { authToken && <Route path="/personal" component={Personal} /> }
     <Route path="/mobile/profile" component={PersonalMobile} />
+    <Route path="/error" component={ServerError} />
+    <Route path="*" component={ClientError} />
   </Route>
 );
 

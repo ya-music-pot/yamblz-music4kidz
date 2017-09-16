@@ -4,8 +4,9 @@ import {
 } from '_actions/player';
 import { likePlaylist, dislikePlaylist } from '_actions/feed';
 import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
-import { showPlayer, playerModeUpdate } from '_actions/playerInfo';
+import { showPlayer, playerModeUpdate, setInfoCard } from '_actions/playerInfo';
 import { openModal } from '_actions/modal';
+import CARDS from '_data/cardsType';
 
 import store from '_settings/store';
 
@@ -31,12 +32,13 @@ const runPlayer = (params) => {
 const openListTracks = (params) => {
   const {
     trackId, playlist, isRadio,
-    playlistId,
+    playlistId, cardType, cardTitle,
   } = params;
 
   const track = playlist.find(item => item.id === trackId);
 
   store.dispatch(setPlaylist(playlist, isRadio, playlistId));
+  store.dispatch(setInfoCard(cardType, cardTitle));
   store.dispatch(setTrackInfo({
     cover: track.image_url,
     singerName: track.artist,
@@ -49,6 +51,18 @@ const openListTracks = (params) => {
   store.dispatch(openModal('listTracks', {
     title: 'Список треков',
   }));
+};
+
+const onCardClick = (params) => {
+  const { cardType } = params;
+  if (cardType === CARDS.radio ||
+      cardType === CARDS.single ||
+      cardType === CARDS.personal) {
+    store.dispatch(playerModeUpdate('full'));
+    runPlayer(params);
+  } else {
+    openListTracks(params);
+  }
 };
 
 /**
@@ -90,6 +104,6 @@ const onAddClick = (isLiked, playlist) => {
 
 export default {
   onButtonClick,
-  onCardClick: openListTracks,
+  onCardClick,
   onAddClick,
 };

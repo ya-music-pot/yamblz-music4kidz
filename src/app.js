@@ -17,39 +17,18 @@ import loaderSvg from '_helpers/svgLoad';
 
 import { getUser } from '_actions/user';
 import { getLocalStorage } from '_helpers';
+import { AUDIO_PLAYER_ERROR, errorHandling, AppError } from '_helpers/errors';
 
 import '_settings/global.css';
 
 initReactFastclick();
 
-/* Player */
-AudioPlayer.init().then(() => {
-  playerListeners();
-  store.dispatch(playerInit());
-}, () => {
-  throw Error('Не удалось инициализировать аудио-плеер');
-});
-
-/* SVG */
-const __svg__ = {
-  path: '../assets/images/icons/**/*.svg',
-  name: '[hash].logos.svg',
-};
-
 
 /* Render */
-const { authToken } = getLocalStorage();
-if (authToken) {
-  store.dispatch(getUser(authToken))
-    .then(() => loaderSvg(__svg__))
-    .then(render)
-    .catch(() => {
-      loadDataAndRender();
-      throw Error('Ошибка первоначальной загрузки данных!');
-    });
-} else {
-  loadDataAndRender();
-}
+loadCommonData().then(render).catch((error) => {
+  render();
+  errorHandling(error);
+});
 
 function render() {
   ReactDOM.render((
@@ -63,12 +42,40 @@ function render() {
   ), document.getElementById('root'));
 }
 
+
+/*
+  Helpers
+ */
+
 /**
  * @return {Promise}
  */
-function loadDataAndRender() {
-  return loaderSvg(__svg__).then(render).catch(() => {
-    render();
-    throw Error('Ошибка загрузки!');
+function loadCommonData() {
+  const { authToken } = getLocalStorage();
+  const __svg__ = {
+    path: '../assets/images/icons/**/*.svg',
+    name: '[hash].logos.svg',
+  };
+
+  return Promise.all([
+    authToken ? store.dispatch(getUser(authToken)) : Promise.resolve(),
+    initAudio(),
+    loaderSvg(__svg__),
+  ]);
+}
+
+/**
+ * initAudio
+ * @return {Promise}
+ */
+function initAudio() {
+  return AudioPlayer.init().then(() => {
+    playerListeners();
+    store.dispatch(playerInit());
+  }, () => {
+    throw new AppError(
+      AUDIO_PLAYER_ERROR,
+      { message: 'Не удалось инициализировать Аудиоплеер' },
+    );
   });
 }
