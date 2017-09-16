@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import PropTypes from 'prop-types';
 import Modal from '_decorators/Modal';
+import ServerError from '_pages/ServerError';
 
 import ListTracks from './ListTracks';
 import Player from './Player';
@@ -33,13 +34,15 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        { this.props.children }
-        { this.props.isModePlayer && <Player /> }
-        { this.renderListTracks() }
-      </div>
-    );
+    return this.props.statusError >= 500
+      ? <ServerError />
+      : (
+        <div>
+          { this.props.children }
+          { this.props.isModePlayer && <Player /> }
+          { this.renderListTracks() }
+        </div>
+      );
   }
 }
 
@@ -49,10 +52,12 @@ App.propTypes = {
   modal: PropTypes.shape({
     listTracks: PropTypes.object,
   }),
+  statusError: PropTypes.number,
 };
 
 export default connect((state, props) => ({
   ...props,
   modal: state.modal,
+  statusError: state.errors.status,
   isModePlayer: state.playerInfo.mode,
 }))(App);

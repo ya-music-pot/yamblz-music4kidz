@@ -19,14 +19,10 @@ export function getUser(id) {
 }
 
 export function createUser(data) {
-  const {
-    moveNext, moodId, actionId,
-    tracks,
-  } = data;
+  const { moodId, actionId, tracks } = data;
 
   return {
     type: CREATE_USER,
-    moveNext,
     callAPI: {
       method: 'POST',
       url: `${API_URL}user/register`,
