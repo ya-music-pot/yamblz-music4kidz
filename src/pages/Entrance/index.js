@@ -17,6 +17,12 @@ class Entrance extends Component {
 
   componentWillMount() {
     removePlayerPage();
+    const { userData, router } = this.props;
+
+    if (userData.id) {
+      router.push('/feed');
+    }
+
     this._metaThemeColor = document.querySelector('meta[name=theme-color]');
     this._metaThemeColor.setAttribute('content', BACKGROUND_COLOR);
   }
@@ -47,6 +53,9 @@ class Entrance extends Component {
 Entrance.propTypes = {
   router: PropTypes.object,
   data: PropTypes.object,
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 };
 
 export default connect((state, props) => {
@@ -54,5 +63,6 @@ export default connect((state, props) => {
   return {
     ...props,
     data,
+    userData: state.user.data,
   };
 })(Entrance);
