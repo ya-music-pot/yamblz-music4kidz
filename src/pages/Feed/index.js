@@ -16,6 +16,7 @@ import PersonalRadio from './PersonalRadio';
 class Feed extends Component {
   componentWillMount() {
     const { id } = this.props.user;
+
     if (id) {
       this.props.getFeed(id);
       this.props.getRadio(id);

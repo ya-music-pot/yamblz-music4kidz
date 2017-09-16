@@ -20,14 +20,22 @@ import style from './style.styl';
 class SetUp extends Component {
   componentWillMount() {
     removePlayerPage();
-    if (this.props.user.data.id) {
-      this.props.router.push('/feed');
-    }
+    this._pushToFeed(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._pushToFeed(nextProps);
   }
 
   componentWillUnmount() {
     this.props.clearSetUp();
     removePlayerPage();
+  }
+
+  _pushToFeed(props) {
+    if (props.user.data.id) {
+      this.props.router.push('/feed');
+    }
   }
 
   _handleNextStep = () => {
@@ -59,14 +67,10 @@ class SetUp extends Component {
         id,
         moodId,
         actionId,
-        moveNext: '/feed',
       });
 
     } else {
-      this.props.createUser({
-        ...settings,
-        moveNext: '/feed',
-      });
+      this.props.createUser({ ...settings });
     }
   }
 
