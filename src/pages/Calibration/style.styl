@@ -1,13 +1,38 @@
+.container {
+    background-color: #fee05b;
+    position:fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
 .titleContainer {
-    background: url('./images/entrance-background-2.svg');
+    background-image: url('./images/entrance-background-2.svg');
     padding-top: 140px;
-    padding-bottom: 120px;
     padding-left: 20px;
-    height: 354px;
+    height: 45vh;
+    max-height: 354px;
     box-sizing: border-box;
 
     .title {
         font-size: 32px;
+    }
+}
+
+@media screen and ( max-height: 567px ){
+    .titleContainer {
+        .title {
+            font-size: 22px;
+            font-size: calc(20px + 1.2vh);
+            line-height: 33px;
+        }
+    }
+}
+
+@media screen and ( max-height: 480px ){
+    .titleContainer {
+        padding-top: 25vh;
     }
 }
 
