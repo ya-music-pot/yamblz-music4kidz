@@ -1,7 +1,7 @@
 import {
   PLAYER_INITED, PLAYER_MODE_UPDATE, SHOW_PLAYER,
   SET_INFO_CARD,
-} from '_actions/playerInfo.js';
+} from '_actions/playerInfo';
 
 const defaultState = {
   inited: false,
