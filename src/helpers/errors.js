@@ -31,9 +31,9 @@ export function AppError(property, error) {
 export function errorHandling(error) {
   const { message, status, property } = error;
 
-  if (status >= 500) {
-    store.dispatch(saveError(status));
-  }
+  // if (status >= 500) {
+  //   store.dispatch(saveError(status));
+  // }
 
   if (error instanceof AppError) {
     switch (property) {
