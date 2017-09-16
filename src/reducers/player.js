@@ -1,6 +1,6 @@
-import * as PlayerActions from '_actions/playerActionTypes.js';
+import * as PlayerActions from '_actions/playerActionTypes';
 
-const defaultState = {
+export const defaultState = {
   isPlaying: false,
   shouldPlay: false,
   loaded: false,

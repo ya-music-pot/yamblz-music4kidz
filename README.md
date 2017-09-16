@@ -1,3 +1,5 @@
+[![GitHub version](https://badge.fury.io/gh/ya-music-pot%2Fyamblz-music4kidz.svg)](https://badge.fury.io/gh/ya-music-pot%2Fyamblz-music4kidz)
+
 # yamblz-music4kidz
 
 ## Сборка

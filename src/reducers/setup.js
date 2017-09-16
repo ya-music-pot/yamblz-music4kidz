@@ -2,7 +2,7 @@ import { UPDATE_STEP, CLEAR_SET_UP } from '_actions/setup';
 
 import setUpData from '_data/setUp';
 
-const stateDefault = {
+export const stateDefault = {
   activeStep: 1,
   ...setUpData,
 };
