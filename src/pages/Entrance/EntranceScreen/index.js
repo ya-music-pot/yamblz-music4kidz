@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
-import Card from '_decorators/Card';
 import Icon from '_components/Icon';
+import OutsideCard from '../OutsideCard';
 
 import style from './style.styl';
 
@@ -15,95 +15,57 @@ class EntranceScreen extends Component {
     isCardShown: false,
   }
 
+  componentWillMount() {
+    this.windowHeight = window.innerHeight;
+    this.bottomPosition = this.windowHeight * 0.9;
+
+    this.setState({
+      translate: this.bottomPosition,
+    });
+  }
+
   componentDidMount() {
     this._initializeCardActions();
+
+    this.cardHeight = this.card.offsetHeight;
+    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
   }
 
   componentWillUnmount() {
     this.mc.destroy();
   }
 
-  _updateThreshholds = () => {
-    this.windowHeight = window.innerHeight;
-    this.cardHeight = this.card.offsetHeight;
-
-    this.upperPosition = (this.windowHeight - this.cardHeight) / 2;
-    this.bottomPosition = this.windowHeight * 0.9; // Карточка торчит на 10% высоты экрана
-    this.threshhold = this.windowHeight / 2;
-  };
-
   /**
    * _initializeCardActions — Функция инициаллизирует обработчик жестов
    */
   _initializeCardActions = () => {
-    this.isPanning = null;
-    this._updateThreshholds();
-    this.posTimeout = null;
-
     this.mc = new Hammer(this.card);
     this.mc.add(new Hammer.Pan({
       direction: Hammer.DIRECTION_VERTICAL,
-      threshold: 0,
+      threshold: 5,
     }));
 
-    this.mc.on('pan', this._handlePan);
+    this.mc.on('panup', () => {
+      this.setState({
+        isCardShown: true,
+        translate: this.upperPosition,
+      });
+    });
+
+    this.mc.on('pandown', () => {
+      this.setState({
+        isCardShown: false,
+        translate: this.bottomPosition,
+      });
+    });
   }
 
-  /**
-   * _handlePan — Функция-обработчик для жестов показа и скрытия карточки
-   * @param  {Object} event
-   */
-  _handlePan = (event) => {
-    if (this.isPanning == null) {
-      this._updateThreshholds();
-
-      this.card.style.top = `${this.bottomPosition}px`;
-      this.card.style.position = 'absolute';
-    }
-
-    if (!this.isPanning) {
-      this.isPanning = true;
-      this.lastCardY = this.card.offsetTop;
-    }
-
-    const newCardY = event.deltaY + this.lastCardY;
-
-    if (newCardY <= this.threshhold) {
-      if (this.state.isCardShown) {
-        return;
-      }
-
-      if (this.posTimeout) {
-        clearTimeout(this.posTimeout);
-      }
-
-      this.posTimeout = setTimeout(() => {
-        this.card.style.top = `${this.upperPosition}px`;
-        this.setState({
-          isCardShown: true,
-        });
-      }, 300);
-    }
-
-    if (newCardY > this.threshhold) {
-      if (this.posTimeout) {
-        clearTimeout(this.posTimeout);
-      }
-
-      this.posTimeout = setTimeout(() => {
-        this.card.style.top = `${this.bottomPosition}px`;
-        this.setState({
-          isCardShown: false,
-        });
-      }, 300);
-    }
-
-    this.card.style.top = `${newCardY}px`;
-
-    if (event.isFinal) {
-      this.isPanning = false;
-    }
-  };
+  _handleClickoutside = () => {
+    this.setState({
+      isCardShown: false,
+      translate: this.bottomPosition,
+    });
+  }
 
   render() {
     const {
@@ -111,7 +73,12 @@ class EntranceScreen extends Component {
       shouldPlay,
     } = this.props;
 
-    const { isCardShown } = this.state;
+    const { isCardShown, translate } = this.state;
+
+    const cardStyle = {
+      transform: `translateY(${translate}px)`,
+      WebkitTransform: `translateY(${translate}px)`,
+    };
 
     let isPlaying = false;
     if (data.id === playlistId && shouldPlay) {
@@ -130,7 +97,16 @@ class EntranceScreen extends Component {
           }}
         >
           <div className={style.imageContainer} />
-          <Title />
+
+          <div className={style.titleWrapper}>
+            <div className={style.title}>
+              Привет!
+            </div>
+            <div className={style.subTitle}>
+              Будем слушать музыку и веселиться?
+            </div>
+          </div>
+
           <div className={style.buttonWrapper}>
             <Button
               style={style.button}
@@ -152,11 +128,13 @@ class EntranceScreen extends Component {
           ref={(el) => {
             this.card = el;
           }}
+          style={cardStyle}
         >
-          <Card
+          <OutsideCard
             data={data}
             callbacks={isCardShown ? callbacks : {}}
             isPlaying={isPlaying}
+            onClickoutside={this._handleClickoutside}
           />
         </div>
       </div>
@@ -183,13 +161,3 @@ export default connect((state, props) => ({
   shouldPlay: state.player.shouldPlay,
 }))(EntranceScreen);
 
-const Title = () => (
-  <div className={style.titleWrapper}>
-    <div className={style.title}>
-      Привет!
-    </div>
-    <div className={style.subTitle}>
-      Будем слушать музыку и веселиться?
-    </div>
-  </div>
-);

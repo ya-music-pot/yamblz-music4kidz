@@ -6,11 +6,9 @@ import callbacks from '_helpers/cardCallbacks';
 import { removePlayerPage } from '_helpers/player';
 
 import EntranceScreen from './EntranceScreen';
-import PlaylistCalibration from './PlaylistCalibration';
 import style from './style.styl';
 
 const BACKGROUND_COLOR = '#fee05b';
-const DEFAULT_COLOR = '#7859ff';
 
 class Entrance extends Component {
   state = {
@@ -23,19 +21,9 @@ class Entrance extends Component {
     this._metaThemeColor.setAttribute('content', BACKGROUND_COLOR);
   }
 
-  componentWillUnmount() {
-    this._metaThemeColor.setAttribute('content', DEFAULT_COLOR);
-  }
-
   _handleNavigate = () => {
     removePlayerPage();
-    this.setState({
-      showEntranceScreen: false,
-    });
-  };
-
-  _handleCalibrationAccept = () => {
-    this.props.router.push('/setup');
+    this.props.router.push('/calibration');
   };
 
   _handleCalibrationDeny = () => {
@@ -45,19 +33,12 @@ class Entrance extends Component {
   render() {
     return (
       <div className={style.container}>
-        {
-          this.state.showEntranceScreen ?
-            <EntranceScreen
-              onNavigate={this._handleNavigate}
-              onDeny={this._handleCalibrationDeny}
-              data={this.props.data}
-              callbacks={callbacks}
-            /> :
-            <PlaylistCalibration
-              onAccept={this._handleCalibrationAccept}
-              onDeny={this._handleCalibrationDeny}
-            />
-        }
+        <EntranceScreen
+          onNavigate={this._handleNavigate}
+          onDeny={this._handleCalibrationDeny}
+          data={this.props.data}
+          callbacks={callbacks}
+        />
       </div>
     );
   }

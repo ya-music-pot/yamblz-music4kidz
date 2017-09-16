@@ -98,7 +98,7 @@ class Personal extends Component {
   };
 
   render() {
-    const { user, player } = this.props;
+    const { user, player, isPlayerVisible } = this.props;
 
     const { trackId, isPlaying } = player;
     const { tracks, playlists } = user;
@@ -114,7 +114,10 @@ class Personal extends Component {
     callbacks.onRouterPush = this.props.router.push;
 
     return (
-      <div className={cl(style.container, stickyFilter && style.containerSticky)}>
+      <div className={
+        cl(style.container, stickyFilter && style.containerSticky,
+          isPlayerVisible && style.containerPadded)}
+      >
         <Header
           avatar={avatarUrl}
           achievementsDict={achievementsDict}
@@ -143,6 +146,7 @@ export default connect((state, props) => ({
   user: state.user,
   achievements: state.dictionaries.achievements,
   player: state.player,
+  isPlayerVisible: state.playerInfo.isShow,
   ...props,
 }), {
   getUser,
@@ -161,6 +165,7 @@ Personal.propTypes = {
   player: PropTypes.object,
   router: PropTypes.object,
   user: PropTypes.object,
+  isPlayerVisible: PropTypes.bool,
 
   getUser: PropTypes.func,
   getAllTracks: PropTypes.func,

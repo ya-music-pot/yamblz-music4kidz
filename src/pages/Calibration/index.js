@@ -6,10 +6,25 @@ import cl from 'classname';
 import Icon from '_components/Icon';
 import style from './style.styl';
 
+const DEFAULT_COLOR = '#7859ff';
+
 export default class PlaylistCalibration extends Component {
+  componentWillUnmount() {
+    this._metaThemeColor = document.querySelector('meta[name=theme-color]');
+    this._metaThemeColor.setAttribute('content', DEFAULT_COLOR);
+  }
+
+  _handleCalibrationAccept = () => {
+    this.props.router.push('/setup');
+  };
+
+  _handleCalibrationDeny = () => {
+    this.props.router.push('/feed');
+  };
+
   render() {
     return (
-      <div>
+      <div className={style.container}>
         <div className={style.titleContainer}>
           <div className={style.title}>
             Катя, давай создадим лучший в&nbsp;мире плейлист для&nbsp;тебя?
@@ -19,13 +34,13 @@ export default class PlaylistCalibration extends Component {
         <div className={style.buttonWrapper}>
           <Button
             style={cl(style.button)}
-            onClick={this.props.onAccept}
+            onClick={this._handleCalibrationDeny}
           >
             Создать
           </Button>
           <Button
             style={style.buttonSmall}
-            onClick={this.props.onDeny}
+            onClick={this._handleCalibrationAccept}
           >
             Не хочу сейчас
           </Button>
@@ -36,6 +51,5 @@ export default class PlaylistCalibration extends Component {
 }
 
 PlaylistCalibration.propTypes = {
-  onAccept: PropTypes.func.isRequired,
-  onDeny: PropTypes.func.isRequired,
+  router: PropTypes.object,
 };

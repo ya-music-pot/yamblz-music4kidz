@@ -1,6 +1,6 @@
 import {
   playerPlay, setPlaylist, playerPause,
-  setTrackInfo,
+  playerResume, setTrackInfo,
 } from '_actions/player';
 import { likePlaylist, dislikePlaylist } from '_actions/feed';
 import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
@@ -58,6 +58,12 @@ const openListTracks = (params) => {
 const onButtonClick = (params) => {
   if (params.isPlaying) {
     store.dispatch(playerPause());
+  } else if (
+    typeof params.position !== 'undefined'
+    && params.position !== 0
+    && params.trackId === params.prevTrackId
+  ) {
+    store.dispatch(playerResume());
   } else {
     store.dispatch(playerModeUpdate('mini'));
     runPlayer(params);
