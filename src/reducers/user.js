@@ -8,7 +8,7 @@ import { getLocalStorage } from '_helpers';
 
 const { authToken } = getLocalStorage();
 
-const defaultState = {
+export const defaultState = {
   loading: false,
   loaded: false,
   data: {

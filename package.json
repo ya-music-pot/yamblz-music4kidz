@@ -31,11 +31,13 @@
     "moduleNameMapper": {
       "\\.css$": "identity-obj-proxy",
       "^_actions(.*)": "<rootDir>/src/actions/$1.js",
+      "^_data(.*)": "<rootDir>/src/data/$1.js",
+      "^_helpers(.*)": "<rootDir>/src/helpers/$1",
       "^_reducers(.*)": "<rootDir>/src/reducers/$1.js"
     }
   },
   "devDependencies": {
-    "babel-jest": "^21.0.2",
+    "babel-jest": "21.0.2",
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-plugin-import": "2.7.0",

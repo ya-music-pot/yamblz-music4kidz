@@ -35,18 +35,18 @@ describe('feed reducer', () => {
         lyrics: 'null',
         image_url: 'http://i.imgur.com/u5CJQoh.jpg',
         mp3_url: 'https://dl.dropboxusercontent.com/s/2om6xhxtexlrx3m/frank_sinatra_blue_moon.mp3'
-      }]
+      }],
     }];
 
     expect(feedReducer({}, {
       type: `${GET_FEED}_SUCCESS`,
       response: {
-        data: feed
-      }
+        data: feed,
+      },
     })).toEqual({
       loading: false,
       loaded: true,
-      data: feed
+      data: feed,
     });
   });
 });
