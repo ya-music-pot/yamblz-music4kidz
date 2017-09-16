@@ -1,5 +1,6 @@
 import React, { Component as ReactComponent } from 'react';
 import { connect } from 'react-redux';
+import cl from 'classname';
 
 import Icon from '_components/Icon';
 import { closeModal } from '_actions/modal';
@@ -20,10 +21,10 @@ class Modal extends ReactComponent {
   }
 
   render() {
-    const Component = this.props.Component;
+    const { Component, modal } = this.props;
 
     return (
-      <div className={style.mainContainer}>
+      <div className={cl(modal.inPlayer && style.mainContainerPlayer, style.mainContainer)}>
         <i className={style.outside} onClick={this._onModalClose} />
         <div className={style.container}>
           <div className={style.close} onClick={this._onModalClose}>
@@ -40,5 +41,7 @@ class Modal extends ReactComponent {
 
 export default Component => connect((state, props) => ({
   ...props,
+  // TO DO Подумать как это вынести из общей обертки.
+  modal: state.modal.listTracks || {},
   Component,
 }), { closeModal })(Modal);

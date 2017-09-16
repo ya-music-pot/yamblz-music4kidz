@@ -75,7 +75,7 @@ class Player extends Component {
   };
 
   _handleOpenListTracks = () => {
-    this.props.openModal('listTracks');
+    this.props.openModal('listTracks', { inPlayer: true });
   };
 
   _handleLikeButton = () => {
