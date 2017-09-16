@@ -8,6 +8,33 @@
   z-index: 2;
 }
 
+// button common
+.buttonCommon {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  border: none;
+  padding: 10px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.buttonCommon24 {
+  @extends .buttonCommon;
+  height: 44px;
+  width: 44px;
+}
+
+.buttonCommon30 {
+  @extends .buttonCommon;
+  height: 50px;
+  width: 50px;
+}
+
+//header row
 .headerRow {
   display: flex;
   flex-direction: row;
@@ -18,6 +45,79 @@
   padding-bottom: 3vh;
 }
 
+.buttonArrowDown {
+  margin-left: -10px;
+  background-position: center;
+  background-image: url('./images/arrow_down.svg');
+  background-size: 24px 24px;
+  @extend .buttonCommon24;
+}
+
+.playerTitle {
+  box-sizing: border-box;
+  width: 78vw;
+  padding-left: 10px;
+  padding-right: 24px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.emojiStyles {
+  margin-bottom: 0;
+  padding-left: 12px;
+}
+
+// main row
+.mainRow {
+  display: flex;
+  align-items: center;
+}
+
+.vote {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 38vh;
+  z-index: 3;
+}
+
+.buttonLike,
+.buttonDislike {
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  margin: 0 15px;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.buttonLike {
+  background-image: url('./images/like.svg');
+  background-color: #ff3333;
+}
+
+.buttonDislike {
+  background-image: url('./images/skip.svg');
+  background-color: #0065d9;
+  opacity: 1;
+  transition: opacity 0.1s ease-out;
+
+  &Disabled {
+    opacity: 0.5;
+  }
+}
+
+// title row
 .titleRow {
   display: flex;
   flex-direction: column;
@@ -38,6 +138,7 @@
   opacity: 0.5;
 }
 
+// controls row
 .controlsRow {
   display: flex;
   flex-direction: row;
@@ -48,118 +149,22 @@
   width: 65vw;
 }
 
-.flexEnd {
-  justify-content: flex-end;
-}
-
-.bottomRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 18vh;
-  width: 90vw;
-}
-
-.vote {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  margin-top: 16vh;
-  width: 38vh;
-  z-index: 3;
-}
-
-.spacer {
-  width: 18vh;
-}
-.buttonList,
-.buttonCommon {
-  background-color: transparent;
-  background-repeat: no-repeat;
-  background-size: contain;
-  display: inline-block;
-  border: none;
-}
-
-.buttonList {
-  margin-top: 6px;
-}
-
-.buttonCommon24 {
-  @extends .buttonCommon;
-  height: 24px;
-  width: 24px;
-}
-
-.buttonCommon30 {
-  @extends .buttonCommon;
-  height: 30px;
-  width: 30px;
-}
-
-.buttonRoundCommon {
-  background-repeat: no-repeat;
-  background-position: center center;
-  border-radius: 50%;
-  height: 7vh;
-  width: 7vh;
-}
-
-.buttonLike {
-  background-image: url('./images/like.svg');
-  background-color: #ff3333;
-  @extend .buttonRoundCommon;
-}
-
-.buttonLike:focus { outline: none; }
-
-.buttonDislike {
-  background-image: url('./images/skip.svg');
-  background-color: #0065d9;
-  @extend .buttonRoundCommon;
-}
-
-.buttonDislike:focus { outline: none; }
-
-.buttonArrowDown {
-  background-position: center;
-  background-image: url('./images/arrow_down.svg');
-  @extend .buttonCommon24;
-}
-
-.buttonArrowDown:focus { outline: none; }
-
-.buttonDownload {
-  background-image: url('./images/download.svg');
-  @extend .buttonCommon24;
-}
-
-.buttonDownload:focus { outline: none; }
-
-.playerTitle {
-  width: 78vw;
-  padding-right: 24px;
-  text-align: center;
-  font-size: 1.5rem;
-  color: #fff;
-}
-
 .buttonPrevious {
   background: url('./images/previous.svg') center center no-repeat;
   width: 33%;
   @extend .buttonCommon30;
 }
 
-.buttonPrevious:focus { outline: none; }
-
 .playerButton {
   display: inline-block;
   background-size: contain;
   border: none;
-  height: 36px;
-  width: 36px;
+  height: 56px;
+  width: 56px;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .playerButtonPlay {
@@ -172,43 +177,51 @@
   background: url('./images/pause.svg') center center no-repeat;
 }
 
-.player-button:focus { outline: none; }
-
 .buttonNext {
   width: 33%;
   background: url('./images/next.svg') center center no-repeat;
   @extend .buttonCommon30;
 }
 
-.buttonNext:focus { outline: none; }
-
-.buttonPlus {
-  @extend .buttonCommon30;
+// footer row
+.bottomRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 18vh;
+  width: 90vw;
 }
 
-.buttonPlus:focus { outline: none; }
+.buttonList {
+  @extends .buttonCommon;
+  margin-top: 6px;
+}
+
+.buttonPlus {
+  @extend .buttonCommon24;
+  margin-left: -10px;
+}
+
+.trackAdded {
+  fill: #00b341;
+  stroke: #00b341;
+}
 
 .buttonRepeat {
-  &Active {
-    background-image: url('./images/repeat.svg');
-    @extend .buttonCommon30;
+  @extend .buttonCommon24;
+  margin-right: -10px;
 
-    &:focus {
-      outline: none;
-    }
+  &Active {
+    fill: #00b341;
   }
 
   &Inactive {
-    background-image: url('./images/repeat-inactive.svg');
-    @extend .buttonCommon30;
-
-    &:focus {
-      outline: none;
-    }
+    fill: #fff;
   }
 }
 
-.emojiStyles {
-  margin-bottom: 0;
-  padding-left: 12px;
+// helpers
+.flexEnd {
+  justify-content: flex-end;
 }

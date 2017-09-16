@@ -9,17 +9,36 @@ import {
   setPlaylist, playerPlay, playerClear,
   playerNext, playerPrev, playerPause,
   playerResume, toggleRepeatMode, likeTrack,
-  dislikeTrack, getRadio,
+  dislikeTrack, getRadio, addTrack,
+  deleteTrack, showSelector, closeSelector,
 } from '_actions/player';
-
+import { addUserTrack, deleteUserTrack, getAllTracks } from '_actions/user';
 import { openModal } from '_actions/modal';
-
 import { playerModeUpdate } from '_actions/playerInfo';
 
 class Player extends Component {
+  state = {
+    isSelector: false,
+    dislikeDisabled: false,
+  };
+
+  componentWillMount() {
+    const userId = this.props.userInfo.id;
+    if (userId) {
+      this.props.getAllTracks(userId);
+    }
+  }
+
+  _isTrackAdded = () => {
+    const { userTracklist, player } = this.props;
+    if (userTracklist) {
+      return userTracklist.some((track) => track.id === player.trackId);
+    }
+    return false;
+  };
+
   _handlePlayButton = () => {
     const { player } = this.props;
-
     if (player.isPlaying) {
       this.props.playerPause();
     } else if (player.position !== 0) {
@@ -31,6 +50,7 @@ class Player extends Component {
 
   _handleNextButton = () => {
     const { player, userInfo } = this.props;
+    this.setState({ dislikeDisabled: false });
 
     if (player.isRadio && userInfo.id) {
       this.props.getRadio(userInfo.id);
@@ -41,6 +61,7 @@ class Player extends Component {
 
   _handlePreviousButton = () => {
     const { player } = this.props;
+    this.setState({ dislikeDisabled: false });
     this.props.playerPrev(player.trackId);
   };
 
@@ -49,6 +70,7 @@ class Player extends Component {
   };
 
   _handleClickArrowDown = () => {
+    this.setState({ dislikeDisabled: false });
     this.props.playerModeUpdate('mini');
   };
 
@@ -58,24 +80,77 @@ class Player extends Component {
 
   _handleLikeButton = () => {
     const { player, userInfo } = this.props;
+    this.setState({ dislikeDisabled: true });
     this.props.likeTrack(userInfo.id, player.trackId);
   };
 
   _handleDislikeButton = () => {
     const { player, userInfo } = this.props;
     this.props.dislikeTrack(userInfo.id, player.trackId);
+    this.setState({ dislikeDisabled: false });
     this._handleNextButton();
+  };
+
+  _handlePlusButton = () => {
+    const { player, userInfo } = this.props;
+    const { playlist, trackId } = player;
+    const isAdded = this._isTrackAdded();
+
+    if (isAdded) {
+      this.props.deleteTrack(userInfo.id, trackId);
+      this.props.deleteUserTrack(trackId);
+    } else {
+      let currentTrack = null;
+      playlist.some((track) => {
+        if (track.id === trackId) {
+          currentTrack = track;
+          return true;
+        }
+        return false;
+      });
+
+      this.props.addTrack(userInfo.id, trackId);
+      this.props.addUserTrack(currentTrack);
+    }
+  };
+
+  _handleClickSelector = () => {
+    this.setState({
+      isSelector: true,
+    });
+    this.props.showSelector(true);
+  };
+
+  _handleCloseSelector = () => {
+    this.setState({
+      isSelector: false,
+    });
+    this.props.closeSelector(false);
   };
 
   render() {
     const {
       player, cardType, cardTitle,
-      userInfo: { moodId, actionId },
-      dictionaries: { listEmoji, listActions },
+      userInfo, dictionaries: { listEmoji,
+        listActions },
     } = this.props;
+    const { moodId, actionId } = userInfo;
+
     const emojiStatus = {
-      moodIcon: listEmoji.data[moodId].typeIcon,
-      actionIcon: listActions.data[actionId].typeIcon,
+      moodIcon: moodId && listEmoji.data[moodId].typeIcon,
+      actionIcon: actionId && listActions.data[actionId].typeIcon,
+    };
+
+    const playerCallbacks = {
+      onTogglePlay: this._handlePlayButton,
+      onClickNext: this._handleNextButton,
+      onClickPrevious: this._handlePreviousButton,
+      onClickRepeat: this._handleRepeatButton,
+      onClickArrowDown: this._handleClickArrowDown,
+      openListTracks: this._handleOpenListTracks,
+      onLikeClick: this._handleLikeButton,
+      onDislikeClick: this._handleDislikeButton,
+      onPlusClick: this._handlePlusButton,
     };
 
     return (
@@ -87,18 +162,19 @@ class Player extends Component {
         />
         <FullPlayer
           playerState={player}
-          onTogglePlay={this._handlePlayButton}
-          onClickNext={this._handleNextButton}
-          onClickPrevious={this._handlePreviousButton}
-          onClickRepeat={this._handleRepeatButton}
-          onClickArrowDown={this._handleClickArrowDown}
-          openListTracks={this._handleOpenListTracks}
-          onLikeClick={this._handleLikeButton}
-          onDislikeClick={this._handleDislikeButton}
+          playerCallbacks={playerCallbacks}
           type="full"
           cardType={cardType}
           cardTitle={cardTitle}
           emojiStatus={emojiStatus}
+          isAdded={this._isTrackAdded()}
+          listEmoji={listEmoji}
+          listActions={listActions}
+          userInfo={userInfo}
+          isSelector={this.state.isSelector}
+          onClickSelector={this._handleClickSelector}
+          onCloseSelector={this._handleCloseSelector}
+          dislikeDisabled={this.state.dislikeDisabled}
         />
       </PlayerToggle>
     );
@@ -111,6 +187,7 @@ export default connect((state, props) => ({
   cardType: state.playerInfo.cardType,
   cardTitle: state.playerInfo.cardTitle,
   dictionaries: state.dictionaries,
+  userTracklist: state.user.tracks,
   ...props,
 }), {
   openModal,
@@ -126,6 +203,13 @@ export default connect((state, props) => ({
   likeTrack,
   dislikeTrack,
   getRadio,
+  addTrack,
+  deleteTrack,
+  addUserTrack,
+  deleteUserTrack,
+  getAllTracks,
+  showSelector,
+  closeSelector,
 })(Player);
 
 Player.propTypes = {
@@ -145,4 +229,12 @@ Player.propTypes = {
   cardTitle: PropTypes.string,
   dictionaries: PropTypes.object,
   getRadio: PropTypes.func,
+  addTrack: PropTypes.func,
+  deleteTrack: PropTypes.func,
+  addUserTrack: PropTypes.func,
+  deleteUserTrack: PropTypes.func,
+  getAllTracks: PropTypes.func,
+  userTracklist: PropTypes.arrayOf(PropTypes.object),
+  showSelector: PropTypes.func,
+  closeSelector: PropTypes.func,
 };

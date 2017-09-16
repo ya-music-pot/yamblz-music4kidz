@@ -18,7 +18,7 @@ export default class ListSettings extends Component {
       <ul className={cl(style.list, className)}>
         { data.map(id => (
           <li key={`heart${id}`} className={style.item}>
-            <Icon typeIcon="heart-red" className={style.icon} />
+            <Icon typeIcon="heart" className={cl(style.icon, style.heart)} />
           </li>
         ))}
         { moodIcon &&

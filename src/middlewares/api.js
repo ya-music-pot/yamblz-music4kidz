@@ -1,4 +1,6 @@
 import 'whatwg-fetch';
+import { API } from '_helpers';
+import { AppError } from '_helpers/errors';
 
 const START = '_START';
 const FAIL = '_FAIL';
@@ -23,15 +25,10 @@ export default ({ dispatch }) => (next) => (action) => {
 
   const options = {
     body: requestBody,
-    credentials: 'same-origin',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-    },
     method: method || 'GET',
   };
 
-  return window.fetch(callAPI.url, options)
+  return API(callAPI.url, options)
     .then((response) => response.json())
     .then((data) => {
       if (data.error) {
@@ -45,6 +42,7 @@ export default ({ dispatch }) => (next) => (action) => {
       });
     })
     .catch((error) => {
+      // Отлавливать также ошибки по коду выше.
       generateError(rest, error, type, dispatch);
     });
 };
@@ -61,5 +59,5 @@ export default ({ dispatch }) => (next) => (action) => {
  */
 function generateError(rest, error, type, dispatch) {
   dispatch({ ...rest, error, type: type + FAIL });
-  return new Error(error);
+  throw new AppError(type, error);
 }

@@ -38,8 +38,7 @@ export const saveLocalStorage = (ops) => {
 
 /**
  * Remove keys from LS
- * @param  {[type]} keys [description]
- * @return {[type]}      [description]
+ * @param  {Array} keys
  */
 export const removeLocalStorage = (keys) => {
   if (typeof window === 'object') {
@@ -83,3 +82,23 @@ export function getTime(position, duration) {
   return `${minutesLeft}:${secondsLeft}`;
 }
 
+/**
+ * API
+ * @param {String} url
+ * @param {Object} options
+ * @param {String} action.url
+ * @param {Object} action.body
+ * @param {Promise}
+ */
+export function API(url, options) {
+  const defOptions = {
+    credentials: 'same-origin',
+    headers: {
+      accept: 'application/json',
+      'content-type': 'application/json',
+    },
+    method: 'GET',
+  };
+
+  return window.fetch(url, { ...defOptions, ...options });
+}

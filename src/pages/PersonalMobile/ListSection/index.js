@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
+import Button from '_components/Button';
 import Icon from '_components/Icon';
 import CardList from '_components/CardList';
 import TrackInfo from '_components/TrackInfo';
@@ -15,6 +16,10 @@ export default class ListSection extends Component {
   _handleTrackClick = (id) => {
     window.jsHandler.trackClick(id);
   };
+
+  _handleSearch = () => {
+    window.jsHandler.clickSearch();
+  }
 
   _renderTrack = (data) => {
     const {
@@ -93,6 +98,12 @@ export default class ListSection extends Component {
               <br />
               Нажми нa <Icon typeIcon="like" className={style.iconHeart} />, чтобы сохранить
             </div>
+            <Button
+              onClick={this._handleSearch}
+              style={style.searchButton}
+            >
+              Смотреть
+            </Button>
           </div>
         }
 
@@ -105,6 +116,12 @@ export default class ListSection extends Component {
               <br />
               Нажми нa <Icon typeIcon="plus" className={style.icon} />, чтобы сохранить
             </div>
+            <Button
+              onClick={this._handleSearch}
+              style={style.searchButton}
+            >
+              Смотреть
+            </Button>
           </div>
         }
       </div>

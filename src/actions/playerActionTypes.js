@@ -12,6 +12,9 @@ export const PLAYER_PREV = 'PLAYER_PREV';
 
 export const SET_POSITION = 'SET_POSITION';
 
+export const SHOW_SELECTOR = 'SHOW_SELECTOR';
+export const CLOSE_SELECTOR = 'CLOSE_SELECTOR';
+
 export const PLAYER_PROGRESS = 'PLAYER_PROGRESS';
 export const PLAYER_ENDED = 'PLAYER_ENDED';
 export const PLAYER_CLEAR = 'PLAYER_CLEAR';
@@ -24,3 +27,6 @@ export const TOGGLE_REPEAT = 'TOGGLE_REPEAT';
 
 export const LIKE_TRACK = 'LIKE_TRACK';
 export const DISLIKE_TRACK = 'DISLIKE_TRACK';
+
+export const ADD_TRACK = 'ADD_TRACK';
+export const DELETE_TRACK = 'DELETE_TRACK';

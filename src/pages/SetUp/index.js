@@ -7,7 +7,7 @@ import ListSettings from '_components/ListSettings';
 import Loader from '_components/Loader';
 
 import { updateStep, clearSetUp } from '_actions/setup';
-import { createUser } from '_actions/user';
+import { createUser, updateUser } from '_actions/user';
 import { playerClear, playerStop } from '_actions/player';
 import { removePlayerPage } from '_helpers/player';
 
@@ -20,14 +20,26 @@ import style from './style.styl';
 class SetUp extends Component {
   componentWillMount() {
     removePlayerPage();
+    this._pushToFeed(this.props);
   }
+
+  componentWillReceiveProps(nextProps) {
+    this._pushToFeed(nextProps);
+  }
+
   componentWillUnmount() {
     this.props.clearSetUp();
     removePlayerPage();
   }
 
+  _pushToFeed(props) {
+    if (props.user.data.id) {
+      this.props.router.push('/feed');
+    }
+  }
+
   _handleNextStep = () => {
-    const { steps, activeStep, settings } = this.props;
+    const { steps, activeStep } = this.props;
     const newStep = activeStep.step + 1;
     const isStep = steps[newStep - 1];
 
@@ -36,15 +48,29 @@ class SetUp extends Component {
     }
 
     if (!isStep) {
-      this.props.createUser({
-        ...settings,
-        moveNext: '/feed',
-      });
+      this._manageUser();
     }
 
     if (isStep && activeStep.step === 1) {
       this.props.playerStop();
       this.props.playerClear();
+    }
+  }
+
+  _manageUser() {
+    const { user, settings } = this.props;
+    const { moodId, actionId } = settings;
+
+    const id = user.data.id;
+    if (id) {
+      this.props.updateUser({
+        id,
+        moodId,
+        actionId,
+      });
+
+    } else {
+      this.props.createUser({ ...settings });
     }
   }
 
@@ -81,7 +107,7 @@ class SetUp extends Component {
             <ButtonCircle
               onClick={this._handleNextStep}
               className={style.btn}
-              typeIcon="arrow-right"
+              nameIcon="arrow-right"
             />
           }
           {
@@ -127,6 +153,7 @@ SetUp.propTypes = {
     moodId: PropTypes.number,
     tracks: PropTypes.array,
   }),
+  updateUser: PropTypes.func,
   createUser: PropTypes.func,
   playerStop: PropTypes.func,
   updateStep: PropTypes.func,
@@ -137,6 +164,7 @@ SetUp.propTypes = {
     type: PropTypes.string,
     title: PropTypes.string,
   }),
+  router: PropTypes.object,
 };
 
 export default connect((state, props) => {
@@ -154,6 +182,7 @@ export default connect((state, props) => {
   };
 }, {
   updateStep,
+  updateUser,
   clearSetUp,
   createUser,
   playerClear,

@@ -77,6 +77,26 @@ export function dislikeTrack(id, trackId) {
   };
 }
 
+export function addTrack(id, trackId) {
+  return {
+    type: ActionType.ADD_TRACK,
+    callAPI: {
+      method: 'POST',
+      url: `${API_URL}user/${id}/add_track?track_id=${trackId}`,
+    },
+  };
+}
+
+export function deleteTrack(id, trackId) {
+  return {
+    type: ActionType.DELETE_TRACK,
+    callAPI: {
+      method: 'DELETE',
+      url: `${API_URL}user/${id}/add_track?track_id=${trackId}`,
+    },
+  };
+}
+
 export function setPlaylist(playlist, isRadio, playlistId) {
   return {
     type: ActionType.SET_PLAYLIST,
@@ -110,6 +130,24 @@ export function setPosition(position) {
     player: {},
     payload: {
       position,
+    },
+  };
+}
+
+export function showSelector(isSelector) {
+  return {
+    type: ActionType.SHOW_SELECTOR,
+    player: {
+      isSelector,
+    },
+  };
+}
+
+export function closeSelector(isSelector) {
+  return {
+    type: ActionType.CLOSE_SELECTOR,
+    player: {
+      isSelector,
     },
   };
 }

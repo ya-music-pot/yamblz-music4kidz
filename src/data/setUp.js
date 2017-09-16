@@ -1,7 +1,7 @@
 export default {
   playlist: [
     {
-      id: 111,
+      id: 26249615,
       name: '',
       artist: 'Егор Крид',
       lyrics: null,
@@ -9,7 +9,7 @@ export default {
       mp3_url: '/assets/music/egor.mp3',
     },
     {
-      id: 112,
+      id: 34976783,
       name: '',
       artist: 'Dragons',
       lyrics: null,
@@ -17,7 +17,7 @@ export default {
       mp3_url: '/assets/music/dragons.mp3',
     },
     {
-      id: 113,
+      id: 20564771,
       name: '',
       artist: 'Макс Корж',
       lyrics: null,

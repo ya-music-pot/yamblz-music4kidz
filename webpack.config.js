@@ -4,6 +4,8 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 const got = require('got');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const SvgStore = require('webpack-svgstore-plugin');
+
 const API_URL = 'https://musicforchildren.herokuapp.com/';
 
 const ENV = process.env.NODE_ENV;
@@ -102,6 +104,14 @@ module.exports = {
     new ExtractTextPlugin({
       filename: 'styles.css',
       allChunks: true,
+    }),
+    new SvgStore({
+      svgoOptions: {
+        plugins: [
+          { removeTitle: true },
+        ],
+      },
+      prefix: 'icon-',
     }),
   ],
 

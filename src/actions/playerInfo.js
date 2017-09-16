@@ -1,6 +1,7 @@
 export const PLAYER_INITED = 'PLAYER_INITED';
 export const PLAYER_MODE_UPDATE = 'PLAYER_MODE_UPDATE';
 export const SHOW_PLAYER = 'SHOW_PLAYER';
+export const SET_INFO_CARD = 'SET_INFO_CARD';
 
 export function playerInit() {
   return {
@@ -20,6 +21,16 @@ export function playerModeUpdate(mode) {
 export function showPlayer(cardType, cardTitle) {
   return {
     type: SHOW_PLAYER,
+    payload: {
+      cardType,
+      cardTitle,
+    },
+  };
+}
+
+export function setInfoCard(cardType, cardTitle) {
+  return {
+    type: SET_INFO_CARD,
     payload: {
       cardType,
       cardTitle,
