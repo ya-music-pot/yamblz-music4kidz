@@ -84,7 +84,7 @@ class Card extends Component {
         bgs={backgroundsList}
         isPlaying={isPlaying}
         isLiked={this._isPlaylistLiked(data.id)}
-        isAuth={userId !== null}
+        isAuth={Boolean(userId)}
       />
     );
   };

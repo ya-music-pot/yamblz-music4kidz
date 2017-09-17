@@ -7,7 +7,7 @@
     "start": "webpack-dev-server",
     "dev": "webpack",
     "lint": "eslint 'src/**/*.js'",
-    "prod": "webpack --optimize-minimize",
+    "prod": "NODE_ENV=production webpack --optimize-minimize",
     "test": "jest"
   },
   "repository": {
