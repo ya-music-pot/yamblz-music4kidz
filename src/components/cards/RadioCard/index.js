@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import { getGradientStyle } from '_helpers';
+import { getRandomInteger } from '_helpers';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import CardAdd from '_components/cards/CardAdd';
@@ -32,7 +32,9 @@ export default class RadioCard extends Component {
   }
 
   _getBg() {
-    return getGradientStyle(this.props.bgs);
+    const { colors } = this.props.bgs;
+    const color = colors[getRandomInteger(0, colors.length - 1)];
+    return { backgroundColor: `#${color}` };
   }
 
   render() {
