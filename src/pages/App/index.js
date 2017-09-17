@@ -14,6 +14,9 @@ import style from './style.styl';
 const ModalPlaylist = Modal(ListTracks);
 
 class App extends Component {
+  renderModalPlaylist() {
+    // return ()
+  }
   renderListTracks() {
     const { listTracks } = this.props.modal;
 
