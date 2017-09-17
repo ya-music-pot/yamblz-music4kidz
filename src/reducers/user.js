@@ -4,16 +4,11 @@ import {
   CREATE_USER, ADD_PLAYLIST, DELETE_PLAYLIST,
   ADD_USER_TRACK, DELETE_USER_TRACK,
 } from '_actions/user';
-import { getLocalStorage } from '_helpers';
-
-const { authToken } = getLocalStorage();
 
 export const defaultState = {
   loading: false,
   loaded: false,
-  data: {
-    id: Number(authToken) || null,
-  },
+  data: {},
   tracks: [],
   playlists: [],
   achievements: [],
