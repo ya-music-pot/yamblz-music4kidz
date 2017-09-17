@@ -57,7 +57,7 @@ export default class Header extends Component {
         <div className={style.slider}>
           {
             order.map(key => {
-              const { id, typeIcon, title } = data[key];
+              const { id, typeIcon, title, description } = data[key];
               const disabled = !userAchievements.find(item => item.id === id);
 
               return (
@@ -65,6 +65,7 @@ export default class Header extends Component {
                   className={style.slide}
                   typeIcon={typeIcon}
                   title={title}
+                  description={description}
                   disabled={disabled}
                   key={id}
                   id={id}

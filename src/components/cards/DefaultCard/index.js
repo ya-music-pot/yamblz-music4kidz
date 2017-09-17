@@ -28,7 +28,7 @@ export default class DefaultCard extends Component {
             <Icon className={icon} typeIcon="action-music" />
           </div>
           <CardTitle text="Музыка только для тебя" styles={title} />
-          <CardSubtitle text="Создай свой плейлист!" styles={subtitle} />
+          <CardSubtitle text="Создай своё радио!" styles={subtitle} />
         </div>
         <Button style={button} onClick={this._onClick}>
           Создать
