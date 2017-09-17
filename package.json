@@ -15,7 +15,8 @@
     "url": "git+https://github.com/ya-music-pot/yamblz-music4kidz.git"
   },
   "pre-commit": [
-    "lint"
+    "lint",
+    "test"
   ],
   "author": "",
   "license": "ISC",

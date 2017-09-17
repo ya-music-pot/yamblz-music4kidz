@@ -33,11 +33,18 @@ describe('playerInfo action', () => {
   });
 
   it('should return SET_INFO_CARD action', () => {
-    expect(setInfoCard(5, 'Привет, Андрей, ну где ты был')).toEqual({
+    const data = {
+      cardType: 5,
+      cardTitle: 'Привет, Андрей, ну где ты был',
+      cardCover: null,
+    };
+
+    expect(setInfoCard(data)).toEqual({
       type: SET_INFO_CARD,
       payload: {
         cardType: 5,
         cardTitle: 'Привет, Андрей, ну где ты был',
+        cardCover: null,
       },
     });
   });
