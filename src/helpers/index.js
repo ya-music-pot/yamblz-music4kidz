@@ -99,6 +99,10 @@ export function API(url, options) {
     },
     method: 'GET',
   };
+  const sendOptions = {
+    ...defOptions,
+    ...options,
+  };
 
-  return window.fetch(url, { ...defOptions, ...options });
+  return window.fetch(url, sendOptions);
 }
