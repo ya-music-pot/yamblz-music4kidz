@@ -29,7 +29,15 @@ export default ({ dispatch }) => (next) => (action) => {
   };
 
   return API(callAPI.url, options)
-    .then((response) => response.json())
+    .then((response) => {
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        return response.json();
+      }
+      // При удалении трека, бэк возврашает null в contentType
+      // и кидается ошибка. Исключение.
+      return Promise.resolve({});
+    })
     .then((data) => {
       if (data.error) {
         return Promise.reject(data);
@@ -42,7 +50,7 @@ export default ({ dispatch }) => (next) => (action) => {
       });
     })
     .catch((error) => {
-      // Отлавливать также ошибки по коду выше.
+      // TODO: Отлавливать также ошибки по коду выше.
       generateError(rest, error, type, dispatch);
     });
 };
