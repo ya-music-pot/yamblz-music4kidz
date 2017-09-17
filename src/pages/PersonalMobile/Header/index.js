@@ -5,12 +5,10 @@ import plural from 'plural-ru';
 
 import Icon from '_components/Icon';
 import Avatar from '_components/Avatar';
-import Slider from '_decorators/Slider';
 import Achievement from '_components/Achievement';
 import style from './style.styl';
 
 const WIDTH_SLIDE = 160;
-const MAX_TRANSFORM = 0;
 
 export default class Header extends Component {
   componentWillMount() {
@@ -56,14 +54,7 @@ export default class Header extends Component {
           {plural(userAchievements.length, '%d награда', '%d награды', '%d наград')}
         </div>
 
-        <Slider
-          className={style.slider}
-          widthSlide={WIDTH_SLIDE}
-          acceleration={1.7}
-          initTransform={MAX_TRANSFORM}
-          maxTransform={MAX_TRANSFORM}
-          minTransform={this.minTransform}
-        >
+        <div className={style.slider}>
           {
             order.map(key => {
               const { id, typeIcon, title } = data[key];
@@ -71,6 +62,7 @@ export default class Header extends Component {
 
               return (
                 <Achievement
+                  className={style.slide}
                   typeIcon={typeIcon}
                   title={title}
                   disabled={disabled}
@@ -81,7 +73,7 @@ export default class Header extends Component {
               );
             })
           }
-        </Slider>
+        </div>
       </div>
     );
   }

@@ -38,7 +38,7 @@ export default class ListSection extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className={style.container}>
         <div className={cl(style.filter, stickyFilter && style.filterSticky)}>
           <div
             className={cl(style.filterItem, activeTab === 'playlists' && style.active)}
@@ -79,7 +79,7 @@ export default class ListSection extends Component {
             <div className={style.emptyText}>
               Здесь будут твои любимые и сохранённые подборки
               <br />
-              Нажми нa <Icon typeIcon="like" className={style.iconHeart} />, чтобы сохранить
+              Нажми нa <Icon typeIcon="plus" className={style.icon} />, чтобы сохранить
             </div>
             <Button
               onClick={onSearch}

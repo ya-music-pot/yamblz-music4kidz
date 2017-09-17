@@ -7,10 +7,12 @@ import style from './style.styl';
 
 export default class Achievement extends Component {
   render() {
-    const { disabled, className, onClick } = this.props;
+    const {
+      disabled, className, onClick,
+      title,
+    } = this.props;
 
     const typeIcon = disabled ? 'achievement-disabled' : this.props.typeIcon;
-    const title = disabled ? 'Тут задание' : this.props.title;
 
     return (
       <div className={cl(style.achievement, className)}>
