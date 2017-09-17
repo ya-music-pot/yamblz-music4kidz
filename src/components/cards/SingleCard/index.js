@@ -46,9 +46,8 @@ export default class SingleCard extends Component {
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
     } = this.props;
 
-    const {
-      artist, name, image_url: imageUrl,
-    } = data.tracks[0];
+    const { artist, name } = data.tracks[0];
+    const imageUrl = data.image_url;
 
     const imageStyles = {};
     if (imageUrl) {
