@@ -33,6 +33,7 @@ class Card extends Component {
         position,
         cardType: data.type,
         cardTitle: data.name,
+        cardCover: data.image_url,
       };
       callback(params);
     }

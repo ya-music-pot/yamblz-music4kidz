@@ -44,17 +44,13 @@ class ListTracks extends Component {
   }
 
   render() {
-    const {
-      info, player, playerInfo,
-      listTracks,
-    } = this.props;
+    const { info, player } = this.props;
     const { playlist, trackId, isPlaying } = player;
-    const inPlayer = listTracks.inPlayer;
 
     return playlist && playlist.length && (
       <div>
         { info.title && <h3 className={style.title}>{info.title}</h3> }
-        <div className={playerInfo.mode && !inPlayer && style.listShift}>
+        <div>
           { playlist.map((item) => this.renderTrack(item, trackId, isPlaying))}
         </div>
       </div>
@@ -64,99 +60,8 @@ class ListTracks extends Component {
 
 export default connect((state, props) => ({
   ...props,
-  // player: state.player,
-  // playerInfo: state.playerInfo,
-  playerInfo: {
-    cardType: 3,
-    cardTitle: 'Холодное сердце',
-    cardCover: 'https://dl.dropboxusercontent.com/s/eqgn54qhwcnan4i/frozen.png?dl=0',
-  },
-  player: {
-    cover: null,
-    singerName: 'Холодное сердце',
-    trackName: 'Холодное сердце',
-    position: 0,
-    trackId: null,
-    playlist: [
-      {
-        id: 17197586,
-        name: 'Сердце льда',
-        artist: 'Павел Ковалёв',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/heart_ice.mp3',
-        added: false,
-        genre_id: 0,
-      }, {
-        id: 31007179,
-        name: 'За окном опять сугробы',
-        artist: 'Natalia Bystrova',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/sugrob.mp3',
-        added: false,
-        genre_id: 2,
-      },
-      {
-        id: 234123,
-        name: 'Сердце льда',
-        artist: 'Павел Ковалёв',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/heart_ice.mp3',
-        added: false,
-        genre_id: 0,
-      }, {
-        id: 1234,
-        name: 'За окном опять сугробы',
-        artist: 'Natalia Bystrova',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/sugrob.mp3',
-        added: false,
-        genre_id: 2,
-      },
-      {
-        id: 36563,
-        name: 'Сердце льда',
-        artist: 'Павел Ковалёв',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/heart_ice.mp3',
-        added: false,
-        genre_id: 0,
-      }, {
-        id: 6784,
-        name: 'За окном опять сугробы',
-        artist: 'Natalia Bystrova',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/sugrob.mp3',
-        added: false,
-        genre_id: 2,
-      },
-      {
-        id: 48678,
-        name: 'Сердце льда',
-        artist: 'Павел Ковалёв',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/heart_ice.mp3',
-        added: false,
-        genre_id: 0,
-      }, {
-        id: 123456,
-        name: 'За окном опять сугробы',
-        artist: 'Natalia Bystrova',
-        lyrics: null,
-        image_url: null,
-        mp3_url: 'https://static.yamblz.ru/music/sugrob.mp3',
-        added: false,
-        genre_id: 2,
-      },
-    ],
-  },
-  listTracks: state.modal.listTracks || {},
+  player: state.player,
+  playerInfo: state.playerInfo,
   info: state.modal.listTracks || {},
 }), { playerPlay, playerPause, playerModeUpdate })(ListTracks);
 
@@ -168,9 +73,6 @@ ListTracks.propTypes = {
   }),
   info: PropTypes.shape({
     title: PropTypes.string,
-  }),
-  listTracks: PropTypes.shape({
-    inPlyaer: PropTypes.bool,
   }),
   playerInfo: PropTypes.shape({
     mode: PropTypes.string,
