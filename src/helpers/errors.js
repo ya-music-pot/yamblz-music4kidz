@@ -31,7 +31,7 @@ export function AppError(property, error) {
 export function errorHandling(error) {
   const { message, status, property } = error;
 
-  // TO DO: Добавить случании 500 ошибок
+  // TODO: Добавить случании 500 ошибок
   if (error instanceof AppError) {
     switch (property) {
       case AUDIO_PLAYER_ERROR:

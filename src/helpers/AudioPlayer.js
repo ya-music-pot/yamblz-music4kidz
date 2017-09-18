@@ -11,7 +11,7 @@ function _init() {
       // Нужно для запуска аудио
       // (Failed to execute 'play' on 'HTMLMediaElement':
       // API can only be initiated by a user gesture.)
-      // TO DO: (Убрать ошибку) в плей не передается ничего
+      // TODO: (Убрать ошибку) в плей не передается ничего
       // и сразу возникает ошибка запроса undefined,
       // если что-то передавать (путой трек), то плеер не инициализируется.
       _audioPlayer.play();

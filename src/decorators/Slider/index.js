@@ -125,7 +125,7 @@ export default class Slider extends Component {
 }
 
 Slider.propTypes = {
-  // TO DO: requred
+  // TODO: requred
   onChange: PropTypes.func,
   children: PropTypes.arrayOf(PropTypes.node).isRequired,
 
