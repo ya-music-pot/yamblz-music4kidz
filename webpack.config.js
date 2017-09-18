@@ -3,8 +3,11 @@
 const { resolve } = require('path');
 const webpack = require('webpack');
 const got = require('got');
+
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SvgStore = require('webpack-svgstore-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 
 const API_URL = 'https://musicforchildren.herokuapp.com/';
 
@@ -19,9 +22,9 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].js',
+    filename: '[name].[hash].js',
     path: resolve('dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
   },
 
   module: {
@@ -102,7 +105,7 @@ module.exports = {
       API_URL: JSON.stringify('https://musicforchildren.herokuapp.com/'),
     }),
     new ExtractTextPlugin({
-      filename: 'styles.css',
+      filename: 'styles.[hash].css',
       allChunks: true,
     }),
     new SvgStore({
@@ -113,6 +116,12 @@ module.exports = {
       },
       prefix: 'icon-',
     }),
+    new HtmlWebpackPlugin({
+      title: 'Music4kids',
+      template: resolve('index.html'),
+      alwaysWriteToDisk: true,
+    }),
+    new HtmlWebpackHarddiskPlugin(),
   ],
 
   devServer: {
