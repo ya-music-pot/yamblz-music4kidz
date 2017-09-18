@@ -123,7 +123,8 @@ export function getRandomInteger(min, max) {
  * @param  {Array} gradients
  * @return {Object}
  */
-export function getGradientStyle(gradients) {
+export function getGradientStyle(bgs) {
+  const { gradients } = bgs;
   const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
   return { backgroundImage: `linear-gradient(${gradient})` };
 }
