@@ -20,7 +20,7 @@
   display: none;
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-height: 560px) {
   .wrapper {
     background: #fff;
     position: fixed;
@@ -55,12 +55,12 @@
 }
 
 .dog {
-  @media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+  @media (orientation: landscape) and (max-height: 560px) and (-webkit-min-device-pixel-ratio: 2) {
     background: url('./images/dog@2x.png');
     background-size: contain;
   }
 
-  @media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 3) {
+  @media (orientation: landscape) and (max-height: 560px) and (-webkit-min-device-pixel-ratio: 3) {
     background: url('./images/dog@3x.png');
     background-size: contain;
   }

@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import ButtonVk from '_components/ButtonVk';
 import style from './style.styl';
 
 export default class Auth extends Component {
-  _onButtonClick = () => {};
-
   render() {
     const {
       wrapper, lapakota, title,
@@ -16,11 +15,15 @@ export default class Auth extends Component {
         <div className={lapakota} />
         <div className={title}>Нужна авторизация</div>
         <div className={text}>
-          Ты&nbsp;сможешь пользоваться личным радио,
+          Ты сможешь пользоваться личным радио,
           получать награды и&nbsp;многое другое!
         </div>
-        <ButtonVk onClick={this._onButtonClick} className={button} />
+        <ButtonVk onClick={this.props.onClick} className={button} />
       </div>
     );
   }
 }
+
+Auth.propTypes = {
+  onClick: PropTypes.func,
+};
