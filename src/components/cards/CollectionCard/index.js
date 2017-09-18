@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import getRandomInteger from '_helpers/randomNumber';
+import { getGradientStyle } from '_helpers';
 import CardTitle from '_components/cards/CardTitle';
 import CardAdd from '_components/cards/CardAdd';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
@@ -30,9 +30,7 @@ export default class CollectionCard extends Component {
   }
 
   _getBg() {
-    const { gradients } = this.props.bgs;
-    const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
-    return { backgroundImage: `linear-gradient(${gradient})` };
+    return getGradientStyle(this.props.bgs);
   }
 
   render() {

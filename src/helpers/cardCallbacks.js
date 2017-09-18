@@ -5,7 +5,9 @@ import {
 import { likePlaylist, dislikePlaylist } from '_actions/feed';
 import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
 import { showPlayer, playerModeUpdate, setInfoCard } from '_actions/playerInfo';
-import { openModal } from '_actions/modal';
+
+import history from '_settings/history';
+
 import CARDS from '_data/cardsType';
 
 import store from '_settings/store';
@@ -33,12 +35,12 @@ const openListTracks = (params) => {
   const {
     trackId, playlist, isRadio,
     playlistId, cardType, cardTitle,
+    cardCover,
   } = params;
 
   const track = playlist.find(item => item.id === trackId);
 
   store.dispatch(setPlaylist(playlist, isRadio, playlistId));
-  store.dispatch(setInfoCard(cardType, cardTitle));
   store.dispatch(setTrackInfo({
     cover: track.image_url,
     singerName: track.artist,
@@ -48,9 +50,8 @@ const openListTracks = (params) => {
     shouldPlay: false,
     loaded: false,
   }));
-  store.dispatch(openModal('listTracks', {
-    title: 'Список треков',
-  }));
+  store.dispatch(setInfoCard({ cardType, cardTitle, cardCover }));
+  history.push('/playlist');
 };
 
 const onCardClick = (params) => {
