@@ -41,6 +41,10 @@ class App extends Component {
           { this.props.children }
           { this.props.isModePlayer && <Player /> }
           { this.renderListTracks() }
+          <div className={style.wrapper} >
+            <div className={style.dog} />
+            <div className={style.text}>Поверни телефон, чтобы вернуться на страницу</div>
+          </div>
         </div>
       );
   }
