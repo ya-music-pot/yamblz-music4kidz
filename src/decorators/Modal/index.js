@@ -41,7 +41,7 @@ class Modal extends ReactComponent {
 
 export default Component => connect((state, props) => ({
   ...props,
-  // TO DO Подумать как это вынести из общей обертки.
+  // TODO: Подумать как это вынести из общей обертки.
   modal: state.modal.listTracks || {},
   Component,
 }), { closeModal })(Modal);
