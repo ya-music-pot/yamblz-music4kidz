@@ -54,12 +54,16 @@
     }
 }
 
-@media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
-  background: url('./images/dog@2x.png');
-  background-size: contain;
+.dog {
+  @media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 2) {
+    background: url('./images/dog@2x.png');
+    background-size: contain;
+  }
+
+  @media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 3) {
+    background: url('./images/dog@3x.png');
+    background-size: contain;
+  }
 }
 
-@media (orientation: landscape) and (-webkit-min-device-pixel-ratio: 3) {
-  background: url('./images/dog@3x.png');
-  background-size: contain;
-}
+
