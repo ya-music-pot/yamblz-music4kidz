@@ -1,4 +1,6 @@
 export const GET_USER = 'GET_USER';
+export const GET_USER_BY_LOGIN = 'GET_USER_BY_LOGIN';
+export const SET_USER_INFO = 'SET_USER_INFO';
 export const UPDATE_USER = 'UPDATE_USER';
 export const CREATE_USER = 'CREATE_USER';
 export const GET_ALL_TRACKS = 'GET_ALL_TRACKS';
@@ -17,9 +19,41 @@ export function getUser(id) {
     },
   };
 }
+export function checkAndCreateUser(data) {
+  return {
+    type: GET_USER_BY_LOGIN,
+    payload: {
+      ...data,
+    },
+    callAPI: {
+      url: `${API_URL}user/login?login=${data.login}`,
+    },
+  };
+}
+
+export function setUserInfo(data) {
+  const {
+    login, firstName, lastName,
+    avatarUrl,
+  } = data;
+
+  return {
+    type: SET_USER_INFO,
+    payload: {
+      login,
+      firstName,
+      lastName,
+      avatarUrl,
+    },
+  };
+}
 
 export function createUser(data) {
-  const { moodId, actionId, tracks } = data;
+  const {
+    login, firstName, lastName,
+    moodId, actionId, avatarUrl,
+    tracks
+  } = data;
 
   return {
     type: CREATE_USER,
@@ -27,12 +61,12 @@ export function createUser(data) {
       method: 'POST',
       url: `${API_URL}user/register`,
       body: {
-        login: new Date().getTime(),
-        first_name: 'Катя',
-        last_name: 'Соловьева',
+        login: login || new Date().getTime(),
+        first_name: firstName || 'Катя',
+        last_name: lastName || 'Соловьева',
         mood_id: moodId,
         action_id: actionId,
-        avatar_url: '/assets/images/avatar.jpg',
+        avatar_url: avatarUrl || '/assets/images/avatar.jpg',
         tracks,
       },
     },

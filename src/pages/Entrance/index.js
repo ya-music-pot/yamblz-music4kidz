@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import callbacks from '_helpers/cardCallbacks';
 import { removePlayerPage } from '_helpers/player';
+import { setUserInfo } from '_actions/user';
 
 import EntranceScreen from './EntranceScreen';
 import style from './style.styl';
@@ -29,7 +30,20 @@ class Entrance extends Component {
 
   _handleNavigate = () => {
     removePlayerPage();
-    this.props.router.push('/calibration');
+
+    VK.Auth.login((data) => {
+      if (data && data.session && data.status === 'connected') {
+        const user = data.session.user;
+        const userInfo = {
+          login: user.id,
+          firstName: user.first_name,
+          lastName: user.last_name,
+        };
+
+        this.props.setUserInfo(userInfo);
+        this.props.router.push('/calibration');
+      }
+    });
   };
 
   _handleCalibrationDeny = () => {
@@ -56,6 +70,7 @@ Entrance.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
   }),
+  setUserInfo: PropTypes.func,
 };
 
 export default connect((state, props) => {
@@ -65,4 +80,4 @@ export default connect((state, props) => {
     data,
     userData: state.user.data,
   };
-})(Entrance);
+}, { setUserInfo })(Entrance);

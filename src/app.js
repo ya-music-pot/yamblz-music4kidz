@@ -25,7 +25,10 @@ initReactFastclick();
 
 const { authToken } = getLocalStorage();
 /* Render */
-loadCommonData().then(render).catch((error) => {
+loadCommonData()
+  .then(render)
+  .then(initVK)
+  .catch((error) => {
   render();
   errorHandling(error);
 });
@@ -40,6 +43,12 @@ function render() {
       </Provider>
     </div>
   ), document.getElementById('root'));
+}
+
+function initVK() {
+  VK.init({
+    apiId: VK_APP_ID,
+  });
 }
 
 

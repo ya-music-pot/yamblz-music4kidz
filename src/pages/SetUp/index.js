@@ -7,7 +7,7 @@ import ListSettings from '_components/ListSettings';
 import Loader from '_components/Loader';
 
 import { updateStep, clearSetUp } from '_actions/setup';
-import { createUser, updateUser } from '_actions/user';
+import { createUser, updateUser, checkAndCreateUser } from '_actions/user';
 import { playerClear, playerStop } from '_actions/player';
 import { removePlayerPage } from '_helpers/player';
 
@@ -70,7 +70,9 @@ class SetUp extends Component {
       });
 
     } else {
-      this.props.createUser({ ...settings });
+      this.props.checkAndCreateUser({
+        ...user.data,
+      });
     }
   }
 
@@ -155,6 +157,7 @@ SetUp.propTypes = {
   }),
   updateUser: PropTypes.func,
   createUser: PropTypes.func,
+  checkAndCreateUser: PropTypes.func,
   playerStop: PropTypes.func,
   updateStep: PropTypes.func,
   clearSetUp: PropTypes.func,
@@ -185,6 +188,7 @@ export default connect((state, props) => {
   updateUser,
   clearSetUp,
   createUser,
+  checkAndCreateUser,
   playerClear,
   playerStop,
 })(SetUp);

@@ -39,6 +39,7 @@
     "isProduction": true,
     "Ya": true,
     "ya": true,
-    "API_URL": true
+    "API_URL": true,
+    "VK_APP_ID": true
   }
 }

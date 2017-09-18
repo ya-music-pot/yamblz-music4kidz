@@ -103,6 +103,7 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(ENV),
       isProduction: ENV === 'production',
       API_URL: JSON.stringify('https://musicforchildren.herokuapp.com/'),
+      VK_APP_ID: JSON.stringify(process.env.VK_APP_ID)
     }),
     new ExtractTextPlugin({
       filename: 'styles.[hash].css',

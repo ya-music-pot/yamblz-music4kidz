@@ -1,5 +1,6 @@
 import {
-  GET_USER, UPDATE_USER, GET_ALL_TRACKS,
+  GET_USER, GET_USER_BY_LOGIN, SET_USER_INFO,
+  UPDATE_USER, GET_ALL_TRACKS,
   GET_ALL_PLAYLISTS, GET_ACHIEVEMENTS,
   CREATE_USER, ADD_PLAYLIST, DELETE_PLAYLIST,
   ADD_USER_TRACK, DELETE_USER_TRACK,
@@ -25,6 +26,36 @@ export default function (state = defaultState, action) {
         loaded: true,
         ...response,
       };
+    case `${GET_USER_BY_LOGIN}_START`:
+      return {
+        ...state,
+        loading: true,
+        loaded: false,
+      };
+    case `${GET_USER_BY_LOGIN}_SUCCESS`:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        ...response,
+      };
+    case `${GET_USER_BY_LOGIN}_FAIL`:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+      };
+    case SET_USER_INFO: {
+      const { data } = state;
+
+      return {
+        ...state,
+        data: {
+          ...data,
+          ...payload,
+        },
+      };
+    }
     case `${UPDATE_USER}_START`:
       return {
         ...state,
