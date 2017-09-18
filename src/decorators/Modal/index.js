@@ -28,7 +28,7 @@ class Modal extends ReactComponent {
         <i className={style.outside} onClick={this._onModalClose} />
         <div className={style.container}>
           <div className={style.close} onClick={this._onModalClose}>
-            <Icon typeIcon="close" />
+            <Icon typeIcon="hide" />
           </div>
           <div className={style.content}>
             <Component {...this.props} />
