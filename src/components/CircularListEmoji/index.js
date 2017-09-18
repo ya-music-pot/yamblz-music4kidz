@@ -28,29 +28,29 @@ export default class ListEmoji extends Component {
   }
 
   _animate = (draw, duration, calcId) => {
-    let start = performance.now();
-    requestAnimationFrame(function frameIteration(time) {
-        let timePassed = time - start;
-        if (timePassed > duration) {
-          timePassed = duration;
-          calcId();
-        };
-        draw(timePassed);
-        if (timePassed < duration) {
-          requestAnimationFrame(frameIteration);
-        }
-      });
+    const start = window.performance.now();
+    window.requestAnimationFrame(function frameIteration(time) {
+      let timePassed = time - start;
+      if (timePassed > duration) {
+        timePassed = duration;
+        calcId();
+      }
+      draw(timePassed);
+      if (timePassed < duration) {
+        window.requestAnimationFrame(frameIteration);
+      }
+    });
   }
 
   _calculateEmojiId = () => {
     const { onChangeEmoji, emojiData } = this.props;
     const stepEmoji = 360 / (emojiData.length * 2);
     let id = Math.abs(parseInt((-this.state.angleEmoji + stepEmoji / 2) / stepEmoji, 10));
-        id = (id >= 9) ? id - Math.floor(id / 9) * 9 + 1 : id + 1;
-    if(this.state.angleEmoji > 0) {
+    id = (id >= 9) ? id - Math.floor(id / 9) * 9 + 1 : id + 1;
+    if (this.state.angleEmoji > 0) {
       id = emojiData.length - id + 1;
     }
-    if(this.state.activeEmojiId !== id) {
+    if (this.state.activeEmojiId !== id) {
       this.setState({
         activeEmojiId: id,
       });
@@ -62,11 +62,11 @@ export default class ListEmoji extends Component {
     const { onChangeAction, actionData } = this.props;
     const stepAction = 360 / (actionData.length * 2);
     let id = Math.abs(parseInt((-this.state.angleAction + stepAction / 2) / stepAction, 10));
-        id = (id >= 9) ? id - Math.floor(id / 9) * 9 + 1 : id + 1;
-    if(this.state.angleAction > 0) {
+    id = (id >= 9) ? id - Math.floor(id / 9) * 9 + 1 : id + 1;
+    if (this.state.angleAction > 0) {
       id = actionData.length - id + 1;
     }
-    if(this.state.activeActionId !== id) {
+    if (this.state.activeActionId !== id) {
       this.setState({
         activeActionId: id,
       });
@@ -74,9 +74,7 @@ export default class ListEmoji extends Component {
     }
   }
 
-  _calcDelta = (deltaX) => {
-    return deltaX / 100;
-  }
+  _calcDelta = (deltaX) => deltaX / 100
 
   _emojiRing = (target) => {
     this.emojiRing = target;
@@ -86,7 +84,7 @@ export default class ListEmoji extends Component {
     const animLength = 200;
     this._animate((t) => {
       this.setState({
-        angleEmoji: this.state.angleEmoji - (Math.abs(e.velocityX) * (animLength - t)/animLength),
+        angleEmoji: this.state.angleEmoji - (Math.abs(e.velocityX) * (animLength - t) / animLength),
       });
     }, animLength, this._calculateEmojiId);
   }
@@ -95,7 +93,7 @@ export default class ListEmoji extends Component {
     const animLength = 200;
     this._animate((t) => {
       this.setState({
-        angleEmoji: this.state.angleEmoji + (Math.abs(e.velocityX) * (animLength - t)/animLength),
+        angleEmoji: this.state.angleEmoji + (Math.abs(e.velocityX) * (animLength - t) / animLength),
       });
     }, animLength, this._calculateEmojiId);
   }
@@ -108,7 +106,8 @@ export default class ListEmoji extends Component {
     const animLength = 200;
     this._animate((t) => {
       this.setState({
-        angleAction: this.state.angleAction - (Math.abs(e.velocityX) * (animLength - t)/animLength),
+        angleAction: this.state.angleAction -
+        (Math.abs(e.velocityX) * (animLength - t) / animLength),
       });
     }, animLength, this._calculateActionId);
   }
@@ -117,7 +116,8 @@ export default class ListEmoji extends Component {
     const animLength = 200;
     this._animate((t) => {
       this.setState({
-        angleAction: this.state.angleAction + (Math.abs(e.velocityX) * (animLength - t)/animLength),
+        angleAction: this.state.angleAction +
+        (Math.abs(e.velocityX) * (animLength - t) / animLength),
       });
     }, animLength, this._calculateActionId);
   }
@@ -169,7 +169,7 @@ export default class ListEmoji extends Component {
     const newEmojiList = [];
     const newActionList = [];
 
-    for(let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       emojiData.map(({ id, typeIcon }) => (
         newEmojiList.push({
           id: id + emojiData.length * i,
@@ -178,7 +178,7 @@ export default class ListEmoji extends Component {
       ));
     }
 
-    for(let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       actionData.map(({ id, typeIcon }) => (
         newActionList.push({
           id: id + actionData.length * i,
@@ -193,24 +193,24 @@ export default class ListEmoji extends Component {
         <div
           ref={this._emojiRing}
           className={style.emojiRing}
-          style={{transform: `rotate(${this.state.angleEmoji}deg)`}}
+          style={{ transform: `rotate(${this.state.angleEmoji}deg)` }}
         >
           <ul className={style.emojiList}>
             {
               newEmojiList.map(({ id, typeIcon }) => (
                 <li
-                  key={typeIcon+id}
+                  key={typeIcon + id}
                   className={style.item}
                   style={this._transformOuterRing(id)}
                 >
-                  <div style={{transform: `rotate(${-this.state.angleEmoji}deg)`}}>
+                  <div style={{ transform: `rotate(${-this.state.angleEmoji}deg)` }}>
                     <Icon
                       typeIcon={`${typeIcon}-small`}
                     />
                   </div>
                   <div
                     className={style.spacer}
-                    style={{transform: `rotate(${-this.state.angleEmoji}deg)`}}
+                    style={{ transform: `rotate(${-this.state.angleEmoji}deg)` }}
                   />
                 </li>
               ))
@@ -220,23 +220,23 @@ export default class ListEmoji extends Component {
         <div
           ref={this._actionRing}
           className={style.actionRing}
-          style={{transform: `rotate(${this.state.angleAction}deg)`}}
+          style={{ transform: `rotate(${this.state.angleAction}deg)` }}
         >
           <ul className={style.actionList}>
             { newActionList.map(({ id, typeIcon }) => (
               <li
-                key={typeIcon+id}
+                key={typeIcon + id}
                 className={style.item}
                 style={this._transformInnerRing(id)}
               >
-                <div style={{transform: `rotate(${-this.state.angleAction}deg)`}}>
+                <div style={{ transform: `rotate(${-this.state.angleAction}deg)` }}>
                   <Icon
                     typeIcon={`${typeIcon}-small`}
                   />
                 </div>
                 <div
                   className={style.spacer}
-                  style={{transform: `rotate(${-this.state.angleAction}deg)`}}
+                  style={{ transform: `rotate(${-this.state.angleAction}deg)` }}
                 />
               </li>
             ))}
