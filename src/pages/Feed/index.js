@@ -50,6 +50,10 @@ class Feed extends Component {
     }
   };
 
+  _handleCreateRadioclick = () => {
+    this.props.openModal('authModal', true);
+  };
+
   _handleAuthClick = () => {
     this.props.router.push('/setup');
     this.props.closeModal();
@@ -76,6 +80,7 @@ class Feed extends Component {
   render() {
     const { playlist, container, paddingBottom } = style;
     callbacks.onRouterPush = this.props.router.push;
+    callbacks.onCreateClick = this._handleCreateRadioclick;
     const { data } = this.props.feed;
     const { user, isPlayerVisible } = this.props;
 
