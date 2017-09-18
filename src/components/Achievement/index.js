@@ -7,10 +7,13 @@ import style from './style.styl';
 
 export default class Achievement extends Component {
   render() {
-    const { disabled, className, onClick } = this.props;
+    const {
+      disabled, className, onClick,
+      title, description,
+    } = this.props;
+    const text = disabled ? description : title;
 
     const typeIcon = disabled ? 'achievement-disabled' : this.props.typeIcon;
-    const title = disabled ? 'Тут задание' : this.props.title;
 
     return (
       <div className={cl(style.achievement, className)}>
@@ -19,7 +22,7 @@ export default class Achievement extends Component {
           className={style.logo}
           onClick={onClick}
         />
-        <div className={cl(style.title, disabled && style.titleDisabled)}>{title}</div>
+        <div className={cl(style.title, disabled && style.titleDisabled)}>{text}</div>
       </div>
     );
   }
@@ -28,6 +31,7 @@ export default class Achievement extends Component {
 Achievement.propTypes = {
   typeIcon: PropTypes.string,
   title: PropTypes.string,
+  description: PropTypes.string,
   disabled: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,

@@ -79,9 +79,14 @@
 
 .slider {
   display: flex;
-  margin: 33px 0;
+  overflow-y: scroll;
+  margin-top: 33px;
+  padding-bottom: 33px;
 
-  :global div[class*='slide'] {
+  .slide {
     flex-basis: 160px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    flex-grow: 0;
   }
 }

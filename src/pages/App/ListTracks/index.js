@@ -44,17 +44,13 @@ class ListTracks extends Component {
   }
 
   render() {
-    const {
-      info, player, playerInfo,
-      listTracks,
-    } = this.props;
+    const { info, player } = this.props;
     const { playlist, trackId, isPlaying } = player;
-    const inPlayer = listTracks.inPlayer;
 
     return playlist && playlist.length && (
       <div>
-        <h3 className={style.title}>{info.title}</h3>
-        <div className={playerInfo.mode && !inPlayer && style.listShift}>
+        { info.title && <h3 className={style.title}>{info.title}</h3> }
+        <div>
           { playlist.map((item) => this.renderTrack(item, trackId, isPlaying))}
         </div>
       </div>
@@ -66,7 +62,6 @@ export default connect((state, props) => ({
   ...props,
   player: state.player,
   playerInfo: state.playerInfo,
-  listTracks: state.modal.listTracks || {},
   info: state.modal.listTracks || {},
 }), { playerPlay, playerPause, playerModeUpdate })(ListTracks);
 
@@ -78,9 +73,6 @@ ListTracks.propTypes = {
   }),
   info: PropTypes.shape({
     title: PropTypes.string,
-  }),
-  listTracks: PropTypes.shape({
-    inPlyaer: PropTypes.bool,
   }),
   playerInfo: PropTypes.shape({
     mode: PropTypes.string,

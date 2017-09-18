@@ -6,6 +6,7 @@ import styles from './style.styl';
 
 export default class Button extends Component {
   render() {
+    // TODO: style -> className
     const { onClick, children, style } = this.props;
     return (
       <button

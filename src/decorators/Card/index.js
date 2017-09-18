@@ -33,6 +33,7 @@ class Card extends Component {
         position,
         cardType: data.type,
         cardTitle: data.name,
+        cardCover: data.image_url,
       };
       callback(params);
     }
@@ -83,7 +84,7 @@ class Card extends Component {
         bgs={backgroundsList}
         isPlaying={isPlaying}
         isLiked={this._isPlaylistLiked(data.id)}
-        isAuth={userId !== null}
+        isAuth={Boolean(userId)}
       />
     );
   };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cl from 'classname';
 
-import getRandomInteger from '_helpers/randomNumber';
+import { getRandomInteger } from '_helpers';
 import CardTitle from '_components/cards/CardTitle';
 import CardSubtitle from '_components/cards/CardSubtitle';
 import CardAdd from '_components/cards/CardAdd';

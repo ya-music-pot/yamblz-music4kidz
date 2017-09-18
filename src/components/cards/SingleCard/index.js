@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import getRandomInteger from '_helpers/randomNumber';
+import { getGradientStyle } from '_helpers';
 import CardTitle from '_components/cards/CardTitle';
 import CardAdd from '_components/cards/CardAdd';
 import ButtonMiniplayer from '_components/ButtonMiniplayer';
@@ -30,9 +30,7 @@ export default class SingleCard extends Component {
   }
 
   _getBg() {
-    const { gradients } = this.props.bgs;
-    const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
-    return { backgroundImage: `linear-gradient(${gradient})` };
+    return getGradientStyle(this.props.bgs);
   }
 
   render() {
@@ -46,9 +44,8 @@ export default class SingleCard extends Component {
       callbacks: { handleCardClick, handleButtonClick, onAddClick },
     } = this.props;
 
-    const {
-      artist, name, image_url: imageUrl,
-    } = data.tracks[0];
+    const { artist, name } = data.tracks[0];
+    const imageUrl = data.image_url;
 
     const imageStyles = {};
     if (imageUrl) {
