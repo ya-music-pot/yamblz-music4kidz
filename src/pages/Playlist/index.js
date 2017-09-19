@@ -13,14 +13,12 @@ import Icon from '_components/Icon';
 import CARDS from '_data/cardsType';
 
 import ListTracks from '_pages/App/ListTracks';
-import { getGradientStyle } from '_helpers';
 
 import style from './style.styl';
 
 class Playlist extends Component {
   state = {
     miniStyle: false,
-    bgHeader: getGradientStyle(this.props.gradients),
   }
 
   componentWillMount() {
@@ -60,7 +58,9 @@ class Playlist extends Component {
   }
 
   _handleBack = () => {
-    this.props.router.push('/feed');
+    const { router, playerInfo } = this.props;
+    const pathBack = playerInfo.pathBack.pathname;
+    router.push(pathBack || '/feed');
   }
 
   _handlePlayStart = () => {
@@ -97,15 +97,11 @@ class Playlist extends Component {
   }
 
   renderHeader() {
-    const { bgHeader } = this.state;
     const { playerInfo } = this.props;
     const { cardTitle } = playerInfo;
 
     return (
-      <div
-        className={cl(style.header)}
-        style={bgHeader}
-      >
+      <div className={cl(style.header)}>
         { this.renderCover() }
         <ButtonCircle
           nameIcon="back"
@@ -135,12 +131,12 @@ class Playlist extends Component {
 }
 
 Playlist.propTypes = {
-  gradients: PropTypes.array,
   router: PropTypes.object,
   playerInfo: PropTypes.shape({
     cardTitle: PropTypes.string,
     cardCover: PropTypes.string,
     cardType: PropTypes.number,
+    pathBack: PropTypes.object,
   }),
   playlist: PropTypes.array,
   isShowing: PropTypes.bool,

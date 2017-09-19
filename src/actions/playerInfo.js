@@ -28,13 +28,14 @@ export function showPlayer(cardType, cardTitle) {
   };
 }
 
-export function setInfoCard({ cardType, cardTitle, cardCover }) {
+export function setInfoCard({ cardType, cardTitle, cardCover, pathBack }) {
   return {
     type: SET_INFO_CARD,
     payload: {
       cardType,
       cardTitle,
       cardCover,
+      pathBack,
     },
   };
 }

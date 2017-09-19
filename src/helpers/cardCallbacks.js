@@ -50,8 +50,16 @@ const openListTracks = (params) => {
     shouldPlay: false,
     loaded: false,
   }));
-  store.dispatch(setInfoCard({ cardType, cardTitle, cardCover }));
+
+  store.dispatch(setInfoCard({
+    cardType,
+    cardTitle,
+    cardCover,
+    pathBack: history.getCurrentLocation(),
+  }));
   history.push('/playlist');
+  store.dispatch(playerPlay(trackId));
+  store.dispatch(playerModeUpdate('mini'));
 };
 
 const onCardClick = (params) => {
