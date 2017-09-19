@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Hammer from 'hammerjs';
 import cl from 'classname';
 import Button from '_components/Button';
+import ButtonVk from '_components/ButtonVk';
 import Icon from '_components/Icon';
 import OutsideCard from '../OutsideCard';
 
@@ -13,7 +14,7 @@ import style from './style.styl';
 class EntranceScreen extends Component {
   state = {
     isCardShown: false,
-  }
+  };
 
   componentWillMount() {
     this.windowHeight = window.innerHeight;
@@ -58,14 +59,14 @@ class EntranceScreen extends Component {
         translate: this.bottomPosition,
       });
     });
-  }
+  };
 
   _handleClickoutside = () => {
     this.setState({
       isCardShown: false,
       translate: this.bottomPosition,
     });
-  }
+  };
 
   render() {
     const {
@@ -103,17 +104,12 @@ class EntranceScreen extends Component {
               Привет!
             </div>
             <div className={style.subTitle}>
-              Будем слушать музыку и веселиться?
+              Будем слушать музыку и&nbsp;веселиться?
             </div>
           </div>
 
           <div className={style.buttonWrapper}>
-            <Button
-              style={style.button}
-              onClick={this.props.onNavigate}
-            >
-              Войти
-            </Button>
+            <ButtonVk onClick={this.props.onNavigate} />
             <Button
               style={style.buttonSmall}
               onClick={this.props.onDeny}

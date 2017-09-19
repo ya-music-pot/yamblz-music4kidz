@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const SvgStore = require('webpack-svgstore-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const API_URL = 'https://musicforchildren.herokuapp.com/';
 
@@ -123,6 +124,12 @@ module.exports = {
       alwaysWriteToDisk: true,
     }),
     new HtmlWebpackHarddiskPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: 'assets/**/*',
+        to: ''
+      },
+    ]),
   ],
 
   devServer: {

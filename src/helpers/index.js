@@ -119,11 +119,12 @@ export function getRandomInteger(min, max) {
 }
 
 /**
- * Return random gradient from dictionaries
- * @param  {Array} gradients
+ * Return random gradient from dictionary
+ * @param  {Object} bgs
  * @return {Object}
  */
-export function getGradientStyle(gradients) {
+export function getGradientStyle(bgs) {
+  const { gradients } = bgs;
   const gradient = gradients[getRandomInteger(0, gradients.length - 1)];
   return { backgroundImage: `linear-gradient(${gradient})` };
 }
