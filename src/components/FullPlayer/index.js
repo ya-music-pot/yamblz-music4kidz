@@ -46,7 +46,7 @@ export default class FullPlayer extends Component {
     const { blured } = style;
     return (
       <div>
-        <div className={cl(style.wrapper, this._changeHeight(), isSelector && blured)}>
+        <div className={cl(style.wrapper, isSelector && blured)} style={this._changeHeight()}>
           <Header
             onClickArrowDown={onClickArrowDown}
             cardType={cardType}
