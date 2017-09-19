@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import cl from 'classname';
 
 import { playerModeUpdate } from '_actions/playerInfo';
-import { playerPlay } from '_actions/player';
 
 import ButtonCircle from '_components/ButtonCircle';
 import Button from '_components/Button';
@@ -13,6 +12,8 @@ import Icon from '_components/Icon';
 import CARDS from '_data/cardsType';
 
 import ListTracks from '_pages/App/ListTracks';
+
+import { runPlayer } from '_helpers/cardCallbacks';
 
 import style from './style.styl';
 
@@ -64,12 +65,15 @@ class Playlist extends Component {
   }
 
   _handlePlayStart = () => {
-    const { cardPlaylist } = this.props.playerInfo;
+    const { cardPlaylist, cardParams } = this.props.playerInfo;
 
     const track = cardPlaylist && cardPlaylist[0];
     if (track) {
       this.props.playerModeUpdate('mini');
-      this.props.playerPlay(track.id);
+      runPlayer({
+        ...cardParams,
+        trackId: track.id,
+      });
     }
   }
 
@@ -146,7 +150,6 @@ Playlist.propTypes = {
   }),
   isShowing: PropTypes.bool,
   playerModeUpdate: PropTypes.func,
-  playerPlay: PropTypes.func,
 };
 
 export default connect((state, props) => ({
@@ -157,5 +160,4 @@ export default connect((state, props) => ({
   ...props,
 }), {
   playerModeUpdate,
-  playerPlay,
 })(Playlist);
