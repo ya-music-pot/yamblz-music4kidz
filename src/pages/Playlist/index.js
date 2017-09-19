@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import cl from 'classname';
 
 import { playerModeUpdate } from '_actions/playerInfo';
-import { playerPlay } from '_actions/player';
 
 import ButtonCircle from '_components/ButtonCircle';
 import Button from '_components/Button';
@@ -151,7 +150,6 @@ Playlist.propTypes = {
   }),
   isShowing: PropTypes.bool,
   playerModeUpdate: PropTypes.func,
-  playerPlay: PropTypes.func,
 };
 
 export default connect((state, props) => ({
@@ -162,5 +160,4 @@ export default connect((state, props) => ({
   ...props,
 }), {
   playerModeUpdate,
-  playerPlay,
 })(Playlist);
