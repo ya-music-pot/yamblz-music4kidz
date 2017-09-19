@@ -5,18 +5,28 @@ import PropTypes from 'prop-types';
 import { playerModeUpdate } from '_actions/playerInfo';
 import TrackInfo from '_components/TrackInfo';
 import { playerPlay, playerPause } from '_actions/player';
+import { runPlayer } from '_helpers/cardCallbacks';
 
 import style from './style.styl';
 
 class ListTracks extends Component {
   _onTogglePlay = (id) => {
-    const { isPlaying, trackId } = this.props.player;
-    const { mode } = this.props.playerInfo;
+    const { cardParams, player, playerInfo } = this.props;
+    const { isPlaying, trackId } = player;
+    const { mode } = playerInfo;
 
     if (!mode) this.props.playerModeUpdate('mini');
 
     if (id === trackId && isPlaying) {
       this.props.playerPause();
+      return;
+    }
+
+    if (cardParams) {
+      runPlayer({
+        ...cardParams,
+        trackId: id,
+      });
     } else {
       this.props.playerPlay(id);
     }
@@ -45,7 +55,10 @@ class ListTracks extends Component {
 
   render() {
     const { info, player } = this.props;
-    const { playlist, trackId, isPlaying } = player;
+    const { cardParams } = this.props;
+
+    const playlist = cardParams ? cardParams.playlist : player.playlist;
+    const { trackId, isPlaying } = player;
 
     return playlist && playlist.length && (
       <div>
@@ -77,6 +90,9 @@ ListTracks.propTypes = {
   playerInfo: PropTypes.shape({
     mode: PropTypes.string,
   }),
+  // TODO: подумать над логикой хранения текущих плейлистов
+  // и остальных.
+  cardParams: PropTypes.object,
   playerModeUpdate: PropTypes.func,
   playerPause: PropTypes.func,
   playerPlay: PropTypes.func,

@@ -13,14 +13,12 @@ import Icon from '_components/Icon';
 import CARDS from '_data/cardsType';
 
 import ListTracks from '_pages/App/ListTracks';
-import { getGradientStyle } from '_helpers';
 
 import style from './style.styl';
 
 class Playlist extends Component {
   state = {
     miniStyle: false,
-    bgHeader: getGradientStyle(this.props.gradients),
   }
 
   componentWillMount() {
@@ -28,7 +26,7 @@ class Playlist extends Component {
 
     window.scrollTo(0, 0);
 
-    if (!playerInfo.cardTitle) {
+    if (!playerInfo.cardPlaylistTitle) {
       router.push('/feed');
     }
   }
@@ -60,13 +58,15 @@ class Playlist extends Component {
   }
 
   _handleBack = () => {
-    this.props.router.push('/feed');
+    const { router, playerInfo } = this.props;
+    const pathBack = playerInfo.pathBack.pathname;
+    router.push(pathBack || '/feed');
   }
 
   _handlePlayStart = () => {
-    const { playlist } = this.props;
+    const { cardPlaylist } = this.props.playerInfo;
 
-    const track = playlist && playlist[0];
+    const track = cardPlaylist && cardPlaylist[0];
     if (track) {
       this.props.playerModeUpdate('mini');
       this.props.playerPlay(track.id);
@@ -89,23 +89,19 @@ class Playlist extends Component {
   }
 
   renderCover() {
-    const { cardCover, cardType } = this.props.playerInfo;
+    const { cardPlaylistCover, cardPlaylistType } = this.props.playerInfo;
 
-    return cardType !== CARDS.game && (
-      <i className={style.cover} style={this.styleCover(cardCover)} />
+    return cardPlaylistType !== CARDS.game && (
+      <i className={style.cover} style={this.styleCover(cardPlaylistCover)} />
     );
   }
 
   renderHeader() {
-    const { bgHeader } = this.state;
     const { playerInfo } = this.props;
-    const { cardTitle } = playerInfo;
+    const { cardPlaylistTitle } = playerInfo;
 
     return (
-      <div
-        className={cl(style.header)}
-        style={bgHeader}
-      >
+      <div className={cl(style.header)}>
         { this.renderCover() }
         <ButtonCircle
           nameIcon="back"
@@ -113,7 +109,7 @@ class Playlist extends Component {
           className={style.back}
         />
         <div className={style.headerContent}>
-          <h1 className={style.title}>{cardTitle}</h1>
+          <h1 className={style.title}>{cardPlaylistTitle}</h1>
         </div>
         { this.renderPlay() }
       </div>
@@ -122,12 +118,16 @@ class Playlist extends Component {
 
   render() {
     const { miniStyle } = this.state;
+    const { cardParams } = this.props.playerInfo;
 
     return this.props.isShowing && (
       <div className={cl(style.container, miniStyle && style.containerMini)}>
         { this.renderHeader() }
         <div className={style.tracks}>
-          <ListTracks />
+          <ListTracks
+            cardParams={cardParams}
+            isPlaylist
+          />
         </div>
       </div>
     );
@@ -135,14 +135,15 @@ class Playlist extends Component {
 }
 
 Playlist.propTypes = {
-  gradients: PropTypes.array,
   router: PropTypes.object,
   playerInfo: PropTypes.shape({
-    cardTitle: PropTypes.string,
-    cardCover: PropTypes.string,
-    cardType: PropTypes.number,
+    cardPlaylistCover: PropTypes.string,
+    cardPlaylistTitle: PropTypes.string,
+    cardPlaylistType: PropTypes.number,
+    pathBack: PropTypes.object,
+    cardPlaylist: PropTypes.array,
+    cardParams: PropTypes.object,
   }),
-  playlist: PropTypes.array,
   isShowing: PropTypes.bool,
   playerModeUpdate: PropTypes.func,
   playerPlay: PropTypes.func,
@@ -152,8 +153,7 @@ export default connect((state, props) => ({
   user: state.user,
   gradients: state.dictionaries.backgroundsList.gradients,
   playerInfo: state.playerInfo,
-  playlist: state.player.playlist,
-  isShowing: Boolean(state.playerInfo.cardTitle),
+  isShowing: Boolean(state.playerInfo.cardPlaylistTitle),
   ...props,
 }), {
   playerModeUpdate,
