@@ -6,16 +6,18 @@ li {
   display: inline-block;
 }
 
-.actionRing {
-  background-color: tomato;
-}
-
 .wrapper {
   position: fixed;
   width: 100vw;
   height: 100vw;
   margin-left: 50vw;
   z-index: 12;
+  touch-action: none;
+  will-change: auto;
+}
+
+.emojiRing {
+  z-index: 13;
 }
 
 .emojiList {
@@ -24,6 +26,8 @@ li {
   margin-top: 0vw;
   padding: 0;
   z-index: 12;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
 }
 
 .actionList {
@@ -32,12 +36,12 @@ li {
   margin-top: 0vw;
   padding: 0;
   z-index: 12;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
 }
 
 .item {
   width: 32px;
-  transition-timing-function: easeInOutSine;
-  transition: all 0.06s;
   cursor: pointer;
 }
 
@@ -47,11 +51,13 @@ li {
 }
 
 .spacer {
-  width: 22vh;
-  height: 11vh;
-  margin-left: -8vh;
-  margin-top: -20px;
+  width: 18vh;
+  height: 12vh;
   border-radius: 50%;
+  margin-top: -8.5vh;
+  margin-left: -6.5vh;
+  transform: translate3d(0,0,0);
+  backface-visibility: hidden;
 }
 
 .title {
