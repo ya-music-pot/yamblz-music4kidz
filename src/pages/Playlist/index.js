@@ -14,6 +14,8 @@ import CARDS from '_data/cardsType';
 
 import ListTracks from '_pages/App/ListTracks';
 
+import { runPlayer } from '_helpers/cardCallbacks';
+
 import style from './style.styl';
 
 class Playlist extends Component {
@@ -64,12 +66,15 @@ class Playlist extends Component {
   }
 
   _handlePlayStart = () => {
-    const { cardPlaylist } = this.props.playerInfo;
+    const { cardPlaylist, cardParams } = this.props.playerInfo;
 
     const track = cardPlaylist && cardPlaylist[0];
     if (track) {
       this.props.playerModeUpdate('mini');
-      this.props.playerPlay(track.id);
+      runPlayer({
+        ...cardParams,
+        trackId: track.id,
+      });
     }
   }
 

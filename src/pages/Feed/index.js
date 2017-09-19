@@ -16,13 +16,15 @@ import PersonalRadio from './PersonalRadio';
 class Feed extends Component {
   componentWillMount() {
     const { id } = this.props.user;
+    const feedData = this.props.feed.data || [];
 
     if (id) {
-      this.props.getFeed(id);
       this.props.getRadio(id);
       this.props.getAllPlaylists(id);
-    } else {
-      this.props.getFeed();
+    }
+
+    if (!feedData.length) {
+      this.props.getFeed(id);
     }
   }
 
