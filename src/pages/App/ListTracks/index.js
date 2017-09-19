@@ -61,7 +61,7 @@ class ListTracks extends Component {
     const { trackId, isPlaying } = player;
 
     return playlist && playlist.length && (
-      <div>
+      <div className={style.wrapper}>
         { info.title && <h3 className={style.title}>{info.title}</h3> }
         <div>
           { playlist.map((item) => this.renderTrack(item, trackId, isPlaying))}

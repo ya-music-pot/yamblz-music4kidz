@@ -23,3 +23,21 @@
 .paddingBottom {
   padding-bottom: 50px;
 }
+
+.enter {
+  transform: translateY(100%);
+}
+
+.enter.enterActive {
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+
+.leave {
+  transform: translateY(0);
+  transition: transform 0.3s;
+}
+
+.leave.leaveActive {
+  transform: translateY(100%);
+}

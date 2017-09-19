@@ -10,10 +10,6 @@ import Button from '_components/Button';
 import style from './style.styl';
 
 export default class DefaultCard extends Component {
-  _onClick = () => {
-    this.props.callbacks.onRouterPush('/setup');
-  };
-
   render() {
     const {
       container, title, subtitle,
@@ -30,7 +26,7 @@ export default class DefaultCard extends Component {
           <CardTitle text="Музыка только для тебя" styles={title} />
           <CardSubtitle text="Создай своё радио!" styles={subtitle} />
         </div>
-        <Button style={button} onClick={this._onClick}>
+        <Button style={button} onClick={this.props.callbacks.onCreateClick}>
           Создать
         </Button>
       </div>
@@ -40,6 +36,6 @@ export default class DefaultCard extends Component {
 
 DefaultCard.propTypes = {
   callbacks: PropTypes.shape({
-    onRouterPush: PropTypes.func,
+    onCreateClick: PropTypes.func,
   }),
 };
