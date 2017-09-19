@@ -58,6 +58,10 @@ const openListTracks = (params) => {
     pathBack: history.getCurrentLocation(),
   }));
   history.push('/playlist');
+  // TODO: песня не должна запускаться сразу
+  // но сейчас происходит перетирка данных внутри
+  // и играет старая песня. Нужно вынести хранение
+  // пейлиста из текущей песни и не изменять ее.
   store.dispatch(playerPlay(trackId));
   store.dispatch(playerModeUpdate('mini'));
 };
