@@ -35,7 +35,7 @@ class PlaylistCalibration extends Component {
       <div className={style.container}>
         <div className={style.titleContainer}>
           <div className={style.title}>
-            Катя, давай создадим лучшее в&nbsp;мире радио для&nbsp;тебя?
+            Лида, давай создадим лучшее в&nbsp;мире радио для&nbsp;тебя?
             <Icon typeIcon="entrance-emoji" />
           </div>
         </div>
