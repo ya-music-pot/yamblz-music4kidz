@@ -1,6 +1,6 @@
 import {
   playerPlay, setPlaylist, playerPause,
-  playerResume, setTrackInfo,
+  playerResume,
 } from '_actions/player';
 import { likePlaylist, dislikePlaylist } from '_actions/feed';
 import { addUserPlaylist, deleteUserPlaylist } from '_actions/user';
@@ -16,7 +16,7 @@ import store from '_settings/store';
  * Функция, запускающая плеер
  * @param {Object} params
  */
-const runPlayer = (params) => {
+export const runPlayer = (params) => {
   const {
     trackId, playlist, isRadio,
     playlistId, cardType, cardTitle,
@@ -33,37 +33,19 @@ const runPlayer = (params) => {
  */
 const openListTracks = (params) => {
   const {
-    trackId, playlist, isRadio,
-    playlistId, cardType, cardTitle,
+    playlist, cardType, cardTitle,
     cardCover,
   } = params;
 
-  const track = playlist.find(item => item.id === trackId);
-
-  store.dispatch(setPlaylist(playlist, isRadio, playlistId));
-  store.dispatch(setTrackInfo({
-    cover: track.image_url,
-    singerName: track.artist,
-    trackName: track.name,
-    position: 0,
-    duration: 0,
-    shouldPlay: false,
-    loaded: false,
-  }));
-
   store.dispatch(setInfoCard({
-    cardType,
-    cardTitle,
-    cardCover,
+    cardPlaylistType: cardType,
+    cardPlaylistTitle: cardTitle,
+    cardPlaylistCover: cardCover,
+    cardPlaylist: playlist,
+    cardParams: params,
     pathBack: history.getCurrentLocation(),
   }));
   history.push('/playlist');
-  // TODO: песня не должна запускаться сразу
-  // но сейчас происходит перетирка данных внутри
-  // и играет старая песня. Нужно вынести хранение
-  // пейлиста из текущей песни и не изменять ее.
-  store.dispatch(playerPlay(trackId));
-  store.dispatch(playerModeUpdate('mini'));
 };
 
 const onCardClick = (params) => {
