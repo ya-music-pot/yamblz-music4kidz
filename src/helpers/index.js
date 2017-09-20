@@ -119,8 +119,8 @@ export function getRandomInteger(min, max) {
 }
 
 /**
- * Return random gradient from dictionaries
- * @param  {Array} gradients
+ * Return random gradient from dictionary
+ * @param  {Object} bgs
  * @return {Object}
  */
 export function getGradientStyle(bgs) {
